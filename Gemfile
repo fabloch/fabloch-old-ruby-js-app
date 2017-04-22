@@ -25,12 +25,19 @@ gem 'puma', '~> 3.0'
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 # gem 'rack-cors'
 
+# Auth
 gem 'devise_token_auth'
 gem 'omniauth'
 
+# Api
 gem 'active_model_serializers'
 gem 'rack-cors'
 gem 'rack-attack'
+
+# ActiveAdmin
+gem 'devise', '> 4.x'
+gem 'activeadmin', github: 'activeadmin'
+gem 'inherited_resources', git: 'https://github.com/activeadmin/inherited_resources'
 
 group :development, :test do
   gem 'rspec-rails'
