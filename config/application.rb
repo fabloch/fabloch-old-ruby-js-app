@@ -27,12 +27,6 @@ module FabLoch
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
 
-    # Re-added for ActiveAdmin
-    config.middleware.use Rack::MethodOverride
-    config.middleware.use ActionDispatch::Flash
-    config.middleware.use ActionDispatch::Cookies
-    config.middleware.use ActionDispatch::Session::CookieStore
-
     config.middleware.use Rack::Cors do
       allow do
         origins '*'
@@ -42,6 +36,12 @@ module FabLoch
           :methods => [:get, :post, :options, :delete, :put]
       end
     end
+    config.middleware.use Rack::Attack
 
+    # Re-added for ActiveAdmin
+    config.middleware.use Rack::MethodOverride
+    config.middleware.use ActionDispatch::Flash
+    config.middleware.use ActionDispatch::Cookies
+    config.middleware.use ActionDispatch::Session::CookieStore
   end
 end
