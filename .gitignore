@@ -17,3 +17,6 @@
 .byebug_history
 
 node_modules
+
+# Mac osX meta file
+.DS_Store
