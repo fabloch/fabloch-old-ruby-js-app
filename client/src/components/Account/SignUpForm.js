@@ -1,20 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import {
-  FormGroup,
-  ControlLabel,
-  FormControl,
-  HelpBlock,
-  Button } from 'react-bootstrap'
-
-const FieldGroup = ({ id, label, help, validationState, ...props }) => (
-  <FormGroup controlId={id} validationState={validationState}>
-    <ControlLabel>{label}</ControlLabel>
-    <FormControl {...props} />
-    {help && <HelpBlock>{help}</HelpBlock>}
-  </FormGroup>
-);
-
+import { Button } from 'react-bootstrap'
+import FieldGroup from '../shared/FieldGroup';
 class SignUpForm extends Component {
   constructor(props) {
     super(props);
@@ -61,26 +48,27 @@ class SignUpForm extends Component {
     return (
       <form onSubmit={this.onSubmit}>
         <FieldGroup
-          validationState={errors.email ? 'error' : null}
           id="formControlsEmail"
-          name="email"
           type="email"
+          name="email"
           label="Email address"
           placeholder="Enter email"
           value={this.state.email}
           onChange={this.onEmailChange}
-          help={errors.email && errors.email.join(', ')}
+          errors={errors.email}
         />
+
         <FieldGroup
-          validationState={errors.password ? 'error' : null}
           id="formControlsPassword"
+          type="password"
           name="password"
           label="Password"
-          type="password"
+          placeholder="Enter password"
           value={this.state.password}
           onChange={this.onPasswordChange}
-          help={errors.password && errors.password.join(', ')}
+          errors={errors.password}
         />
+
         <Button
           type="submit"
           bsStyle="primary"
