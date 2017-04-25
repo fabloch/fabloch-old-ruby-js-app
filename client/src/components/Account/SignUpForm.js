@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {
   FormGroup,
   ControlLabel,
@@ -14,24 +14,54 @@ const FieldGroup = ({ id, label, help, ...props }) => (
   </FormGroup>
 );
 
-const SignUpForm = () => (
-  <form>
-    <FieldGroup
-      id="formControlsEmail"
-      type="email"
-      label="Email address"
-      placeholder="Enter email"
-    />
-    <FieldGroup
-      id="formControlsPassword"
-      label="Password"
-      type="password"
-    />
+class SignUpForm extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      email: '',
+      password: '',
+    }
+    this.onChange = this.onChange.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
+  }
 
-    <Button type="submit">
-      Submit
-    </Button>
-  </form>
-)
+  onChange (e) {
+    this.setState({ [e.target.name]: e.target.value });
+  }
+
+  onSubmit (e) {
+    e.preventDefault();
+    console.log(this.state);
+
+  }
+
+  render () {
+    return (
+      <form onSubmit={this.onSubmit}>
+        <FieldGroup
+          id="formControlsEmail"
+          name="email"
+          type="email"
+          label="Email address"
+          placeholder="Enter email"
+          value={this.state.email}
+          onChange={this.onChange}
+        />
+        <FieldGroup
+          id="formControlsPassword"
+          name="password"
+          label="Password"
+          type="password"
+          value={this.state.password}
+          onChange={this.onChange}
+        />
+
+        <Button type="submit">
+          Sign Up
+        </Button>
+      </form>
+    )
+  }
+}
 
 export default SignUpForm;
