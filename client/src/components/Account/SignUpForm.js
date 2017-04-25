@@ -37,19 +37,22 @@ class SignUpForm extends Component {
       .then((response) => {
         this.props.addFlashMessage({
           type: 'success',
-          message: 'You have signed up successfully, welcome !'
+          text: 'You have signed up successfully, welcome !'
         })
-        // this.context.router.push('/');
-        console.log(response)
-        this.setState({
-          isLoading: false
-        })
+        this.context.router.history.push('/');
       })
       .catch((error) => {
-        this.setState({
-          errors: error.response.data.errors,
-          isLoading: false
-        })
+        if (error.response) {
+          this.setState({
+            errors: error.response.data.errors,
+            isLoading: false
+          })
+        } else if (error.request) {
+          console.log(error.request);
+        } else {
+          console.log('Error', error.message);
+        }
+        console.log(error.config);
       })
   }
 
