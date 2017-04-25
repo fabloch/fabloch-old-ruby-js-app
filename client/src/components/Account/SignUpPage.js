@@ -1,12 +1,30 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { PropTypes } from 'prop-types';
 import SignUpForm from './SignUpForm';
+import { connect } from 'react-redux';
+import { userSignupRequest } from '../../actions/signupActions'
 
-const SignUpPage = () => (
-  <div>
-    <h1> SignUp</h1>
+class SignUpPage extends Component {
 
-    <SignUpForm />
-  </div>
-)
+    render () {
+        const { userSignupRequest } = this.props;
 
-export default SignUpPage
+        return (
+          <div>
+            <h1> SignUp</h1>
+
+            <SignUpForm userSignupRequest={userSignupRequest} />
+          </div>
+        )
+    }
+}
+
+SignUpPage.propTypes = {
+  userSignupRequest: PropTypes.func.isRequired,
+}
+
+const mapDispatchToProps = {
+  userSignupRequest
+}
+
+export default connect(null, mapDispatchToProps)(SignUpPage);
