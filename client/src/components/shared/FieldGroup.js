@@ -10,7 +10,6 @@ import {
 const FieldGroup = (
   {
     id,
-    type,
     name,
     label,
     value,

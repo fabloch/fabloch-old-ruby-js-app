@@ -1,6 +1,7 @@
 import { createStore, applyMiddleware } from 'redux';
 import { createLogger } from 'redux-logger';
 import thunk from 'redux-thunk';
+import { composeWithDevTools } from 'redux-devtools-extension';
 import fabLochApp from './reducers';
 
 const configureStore = () => {
@@ -10,8 +11,9 @@ const configureStore = () => {
   }
 
   return createStore(
-    fabLochApp,
-    applyMiddleware(...middlewares)
+    fabLochApp, composeWithDevTools(
+      applyMiddleware(...middlewares)      
+    )
   );
 };
 
