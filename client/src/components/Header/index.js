@@ -24,8 +24,8 @@ const Header = () => (
 
       <Nav pullRight>
         <NavDropdown title="Account" id="account-dropdown">
-          <LinkContainer to="/account/signin">
-            <MenuItem>Sign In</MenuItem>
+          <LinkContainer to="/account/login">
+            <MenuItem>Log In</MenuItem>
           </LinkContainer>
           <LinkContainer to="/account/signup">
             <MenuItem>Sign Up</MenuItem>

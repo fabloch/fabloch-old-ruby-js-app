@@ -10,9 +10,7 @@ import {
 const FieldGroup = (
   {
     id,
-    name,
     label,
-    value,
     onChange,
     errors,
     ...props

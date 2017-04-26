@@ -33,7 +33,7 @@ class SignUpForm extends Component {
   onSubmit (e) {
     this.setState({ errors: {}, isLoading: true });
     e.preventDefault();
-    this.props.userSignupRequest(this.state)
+    this.props.signupRequest(this.state)
       .then((response) => {
         this.props.addFlashMessage({
           type: 'success',
@@ -96,7 +96,7 @@ class SignUpForm extends Component {
 }
 
 SignUpForm.propTypes = {
-  userSignupRequest: PropTypes.func.isRequired,
+  signupRequest: PropTypes.func.isRequired,
   addFlashMessage: PropTypes.func.isRequired,
 }
 
