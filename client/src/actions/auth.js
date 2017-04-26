@@ -50,3 +50,14 @@ export const loginRequest = (userData) => {
     })
   }
 }
+
+export const logoutRequest = () => {
+  return dispatch => {
+    localStorage.removeItem('client')
+    localStorage.removeItem('uid')
+    localStorage.removeItem('token')
+    localStorage.removeItem('expiry')
+    setAuthHeaders(false)
+    dispatch(setCurrentUser({}))
+  }
+}

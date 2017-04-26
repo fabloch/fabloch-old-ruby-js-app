@@ -15,7 +15,7 @@ if(localStorage.token) {
     client: localStorage.client,
     uid: localStorage.uid,
     token: localStorage.token,
-    expiry: localStorage.xpiry,
+    expiry: localStorage.expiry,
   }
 
   setAuthHeaders(localStorageAuth)
