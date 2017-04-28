@@ -1,36 +1,25 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { PropTypes } from 'prop-types';
 import SignUpForm from './SignUpForm';
 import { connect } from 'react-redux';
-import { emailSignup } from '../../actions/auth';
-import { addNotification } from '../../actions/notifications';
+import { emailSignup } from '../../actions/signup';
 
-class SignUpPage extends Component {
+const SignUpPage = ({ emailSignup }) => (
+  <div>
+    <h1> SignUp</h1>
 
-    render () {
-        const { emailSignup, addNotification } = this.props;
-
-        return (
-          <div>
-            <h1> SignUp</h1>
-
-            <SignUpForm
-              emailSignup={emailSignup}
-              addNotification={addNotification}
-            />
-          </div>
-        )
-    }
-}
+    <SignUpForm
+      emailSignup={emailSignup}
+    />
+  </div>
+)
 
 SignUpPage.propTypes = {
   emailSignup: PropTypes.func.isRequired,
-  addNotification: PropTypes.func.isRequired,
 }
 
 const mapDispatchToProps = {
   emailSignup,
-  addNotification,
 }
 
 export default connect(null, mapDispatchToProps)(SignUpPage);

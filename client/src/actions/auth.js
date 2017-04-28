@@ -1,7 +1,7 @@
 import axios from 'axios';
 import * as ActionTypes from './ActionTypes'
 import setAuthHeaders from '../api/setAuthHeaders'
-import { addNotification } from './notifications'
+// import { addNotification } from './notifications'
 
 export const setCurrentUser = (user) => {
   return {

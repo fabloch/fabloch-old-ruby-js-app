@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Button } from 'react-bootstrap'
 import FieldGroup from '../shared/FieldGroup';
+
 class SignUpForm extends Component {
   constructor(props) {
     super(props);
@@ -34,26 +35,6 @@ class SignUpForm extends Component {
     this.setState({ errors: {}, isLoading: true });
     e.preventDefault();
     this.props.emailSignup(this.state)
-      // .then((response) => {
-      //   this.props.addNotification({
-      //     type: 'success',
-      //     text: 'You have signed up successfully, welcome !'
-      //   })
-      //   this.context.router.history.push('/');
-      // })
-      // .catch((error) => {
-      //   if (error.response) {
-      //     this.setState({
-      //       errors: error.response.data.errors,
-      //       isLoading: false
-      //     })
-      //   } else if (error.request) {
-      //     console.log(error.request);
-      //   } else {
-      //     console.log('Error', error.message);
-      //   }
-      //   console.log(error.config);
-      // })
   }
 
   render () {
@@ -97,7 +78,6 @@ class SignUpForm extends Component {
 
 SignUpForm.propTypes = {
   emailSignup: PropTypes.func.isRequired,
-  addNotification: PropTypes.func.isRequired,
 }
 
 SignUpForm.contextTypes = {

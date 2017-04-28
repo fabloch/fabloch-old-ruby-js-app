@@ -38,7 +38,11 @@ export const emailSignup = (userData) => (dispatch) => {
   })
   .then((res) => { dispatch(emailSignupSuccess(res)); })
   .catch((err) => {
-    if (err.response) { dispatch(emailSignupFailure(err.response.data)) }
-    else if (err.request) { dispatch(backendFailure()) }
+    if (err.response) {
+      console.log(err.response.data.errors)
+      dispatch(emailSignupFailure(err.response.data.errors))
+    } else if (err.request) {
+      dispatch(backendFailure())
+    }
   })
 }

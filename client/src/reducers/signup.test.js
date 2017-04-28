@@ -5,7 +5,12 @@ describe('signupReducer', () => {
   it('has a default state', () => {
     expect(
       signupReducer(undefined, {type: 'ANOTHER_ACTION'} )
-    ).toEqual({})
+    ).toEqual(
+      {
+        isSigningUp: false,
+        isSignedUp: false,
+      }
+    )
   })
 
   it('handles EMAIL_SIGNUP_REQUEST', () => {
@@ -14,7 +19,8 @@ describe('signupReducer', () => {
         type: ActionTypes.EMAIL_SIGNUP_REQUEST,
       })
     ).toEqual({
-      isSigningUp: true
+      isSigningUp: true,
+      isSignedUp: false,
     })
   })
 
@@ -25,18 +31,27 @@ describe('signupReducer', () => {
       })
     ).toEqual({
       isSigningUp: false,
-      isSignedUp: true
+      isSignedUp: true,
     })
   })
 
   it('handles EMAIL_SIGNUP_FAILURE', () => {
+    const errors = {
+      email: "has already been taken",
+      full_message: "Email has already been taken",
+    }
     expect(
       signupReducer(undefined, {
         type: ActionTypes.EMAIL_SIGNUP_FAILURE,
-        res
-      }).toEqual(
-        
-      )
-    )
+        errors
+      })
+    ).toEqual({
+      isSigningUp: false,
+      isSignedUp: false,
+      errors: {
+        email: "has already been taken",
+        full_message: "Email has already been taken",
+      }
+    })
   })
 })
