@@ -33,27 +33,27 @@ class SignUpForm extends Component {
   onSubmit (e) {
     this.setState({ errors: {}, isLoading: true });
     e.preventDefault();
-    this.props.signupRequest(this.state)
-      .then((response) => {
-        this.props.addFlashMessage({
-          type: 'success',
-          text: 'You have signed up successfully, welcome !'
-        })
-        this.context.router.history.push('/');
-      })
-      .catch((error) => {
-        if (error.response) {
-          this.setState({
-            errors: error.response.data.errors,
-            isLoading: false
-          })
-        } else if (error.request) {
-          console.log(error.request);
-        } else {
-          console.log('Error', error.message);
-        }
-        console.log(error.config);
-      })
+    this.props.emailSignup(this.state)
+      // .then((response) => {
+      //   this.props.addNotification({
+      //     type: 'success',
+      //     text: 'You have signed up successfully, welcome !'
+      //   })
+      //   this.context.router.history.push('/');
+      // })
+      // .catch((error) => {
+      //   if (error.response) {
+      //     this.setState({
+      //       errors: error.response.data.errors,
+      //       isLoading: false
+      //     })
+      //   } else if (error.request) {
+      //     console.log(error.request);
+      //   } else {
+      //     console.log('Error', error.message);
+      //   }
+      //   console.log(error.config);
+      // })
   }
 
   render () {
@@ -96,8 +96,8 @@ class SignUpForm extends Component {
 }
 
 SignUpForm.propTypes = {
-  signupRequest: PropTypes.func.isRequired,
-  addFlashMessage: PropTypes.func.isRequired,
+  emailSignup: PropTypes.func.isRequired,
+  addNotification: PropTypes.func.isRequired,
 }
 
 SignUpForm.contextTypes = {

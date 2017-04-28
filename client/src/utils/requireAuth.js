@@ -1,15 +1,15 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { addFlashMessage } from '../actions/flashMessages'
+import { addNotification } from '../actions/notifications'
 
 export default function (ComposedComponent) {
   class Authenticate extends Component {
 
     componentWillMount () {
-      const { isAuthenticated, addFlashMessage, path = '/account/login' } = this.props
+      const { isAuthenticated, addNotification, path = '/account/login' } = this.props
       if (!isAuthenticated) {
-        addFlashMessage({
+        addNotification({
           type: 'danger',
           text: 'You need to log in to access this page.'
         })
@@ -36,7 +36,7 @@ export default function (ComposedComponent) {
 
   Authenticate.propTypes = {
     isAuthenticated: PropTypes.bool.isRequired,
-    addFlashMessage: PropTypes.func.isRequired,
+    addNotification: PropTypes.func.isRequired,
     path: PropTypes.string,
   }
 
@@ -45,7 +45,7 @@ export default function (ComposedComponent) {
   })
 
   const mapDisptatchToProps = {
-    addFlashMessage: addFlashMessage,
+    addNotification: addNotification,
   }
 
   return connect(mapStateToProps, mapDisptatchToProps)(Authenticate)

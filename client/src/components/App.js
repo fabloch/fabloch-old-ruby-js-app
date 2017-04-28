@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import Header from './Header';
-import FlashMessageList from './FlashMessageList';
+import NotificationList from './Notifications/NotificationList';
 import Routes from './Routes';
 import Footer from './Footer';
 
@@ -12,7 +12,7 @@ const App = () => (
     <Router>
       <div>
         <Header />
-        <FlashMessageList />
+        <NotificationList />
         <Routes />
         <Footer />
       </div>

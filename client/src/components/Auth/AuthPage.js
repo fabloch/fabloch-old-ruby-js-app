@@ -5,7 +5,7 @@ import { Grid, Row, Col } from 'react-bootstrap';
 import SignUpPage from './SignUpPage';
 import LogInPage from './LogInPage';
 
-const Account = () => (
+const Auth = () => (
   <Grid>
     <Row className="show-grid">
       <Col md={4} mdOffset={4}>
@@ -16,4 +16,4 @@ const Account = () => (
   </Grid>
 );
 
-export default Account;
+export default Auth;

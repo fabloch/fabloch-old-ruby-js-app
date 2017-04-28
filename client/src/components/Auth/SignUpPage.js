@@ -2,21 +2,21 @@ import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
 import SignUpForm from './SignUpForm';
 import { connect } from 'react-redux';
-import { signupRequest } from '../../actions/auth';
-import { addFlashMessage } from '../../actions/flashMessages';
+import { emailSignup } from '../../actions/auth';
+import { addNotification } from '../../actions/notifications';
 
 class SignUpPage extends Component {
 
     render () {
-        const { signupRequest, addFlashMessage } = this.props;
+        const { emailSignup, addNotification } = this.props;
 
         return (
           <div>
             <h1> SignUp</h1>
 
             <SignUpForm
-              signupRequest={signupRequest}
-              addFlashMessage={addFlashMessage}
+              emailSignup={emailSignup}
+              addNotification={addNotification}
             />
           </div>
         )
@@ -24,13 +24,13 @@ class SignUpPage extends Component {
 }
 
 SignUpPage.propTypes = {
-  signupRequest: PropTypes.func.isRequired,
-  addFlashMessage: PropTypes.func.isRequired,
+  emailSignup: PropTypes.func.isRequired,
+  addNotification: PropTypes.func.isRequired,
 }
 
 const mapDispatchToProps = {
-  signupRequest,
-  addFlashMessage,
+  emailSignup,
+  addNotification,
 }
 
 export default connect(null, mapDispatchToProps)(SignUpPage);

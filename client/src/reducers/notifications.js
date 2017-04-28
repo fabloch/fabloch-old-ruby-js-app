@@ -1,19 +1,20 @@
 import shortid from 'shortid';
-import { ADD_FLASH_MESSAGE, DELETE_FLASH_MESSAGE } from '../actions/types';
+import * as ActionTypes from '../actions/ActionTypes';
 import findIndex from 'lodash/findIndex';
 
-const flashReducer = (state = [], action) => {
+const notifications = (state = [], action) => {
   switch(action.type) {
-    case ADD_FLASH_MESSAGE:
+    case ActionTypes.SHOW_NOTIFICATION:
       return [
         ...state,
         {
           id: shortid.generate(),
-          type: action.message.type,
-          text: action.message.text,
+          level: action.notification.level,
+          title: action.notification.title,
+          body: action.notification.body
         }
       ]
-    case DELETE_FLASH_MESSAGE:
+    case ActionTypes.HIDE_NOTIFICATION:
       const index = findIndex(state, {id: action.id})
       if (index >= 0) {
         return [
@@ -27,4 +28,4 @@ const flashReducer = (state = [], action) => {
   }
 };
 
-export default flashReducer;
+export default notifications;

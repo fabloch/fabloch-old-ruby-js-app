@@ -27,10 +27,10 @@ class LogInForm extends Component {
     e.preventDefault();
     if (this.isValidFunc()) {
       this.setState({ errors: {}, isLoading: true });
-      this.props.loginRequest(this.state)
+      this.props.startLogin(this.state)
       .then(
         (res) => {
-          this.props.addFlashMessage({
+          this.props.addNotification({
             type: 'success',
             text: 'You are logged in successfully, welcome back !'
           })
@@ -110,8 +110,8 @@ class LogInForm extends Component {
 }
 
 LogInForm.propTypes = {
-  loginRequest: PropTypes.func.isRequired,
-  addFlashMessage: PropTypes.func.isRequired,
+  startLogin: PropTypes.func.isRequired,
+  addNotification: PropTypes.func.isRequired,
 }
 
 LogInForm.contextTypes = {

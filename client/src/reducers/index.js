@@ -1,10 +1,12 @@
 import { combineReducers } from 'redux';
-import flashMessages from './flashMessages'
+import notifications from './notifications'
 import auth from './auth'
+import signup from './signup'
 
 const fabLochReducer = combineReducers({
-  flashMessages,
+  notifications,
   auth,
+  signup,
 });
 
 export default fabLochReducer;
