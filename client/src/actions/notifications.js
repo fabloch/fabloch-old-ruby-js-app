@@ -10,6 +10,11 @@ export const hideNotification = (id) => ({
   id
 })
 
+export const deleteNotification = (id) => ({
+  type: ActionTypes.DELETE_NOTIFICATION,
+  id
+})
+
 export const addNotification = (notification) => (dispatch) => {
   dispatch(showNotification(notification))
   setTimeout(() => {

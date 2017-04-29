@@ -7,13 +7,13 @@ export const emailSignupRequest = () => ({
   type: ActionTypes.EMAIL_SIGNUP_REQUEST
 })
 
-export const emailSignupSuccess = (res) => (dispatch) => {
+export const emailSignupSuccess = (userData) => (dispatch) => {
   dispatch(addNotification({
     level: 'success',
     title: 'Account created',
     body: 'Account created successfully.'
   }))
-  dispatch(startLogin(res))
+  dispatch(startLogin(userData))
 }
 
 export const emailSignupFailure = (res) => ({
@@ -36,10 +36,9 @@ export const emailSignup = (userData) => (dispatch) => {
       confirm_success_url: "http://localhost:3000"
     }
   })
-  .then((res) => { dispatch(emailSignupSuccess(res)); })
+  .then((res) => { dispatch(emailSignupSuccess(userData)); })
   .catch((err) => {
     if (err.response) {
-      console.log(err.response.data.errors)
       dispatch(emailSignupFailure(err.response.data.errors))
     } else if (err.request) {
       dispatch(backendFailure())

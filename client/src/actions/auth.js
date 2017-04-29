@@ -1,7 +1,7 @@
 import axios from 'axios';
 import * as ActionTypes from './ActionTypes'
-import setAuthHeaders from '../api/setAuthHeaders'
-// import { addNotification } from './notifications'
+import setAuthHeaders from '../utils/setAuthHeaders'
+import { addNotification } from './notifications'
 
 export const setCurrentUser = (user) => {
   return {
@@ -10,16 +10,16 @@ export const setCurrentUser = (user) => {
   }
 }
 
-const loginRequest = () => ({
+export const loginRequest = () => ({
   type: ActionTypes.LOGIN_REQUEST
 })
 
-const loginSuccess = (response) => (dispatch) => {
+export const loginSuccess = (headers) => (dispatch) => {
   const authHeaders = {
-    client: response.headers['client'],
-    uid: response.headers['uid'],
-    token: response.headers['access-token'],
-    expiry: response.headers['expiry'],
+    client: headers['client'],
+    uid: headers['uid'],
+    token: headers['access-token'],
+    expiry: headers['expiry'],
   }
   localStorage.setItem('client', authHeaders.client)
   localStorage.setItem('uid', authHeaders.uid)
@@ -27,8 +27,18 @@ const loginSuccess = (response) => (dispatch) => {
   localStorage.setItem('expiry', authHeaders.expiry)
 
   setAuthHeaders(authHeaders)
+  dispatch(addNotification({
+    level: 'success',
+    title: 'Log in successful',
+    body: 'Enjoy your ride.'
+  }))
   dispatch(setCurrentUser(authHeaders))
 }
+
+export const loginFailure = (response) => ({
+  type: ActionTypes.LOGIN_FAILURE,
+  errors: response.data.errors
+})
 
 export const startLogin = (userData) => (dispatch) => {
   dispatch(loginRequest())
@@ -41,7 +51,15 @@ export const startLogin = (userData) => (dispatch) => {
       confirm_success_url: "http://localhost:3000"
     }
   })
-  .then((response) => { loginSuccess(response) })
+  .then((response) => {
+    console.log(response.headers)
+    loginSuccess(response.headers)
+  })
+  .catch((error) => {
+    if (error.response) {
+      loginFailure(error.response.data.errors)
+    }
+  })
 }
 
 export const logoutRequest = () => {

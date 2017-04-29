@@ -2,18 +2,26 @@ import shortid from 'shortid';
 import * as ActionTypes from '../actions/ActionTypes';
 import findIndex from 'lodash/findIndex';
 
-const notifications = (state = [], action) => {
+const initialState = {
+  highlight: [],
+  history: []
+}
+
+const notifications = (state = initialState, action) => {
   switch(action.type) {
     case ActionTypes.SHOW_NOTIFICATION:
-      return [
+      const new_id = shortid.generate()
+      return {
         ...state,
-        {
-          id: shortid.generate(),
-          level: action.notification.level,
-          title: action.notification.title,
-          body: action.notification.body
-        }
-      ]
+        highlight.push(
+          {
+            id: new_id,
+            level: action.notification.level,
+            title: action.notification.title,
+            body: action.notification.body
+          }
+        )
+      }
     case ActionTypes.HIDE_NOTIFICATION:
       const index = findIndex(state, {id: action.id})
       if (index >= 0) {

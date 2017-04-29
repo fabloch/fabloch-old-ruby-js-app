@@ -40,6 +40,19 @@ describe('hideNotification action', () => {
   })
 })
 
+describe('deleteNotification action', () => {
+  it('returns action with type and notification', () => {
+    expect(
+      actions.deleteNotification("some_id")
+    ).toEqual(
+      {
+        type: ActionTypes.DELETE_NOTIFICATION,
+        id: "some_id"
+      }
+    )
+  })
+})
+
 describe('addNotification action', () => {
   it('creates showNotification action and then hideNotification action', () => {
     jest.useFakeTimers()

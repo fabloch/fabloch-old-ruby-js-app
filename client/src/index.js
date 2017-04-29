@@ -2,7 +2,7 @@ import React from 'react';
 import { render } from 'react-dom';
 import Root from './components/Root';
 import configureStore from './configureStore';
-import setAuthHeaders from './api/setAuthHeaders';
+import setAuthHeaders from './utils/setAuthHeaders';
 import { setCurrentUser } from './actions/auth';
 
 import 'bootstrap/dist/css/bootstrap.css';

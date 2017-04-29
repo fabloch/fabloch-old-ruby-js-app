@@ -11,7 +11,10 @@ describe('notifications reducer', () => {
   it('should return the initial state', () => {
     expect(
       reducer(undefined, {})
-    ).toEqual([])
+    ).toEqual({
+      highlight: [],
+      history: []
+    })
   })
 
   describe('should handle SHOW_NOTIFICATION', () => {
@@ -22,7 +25,9 @@ describe('notifications reducer', () => {
           notification
         })
       ).toMatchObject(
-        [notification]
+        {
+          highlight: [notification] 
+        }
       )
     })
 
@@ -55,6 +60,12 @@ describe('notifications reducer', () => {
         }
       ]
       const expectedState = [
+        {
+          id: "some_random_id",
+          level: "success",
+          title: "Login successful",
+          body: "Login was successful",
+        },
         {
           id: "some_other_random_id",
           level: "info",
