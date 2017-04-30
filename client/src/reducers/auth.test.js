@@ -1,29 +1,31 @@
 import authReducer from './auth'
 import * as ActionTypes from '../actions/ActionTypes'
+import * as actions from '../actions/auth'
+import { Map } from 'immutable'
 
 describe('authReducer', () => {
   it('has a default state', () => {
     expect(
       authReducer(undefined, {type: 'ANOTHER_ACTION'} )
     ).toEqual(
-      {
+      Map({
         isAuthenticated: false,
-        user: {}
-      }
+        user: Map({})
+      })
     )
   })
 
   it('handles SET_CURRENT_USER', () => {
+    const initialState = undefined
+    const action = actions.setCurrentUser({hello: 'world'})
+    const nextState = Map({
+      isAuthenticated: true,
+      user: Map({hello: 'world'})
+    })
     expect(
-      authReducer(undefined, {
-        type: ActionTypes.SET_CURRENT_USER,
-        user: {hello: 'world'}
-      })
+      authReducer(initialState, action)
     ).toEqual(
-      {
-        isAuthenticated: true,
-        user: {hello: 'world'}
-      }
+      nextState
     )
   })
 })
