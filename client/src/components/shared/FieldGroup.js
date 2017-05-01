@@ -1,11 +1,5 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
-import {
-  FormGroup,
-  ControlLabel,
-  FormControl,
-  HelpBlock,
-} from 'react-bootstrap';
 
 const FieldGroup = (
   {
@@ -15,15 +9,7 @@ const FieldGroup = (
     errors,
     ...props
   }) => (
-    <FormGroup
-      controlId={id}
-      validationState={errors ? 'error' : null}
-      onChange={onChange}
-    >
-      <ControlLabel>{label}</ControlLabel>
-      <FormControl {...props} />
-      {errors && <HelpBlock>{errors.join(', ')}</HelpBlock>}
-    </FormGroup>
+    <input />
   )
 
 FieldGroup.propTypes = {

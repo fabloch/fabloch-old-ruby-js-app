@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Button, Alert } from 'react-bootstrap'
 import FieldGroup from '../shared/FieldGroup';
 import validateInput from '../../validations/login';
 
@@ -71,7 +70,7 @@ class LogInForm extends Component {
     const { errors, isLoading } = this.state;
     return (
       <div>
-        { errors && errors.constructor === Array && <Alert bsStyle="danger">{errors[0]}</Alert> }
+        {/* { errors && errors.constructor === Array && <Alert bsStyle="danger">{errors[0]}</Alert> } */}
         <form onSubmit={this.onSubmit}>
           <FieldGroup
             id="formControlsEmail"
@@ -95,14 +94,14 @@ class LogInForm extends Component {
             errors={errors.password}
           />
 
-          <Button
+          <button
             type="submit"
             bsStyle="primary"
             bsSize="large"
             block
             disabled={isLoading}>
             {isLoading ? "Loading…" : "Log In"}
-          </Button>
+          </button>
         </form>
       </div>
     )

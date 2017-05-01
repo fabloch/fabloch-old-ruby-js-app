@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Button } from 'react-bootstrap'
 import FieldGroup from '../shared/FieldGroup';
 
 class SignUpForm extends Component {
@@ -63,14 +62,14 @@ class SignUpForm extends Component {
           errors={errors.password}
         />
 
-        <Button
+        <button
           type="submit"
           bsStyle="primary"
           bsSize="large"
           block
           disabled={isLoading}>
           {isLoading ? "Loading…" : "Sign Up"}
-        </Button>
+        </button>
       </form>
     )
   }

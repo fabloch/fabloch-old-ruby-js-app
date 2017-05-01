@@ -10,8 +10,8 @@ const mockStore = configureStore(middlewares)
 const notification = {
   id: "some_id",
   level: "success",
-  title: "Login successful",
-  body: "Login was successful",
+  header: "Login successful",
+  content: "Login was successful",
 }
 
 describe('showNotification action', () => {

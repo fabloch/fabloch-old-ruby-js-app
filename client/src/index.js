@@ -1,14 +1,13 @@
-import React from 'react';
-import { render } from 'react-dom';
-import Root from './components/Root';
-import configureStore from './configureStore';
-import setAuthHeaders from './utils/setAuthHeaders';
-import { setCurrentUser } from './actions/auth';
+import React from 'react'
+import { render } from 'react-dom'
+import Root from './components/Root'
+import configureStore from './configureStore'
+import setAuthHeaders from './utils/setAuthHeaders'
+import { setCurrentUser } from './actions/auth'
 
-import 'bootstrap/dist/css/bootstrap.css';
-import 'bootstrap/dist/css/bootstrap-theme.css';
+import 'semantic-ui-css/semantic.min.css'
 
-const store = configureStore();
+const store = configureStore()
 
 if(localStorage.token) {
   const localStorageAuth = {
@@ -25,4 +24,4 @@ if(localStorage.token) {
 render(
   <Root store={store} />,
   document.getElementById('root')
-);
+)

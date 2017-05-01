@@ -1,15 +1,15 @@
 import React from 'react'
 import PropTypes from 'prop-types';
-import { Alert, Button } from 'react-bootstrap';
+import { Message } from 'semantic-ui-react';
 
 const Notification = ({notification, hideNotification}) => {
-  const { id, type, text } = notification
+  const { id, level, header, content } = notification
   return (
     <div>
-      <Alert bsStyle={type} onDismiss={() => hideNotification(id)}>
-        {text}
-      </Alert>
-      <Button onClick={() => hideNotification(id)}>Hide Alert</Button>
+      <Message level >
+        <Message.Header>{header}</Message.Header>
+        <p>{content}</p>
+      </Message>
     </div>
   )
 }

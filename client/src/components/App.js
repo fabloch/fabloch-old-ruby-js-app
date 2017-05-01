@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
-import Header from './Header';
+import { Container } from 'semantic-ui-react'
+import Navbar from './Navbar';
 import NotificationList from './Notifications/NotificationList';
 import Routes from './Routes';
 import Footer from './Footer';
@@ -11,9 +12,11 @@ const App = () => (
   <div>
     <Router>
       <div>
-        <Header />
+        <Navbar />
         <NotificationList />
-        <Routes />
+        <Container>
+          <Routes />
+        </Container>
         <Footer />
       </div>
   </Router>
