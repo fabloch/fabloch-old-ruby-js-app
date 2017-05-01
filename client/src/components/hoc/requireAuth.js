@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { addNotification } from '../actions/notifications'
+import { addNotification } from '../../actions/notifications'
 
 export default function (ComposedComponent) {
   class Authenticate extends Component {

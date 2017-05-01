@@ -6,7 +6,7 @@ import Contact from './Contact';
 import AuthPage from './Auth/AuthPage';
 import Members from './Members';
 import NotFound from './NotFound';
-import requireAuth from '../utils/requireAuth'
+import requireAuth from './hoc/requireAuth'
 
 const Routes = () => (
   <Switch>
