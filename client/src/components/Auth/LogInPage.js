@@ -1,26 +1,23 @@
 import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
-import LogInForm from './LogInForm';
 import { connect } from 'react-redux';
+import { toJS } from '../hoc/toJS'
+import { Grid } from 'semantic-ui-react'
+
+import LogInForm from './LogInForm';
 import { startLogin } from '../../actions/auth';
 import { addNotification } from '../../actions/notifications';
 
-class LogInPage extends Component {
-
-    render () {
-        const { startLogin, addNotification } = this.props;
-
-        return (
-          <div>
-            <h1> LogIn</h1>
-
-            <LogInForm
-              startLogin={startLogin}
-              addNotification={addNotification}
-            />
-          </div>
-        )
-    }
+const LogInPage = ({startLogin, addNotification}) => {
+  return (
+    <Grid.Column width={5} textAlign="center">
+      <h1> LogIn</h1>
+      <LogInForm
+        startLogin={startLogin}
+        addNotification={addNotification}
+      />
+    </Grid.Column>
+  )
 }
 
 LogInPage.propTypes = {

@@ -1,18 +1,17 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
-import SignUpForm from './SignUpForm';
 import { connect } from 'react-redux';
-import { emailSignup } from '../../actions/signup';
 import { toJS } from '../hoc/toJS'
+import { Grid } from 'semantic-ui-react'
+
+import SignUpForm from './SignUpForm';
+import { emailSignup } from '../../actions/signup';
 
 const SignUpPage = ({ emailSignup }) => (
-  <div>
+  <Grid.Column width={5} textAlign="center">
     <h1> SignUp</h1>
-
-    <SignUpForm
-      emailSignup={emailSignup}
-    />
-  </div>
+    <SignUpForm emailSignup={emailSignup} />
+  </Grid.Column>
 )
 
 SignUpPage.propTypes = {

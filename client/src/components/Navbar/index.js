@@ -5,27 +5,25 @@ import { logoutRequest } from '../../actions/auth'
 
 import { Menu } from "semantic-ui-react"
 
-const Navbar = ({}, context) => {
+const Navbar = ({pathname}, context) => {
   // const { isAuthenticated } = auth
-  console.log(context.router.history.location.pathname)
-
   return (
     <Menu>
       <Menu.Menu>
         <Menu.Item
-          active={ context.router.history.location.pathname === "/" && true}
+          active={ pathname === "/" && true}
           onClick={() => context.router.history.push('/')}>
           La FABrique du Loch
         </Menu.Item>
       </Menu.Menu>
       <Menu.Menu position="right">
         <Menu.Item
-          active={ context.router.history.location.pathname === "/account/signup" && true}
+          active={ pathname === "/account/signup" && true}
           onClick={() => context.router.history.push('/account/signup')}>
           Sign Up
         </Menu.Item>
         <Menu.Item
-          active={ context.router.history.location.pathname === "/account/login" && true}
+          active={ pathname === "/account/login" && true}
           onClick={() => context.router.history.push('/account/login')}>
           Log In
         </Menu.Item>
@@ -35,17 +33,19 @@ const Navbar = ({}, context) => {
 }
 
 Navbar.contextTypes = {
-  router: PropTypes.object.isRequired,
+  router: PropTypes.object.isRequired
 }
 
-// Navbar.propTypes = {
-//   auth: PropTypes.object.isRequired,
-//   logoutRequest: PropTypes.func.isRequired,
-// }
+Navbar.propTypes = {
+  pathname: PropTypes.string.isRequired
+  // auth: PropTypes.object.isRequired,
+  // logoutRequest: PropTypes.func.isRequired,
+}
 
 
 const mapStateToProps = (state) => ({
   // auth: state.auth,
+  pathname: state.router.location.pathname
 })
 
 const mapDisptatchToProps = {

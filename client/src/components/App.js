@@ -1,5 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
+import { ConnectedRouter } from 'react-router-redux'
+import { history } from '../configureStore'
 import { Container } from 'semantic-ui-react'
 import Navbar from './Navbar';
 import NotificationList from './Notifications/NotificationList';
@@ -10,7 +12,7 @@ import './App.css'
 
 const App = () => (
   <div>
-    <Router>
+    <ConnectedRouter history={history}>
       <div>
         <Navbar />
         <NotificationList />
@@ -19,7 +21,7 @@ const App = () => (
         </Container>
         <Footer />
       </div>
-  </Router>
+  </ConnectedRouter>
   </div>
 );
 
