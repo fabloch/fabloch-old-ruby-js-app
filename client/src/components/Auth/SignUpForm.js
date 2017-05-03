@@ -1,11 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import validator from 'validator'
 
 import { Form, Button } from 'semantic-ui-react'
 import { reduxForm, Field } from 'redux-form'
 
-// import { emailSignup } from '../../actions/signup'
 import { validate } from './validate'
 import { asyncValidate } from './asyncValidate'
 import { warn } from './warn'
@@ -13,7 +11,7 @@ import { submit } from './submit'
 import { renderField} from './renderField'
 
 const SignUpForm = (props) => {
-  const { error, handleSubmit, pristine, reset, submitting } = props
+  const { handleSubmit, pristine, reset, submitting } = props
 
   return (
     <Form onSubmit={handleSubmit(submit)}>
@@ -54,7 +52,6 @@ const SignUpForm = (props) => {
 }
 
 SignUpForm.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   validate: PropTypes.func.isRequired,
   warn: PropTypes.func.isRequired,
@@ -69,7 +66,6 @@ const ConnectedSignUpForm = reduxForm({
   validate,
   warn,
   asyncValidate,
-  onSubmit: submit,
 })(SignUpForm)
 
 export default ConnectedSignUpForm

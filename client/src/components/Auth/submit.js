@@ -1,9 +1,5 @@
 import { SubmissionError } from 'redux-form'
-import { emailSignup } from '../../actions/signup'
 import axios from 'axios'
-
-const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
-
 
 export const submit = (values) => {
   const userData = {
@@ -31,18 +27,3 @@ export const submit = (values) => {
     }
   })
 }
-
-// export const submit = (values) => {
-//   return sleep(1000) // simulate server latency
-//     .then(() => {
-//       // if (![ 'john', 'paul', 'george', 'ringo' ].includes(values.username)) {
-//       //   throw new SubmissionError({ username: 'User does not exist', _error: 'Login failed!' })
-//       // } else if (values.password !== 'redux-form') {
-//       //   throw new SubmissionError({ password: 'Wrong password', _error: 'Login failed!' })
-//       // } else {
-//         emailSignup(values)
-//         window.alert(`You submitted:\n\n${JSON.stringify(values, null, 2)}`)
-//       //
-//       // }
-//     })
-// }
