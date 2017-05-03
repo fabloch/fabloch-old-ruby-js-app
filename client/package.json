@@ -23,7 +23,13 @@
     "validator": "^7.0.0"
   },
   "devDependencies": {
+    "babel-eslint": "^7.2.3",
     "enzyme": "^2.8.2",
+    "eslint": "^3.19.0",
+    "eslint-config-airbnb": "^14.1.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^4.0.0",
+    "eslint-plugin-react": "^6.10.3",
     "nock": "^9.0.13",
     "react-test-renderer": "^15.5.4",
     "redux-mock-store": "^1.2.3"
