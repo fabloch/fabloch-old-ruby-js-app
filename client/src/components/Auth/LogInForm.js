@@ -1,9 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import FieldGroup from '../shared/FieldGroup';
 import { Form, Button } from 'semantic-ui-react'
 
-import validateInput from '../../validations/login';
+// import validateInput from '../../validations/login';
 
 const LogInForm = () => {
   return (

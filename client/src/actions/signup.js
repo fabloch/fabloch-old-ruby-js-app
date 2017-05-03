@@ -26,6 +26,7 @@ export const backendFailure = () => ({
 })
 
 export const emailSignup = (userData) => (dispatch) => {
+  console.log("C'est parti")
   dispatch(emailSignupRequest())
   return axios({
     url: '/auth',

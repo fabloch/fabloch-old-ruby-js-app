@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { logoutRequest } from '../../actions/auth'
+// import { logoutRequest } from '../../actions/auth'
 
 import { Menu } from "semantic-ui-react"
 

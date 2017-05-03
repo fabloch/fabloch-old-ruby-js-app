@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
+// import { BrowserRouter as Router } from 'react-router-dom';
 import { ConnectedRouter } from 'react-router-redux'
 import { history } from '../configureStore'
 import { Container } from 'semantic-ui-react'

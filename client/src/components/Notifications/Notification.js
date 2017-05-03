@@ -3,10 +3,11 @@ import PropTypes from 'prop-types';
 import { Message } from 'semantic-ui-react';
 
 const Notification = ({notification, hideNotification}) => {
-  const { id, level, header, content } = notification
+  const { id, header, content } = notification
+  // const { id, level, header, content } = notification
   return (
     <div>
-      <Message level >
+      <Message key={id} level>
         <Message.Header>{header}</Message.Header>
         <p>{content}</p>
       </Message>

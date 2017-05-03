@@ -1,90 +1,75 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import FieldGroup from '../shared/FieldGroup';
-import { Form, Button } from 'semantic-ui-react'
+import React from 'react'
+import PropTypes from 'prop-types'
+import validator from 'validator'
 
-const SignUpForm = () => {
-  // const { errors, isLoading } = this.state;
+import { Form, Button } from 'semantic-ui-react'
+import { reduxForm, Field } from 'redux-form'
+
+// import { emailSignup } from '../../actions/signup'
+import { validate } from './validate'
+import { asyncValidate } from './asyncValidate'
+import { warn } from './warn'
+import { submit } from './submit'
+import { renderField} from './renderField'
+
+const SignUpForm = (props) => {
+  const { error, handleSubmit, pristine, reset, submitting } = props
+
   return (
-    <Form>
-      <Form.Field>
-        {/* <label>Email address</label> */}
-        <input type="email" placeholder="Enter email" />
-      </Form.Field>
-        {/* id="formControlsEmail"
+    <Form onSubmit={handleSubmit(submit)}>
+      <Field
         type="email"
         name="email"
-        label="Email address"
-        placeholder="Enter email"
-        // value={this.state.email}
-        // onChange={this.onEmailChange}
-        // errors={errors.email} */}
+        component={renderField}
+        placeholder="First Name"
+        label="Email"
+      />
 
-      <Form.Field>
-        {/* <label>Password</label> */}
-        <input type="password" placeholder="Enter password" />
-      </Form.Field>
-        {/* id="formControlsPassword"
-        type="password"
+      <Field
         name="password"
+        component={renderField}
+        type="password"
+        placeholder="Password"
         label="Password"
-        placeholder="Enter password"
-        // value={this.state.password}
-        // onChange={this.onPasswordChange}
-        // errors={errors.password}
-      /> */}
+      />
 
       <Button
         type="submit"
+        disabled={pristine || submitting}
         fluid
         primary
       >
         Sign Up
       </Button>
+      <p>
+        <Button
+          type="button"
+          disabled={pristine || submitting}
+          onClick={reset}>
+          Clear Values
+        </Button>
+      </p>
     </Form>
   )
 }
 
 SignUpForm.propTypes = {
-  emailSignup: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  validate: PropTypes.func.isRequired,
+  warn: PropTypes.func.isRequired,
 }
 
 SignUpForm.contextTypes = {
   router: PropTypes.object.isRequired,
 }
 
-export default SignUpForm;
+const ConnectedSignUpForm = reduxForm({
+  form: 'signup',
+  validate,
+  warn,
+  asyncValidate,
+  onSubmit: submit,
+})(SignUpForm)
 
-// constructor(props) {
-//   super(props);
-//   this.state = {
-//     email: '',
-//     password: '',
-//     password_confirmation: '',
-//     errors: {},
-//     isLoading: false,
-//   }
-//   this.onEmailChange = this.onEmailChange.bind(this);
-//   this.onPasswordChange = this.onPasswordChange.bind(this);
-//   this.onSubmit = this.onSubmit.bind(this);
-// }
-//
-// onEmailChange (e) {
-//   this.setState({
-//     email: e.target.value
-//   });
-// }
-//
-// onPasswordChange (e) {
-//   this.setState({
-//     password: e.target.value,
-//     password_confirmation: e.target.value,
-//   });
-// }
-//
-// onSubmit (e) {
-//   this.setState({ errors: {}, isLoading: true });
-//   e.preventDefault();
-//   this.props.emailSignup(this.state)
-// }
-//
+export default ConnectedSignUpForm

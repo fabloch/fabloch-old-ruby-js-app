@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
-import { toJS } from '../hoc/toJS'
+// import { toJS } from '../hoc/toJS'
 import { Grid } from 'semantic-ui-react'
 
 import LogInForm from './LogInForm';
