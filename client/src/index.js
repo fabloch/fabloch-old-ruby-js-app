@@ -1,15 +1,15 @@
-import React from 'react'
-import { render } from 'react-dom'
-import Root from './components/Root'
-import configureStore from './configureStore'
-import setAuthHeaders from './utils/setAuthHeaders'
-import { setCurrentUser } from './actions/auth'
+import React from "react"
+import { render } from "react-dom"
+import "semantic-ui-css/semantic.min.css"
 
-import 'semantic-ui-css/semantic.min.css'
+import Root from "./views/Root"
+import configureStore from "./state/configureStore"
+import setAuthHeaders from "./state/ducks/auth/utils"
+import { setCurrentUser } from "./state/ducks/auth/actions"
 
 const store = configureStore()
 
-if(localStorage.token) {
+if (localStorage.token) {
   const localStorageAuth = {
     client: localStorage.client,
     uid: localStorage.uid,
@@ -23,5 +23,4 @@ if(localStorage.token) {
 
 render(
   <Root store={store} />,
-  document.getElementById('root')
-)
+  document.getElementById("root"))
