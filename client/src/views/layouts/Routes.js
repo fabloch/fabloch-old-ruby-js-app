@@ -6,7 +6,7 @@ import Contact from "../pages/Contact"
 import AuthPage from "../pages/Auth"
 import Members from "../pages/Members"
 import NotFound from "../pages/NotFound"
-import requireAuth from "../hoc/requireAuth"
+import withAuth from "../enhancers/withAuth"
 
 const Routes = () => (
   <Switch>
@@ -14,7 +14,7 @@ const Routes = () => (
     <Route path="/about" component={About} />
     <Route path="/contact" component={Contact} />
     <Route path="/account" component={AuthPage} />
-    <Route path="/membres" component={requireAuth(Members)} />
+    <Route path="/membres" component={withAuth(Members)} />
     <Route component={NotFound} />
   </Switch>
 )
