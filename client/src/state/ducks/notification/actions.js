@@ -1,22 +1,22 @@
-import * as types from './types';
+import types from "./types"
 
-export const showNotification= (notification) => ({
-  type: types.SHOW_NOTIFICATION,
-  notification
+const showNotification = notification => ({
+  type: types.SHOW,
+  notification,
 })
 
-export const hideNotification = (id) => ({
-  type: types.HIDE_NOTIFICATION,
-  id
+const hideNotification = id => ({
+  type: types.HIDE,
+  id,
 })
 
-export const deleteNotification = (id) => ({
-  type: types.DELETE_NOTIFICATION,
-  id
+const deleteNotification = id => ({
+  type: types.DELETE,
+  id,
 })
 
-export const addNotification = (notification) => (dispatch) => {
-  dispatch(showNotification(notification))
-  setTimeout(() => {
-    dispatch(hideNotification(notification.id))
-  }, 5000)}
+export default {
+  showNotification,
+  hideNotification,
+  deleteNotification,
+}

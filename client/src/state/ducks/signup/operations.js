@@ -10,8 +10,8 @@ a thunk that dispatches multiple actions in a certain order
 import axios from "axios"
 import actions from "./actions"
 
-import { addNotification } from "../notification/actions"
-import { login } from "../auth/actions"
+import notificationOperations from "../notification/operations"
+import { login } from "../auth/operations"
 
 const emailSignup = userData => (dispatch) => {
   dispatch(actions.signupRequest())
@@ -24,7 +24,7 @@ const emailSignup = userData => (dispatch) => {
       confirm_success_url: "http://localhost:3000" } })
   .then(() => {
     dispatch(actions.signupSuccess())
-    dispatch(addNotification({
+    dispatch(notificationOperations.addNotification({
       level: "success",
       title: "Account created",
       body: "Account created successfully.",
@@ -35,7 +35,7 @@ const emailSignup = userData => (dispatch) => {
     if (err.response) {
       dispatch(actions.signupFailure(err.response.data.errors))
     } else if (err.request) {
-      console.log(err.request)
+      // do something
     }
   })
 }

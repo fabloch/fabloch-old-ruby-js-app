@@ -1,4 +1,4 @@
-import * as types from "./types"
+import types from "./types"
 
 const initialState = {
   isSigningUp: false,
@@ -7,18 +7,18 @@ const initialState = {
 
 const signupReducer = (state = initialState, action) => {
   switch (action.type) {
-  case types.SIGNUP_REQUEST:
+  case types.REQUEST:
     return {
       ...state,
       isSigningUp: true,
     }
-  case types.SIGNUP_SUCCESS:
+  case types.SUCCESS:
     return {
       ...state,
       isSigningUp: false,
       isSignedUp: true,
     }
-  case types.SIGNUP_FAILURE:
+  case types.FAILURE:
     return {
       ...state,
       isSigningUp: false,

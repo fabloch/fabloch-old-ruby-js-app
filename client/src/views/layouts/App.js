@@ -9,8 +9,6 @@ import NotificationList from "./Notifications/NotificationList"
 import Routes from "./Routes"
 import Footer from "./Footer"
 
-import "./App.css"
-
 const App = () => (
   <div>
     <ConnectedRouter history={history}>

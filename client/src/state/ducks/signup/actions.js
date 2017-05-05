@@ -6,16 +6,16 @@ HINT: Always use functions for consistency, don"t export plain objects
 import types from "./types"
 
 const signupRequest = () => ({
-  type: types.SIGNUP_REQUEST,
+  type: types.REQUEST,
 })
 
 const signupFailure = res => ({
-  type: types.SIGNUP_FAILURE,
+  type: types.FAILURE,
   res,
 })
 
 const signupSuccess = () => ({
-  type: types.SIGNUP_SUCCESS,
+  type: types.SUCCESS,
 })
 
 export default {

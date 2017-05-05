@@ -1,4 +1,11 @@
-export const ADD_NOTIFICATION = 'ADD_NOTIFICATION'
-export const SHOW_NOTIFICATION = 'SHOW_NOTIFICATION'
-export const HIDE_NOTIFICATION = 'HIDE_NOTIFICATION'
-export const DELETE_NOTIFICATION = 'DELETE_NOTIFICATION'
+const ADD = "fab_loch/notification/ADD"
+const SHOW = "fab_loch/notification/SHOW"
+const HIDE = "fab_loch/notification/HIDE"
+const DELETE = "fab_loch/notification/DELETE"
+
+export default {
+  ADD,
+  SHOW,
+  HIDE,
+  DELETE,
+}
