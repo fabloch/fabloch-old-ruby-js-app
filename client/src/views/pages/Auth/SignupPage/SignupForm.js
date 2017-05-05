@@ -1,5 +1,6 @@
 import React from "react"
 import PropTypes from "prop-types"
+import { connect } from "react-redux"
 
 import { Form, Button } from "semantic-ui-react"
 import { reduxForm, Field } from "redux-form"
@@ -7,14 +8,14 @@ import { reduxForm, Field } from "redux-form"
 import { validate } from "./validate"
 import { asyncValidate } from "./asyncValidate"
 import { warn } from "./warn"
-import { submit } from "./submit"
 import { renderField } from "../../../components/renderField"
+import { signupOperations } from "../../../../state/ducks/signup"
 
 const SignupForm = (props) => {
-  const { handleSubmit, pristine, reset, submitting } = props
+  const { emailSignup, handleSubmit, pristine, reset, submitting } = props
 
   return (
-    <Form onSubmit={handleSubmit(submit)}>
+    <Form onSubmit={handleSubmit(emailSignup)}>
       <Field
         type="email"
         name="email"
@@ -53,6 +54,7 @@ const SignupForm = (props) => {
 }
 
 SignupForm.propTypes = {
+  emailSignup: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   validate: PropTypes.func.isRequired,
   warn: PropTypes.func.isRequired,
@@ -62,11 +64,17 @@ SignupForm.contextTypes = {
   router: PropTypes.object.isRequired,
 }
 
-const ConnectedSignupForm = reduxForm({
+const mapDispatchToProps = ({
+  emailSignup: signupOperations.emailSignup,
+})
+
+const ConnectedSignupForm = connect(null, mapDispatchToProps)(SignupForm)
+
+const FormedSignupForm = reduxForm({
   form: "signup",
   validate,
   warn,
   asyncValidate,
-})(SignupForm)
+})(ConnectedSignupForm)
 
-export default ConnectedSignupForm
+export default FormedSignupForm
