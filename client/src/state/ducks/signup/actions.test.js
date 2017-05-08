@@ -18,7 +18,7 @@ describe("signupActions", () => {
     ).toEqual(
       {
         type: types.FAILURE,
-        res: { response: "error" },
+        errors: { response: "error" },
       },
     )
   })

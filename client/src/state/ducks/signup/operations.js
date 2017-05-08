@@ -8,10 +8,11 @@ a thunk that dispatches multiple actions in a certain order
 */
 
 import axios from "axios"
-import actions from "./actions"
+import { SubmissionError } from "redux-form"
 
+import actions from "./actions"
 import notificationOperations from "../notification/operations"
-import { login } from "../auth/operations"
+import loginOperations from "../auth/operations"
 
 const emailSignup = userData => (dispatch) => {
   dispatch(actions.signupRequest())
@@ -29,13 +30,15 @@ const emailSignup = userData => (dispatch) => {
       title: "Account created",
       body: "Account created successfully.",
     }))
-    dispatch(login(userData))
+    dispatch(loginOperations.login(userData))
   })
   .catch((err) => {
     if (err.response) {
       dispatch(actions.signupFailure(err.response.data.errors))
+      throw new SubmissionError(err.response.data.errors)
     } else if (err.request) {
       // do something
+      // TODO: bad request
     }
   })
 }

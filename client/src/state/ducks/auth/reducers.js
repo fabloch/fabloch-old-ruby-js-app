@@ -1,28 +1,29 @@
-import { SET_CURRENT_USER } from '../actions/types'
-import isEmpty from 'lodash/isEmpty'
-import { Map, fromJS } from 'immutable'
+import isEmpty from "lodash/isEmpty"
+import { Map, fromJS } from "immutable"
+import types from "./types"
 
 const initialState = Map({
   isAuthenticated: false,
-  user: Map({})
+  isSigningIn: false,
 })
 
 const authReducer = (state = initialState, action) => {
-  switch(action.type) {
-    case SET_CURRENT_USER:
-      return state
-        .merge(
-          Map({
-            isAuthenticated: !isEmpty(action.user),
-            user: fromJS(action.user)
-          })
-        )
-        // .set('isAuthenticated', !isEmpty(action.user))
-        // .set('user', fromJS(action.user))
-
-    default:
-      return state
+  switch (action.type) {
+  case types.LOGIN_REQUEST:
+    return state
+      .set("isSigningIn", true)
+  case types.LOGIN_SUCCESS:
+    return state
+      .merge(
+        Map({
+          isAuthenticated: true,
+          isSigningIn: false,
+          user: fromJS(action.authHeaders),
+        }),
+      )
+  default:
+    return state
   }
 }
 
-export default authReducer;
+export default authReducer

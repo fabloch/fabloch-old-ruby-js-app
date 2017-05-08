@@ -9,9 +9,9 @@ const signupRequest = () => ({
   type: types.REQUEST,
 })
 
-const signupFailure = res => ({
+const signupFailure = errors => ({
   type: types.FAILURE,
-  res,
+  errors,
 })
 
 const signupSuccess = () => ({

@@ -4,8 +4,8 @@ import "semantic-ui-css/semantic.min.css"
 
 import Root from "./views/Root"
 import configureStore from "./state/configureStore"
-import setAuthHeaders from "./state/ducks/auth/utils"
-import { setCurrentUser } from "./state/ducks/auth/actions"
+import utils from "./state/ducks/auth/utils"
+import authActions from "./state/ducks/auth/actions"
 
 const store = configureStore()
 
@@ -17,8 +17,8 @@ if (localStorage.token) {
     expiry: localStorage.expiry,
   }
 
-  setAuthHeaders(localStorageAuth)
-  store.dispatch(setCurrentUser(localStorageAuth))
+  utils.setAuthHeaders(localStorageAuth)
+  store.dispatch(authActions.setCurrentUser(localStorageAuth))
 }
 
 render(

@@ -1,4 +1,4 @@
-import * as types from "./types"
+import types from "./types"
 
 const setCurrentUser = user => ({
   type: types.SET_CURRENT_USER,
@@ -9,13 +9,18 @@ const loginRequest = () => ({
   type: types.LOGIN_REQUEST,
 })
 
-const loginSuccess = () => ({
+const loginSuccess = authHeaders => ({
   type: types.LOGIN_SUCCESS,
+  authHeaders,
 })
 
-const loginFailure = response => ({
+const loginFailure = errors => ({
   type: types.LOGIN_FAILURE,
-  errors: response.data.errors,
+  errors,
+})
+
+const logout = () => ({
+  type: types.LOGOUT,
 })
 
 export default {
@@ -23,4 +28,5 @@ export default {
   loginRequest,
   loginSuccess,
   loginFailure,
+  logout,
 }

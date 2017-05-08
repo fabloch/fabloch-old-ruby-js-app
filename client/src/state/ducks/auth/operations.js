@@ -1,7 +1,9 @@
 import axios from "axios"
+import { SubmissionError } from "redux-form"
+
 import actions from "./actions"
-import { setAuthHeaders } from "./utils"
-import { addNotification } from "../notification/actions"
+import utils from "./utils"
+import notificationOperations from "../notification/operations"
 
 const login = userData => (dispatch) => {
   dispatch(actions.loginRequest())
@@ -22,22 +24,27 @@ const login = userData => (dispatch) => {
       token: headers["access-token"],
       expiry: headers.expiry,
     }
+    dispatch(actions.loginSuccess(authHeaders))
     localStorage.setItem("client", authHeaders.client)
     localStorage.setItem("uid", authHeaders.uid)
     localStorage.setItem("token", authHeaders.token)
     localStorage.setItem("expiry", authHeaders.expiry)
 
-    setAuthHeaders(authHeaders)
-    dispatch(addNotification({
+    utils.setAuthHeaders(authHeaders)
+
+    dispatch(notificationOperations.addNotification({
       level: "success",
       title: "Log in successful",
       body: "Enjoy your ride.",
     }))
-    dispatch(actions.setCurrentUser(authHeaders))
   })
   .catch((error) => {
     if (error.response) {
-      actions.loginFailure(error.response.data.errors)
+      dispatch(actions.loginFailure(error.response.data.errors))
+      throw new SubmissionError(error.response.data.errors)
+    } else if (error.request) {
+      // do something
+      // TODO: bad request
     }
   })
 }
@@ -47,7 +54,8 @@ const logout = () => (dispatch) => {
   localStorage.removeItem("uid")
   localStorage.removeItem("token")
   localStorage.removeItem("expiry")
-  setAuthHeaders(false)
+  utils.setAuthHeaders(false)
+  dispatch(actions.logout())
   dispatch(actions.setCurrentUser({}))
 }
 

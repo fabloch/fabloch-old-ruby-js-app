@@ -1,3 +1,4 @@
+import { Map } from "immutable"
 import signupReducer from "./reducers"
 import types from "./types"
 
@@ -6,10 +7,10 @@ describe("signupReducer", () => {
     expect(
       signupReducer(undefined, { type: "ANOTHER_ACTION" }),
     ).toEqual(
-      {
+      Map({
         isSigningUp: false,
         isSignedUp: false,
-      },
+      }),
     )
   })
 
@@ -18,10 +19,10 @@ describe("signupReducer", () => {
       signupReducer(undefined, {
         type: types.REQUEST,
       }),
-    ).toEqual({
+    ).toEqual(Map({
       isSigningUp: true,
       isSignedUp: false,
-    })
+    }))
   })
 
   it("handles SUCCESS", () => {
@@ -29,10 +30,10 @@ describe("signupReducer", () => {
       signupReducer(undefined, {
         type: types.SUCCESS,
       }),
-    ).toEqual({
+    ).toEqual(Map({
       isSigningUp: false,
       isSignedUp: true,
-    })
+    }))
   })
 
   it("handles FAILURE", () => {
@@ -45,13 +46,15 @@ describe("signupReducer", () => {
         type: types.FAILURE,
         errors,
       }),
-    ).toEqual({
-      isSigningUp: false,
-      isSignedUp: false,
-      errors: {
-        email: "has already been taken",
-        full_message: "Email has already been taken",
-      },
-    })
+    ).toEqual(
+      Map({
+        isSigningUp: false,
+        isSignedUp: false,
+        errors: Map({
+          email: "has already been taken",
+          full_message: "Email has already been taken",
+        }),
+      }),
+    )
   })
 })

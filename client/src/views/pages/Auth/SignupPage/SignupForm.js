@@ -58,6 +58,9 @@ SignupForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   validate: PropTypes.func.isRequired,
   warn: PropTypes.func.isRequired,
+  pristine: PropTypes.func.isRequired,
+  reset: PropTypes.func.isRequired,
+  submitting: PropTypes.func.isRequired,
 }
 
 SignupForm.contextTypes = {
