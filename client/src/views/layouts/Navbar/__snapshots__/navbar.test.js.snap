@@ -1,0 +1,26 @@
+exports[`Navbar presentational when on homepage, not logged in 1`] = `
+<div
+  className="ui menu">
+  <div
+    className="menu">
+    <a
+      className="active item"
+      onClick={[Function]}>
+      La FABrique du Loch
+    </a>
+  </div>
+  <div
+    className="right menu">
+    <a
+      className="item"
+      onClick={[Function]}>
+      Sign Up
+    </a>
+    <a
+      className="item"
+      onClick={[Function]}>
+      Log In
+    </a>
+  </div>
+</div>
+`;
