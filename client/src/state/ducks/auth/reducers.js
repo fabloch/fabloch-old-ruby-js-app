@@ -1,4 +1,3 @@
-import isEmpty from "lodash/isEmpty"
 import { Map, fromJS } from "immutable"
 import types from "./types"
 
@@ -12,13 +11,14 @@ const authReducer = (state = initialState, action) => {
   case types.LOGIN_REQUEST:
     return state
       .set("isSigningIn", true)
+  case types.SET_CURRENT_USER:
   case types.LOGIN_SUCCESS:
     return state
       .merge(
         Map({
           isAuthenticated: true,
           isSigningIn: false,
-          user: fromJS(action.authHeaders),
+          userData: fromJS(action.userData),
         }),
       )
   default:

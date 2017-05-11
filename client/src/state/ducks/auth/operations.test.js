@@ -12,6 +12,17 @@ const mockStore = configureStore(middlewares)
 mockLocalStorage()
 
 describe("authOperations", () => {
+  describe("setCurrentUser", () => {
+    expect(
+      operations.setCurrentUser({ name: "John" }),
+    ).toEqual(
+      {
+        type: types.SET_CURRENT_USER,
+        userData: { name: "John" },
+      },
+    )
+  })
+
   describe("login", () => {
     afterEach(() => {
       nock.cleanAll()
@@ -43,7 +54,7 @@ describe("authOperations", () => {
         { type: "fabloch/auth/LOGIN_REQUEST" },
         {
           type: "fabloch/auth/LOGIN_SUCCESS",
-          authHeaders: {
+          userData: {
             client: "abcdef",
             uid: "ghijkl",
             token: "mnopqr",
@@ -76,7 +87,7 @@ describe("authOperations", () => {
         { type: types.LOGOUT },
         {
           type: types.SET_CURRENT_USER,
-          user: {
+          userData: {
           },
         },
       ]

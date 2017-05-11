@@ -25,11 +25,11 @@ describe("authReducer", () => {
     )
   })
 
-  it("handles LOGIN_SUCCESS", () => {
+  it("handles SET_CURRENT_USER", () => {
     expect(
       authReducer(undefined, {
-        type: types.LOGIN_SUCCESS,
-        authHeaders: {
+        type: types.SET_CURRENT_USER,
+        userData: {
           client: "abcdef",
           uid: "ghijkl",
           token: "mnopqr",
@@ -40,7 +40,32 @@ describe("authReducer", () => {
       Map({
         isAuthenticated: true,
         isSigningIn: false,
-        user: Map({
+        userData: Map({
+          client: "abcdef",
+          uid: "ghijkl",
+          token: "mnopqr",
+          expiry: "123456",
+        }),
+      }),
+    )
+  })
+
+  it("handles LOGIN_SUCCESS", () => {
+    expect(
+      authReducer(undefined, {
+        type: types.LOGIN_SUCCESS,
+        userData: {
+          client: "abcdef",
+          uid: "ghijkl",
+          token: "mnopqr",
+          expiry: "123456",
+        },
+      }),
+    ).toEqual(
+      Map({
+        isAuthenticated: true,
+        isSigningIn: false,
+        userData: Map({
           client: "abcdef",
           uid: "ghijkl",
           token: "mnopqr",

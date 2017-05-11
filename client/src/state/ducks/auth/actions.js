@@ -1,17 +1,17 @@
 import types from "./types"
 
-const setCurrentUser = user => ({
+const setCurrentUser = userData => ({
   type: types.SET_CURRENT_USER,
-  user,
+  userData,
 })
 
 const loginRequest = () => ({
   type: types.LOGIN_REQUEST,
 })
 
-const loginSuccess = authHeaders => ({
+const loginSuccess = userData => ({
   type: types.LOGIN_SUCCESS,
-  authHeaders,
+  userData,
 })
 
 const loginFailure = errors => ({

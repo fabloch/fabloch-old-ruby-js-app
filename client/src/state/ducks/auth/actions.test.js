@@ -8,7 +8,7 @@ describe("authActions", () => {
     ).toEqual(
       {
         type: types.SET_CURRENT_USER,
-        user: {
+        userData: {
           name: "John",
           email: "john@example.com",
         },
@@ -27,18 +27,18 @@ describe("authActions", () => {
   })
 
   it("loginSuccess", () => {
-    const authHeaders = {
+    const userData = {
       accessToken: "BFWQiosmy3iTASScebJKwA",
       client: "4QwqYw_Go1einhAkTowqTQ",
       expiry: "1494622401",
       uid: "user@example.com",
     }
     expect(
-      actions.loginSuccess(authHeaders),
+      actions.loginSuccess(userData),
     ).toEqual(
       {
         type: types.LOGIN_SUCCESS,
-        authHeaders,
+        userData,
       },
     )
   })

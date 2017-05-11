@@ -59,8 +59,11 @@ const logout = () => (dispatch) => {
   dispatch(actions.setCurrentUser({}))
 }
 
+const setCurrentUser = actions.setCurrentUser
+
 
 export default {
+  setCurrentUser,
   login,
   logout,
 }
