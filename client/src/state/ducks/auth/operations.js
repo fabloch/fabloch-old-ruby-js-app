@@ -38,11 +38,11 @@ const login = userData => (dispatch) => {
       body: "Enjoy your ride.",
     }))
   })
-  .catch((error) => {
-    if (error.response) {
-      dispatch(actions.loginFailure(error.response.data.errors))
-      throw new SubmissionError(error.response.data.errors)
-    } else if (error.request) {
+  .catch((err) => {
+    if (err.response) {
+      dispatch(actions.loginFailure(err.response.data.errors))
+      throw new SubmissionError({_error: err.response.data.errors[0]})
+    } else if (err.request) {
       // do something
       // TODO: bad request
     }
@@ -56,14 +56,15 @@ const logout = () => (dispatch) => {
   localStorage.removeItem("expiry")
   utils.setAuthHeaders(false)
   dispatch(actions.logout())
-  dispatch(actions.setCurrentUser({}))
+  dispatch(actions.removeCurrentUser())
 }
 
 const setCurrentUser = actions.setCurrentUser
-
+const removeCurrentUser = actions.removeCurrentUser
 
 export default {
   setCurrentUser,
+  removeCurrentUser,
   login,
   logout,
 }

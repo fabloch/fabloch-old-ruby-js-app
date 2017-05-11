@@ -1,118 +1,85 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Form, Button } from 'semantic-ui-react'
+import React from "react"
+import PropTypes from "prop-types"
+import { connect } from "react-redux"
 
-// import validateInput from '../../validations/login';
+import { Form, Button } from "semantic-ui-react"
+import { reduxForm, Field } from "redux-form"
 
-const LoginForm = () => {
+// import { validate } from "./validate"
+// import { asyncValidate } from "./asyncValidate"
+// import { warn } from "./warn"
+import { renderField } from "../../../components/renderField"
+import { authOperations } from "../../../../state/ducks/auth"
+
+const LoginForm = (props) => {
+  const { login, error, handleSubmit, pristine, reset, submitting } = props
+
   return (
-    // {/* { errors && errors.constructor === Array && <Alert bsStyle="danger">{errors[0]}</Alert> } */}
-    <Form>
-      <Form.Field>
-        <input type="email" placeholder="Enter email" />
-        {/* id="formControlsEmail"
+    <Form onSubmit={handleSubmit(login)}>
+      {error && <strong>{error}</strong>}
+      <Field
         type="email"
         name="email"
-        label="Email address"
-        placeholder="Enter email"
-        value={this.state.email}
-        onChange={this.onChange}
-        errors={errors.email} */}
-      </Form.Field>
+        component={renderField}
+        placeholder="Email"
+        label="Email"
+      />
 
-      <Form.Field>
-        <input type="password" placeholder="Enter password" />
-        {/* id="formControlsPassword"
-        type="password"
+      <Field
         name="password"
+        component={renderField}
+        type="password"
+        placeholder="Password"
         label="Password"
-        placeholder="Enter password"
-        value={this.state.password}
-        onChange={this.onChange}
-        errors={errors.password} */}
-      </Form.Field>
+      />
 
       <Button
         type="submit"
+        disabled={pristine || submitting}
         fluid
         primary
       >
-        Log In
+        Sign Up
       </Button>
+      <p>
+        <Button
+          type="button"
+          disabled={pristine || submitting}
+          onClick={reset}
+        >
+          Clear Values
+        </Button>
+      </p>
     </Form>
   )
 }
 
 LoginForm.propTypes = {
   login: PropTypes.func.isRequired,
-  addNotification: PropTypes.func.isRequired,
+  error: PropTypes.string.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  // validate: PropTypes.func.isRequired,
+  // warn: PropTypes.func.isRequired,
+  pristine: PropTypes.bool.isRequired,
+  reset: PropTypes.func.isRequired,
+  submitting: PropTypes.bool.isRequired,
 }
 
 LoginForm.contextTypes = {
   router: PropTypes.object.isRequired,
 }
 
-export default LoginForm;
+const mapDispatchToProps = {
+  login: authOperations.login,
+}
 
-// constructor(props) {
-//   super(props);
-//   this.state = {
-//     email: '',
-//     password: '',
-//     errors: {},
-//     isLoading: false,
-//   }
-//   this.onChange = this.onChange.bind(this);
-//   this.onSubmit = this.onSubmit.bind(this);
-// }
-//
-// onChange (e) {
-//   this.setState({ [e.target.name]: e.target.value });
-//   this.isValidFunc()
-// }
-//
-//
-// onSubmit (e) {
-//   e.preventDefault();
-//   if (this.isValidFunc()) {
-//     this.setState({ errors: {}, isLoading: true });
-//     this.props.login(this.state)
-//     .then(
-//       (res) => {
-//         this.props.addNotification({
-//           type: 'success',
-//           text: 'You are logged in successfully, welcome back !'
-//         })
-//         this.context.router.history.push('/');
-//       }
-//     ).catch(
-//       (error) => {
-//         if (error.response) {
-//           console.log(error.response)
-//           this.setState({
-//             errors: error.response.data.errors,
-//             isLoading: false
-//           })
-//         } else if (error.request) {
-//           console.log(error.request);
-//         } else {
-//           console.log('Error', error.message);
-//         }
-//         console.log(error.config);
-//       }
-//     )
-//   }
-// }
-//
-// isValidFunc () {
-//   const { errors, isValid } = validateInput(this.state);
-//
-//   if (!isValid) {
-//     this.setState({errors})
-//   } else {
-//     this.setState({errors: {}})
-//   }
-//
-//   return isValid;
-// }
-//
+const ConnectedLoginForm = connect(null, mapDispatchToProps)(LoginForm)
+
+const FormedLoginForm = reduxForm({
+  form: "login",
+  // validate,
+  // warn,
+  // asyncValidate,
+})(ConnectedLoginForm)
+
+export default FormedLoginForm

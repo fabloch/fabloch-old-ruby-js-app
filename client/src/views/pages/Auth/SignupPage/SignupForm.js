@@ -20,7 +20,7 @@ const SignupForm = (props) => {
         type="email"
         name="email"
         component={renderField}
-        placeholder="First Name"
+        placeholder="Email"
         label="Email"
       />
 
@@ -56,11 +56,11 @@ const SignupForm = (props) => {
 SignupForm.propTypes = {
   emailSignup: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
-  validate: PropTypes.func.isRequired,
-  warn: PropTypes.func.isRequired,
-  pristine: PropTypes.func.isRequired,
+  // validate: PropTypes.func.isRequired,
+  // warn: PropTypes.func.isRequired,
+  pristine: PropTypes.bool.isRequired,
   reset: PropTypes.func.isRequired,
-  submitting: PropTypes.func.isRequired,
+  submitting: PropTypes.bool.isRequired,
 }
 
 SignupForm.contextTypes = {

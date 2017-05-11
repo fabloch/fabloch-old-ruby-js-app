@@ -1,6 +1,7 @@
 import { Map } from "immutable"
 import authReducer from "./reducers"
 import types from "./types"
+import actions from "./actions"
 
 describe("authReducer", () => {
   it("has a default state", () => {
@@ -10,17 +11,6 @@ describe("authReducer", () => {
       Map({
         isAuthenticated: false,
         isSigningIn: false,
-      }),
-    )
-  })
-
-  it("handles LOGIN_REQUEST", () => {
-    expect(
-      authReducer(undefined, { type: types.LOGIN_REQUEST }),
-    ).toEqual(
-      Map({
-        isAuthenticated: false,
-        isSigningIn: true,
       }),
     )
   })
@@ -46,6 +36,36 @@ describe("authReducer", () => {
           token: "mnopqr",
           expiry: "123456",
         }),
+      }),
+    )
+  })
+
+  it("handles REMOVE_CURRENT_USER", () => {
+    const initialState = Map({
+      isAuthenticated: true,
+      isSigningIn: false,
+      userData: Map({
+        client: "abcdef",
+        uid: "ghijkl",
+        token: "mnopqr",
+        expiry: "123456",
+      }),
+    })
+    const action = actions.removeCurrentUser()
+    const nextState = Map({
+      isAuthenticated: false,
+      isSigningIn: false,
+    })
+    expect(authReducer(initialState, action)).toEqual(nextState)
+  })
+
+  it("handles LOGIN_REQUEST", () => {
+    expect(
+      authReducer(undefined, { type: types.LOGIN_REQUEST }),
+    ).toEqual(
+      Map({
+        isAuthenticated: false,
+        isSigningIn: true,
       }),
     )
   })
@@ -77,5 +97,43 @@ describe("authReducer", () => {
 
   xit("handles LOGIN_FAILURE", () => {
     // TODO
+  })
+
+  it("handles LOGOUT", () => {
+    const initialState = Map({
+      isAuthenticated: true,
+      isSigningIn: false,
+      userData: Map({
+        client: "abcdef",
+        uid: "ghijkl",
+        token: "mnopqr",
+        expiry: "123456",
+      }),
+    })
+    const action = actions.logout()
+    const nextState = Map({
+      isAuthenticated: false,
+      isSigningIn: false,
+    })
+    expect(authReducer(initialState, action)).toEqual(nextState)
+  })
+
+  it("handles LOGOUT", () => {
+    const initialState = Map({
+      isAuthenticated: true,
+      isSigningIn: false,
+      userData: Map({
+        client: "abcdef",
+        uid: "ghijkl",
+        token: "mnopqr",
+        expiry: "123456",
+      }),
+    })
+    const action = actions.logout()
+    const nextState = Map({
+      isAuthenticated: false,
+      isSigningIn: false,
+    })
+    expect(authReducer(initialState, action)).toEqual(nextState)
   })
 })

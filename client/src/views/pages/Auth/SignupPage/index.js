@@ -1,7 +1,7 @@
-import React from 'react';
-import { Grid } from 'semantic-ui-react'
+import React from "react"
+import { Grid } from "semantic-ui-react"
 
-import SignupForm from './SignupForm';
+import SignupForm from "./SignupForm"
 
 const SignupPage = () => (
   <Grid.Column width={5} textAlign="center">
@@ -10,4 +10,4 @@ const SignupPage = () => (
   </Grid.Column>
 )
 
-export default SignupPage;
+export default SignupPage

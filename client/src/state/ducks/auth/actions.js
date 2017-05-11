@@ -5,6 +5,10 @@ const setCurrentUser = userData => ({
   userData,
 })
 
+const removeCurrentUser = () => ({
+  type: types.REMOVE_CURRENT_USER,
+})
+
 const loginRequest = () => ({
   type: types.LOGIN_REQUEST,
 })
@@ -25,6 +29,7 @@ const logout = () => ({
 
 export default {
   setCurrentUser,
+  removeCurrentUser,
   loginRequest,
   loginSuccess,
   loginFailure,

@@ -86,9 +86,7 @@ describe("authOperations", () => {
       const expectedActions = [
         { type: types.LOGOUT },
         {
-          type: types.SET_CURRENT_USER,
-          userData: {
-          },
+          type: types.REMOVE_CURRENT_USER,
         },
       ]
 

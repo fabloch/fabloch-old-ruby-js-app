@@ -1,26 +1,209 @@
-exports[`Navbar presentational when on homepage, not logged in 1`] = `
-<div
-  className="ui menu">
-  <div
-    className="menu">
-    <a
-      className="active item"
-      onClick={[Function]}>
-      La FABrique du Loch
-    </a>
-  </div>
-  <div
-    className="right menu">
-    <a
-      className="item"
-      onClick={[Function]}>
-      Sign Up
-    </a>
-    <a
-      className="item"
-      onClick={[Function]}>
-      Log In
-    </a>
-  </div>
-</div>
+exports[`Navbar presentational when logged in homepage 1`] = `
+<Component
+  auth={
+    Object {
+      "isAuthenticated": true,
+      "isSigningIn": false,
+      "user": Object {
+        "some": "data",
+      },
+    }
+  }
+  logout={[Function]}
+  pathname="/">
+  <Menu>
+    <div
+      className="ui menu">
+      <LeftMenu>
+        <MenuMenu>
+          <div
+            className="menu">
+            <MenuItem
+              active={true}
+              onClick={[Function]}>
+              <a
+                className="active item"
+                onClick={[Function]}>
+                La FABrique du Loch
+              </a>
+            </MenuItem>
+          </div>
+        </MenuMenu>
+      </LeftMenu>
+      <RightMenu>
+        <MenuMenu
+          position="right">
+          <div
+            className="right menu">
+            <MenuItem
+              active={false}
+              onClick={[Function]}>
+              <a
+                className="item"
+                onClick={[Function]}>
+                Log Out
+              </a>
+            </MenuItem>
+          </div>
+        </MenuMenu>
+      </RightMenu>
+    </div>
+  </Menu>
+</Component>
+`;
+
+exports[`Navbar presentational when not logged in homepage 1`] = `
+<Component
+  auth={
+    Object {
+      "isAuthenticated": true,
+      "isSigningIn": false,
+      "user": Object {},
+    }
+  }
+  logout={[Function]}
+  pathname="/">
+  <Menu>
+    <div
+      className="ui menu">
+      <LeftMenu>
+        <MenuMenu>
+          <div
+            className="menu">
+            <MenuItem
+              active={true}
+              onClick={[Function]}>
+              <a
+                className="active item"
+                onClick={[Function]}>
+                La FABrique du Loch
+              </a>
+            </MenuItem>
+          </div>
+        </MenuMenu>
+      </LeftMenu>
+      <RightMenu>
+        <MenuMenu
+          position="right">
+          <div
+            className="right menu">
+            <MenuItem
+              active={false}
+              onClick={[Function]}>
+              <a
+                className="item"
+                onClick={[Function]}>
+                Log Out
+              </a>
+            </MenuItem>
+          </div>
+        </MenuMenu>
+      </RightMenu>
+    </div>
+  </Menu>
+</Component>
+`;
+
+exports[`Navbar presentational when not logged in login page 1`] = `
+<Component
+  auth={
+    Object {
+      "isAuthenticated": true,
+      "isSigningIn": false,
+      "user": Object {},
+    }
+  }
+  logout={[Function]}
+  pathname="/account/login">
+  <Menu>
+    <div
+      className="ui menu">
+      <LeftMenu>
+        <MenuMenu>
+          <div
+            className="menu">
+            <MenuItem
+              active={false}
+              onClick={[Function]}>
+              <a
+                className="item"
+                onClick={[Function]}>
+                La FABrique du Loch
+              </a>
+            </MenuItem>
+          </div>
+        </MenuMenu>
+      </LeftMenu>
+      <RightMenu>
+        <MenuMenu
+          position="right">
+          <div
+            className="right menu">
+            <MenuItem
+              active={true}
+              onClick={[Function]}>
+              <a
+                className="active item"
+                onClick={[Function]}>
+                Log Out
+              </a>
+            </MenuItem>
+          </div>
+        </MenuMenu>
+      </RightMenu>
+    </div>
+  </Menu>
+</Component>
+`;
+
+exports[`Navbar presentational when not logged in signup page 1`] = `
+<Component
+  auth={
+    Object {
+      "isAuthenticated": true,
+      "isSigningIn": false,
+      "user": Object {},
+    }
+  }
+  logout={[Function]}
+  pathname="/account/signup">
+  <Menu>
+    <div
+      className="ui menu">
+      <LeftMenu>
+        <MenuMenu>
+          <div
+            className="menu">
+            <MenuItem
+              active={false}
+              onClick={[Function]}>
+              <a
+                className="item"
+                onClick={[Function]}>
+                La FABrique du Loch
+              </a>
+            </MenuItem>
+          </div>
+        </MenuMenu>
+      </LeftMenu>
+      <RightMenu>
+        <MenuMenu
+          position="right">
+          <div
+            className="right menu">
+            <MenuItem
+              active={false}
+              onClick={[Function]}>
+              <a
+                className="item"
+                onClick={[Function]}>
+                Log Out
+              </a>
+            </MenuItem>
+          </div>
+        </MenuMenu>
+      </RightMenu>
+    </div>
+  </Menu>
+</Component>
 `;

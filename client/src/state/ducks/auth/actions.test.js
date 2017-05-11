@@ -16,6 +16,16 @@ describe("authActions", () => {
     )
   })
 
+  it("removeCurrentUser", () => {
+    expect(
+      actions.removeCurrentUser(),
+    ).toEqual(
+      {
+        type: types.REMOVE_CURRENT_USER,
+      },
+    )
+  })
+
   it("loginRequest", () => {
     expect(
       actions.loginRequest(),

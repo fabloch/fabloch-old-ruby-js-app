@@ -21,6 +21,11 @@ const authReducer = (state = initialState, action) => {
           userData: fromJS(action.userData),
         }),
       )
+  case types.REMOVE_CURRENT_USER:
+  case types.LOGOUT:
+    return state
+      .set("isAuthenticated", false)
+      .delete("userData")
   default:
     return state
   }
