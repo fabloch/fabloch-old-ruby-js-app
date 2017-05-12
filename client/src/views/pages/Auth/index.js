@@ -4,12 +4,11 @@ import { Grid } from "semantic-ui-react"
 
 import SignupPage from "./SignupPage"
 import LoginPage from "./LoginPage"
-import { userIsNotAuthenticated } from "../../../auth"
 
 const Auth = () => (
   <Grid centered>
-    <Route path="/account/signup" component={userIsNotAuthenticated(SignupPage)} />
-    <Route path="/account/login" component={userIsNotAuthenticated(LoginPage)} />
+    <Route path="/auth/login" component={LoginPage} />
+    <Route path="/auth/signup" component={SignupPage} />
   </Grid>
 )
 

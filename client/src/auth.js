@@ -6,7 +6,7 @@ import Loading from "./views/pages/Loading"
 const locationHelper = locationHelperBuilder({})
 
 export const userIsAuthenticated = connectedRouterRedirect({
-  redirectPath: "/login",
+  redirectPath: "/auth/login",
   authSelector: state => state.user.data,
   authenticatingSelector: state => state.user.isLoading,
   AuthenticatingComponent: Loading,

@@ -27,7 +27,7 @@ export const Navbar = ({ auth, logout }, { router }) => {
   const LeftMenu = () => (
     <Menu.Menu>
       <MenuItem
-        activeOnlyWhenExact
+        activeOnlyWhenExact={true}
         to="/"
         label="La FABrique du Loch"
       />
@@ -48,7 +48,7 @@ export const Navbar = ({ auth, logout }, { router }) => {
           />
 
           <MenuItem
-            to="/signup"
+            to="/auth/signup"
             label="M'inscrire"
           />
         </Menu.Menu>
@@ -57,7 +57,7 @@ export const Navbar = ({ auth, logout }, { router }) => {
     return (
       <Menu.Menu position="right">
         <MenuItem
-          to="/logout"
+          to="/auth/logout"
           label="Me déconnecter"
           onClick={logout}
         />
