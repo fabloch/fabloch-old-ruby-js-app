@@ -14,7 +14,7 @@ const App = () => (
     <ConnectedRouter history={history}>
       <div>
         <Navbar />
-        <NotificationList />
+        {/* <NotificationList /> */}
         <Container>
           <Routes />
         </Container>
