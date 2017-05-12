@@ -1,7 +1,7 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
 import { connect } from "react-redux"
-import { addNotification } from "../../state/ducks/notification/actions"
+import { notificationOperations } from "../../state/ducks/notification"
 
 export default function (ComposedComponent) {
   class Authenticate extends Component {
@@ -45,7 +45,7 @@ export default function (ComposedComponent) {
   })
 
   const mapDisptatchToProps = {
-    addNotification,
+    addNotification: notificationOperations.addNotification,
   }
 
   return connect(mapStateToProps, mapDisptatchToProps)(Authenticate)
