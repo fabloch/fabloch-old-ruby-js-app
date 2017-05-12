@@ -14,7 +14,7 @@ const MenuItem = ({ label, to, activeOnlyWhenExact, onClick }) => (
       <Menu.Item
         as={Link}
         to={to}
-        active={match} // TODO problem with match not updating
+        active={match && true}
         onClick={onClick}
       >
         {label}

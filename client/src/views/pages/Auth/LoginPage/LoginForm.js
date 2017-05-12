@@ -56,13 +56,17 @@ const LoginForm = (props) => {
 
 LoginForm.propTypes = {
   login: PropTypes.func.isRequired,
-  error: PropTypes.string.isRequired,
+  error: PropTypes.string,
   handleSubmit: PropTypes.func.isRequired,
   // validate: PropTypes.func.isRequired,
   // warn: PropTypes.func.isRequired,
   pristine: PropTypes.bool.isRequired,
   reset: PropTypes.func.isRequired,
   submitting: PropTypes.bool.isRequired,
+}
+
+LoginForm.defaultProps = {
+  error: null,
 }
 
 LoginForm.contextTypes = {

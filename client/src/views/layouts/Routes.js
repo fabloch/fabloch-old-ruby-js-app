@@ -1,6 +1,5 @@
 import React from "react"
 import { Route, Switch } from "react-router-dom"
-import { Grid } from "semantic-ui-react"
 
 import { userIsAuthenticated, userIsNotAuthenticated, userIsAdmin } from "../../auth"
 
