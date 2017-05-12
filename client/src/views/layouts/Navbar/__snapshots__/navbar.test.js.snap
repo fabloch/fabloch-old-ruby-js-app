@@ -123,10 +123,10 @@ exports[`Navbar presentational when not logged in login page 1`] = `
           <div
             className="menu">
             <MenuItem
-              active={false}
+              active={true}
               onClick={[Function]}>
               <a
-                className="item"
+                className="active item"
                 onClick={[Function]}>
                 La FABrique du Loch
               </a>
@@ -140,10 +140,10 @@ exports[`Navbar presentational when not logged in login page 1`] = `
           <div
             className="right menu">
             <MenuItem
-              active={true}
+              active={false}
               onClick={[Function]}>
               <a
-                className="active item"
+                className="item"
                 onClick={[Function]}>
                 Log Out
               </a>
@@ -175,10 +175,10 @@ exports[`Navbar presentational when not logged in signup page 1`] = `
           <div
             className="menu">
             <MenuItem
-              active={false}
+              active={true}
               onClick={[Function]}>
               <a
-                className="item"
+                className="active item"
                 onClick={[Function]}>
                 La FABrique du Loch
               </a>

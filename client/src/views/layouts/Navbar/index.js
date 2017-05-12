@@ -1,18 +1,40 @@
 import React from "react"
 import PropTypes from "prop-types"
+import { Route, Link } from "react-router-dom"
 import { connect } from "react-redux"
 import { Menu } from "semantic-ui-react"
+
 import { authOperations } from "../../../state/ducks/auth"
 
-export const Navbar = ({ pathname, auth, logout }, { router }) => {
+const MenuItem = ({ label, to, activeOnlyWhenExact, onClick }) => (
+  <Route
+    path={to}
+    exact={activeOnlyWhenExact}
+    children={({ match }) => (
+      <Menu.Item
+        as={Link}
+        to={to}
+        active={match} // TODO problem with match not updating
+        onClick={onClick}
+      >
+        {label}
+      </Menu.Item>
+    )}
+  />
+)
+
+export const Navbar = ({ auth, logout }, { router }) => {
   const LeftMenu = () => (
     <Menu.Menu>
-      <Menu.Item
-        active={pathname === "/" && true}
-        onClick={() => router.history.push("/")}
-      >
-        La FABrique du Loch
-      </Menu.Item>
+      <MenuItem
+        activeOnlyWhenExact
+        to="/"
+        label="La FABrique du Loch"
+      />
+      <MenuItem
+        to="/myfablab"
+        label="My Fablab"
+      />
     </Menu.Menu>
   )
 
@@ -20,29 +42,25 @@ export const Navbar = ({ pathname, auth, logout }, { router }) => {
     if (!auth.isAuthenticated) {
       return (
         <Menu.Menu position="right">
-          <Menu.Item
-            active={pathname === "/account/signup" && true}
-            onClick={() => router.history.push("/account/signup")}
-          >
-            Sign Up
-          </Menu.Item>
-          <Menu.Item
-            active={pathname === "/account/login" && true}
-            onClick={() => router.history.push("/account/login")}
-          >
-            Log In
-          </Menu.Item>
+          <MenuItem
+            to="/auth/login"
+            label="Me connecter"
+          />
+
+          <MenuItem
+            to="/signup"
+            label="M'inscrire"
+          />
         </Menu.Menu>
       )
     }
     return (
       <Menu.Menu position="right">
-        <Menu.Item
-          active={pathname === "/account/login" && true}
+        <MenuItem
+          to="/logout"
+          label="Me déconnecter"
           onClick={logout}
-        >
-          Log Out
-        </Menu.Item>
+        />
       </Menu.Menu>
     )
   }
@@ -60,7 +78,6 @@ Navbar.contextTypes = {
 }
 
 Navbar.propTypes = {
-  pathname: PropTypes.string.isRequired,
   auth: PropTypes.shape({
     isAuthenticated: PropTypes.bool.isRequired,
     isSigningIn: PropTypes.bool.isRequired,
@@ -72,7 +89,6 @@ Navbar.propTypes = {
 
 const mapStateToProps = state => ({
   auth: state.auth.toJS(),
-  pathname: state.router.location.pathname,
 })
 
 const mapDisptatchToProps = {

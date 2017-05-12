@@ -1,27 +1,25 @@
 import React from "react"
-// import { BrowserRouter as Router } from "react-router-dom"
-import { ConnectedRouter } from "react-router-redux"
+import { BrowserRouter as Router } from "react-router-dom"
+import { connect } from "react-redux"
 import { Container } from "semantic-ui-react"
 
-import { history } from "../../state/configureStore"
-import Navbar from "./Navbar"
-import NotificationList from "./Notifications/NotificationList"
+import { logout } from "../../state/ducks/user/actions"
+import NavbarContainer from "./Navbar"
+// import NotificationList from "./Notifications/NotificationList"
 import Routes from "./Routes"
 import Footer from "./Footer"
 
 const App = () => (
-  <div>
-    <ConnectedRouter history={history}>
-      <div>
-        <Navbar />
+  <Router>
+    <div>
+      <NavbarContainer />
+      <Container>
         {/* <NotificationList /> */}
-        <Container>
-          <Routes />
-        </Container>
-        <Footer />
-      </div>
-    </ConnectedRouter>
-  </div>
+        <Routes />
+      </Container>
+      <Footer />
+    </div>
+  </Router>
 )
 
-export default App
+export default connect(false, { logout })(App)
