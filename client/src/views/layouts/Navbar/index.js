@@ -4,7 +4,7 @@ import { Route, Link } from "react-router-dom"
 import { connect } from "react-redux"
 import { Menu } from "semantic-ui-react"
 
-import { authOperations } from "../../../state/ducks/auth"
+import { sessionOperations } from "../../../state/ducks/session"
 
 const MenuItem = ({ label, to, activeOnlyWhenExact, onClick }) => (
   <Route
@@ -23,7 +23,7 @@ const MenuItem = ({ label, to, activeOnlyWhenExact, onClick }) => (
   />
 )
 
-export const Navbar = ({ auth, logout }, { router }) => {
+export const Navbar = ({ session, logout }, { router }) => {
   const LeftMenu = () => (
     <Menu.Menu>
       <MenuItem
@@ -39,16 +39,16 @@ export const Navbar = ({ auth, logout }, { router }) => {
   )
 
   const RightMenu = () => {
-    if (!auth.isAuthenticated) {
+    if (!session.data) {
       return (
         <Menu.Menu position="right">
           <MenuItem
-            to="/auth/login"
+            to="/session/login"
             label="Me connecter"
           />
 
           <MenuItem
-            to="/auth/signup"
+            to="/session/signup"
             label="M'inscrire"
           />
         </Menu.Menu>
@@ -57,7 +57,7 @@ export const Navbar = ({ auth, logout }, { router }) => {
     return (
       <Menu.Menu position="right">
         <MenuItem
-          to="/auth/logout"
+          to="/session/logout"
           label="Me déconnecter"
           onClick={logout}
         />
@@ -78,21 +78,20 @@ Navbar.contextTypes = {
 }
 
 Navbar.propTypes = {
-  auth: PropTypes.shape({
-    isAuthenticated: PropTypes.bool.isRequired,
-    isSigningIn: PropTypes.bool.isRequired,
-    userData: PropTypes.objectOf(PropTypes.string),
+  session: PropTypes.shape({
+    data: PropTypes.objectOf(PropTypes.string),
+    isLoading: PropTypes.bool.isRequired,
   }).isRequired,
   logout: PropTypes.func.isRequired,
 }
 
 
 const mapStateToProps = state => ({
-  auth: state.auth.toJS(),
+  session: state.session.toJS(),
 })
 
 const mapDisptatchToProps = {
-  logout: authOperations.logout,
+  logout: sessionOperations.logout,
 }
 
 const connectedNavbar = connect(mapStateToProps, mapDisptatchToProps)(Navbar)

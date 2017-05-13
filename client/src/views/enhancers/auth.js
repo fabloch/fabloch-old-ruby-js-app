@@ -1,14 +1,14 @@
 import locationHelperBuilder from "redux-auth-wrapper/lib/history4/locationHelper"
 import { connectedRouterRedirect } from "redux-auth-wrapper/lib/history4/redirect"
 
-import Loading from "./views/pages/Loading"
+import Loading from "../pages/Loading"
 
 const locationHelper = locationHelperBuilder({})
 
 export const userIsAuthenticated = connectedRouterRedirect({
   redirectPath: "/session/login",
-  authSelector: state => state.session.data,
-  authenticatingSelector: state => state.session.isLoading,
+  authSelector: state => state.session.get("data"),
+  authenticatingSelector: state => state.session.get("isLoading"),
   AuthenticatingComponent: Loading,
   wrapperDisplayName: "UserIsAuthenticated",
 })
@@ -16,15 +16,15 @@ export const userIsAuthenticated = connectedRouterRedirect({
 export const userIsAdmin = connectedRouterRedirect({
   redirectPath: "/",
   allowRedirectBack: false,
-  authSelector: state => state.session.data,
-  predicate: user => user.isAdmin,
+  authSelector: state => state.session.get("data"),
+  predicate: user => user.get("isAdmin"),
   wrapperDisplayName: "UserIsAdmin",
 })
 
 export const userIsNotAuthenticated = connectedRouterRedirect({
   redirectPath: (state, ownProps) => locationHelper.getRedirectQuery(ownProps) || "/myfablab",
   allowRedirectBack: false,
-  authSelector: state => state.session,
+  authSelector: state => state.session.toJS(),
   // Want to redirect the user when they are done loading and authenticated
   predicate: session => session.data === null && session.isLoading === false,
   wrapperDisplayName: "UserIsNotAuthenticated",
