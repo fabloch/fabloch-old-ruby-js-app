@@ -1,21 +1,23 @@
 import React from "react"
-import { shallow, mount } from "enzyme"
+import { mount } from "enzyme"
 import toJson from "enzyme-to-json"
+import { BrowserRouter as Router } from "react-router-dom"
 
 import { Navbar } from "./"
 
 const notLoggedIn = {
-  isAuthenticated: true,
-  isSigningIn: false,
-  user: {},
+  data: null,
+  isLoading: false,
 }
 
 const loggedIn = {
-  isAuthenticated: true,
-  isSigningIn: false,
-  user: {
-    some: "data",
+  data: {
+    client: "abcdef",
+    uid: "ghijkl",
+    token: "mnopqr",
+    expiry: "123456",
   },
+  isLoading: false,
 }
 
 const logout = jest.fn()
@@ -23,28 +25,40 @@ const logout = jest.fn()
 describe("Navbar presentational", () => {
   describe("when not logged in", () => {
     it("homepage", () => {
-      const context = { router: { isActive: (a, b) => true } }
       const wrapper = mount(
-        <Navbar pathname={"/"} auth={notLoggedIn} logout={logout} />,
-        { context },
+        <Router>
+          <Navbar
+            pathname={"/"}
+            session={notLoggedIn}
+            logout={logout}
+          />
+        </Router>,
       )
       expect(toJson(wrapper)).toMatchSnapshot()
     })
 
     it("signup page", () => {
-      const context = { router: { isActive: (a, b) => true } }
       const wrapper = mount(
-        <Navbar pathname={"/account/signup"} auth={notLoggedIn} logout={logout} />,
-        { context },
+        <Router>
+          <Navbar
+            pathname={"/account/signup"}
+            session={notLoggedIn}
+            logout={logout}
+          />
+        </Router>,
       )
       expect(toJson(wrapper)).toMatchSnapshot()
     })
 
     it("login page", () => {
-      const context = { router: { isActive: (a, b) => true } }
       const wrapper = mount(
-        <Navbar pathname={"/account/login"} auth={notLoggedIn} logout={logout} />,
-        { context },
+        <Router>
+          <Navbar
+            pathname={"/account/login"}
+            session={notLoggedIn}
+            logout={logout}
+          />
+        </Router>,
       )
       expect(toJson(wrapper)).toMatchSnapshot()
     })
@@ -52,10 +66,14 @@ describe("Navbar presentational", () => {
 
   describe("when logged in", () => {
     it("homepage", () => {
-      const context = { router: { isActive: (a, b) => true } }
       const wrapper = mount(
-        <Navbar pathname={"/"} auth={loggedIn} logout={logout} />,
-        { context },
+        <Router>
+          <Navbar
+            pathname={"/"}
+            session={loggedIn}
+            logout={logout}
+          />
+        </Router>,
       )
       expect(toJson(wrapper)).toMatchSnapshot()
     })

@@ -23,7 +23,7 @@ const MenuItem = ({ label, to, activeOnlyWhenExact, onClick }) => (
   />
 )
 
-export const Navbar = ({ session, logout }, { router }) => {
+export const Navbar = ({ session, logout }) => {
   const LeftMenu = () => (
     <Menu.Menu>
       <MenuItem
@@ -71,10 +71,6 @@ export const Navbar = ({ session, logout }, { router }) => {
       <RightMenu />
     </Menu>
   )
-}
-
-Navbar.contextTypes = {
-  router: PropTypes.object.isRequired,
 }
 
 Navbar.propTypes = {
