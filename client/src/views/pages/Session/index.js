@@ -5,11 +5,11 @@ import { Grid } from "semantic-ui-react"
 import SignupPage from "./SignupPage"
 import LoginPage from "./LoginPage"
 
-const Auth = () => (
+const Session = () => (
   <Grid centered>
-    <Route path="/auth/login" component={LoginPage} />
-    <Route path="/auth/signup" component={SignupPage} />
+    <Route path="/session/login" component={LoginPage} />
+    <Route path="/session/signup" component={SignupPage} />
   </Grid>
 )
 
-export default Auth
+export default Session

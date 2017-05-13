@@ -14,7 +14,7 @@ import actions from "./actions"
 import notificationOperations from "../notification/operations"
 import loginOperations from "../auth/operations"
 
-const emailSignup = userData => (dispatch) => {
+const signup = userData => (dispatch) => {
   dispatch(actions.signupRequest())
   return axios({
     url: "/auth",
@@ -43,5 +43,5 @@ const emailSignup = userData => (dispatch) => {
   })
 }
 export default {
-  emailSignup,
+  signup,
 }

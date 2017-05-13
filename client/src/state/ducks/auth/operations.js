@@ -2,7 +2,7 @@ import axios from "axios"
 import { SubmissionError } from "redux-form"
 
 import actions from "./actions"
-import utils from "./utils"
+import setAuthHeaders from "../../../utils/setAuthHeaders"
 import notificationOperations from "../notification/operations"
 
 const login = userData => (dispatch) => {
@@ -30,7 +30,7 @@ const login = userData => (dispatch) => {
     localStorage.setItem("token", authHeaders.token)
     localStorage.setItem("expiry", authHeaders.expiry)
 
-    utils.setAuthHeaders(authHeaders)
+    setAuthHeaders(authHeaders)
 
     dispatch(notificationOperations.addNotification({
       level: "success",
@@ -54,7 +54,7 @@ const logout = () => (dispatch) => {
   localStorage.removeItem("uid")
   localStorage.removeItem("token")
   localStorage.removeItem("expiry")
-  utils.setAuthHeaders(false)
+  setAuthHeaders(false)
   dispatch(actions.logout())
   dispatch(actions.removeCurrentUser())
 }

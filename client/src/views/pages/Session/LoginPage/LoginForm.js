@@ -5,17 +5,18 @@ import { connect } from "react-redux"
 import { Form, Button } from "semantic-ui-react"
 import { reduxForm, Field } from "redux-form"
 
-import { validate } from "./validate"
-import { asyncValidate } from "./asyncValidate"
-import { warn } from "./warn"
+// import { validate } from "./validate"
+// import { asyncValidate } from "./asyncValidate"
+// import { warn } from "./warn"
 import { renderField } from "../../../components/renderField"
-import { signupOperations } from "../../../../state/ducks/signup"
+import { sessionOperations } from "../../../../state/ducks/session"
 
-const SignupForm = (props) => {
-  const { emailSignup, handleSubmit, pristine, reset, submitting } = props
+const LoginForm = (props) => {
+  const { login, error, handleSubmit, pristine, reset, submitting } = props
 
   return (
-    <Form onSubmit={handleSubmit(emailSignup)}>
+    <Form onSubmit={handleSubmit(login)}>
+      {error && <strong>{error}</strong>}
       <Field
         type="email"
         name="email"
@@ -53,8 +54,9 @@ const SignupForm = (props) => {
   )
 }
 
-SignupForm.propTypes = {
-  emailSignup: PropTypes.func.isRequired,
+LoginForm.propTypes = {
+  login: PropTypes.func.isRequired,
+  error: PropTypes.string,
   handleSubmit: PropTypes.func.isRequired,
   // validate: PropTypes.func.isRequired,
   // warn: PropTypes.func.isRequired,
@@ -63,21 +65,25 @@ SignupForm.propTypes = {
   submitting: PropTypes.bool.isRequired,
 }
 
-SignupForm.contextTypes = {
+LoginForm.defaultProps = {
+  error: null,
+}
+
+LoginForm.contextTypes = {
   router: PropTypes.object.isRequired,
 }
 
-const mapDispatchToProps = ({
-  emailSignup: signupOperations.emailSignup,
-})
+const mapDispatchToProps = {
+  login: sessionOperations.login,
+}
 
-const ConnectedSignupForm = connect(null, mapDispatchToProps)(SignupForm)
+const ConnectedLoginForm = connect(null, mapDispatchToProps)(LoginForm)
 
-const FormedSignupForm = reduxForm({
-  form: "signup",
-  validate,
-  warn,
-  asyncValidate,
-})(ConnectedSignupForm)
+const FormedLoginForm = reduxForm({
+  form: "login",
+  // validate,
+  // warn,
+  // asyncValidate,
+})(ConnectedLoginForm)
 
-export default FormedSignupForm
+export default FormedLoginForm

@@ -16,6 +16,4 @@ const setAuthHeaders = (authCredentials) => {
   }
 }
 
-export default {
-  setAuthHeaders,
-}
+export default setAuthHeaders

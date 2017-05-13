@@ -2,7 +2,7 @@ import React, { Component } from "react"
 import PropTypes from "prop-types"
 import { connect } from "react-redux"
 
-import { login } from "../../state/ducks/user/actions"
+import { login } from "../../state/ducks/session/actions"
 
 export class LoginContainer extends Component {
 

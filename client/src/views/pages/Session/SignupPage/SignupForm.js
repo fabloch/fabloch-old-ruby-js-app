@@ -5,18 +5,17 @@ import { connect } from "react-redux"
 import { Form, Button } from "semantic-ui-react"
 import { reduxForm, Field } from "redux-form"
 
-// import { validate } from "./validate"
-// import { asyncValidate } from "./asyncValidate"
-// import { warn } from "./warn"
+import { validate } from "./validate"
+import { asyncValidate } from "./asyncValidate"
+import { warn } from "./warn"
 import { renderField } from "../../../components/renderField"
-import { authOperations } from "../../../../state/ducks/auth"
+import { sessionOperations } from "../../../../state/ducks/session"
 
-const LoginForm = (props) => {
-  const { login, error, handleSubmit, pristine, reset, submitting } = props
+const SignupForm = (props) => {
+  const { signup, handleSubmit, pristine, reset, submitting } = props
 
   return (
-    <Form onSubmit={handleSubmit(login)}>
-      {error && <strong>{error}</strong>}
+    <Form onSubmit={handleSubmit(signup)}>
       <Field
         type="email"
         name="email"
@@ -54,9 +53,8 @@ const LoginForm = (props) => {
   )
 }
 
-LoginForm.propTypes = {
-  login: PropTypes.func.isRequired,
-  error: PropTypes.string,
+SignupForm.propTypes = {
+  signup: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   // validate: PropTypes.func.isRequired,
   // warn: PropTypes.func.isRequired,
@@ -65,25 +63,21 @@ LoginForm.propTypes = {
   submitting: PropTypes.bool.isRequired,
 }
 
-LoginForm.defaultProps = {
-  error: null,
-}
-
-LoginForm.contextTypes = {
+SignupForm.contextTypes = {
   router: PropTypes.object.isRequired,
 }
 
-const mapDispatchToProps = {
-  login: authOperations.login,
-}
+const mapDispatchToProps = ({
+  signup: sessionOperations.signup,
+})
 
-const ConnectedLoginForm = connect(null, mapDispatchToProps)(LoginForm)
+const ConnectedSignupForm = connect(null, mapDispatchToProps)(SignupForm)
 
-const FormedLoginForm = reduxForm({
-  form: "login",
-  // validate,
-  // warn,
-  // asyncValidate,
-})(ConnectedLoginForm)
+const FormedSignupForm = reduxForm({
+  form: "signup",
+  validate,
+  warn,
+  asyncValidate,
+})(ConnectedSignupForm)
 
-export default FormedLoginForm
+export default FormedSignupForm

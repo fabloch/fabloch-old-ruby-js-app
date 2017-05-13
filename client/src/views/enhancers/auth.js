@@ -6,9 +6,9 @@ import Loading from "./views/pages/Loading"
 const locationHelper = locationHelperBuilder({})
 
 export const userIsAuthenticated = connectedRouterRedirect({
-  redirectPath: "/auth/login",
-  authSelector: state => state.user.data,
-  authenticatingSelector: state => state.user.isLoading,
+  redirectPath: "/session/login",
+  authSelector: state => state.session.data,
+  authenticatingSelector: state => state.session.isLoading,
   AuthenticatingComponent: Loading,
   wrapperDisplayName: "UserIsAuthenticated",
 })
@@ -16,16 +16,16 @@ export const userIsAuthenticated = connectedRouterRedirect({
 export const userIsAdmin = connectedRouterRedirect({
   redirectPath: "/",
   allowRedirectBack: false,
-  authSelector: state => state.user.data,
+  authSelector: state => state.session.data,
   predicate: user => user.isAdmin,
   wrapperDisplayName: "UserIsAdmin",
 })
 
 export const userIsNotAuthenticated = connectedRouterRedirect({
-  redirectPath: (state, ownProps) => locationHelper.getRedirectQuery(ownProps) || "/foo",
+  redirectPath: (state, ownProps) => locationHelper.getRedirectQuery(ownProps) || "/myfablab",
   allowRedirectBack: false,
-  authSelector: state => state.user,
+  authSelector: state => state.session,
   // Want to redirect the user when they are done loading and authenticated
-  predicate: user => user.data === null && user.isLoading === false,
+  predicate: session => session.data === null && session.isLoading === false,
   wrapperDisplayName: "UserIsNotAuthenticated",
 })

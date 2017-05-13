@@ -1,7 +1,7 @@
 import configureStore from "redux-mock-store"
 import thunk from "redux-thunk"
 import nock from "nock"
-import mockLocalStorage from "../utils/mockLocalStorage"
+import mockLocalStorage from "../../../utils/mockLocalStorage"
 
 import operations from "./operations"
 import types from "./types"
