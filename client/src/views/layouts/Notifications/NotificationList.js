@@ -2,7 +2,7 @@ import React from "react"
 import PropTypes from "prop-types"
 import { connect } from "react-redux"
 
-import { hideNotification } from "../../../state/ducks/notification/actions"
+import { notificationOperations } from "../../../state/ducks/notification"
 import Notification from "./Notification"
 
 const NotificationList = ({ notifications, hideNotification }) => {
@@ -18,16 +18,20 @@ const NotificationList = ({ notifications, hideNotification }) => {
 }
 
 NotificationList.propTypes = {
-  notifications: PropTypes.array,
+  notifications: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.string)),
   hideNotification: PropTypes.func.isRequired,
 }
 
-const mapStateToProps = (state) => ({
-  nofitications: state.notifications
+NotificationList.defaultProps = {
+  notifications: [],
+}
+
+const mapStateToProps = state => ({
+  nofitications: state.notification.get("highlight") && state.notification.get("highlight").toJS(),
 })
 
 const mapDispatchToProps = ({
-  hideNotification,
+  hideNotification: notificationOperations.hideNotification,
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(NotificationList)

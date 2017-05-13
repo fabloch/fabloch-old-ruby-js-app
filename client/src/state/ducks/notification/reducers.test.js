@@ -2,7 +2,14 @@ import { Map, fromJS } from "immutable"
 import notificationReducer from "./reducers"
 import types from "./types"
 
-const notification = {
+const notificationIn = {
+  id: "someId",
+  level: "success",
+  title: "Login successful",
+  body: "Login was successful",
+}
+
+const notificationOut = {
   level: "success",
   title: "Login successful",
   body: "Login was successful",
@@ -28,19 +35,18 @@ describe("notifications notificationReducer", () => {
       })
       const action = ({
         type: types.SHOW,
-        notification,
+        notification: notificationIn,
       })
-      const newState = notificationReducer(initialState, action)
-      const customId = newState.get("highlight").keySeq().last()
-      expect(
-        newState,
-      ).toEqual(
-        Map({
-          highlight: Map({
-            [customId]: fromJS(notification),
-          }),
-          history: Map({}),
+      const nextState = Map({
+        highlight: Map({
+          someId: fromJS(notificationOut),
         }),
+        history: Map({}),
+      })
+      expect(
+        notificationReducer(initialState, action),
+      ).toEqual(
+        nextState,
       )
     })
 
@@ -57,28 +63,24 @@ describe("notifications notificationReducer", () => {
       })
       const action = {
         type: types.SHOW,
-        notification,
+        notification: notificationIn,
       }
-      const newState = notificationReducer(previousState, action)
-      const customId = newState.get("highlight").keySeq().last()
-      expect(
-        newState,
-      ).toEqual(
-        Map({
-          highlight: Map({
-            HkGnJJEkZ: Map({
-              level: "success",
-              title: "Login successful",
-              body: "Login was successful",
-            }),
-            [customId]: Map({
-              level: "success",
-              title: "Login successful",
-              body: "Login was successful",
-            }),
+      const nextState = Map({
+        highlight: Map({
+          HkGnJJEkZ: Map({
+            level: "success",
+            title: "Login successful",
+            body: "Login was successful",
           }),
-          history: Map({}),
+          someId: fromJS(notificationOut),
         }),
+        history: Map({}),
+      })
+
+      expect(
+        notificationReducer(previousState, action),
+      ).toEqual(
+        nextState,
       )
     })
   })
@@ -104,26 +106,27 @@ describe("notifications notificationReducer", () => {
         type: types.HIDE,
         id: "HkGnJJEkZ",
       }
-      const newState = notificationReducer(initialState, action)
-      expect(
-        newState,
-      ).toEqual(
-        Map({
-          highlight: Map({
-            qtrReGEZA: Map({
-              level: "success",
-              title: "Login successful",
-              body: "Login was successful",
-            }),
-          }),
-          history: Map({
-            HkGnJJEkZ: Map({
-              level: "success",
-              title: "Login successful",
-              body: "Login was successful",
-            }),
+      const nextState = Map({
+        highlight: Map({
+          qtrReGEZA: Map({
+            level: "success",
+            title: "Login successful",
+            body: "Login was successful",
           }),
         }),
+        history: Map({
+          HkGnJJEkZ: Map({
+            level: "success",
+            title: "Login successful",
+            body: "Login was successful",
+          }),
+        }),
+      })
+
+      expect(
+        notificationReducer(initialState, action),
+      ).toEqual(
+        nextState,
       )
     })
   })

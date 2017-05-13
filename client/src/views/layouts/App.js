@@ -5,7 +5,7 @@ import { Container } from "semantic-ui-react"
 
 import { logout } from "../../state/ducks/session/actions"
 import NavbarContainer from "./Navbar"
-// import NotificationList from "./Notifications/NotificationList"
+import NotificationList from "./Notifications/NotificationList"
 import Routes from "./Routes"
 import Footer from "./Footer"
 
@@ -14,7 +14,7 @@ const App = () => (
     <div>
       <NavbarContainer />
       <Container>
-        {/* <NotificationList /> */}
+        <NotificationList />
         <Routes />
       </Container>
       <Footer />

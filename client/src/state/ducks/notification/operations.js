@@ -1,12 +1,19 @@
+import shortid from "shortid"
 import actions from "./actions"
 
+const hideNotification = actions.hideNotification
+
 const addNotification = notification => (dispatch) => {
-  dispatch(actions.showNotification(notification))
+  const newId = shortid.generate()
+  const notificationWithId = { ...notification, id: newId }
+
+  dispatch(actions.showNotification(notificationWithId))
   setTimeout(() => {
-    dispatch(actions.hideNotification(notification.id))
+    dispatch(actions.hideNotification(notificationWithId.id))
   }, 5000)
 }
 
 export default {
   addNotification,
+  hideNotification,
 }

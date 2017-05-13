@@ -4,22 +4,22 @@ import actions from "./actions"
 describe("notificationActions", () => {
   it("showNotification", () => {
     expect(
-      actions.showNotification({ some: "notification" }),
+      actions.showNotification({ id: "someId", some: "data" }),
     ).toEqual(
       {
         type: types.SHOW,
-        notification: { some: "notification" },
+        notification: { id: "someId", some: "data" },
       },
     )
   })
 
   it("hideNotification", () => {
     expect(
-      actions.hideNotification(10),
+      actions.hideNotification("someId"),
     ).toEqual(
       {
         type: types.HIDE,
-        id: 10,
+        id: "someId",
       },
     )
   })

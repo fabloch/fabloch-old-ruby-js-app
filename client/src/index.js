@@ -6,6 +6,7 @@ import Root from "./views/Root"
 import configureStore from "./state/configureStore"
 import setAuthHeaders from "./utils/setAuthHeaders"
 import sessionActions from "./state/ducks/session/actions"
+import { notificationOperations } from "./state/ducks/notification"
 
 const store = configureStore()
 
@@ -20,6 +21,12 @@ if (localStorage.token) {
   setAuthHeaders(localStorageAuth)
   store.dispatch(sessionActions.setCurrentUser(localStorageAuth))
 }
+
+store.dispatch(notificationOperations.addNotification({
+  title: "Title",
+  level: "success",
+  body: "Hello world!",
+}))
 
 render(
   <Root store={store} />,

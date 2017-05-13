@@ -38,29 +38,32 @@ describe("sessionpOperations", () => {
         },
       )
 
-      const expectedActions = [
-        { type: types.LOGIN_REQUEST },
-        {
-          type: types.LOGIN_SUCCESS,
-          data: {
-            client: "abcdef",
-            uid: "ghijkl",
-            token: "mnopqr",
-            expiry: "123456",
-          },
-        },
-        {
-          type: notificationTypes.SHOW,
-          notification: {
-            level: "success",
-            title: "Log in successful",
-            body: "Enjoy your ride.",
-          },
-        },
-      ]
-
       return store.dispatch(operations.login(data))
       .then(() => { // return of async operations
+        const id = store.getActions()[2].notification.id
+        const expectedActions = [
+          { type: types.LOGIN_REQUEST },
+          {
+            type: types.LOGIN_SUCCESS,
+            data: {
+              client: "abcdef",
+              uid: "ghijkl",
+              token: "mnopqr",
+              expiry: "123456",
+            },
+          },
+          {
+            type: notificationTypes.SHOW,
+            notification: {
+              id,
+              level: "success",
+              title: "Log in successful",
+              body: "Enjoy your ride.",
+            },
+          },
+        ]
+
+
         expect(store.getActions()[0]).toEqual(expectedActions[0])
         expect(store.getActions()[1]).toEqual(expectedActions[1])
         expect(store.getActions()[2]).toEqual(expectedActions[2])
@@ -81,17 +84,24 @@ describe("sessionpOperations", () => {
         .reply(200, { body: { textStatus: "ok" } })
 
 
-      const expectedActions = [
-        { type: types.SIGNUP_REQUEST },
-        { type: types.SIGNUP_SUCCESS },
-        {
-          type: notificationTypes.SHOW,
-          notification: { body: "Account created successfully.", level: "success", title: "Account created" },
-        },
-      ]
-
       return store.dispatch(operations.signup(data))
       .then(() => { // return of async operations
+        const id = store.getActions()[2].notification.id
+        const expectedActions = [
+          { type: types.SIGNUP_REQUEST },
+          { type: types.SIGNUP_SUCCESS },
+          {
+            type: notificationTypes.SHOW,
+            notification: {
+              id,
+              body: "Account created successfully.",
+              level: "success",
+              title: "Account created",
+            },
+          },
+        ]
+
+
         expect(store.getActions()[0]).toEqual(expectedActions[0])
         expect(store.getActions()[1]).toEqual(expectedActions[1])
         expect(store.getActions()[2]).toEqual(expectedActions[2])
@@ -141,19 +151,22 @@ describe("sessionpOperations", () => {
   describe("logout", () => {
     it("sends logout action", () => {
       const store = mockStore({})
+
+      store.dispatch(operations.logout())
+
+      const id = store.getActions()[1].notification.id
       const expectedActions = [
         { type: types.LOGOUT },
         {
           type: notificationTypes.SHOW,
           notification: {
+            id,
             level: "success",
             title: "Successfully disconnected",
             body: "You have been disconnected successfully.",
           },
         },
       ]
-
-      store.dispatch(operations.logout())
       expect(store.getActions()[0]).toEqual(expectedActions[0])
       expect(store.getActions()[1]).toEqual(expectedActions[1])
     })

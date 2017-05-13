@@ -1,6 +1,5 @@
-import shortid from "shortid"
-import types from "./types"
 import { Map } from "immutable"
+import types from "./types"
 
 const initialState = Map({
   highlight: Map({}),
@@ -10,21 +9,20 @@ const initialState = Map({
 const notifications = (state = initialState, action) => {
   switch (action.type) {
   case types.SHOW:
-    const newId = shortid.generate()
     return state.setIn(
-      ["highlight", newId],
+      ["highlight", action.notification.id],
       Map({
         level: action.notification.level,
         title: action.notification.title,
-        body: action.notification.body
-      })
+        body: action.notification.body,
+      }),
     )
 
   case types.HIDE:
     return state
       .setIn(
         ["history", action.id],
-        state.getIn(["highlight", action.id])
+        state.getIn(["highlight", action.id]),
       )
       .deleteIn(["highlight", action.id])
   default:
