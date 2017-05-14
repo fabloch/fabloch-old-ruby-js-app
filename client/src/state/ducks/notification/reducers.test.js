@@ -1,30 +1,35 @@
-import { Map, fromJS } from "immutable"
+import { Map, fromJS, is } from "immutable"
 import notificationReducer from "./reducers"
 import types from "./types"
 
 const notificationIn = {
   id: "someId",
+  timeStamp: "946681200000",
   level: "success",
   title: "Login successful",
   body: "Login was successful",
 }
 
-const notificationOut = {
+
+const notificationOut = Map({
+  id: "someId",
   level: "success",
   title: "Login successful",
   body: "Login was successful",
-}
+  timeStamp: "946681200000",
+})
 
 describe("notifications notificationReducer", () => {
   it("should return the initial state", () => {
     expect(
-      notificationReducer(undefined, {}),
-    ).toEqual(
-      Map({
-        highlight: Map(),
-        history: Map(),
-      }),
-    )
+      is(
+        notificationReducer(undefined, {}),
+        Map({
+          highlight: Map(),
+          history: Map(),
+        }),
+      ),
+    ).toEqual(true)
   })
 
   describe("should handle SHOW", () => {
@@ -39,14 +44,17 @@ describe("notifications notificationReducer", () => {
       })
       const nextState = Map({
         highlight: Map({
-          someId: fromJS(notificationOut),
+          someId: notificationOut,
         }),
         history: Map({}),
       })
       expect(
-        notificationReducer(initialState, action),
+        is(
+          notificationReducer(initialState, action),
+          nextState,
+        ),
       ).toEqual(
-        nextState,
+        true,
       )
     })
 
@@ -72,16 +80,17 @@ describe("notifications notificationReducer", () => {
             title: "Login successful",
             body: "Login was successful",
           }),
-          someId: fromJS(notificationOut),
+          someId: notificationOut,
         }),
         history: Map({}),
       })
 
       expect(
-        notificationReducer(previousState, action),
-      ).toEqual(
-        nextState,
-      )
+        is(
+          notificationReducer(previousState, action),
+          nextState,
+        ),
+      ).toEqual(true)
     })
   })
 

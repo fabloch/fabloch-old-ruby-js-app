@@ -57,7 +57,7 @@ export const Navbar = ({ session, logout }) => {
     return (
       <Menu.Menu position="right">
         <MenuItem
-          to="/session/logout"
+          to="/"
           label="Me déconnecter"
           onClick={logout}
         />

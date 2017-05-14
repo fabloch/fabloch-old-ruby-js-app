@@ -104,22 +104,22 @@ exports[`Navbar presentational when logged in homepage 1`] = `
                 <MenuItem
                   label="Me déconnecter"
                   onClick={[Function]}
-                  to="/session/logout">
+                  to="/">
                   <Route
-                    path="/session/logout">
+                    path="/">
                     <MenuItem
-                      active={null}
+                      active={true}
                       as={[Function]}
                       onClick={[Function]}
-                      to="/session/logout">
+                      to="/">
                       <Link
-                        className="item"
+                        className="active item"
                         onClick={[Function]}
                         replace={false}
-                        to="/session/logout">
+                        to="/">
                         <a
-                          className="item"
-                          href="/session/logout"
+                          className="active item"
+                          href="/"
                           onClick={[Function]}>
                           Me déconnecter
                         </a>

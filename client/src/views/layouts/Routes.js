@@ -3,25 +3,28 @@ import { Route, Switch } from "react-router-dom"
 
 import { userIsAuthenticated, userIsNotAuthenticated, userIsAdmin } from "../enhancers/auth"
 
-import AdminComponent from "../pages/Admin"
-import MyFablabComponent from "../pages/MyFablab"
-import SessionComponent from "../pages/Session"
-import Home from "../pages/Home"
-import NotFound from "../pages/NotFound"
+import HomePage from "../pages/Home"
+import Admin from "../pages/Admin"
+import MyFablab from "../pages/MyFablab"
+import Session from "../pages/Session"
+import Profile from "../pages/Profile"
+import NotFoundPage from "../pages/NotFound"
 
 // Need to apply the hocs here to avoid applying them inside the render method
 
-const Session = userIsNotAuthenticated(SessionComponent)
-const MyFablab = userIsAuthenticated(MyFablabComponent)
-const Admin = userIsAuthenticated(userIsAdmin(AdminComponent))
+const SessionPage = userIsNotAuthenticated(Session)
+const MyFablabPage = userIsAuthenticated(MyFablab)
+const AdminPage = userIsAuthenticated(userIsAdmin(Admin))
+const ProfilePage = userIsAuthenticated(Profile)
 
 const Routes = () => (
   <Switch>
-    <Route exact path="/" component={Home} />
-    <Route path="/session" component={Session} />
-    <Route path="/myfablab" component={MyFablab} />
-    <Route path="/admin" component={Admin} />
-    <Route component={NotFound} />
+    <Route exact path="/" component={HomePage} />
+    <Route path="/session" component={SessionPage} />
+    <Route path="/myfablab" component={MyFablabPage} />
+    <Route path="/admin" component={AdminPage} />
+    <Route path="/profile" component={ProfilePage} />
+    <Route component={NotFoundPage} />
   </Switch>
 )
 

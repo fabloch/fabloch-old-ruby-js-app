@@ -21,7 +21,8 @@ describe("addNotification action", () => {
     store.dispatch(operations.addNotification(notification))
 
     const id = store.getActions()[0].notification.id
-    const notificationWithId = { ...notification, id }
+    const timeStamp = store.getActions()[0].notification.timeStamp
+    const notificationWithId = { ...notification, id, timeStamp }
 
     jest.runAllTimers()
 

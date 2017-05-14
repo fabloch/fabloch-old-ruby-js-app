@@ -41,6 +41,7 @@ describe("sessionpOperations", () => {
       return store.dispatch(operations.login(data))
       .then(() => { // return of async operations
         const id = store.getActions()[2].notification.id
+        const timeStamp = store.getActions()[2].notification.timeStamp
         const expectedActions = [
           { type: types.LOGIN_REQUEST },
           {
@@ -56,6 +57,7 @@ describe("sessionpOperations", () => {
             type: notificationTypes.SHOW,
             notification: {
               id,
+              timeStamp,
               level: "success",
               title: "Log in successful",
               body: "Enjoy your ride.",
@@ -87,6 +89,7 @@ describe("sessionpOperations", () => {
       return store.dispatch(operations.signup(data))
       .then(() => { // return of async operations
         const id = store.getActions()[2].notification.id
+        const timeStamp = store.getActions()[2].notification.timeStamp
         const expectedActions = [
           { type: types.SIGNUP_REQUEST },
           { type: types.SIGNUP_SUCCESS },
@@ -94,6 +97,7 @@ describe("sessionpOperations", () => {
             type: notificationTypes.SHOW,
             notification: {
               id,
+              timeStamp,
               body: "Account created successfully.",
               level: "success",
               title: "Account created",
@@ -155,12 +159,14 @@ describe("sessionpOperations", () => {
       store.dispatch(operations.logout())
 
       const id = store.getActions()[1].notification.id
+      const timeStamp = store.getActions()[1].notification.timeStamp
       const expectedActions = [
         { type: types.LOGOUT },
         {
           type: notificationTypes.SHOW,
           notification: {
             id,
+            timeStamp,
             level: "success",
             title: "Successfully disconnected",
             body: "You have been disconnected successfully.",

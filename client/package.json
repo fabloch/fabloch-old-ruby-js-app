@@ -13,7 +13,7 @@
     "react-dom": "^15.5.4",
     "react-redux": "^5.0.4",
     "react-router-dom": "^4.1.1",
-    "react-scripts": "0.9.5",
+    "react-scripts": "^0.9.5",
     "redux": "^3.6.0",
     "redux-auth-wrapper": "2.0-beta",
     "redux-devtools-extension": "^2.13.0",
@@ -34,6 +34,7 @@
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^4.0.0",
     "eslint-plugin-react": "^6.10.3",
+    "mockdate": "^2.0.1",
     "nock": "^9.0.13",
     "react-test-renderer": "^15.5.4",
     "redux-mock-store": "^1.2.3"

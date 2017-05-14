@@ -2,20 +2,36 @@ import React from 'react'
 import PropTypes from 'prop-types';
 import { Message } from 'semantic-ui-react';
 
-const Notification = ({notification, hideNotification}) => {
-  const { id, header, content } = notification
-  // const { id, level, header, content } = notification
+const Notification = (
+  {
+    id,
+    level,
+    title,
+    body,
+    hideNotification,
+  }
+) => {
   return (
     <div>
-      <Message key={id} level>
-        <Message.Header>{header}</Message.Header>
-        <p>{content}</p>
+      <Message
+        error={level === "error"}
+        warning={level === "warning"}
+        info={level === "info"}
+        success={level === "success"}
+      >
+        <Message.Header>{title}</Message.Header>
+        <p>{body}</p>
       </Message>
     </div>
   )
 }
 
 Notification.propTypes = {
-  notification: PropTypes.object.isRequired,
+  id: PropTypes.string.isRequired,
+  level: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  body: PropTypes.string.isRequired,
   hideNotification: PropTypes.func.isRequired,
 }
+
+export default Notification

@@ -1,4 +1,4 @@
-import { Map } from "immutable"
+import { Map, fromJS } from "immutable"
 import types from "./types"
 
 const initialState = Map({
@@ -11,11 +11,7 @@ const notifications = (state = initialState, action) => {
   case types.SHOW:
     return state.setIn(
       ["highlight", action.notification.id],
-      Map({
-        level: action.notification.level,
-        title: action.notification.title,
-        body: action.notification.body,
-      }),
+      fromJS(action.notification),
     )
 
   case types.HIDE:

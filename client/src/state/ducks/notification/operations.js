@@ -4,8 +4,14 @@ import actions from "./actions"
 const hideNotification = actions.hideNotification
 
 const addNotification = notification => (dispatch) => {
-  const newId = shortid.generate()
-  const notificationWithId = { ...notification, id: newId }
+  const id = shortid.generate()
+  const date = new Date()
+  const timeStamp = date.getTime();
+  const notificationWithId = {
+    ...notification,
+    id,
+    timeStamp,
+  }
 
   dispatch(actions.showNotification(notificationWithId))
   setTimeout(() => {

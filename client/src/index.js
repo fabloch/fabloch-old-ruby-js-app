@@ -22,11 +22,16 @@ if (localStorage.token) {
   store.dispatch(sessionActions.setCurrentUser(localStorageAuth))
 }
 
-store.dispatch(notificationOperations.addNotification({
-  title: "Title",
-  level: "success",
-  body: "Hello world!",
-}))
+// store.dispatch(notificationOperations.addNotification({
+//   title: "First",
+//   level: "success",
+//   body: "First Hello world!",
+// }))
+// store.dispatch(notificationOperations.addNotification({
+//   title: "Second",
+//   level: "info",
+//   body: "Second Hello world!",
+// }))
 
 render(
   <Root store={store} />,
