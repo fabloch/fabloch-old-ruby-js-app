@@ -41,10 +41,13 @@ gem 'inherited_resources', git: 'https://github.com/activeadmin/inherited_resour
 
 group :development, :test do
   gem 'rspec-rails'
+  gem 'guard-rspec', require: false
   gem 'factory_girl_rails'
+  gem 'shoulda-matchers', git: 'https://github.com/thoughtbot/shoulda-matchers.git', branch: 'rails-5'
   gem 'pry-rails'
   gem 'pry-byebug'
   gem 'pry-stack_explorer'
+  gem 'faker'
 end
 
 group :development do

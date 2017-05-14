@@ -1,14 +1,14 @@
 require 'rails_helper'
 
-RSpec.describe AdminUser, type: :model do
+RSpec.describe User, type: :model do
   context "valid Factory" do
     it "has a valid factory" do
-      expect(build(:admin_user)).to be_valid
+      expect(build(:user)).to be_valid
     end
   end
 
   context "validations" do
-    before { create(:admin_user) }
+    before { create(:user) }
 
     context "presence" do
       it { should validate_presence_of :email }
