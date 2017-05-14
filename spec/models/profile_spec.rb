@@ -7,6 +7,10 @@ RSpec.describe Profile, type: :model do
     end
   end
 
+  context "relations" do
+    it { should belong_to(:user) }
+  end
+
   context "validations" do
     before { create(:profile) }
 

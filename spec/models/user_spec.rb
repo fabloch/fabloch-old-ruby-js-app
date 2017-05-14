@@ -7,6 +7,10 @@ RSpec.describe User, type: :model do
     end
   end
 
+  context "relations" do
+    it { should have_one(:profile) }
+  end
+
   context "validations" do
     before { create(:user) }
 
