@@ -11,7 +11,7 @@ module Api::V1
 
     # POST /v1/profile
     def create
-      @profile = Profile.create!(profile_params)
+      @profile = Profile.create!(profile_params_with_user)
       json_response(@profile, :created)
     end
 
@@ -35,6 +35,10 @@ module Api::V1
       params.permit(
         :username, :firstname, :lastname, :description, :birthday
       ).merge(user_id: current_user.id)
+    end
+
+    def profile_params_with_user
+      profile_params().merge(user_id: current_user.id)
     end
 
     def set_profile

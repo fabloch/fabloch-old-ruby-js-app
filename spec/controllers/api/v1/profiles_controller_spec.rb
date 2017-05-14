@@ -81,6 +81,12 @@ describe Api::V1::ProfilesController do
         }
       )
     end
+
+    it "links profile with current_user" do
+      expect(
+        Profile.last().user
+      ).to eq(@user)
+    end
   end
 
   describe "PUT #update" do
