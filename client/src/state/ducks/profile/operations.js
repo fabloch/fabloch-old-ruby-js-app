@@ -7,52 +7,51 @@ Complex operations involve returning
 a thunk that dispatches multiple actions in a certain order
 */
 
-import axios from "axios"
 import { SubmissionError } from "redux-form"
-
+import api from "../../../api"
 import actions from "./actions"
+import { loadingOperations } from "../loading"
 
 const fetchProfile = () => (dispatch) => {
+  dispatch(loadingOperations.startLoading())
   dispatch(actions.fetchProfileRequest())
-  return axios({
-    url: "/profile",
-    method: "get",
-    responseType: "json",
-  })
+  return api.fetch("profile", "get")
   .then((response) => {
-    dispatch(actions.fetchProfileSuccess(response.data))
+    dispatch(loadingOperations.stopLoading())
+    dispatch(
+      actions.fetchProfileSuccess(response.data.data.attributes),
+    )
   })
-  .catch((err) => {
-    if (err.response) {
+  .catch((error) => {
+    if (error.response) {
+      dispatch(loadingOperations.stopLoading())
       dispatch(actions.fetchProfileFailure({
-        status: err.response.status,
-        statusText: err.response.statusText,
+        status: error.response.status,
+        statusText: error.response.statusText,
       }))
-    } else if (err.request) {
-      // do something
-      // TODO: bad request
+    } else if (error.request) {
+      return error.request
     }
+    return (error.message)
   })
 }
 
 const submit = data => (dispatch) => {
+  dispatch(loadingOperations.startLoading())
   dispatch(actions.postProfileRequest())
-  return axios({
-    url: "v1/profile",
-    method: "post",
-    responseType: "json",
-    data,
-  })
+  return api.fetch("profile", "post", data)
   .then((response) => {
-    console.log(response.data.attributes)
-    dispatch(actions.postProfileSuccess(response.data.attributes))
+    dispatch(loadingOperations.stopLoading())
+    dispatch(
+      actions.postProfileSuccess(response.data.data.attributes),
+    )
   })
-  .catch((err) => {
-    if (err.response) {
-      console.log(err.response.data)
-      dispatch(actions.postProfileFailure(err.response.data.errors))
-      throw new SubmissionError(err.response.data.errors)
-    } else if (err.request) {
+  .catch((error) => {
+    if (error.response) {
+      dispatch(loadingOperations.stopLoading())
+      dispatch(actions.postProfileFailure())
+      throw new SubmissionError(error.response.data)
+    } else if (error.request) {
       // do something
       // TODO: bad request
     }

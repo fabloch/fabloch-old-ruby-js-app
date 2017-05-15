@@ -2,15 +2,15 @@ import { Map } from "immutable"
 import types from "./types"
 
 const initialState = Map({
-  loading: false,
+  isLoading: false,
 })
 
 const loadingReducer = (state = initialState, action) => {
   switch (action.type) {
   case (types.START):
-    return state.set("loading", true)
+    return state.set("isLoading", true)
   case (types.STOP):
-    return state.set("loading", false)
+    return state.set("isLoading", false)
   default:
     return state
   }

@@ -8,7 +8,7 @@ describe("loadingReducer", () => {
       is(
         loadingReducer(undefined, {}),
         Map({
-          loading: false,
+          isLoading: false,
         }),
       ),
     ).toEqual(true)
@@ -17,13 +17,13 @@ describe("loadingReducer", () => {
   describe("handles START", () => {
     it("with loading false", () => {
       const initialState = Map({
-        loading: false,
+        isLoading: false,
       })
       const action = ({
         type: types.START,
       })
       const nextState = Map({
-        loading: true,
+        isLoading: true,
       })
       expect(
         is(
@@ -37,13 +37,13 @@ describe("loadingReducer", () => {
 
     it("with loading true", () => {
       const initialState = Map({
-        loading: true,
+        isLoading: true,
       })
       const action = ({
         type: types.START,
       })
       const nextState = Map({
-        loading: true,
+        isLoading: true,
       })
       expect(
         is(
@@ -58,13 +58,13 @@ describe("loadingReducer", () => {
     describe("handlers STOP", () => {
       it("with loading true", () => {
         const previousState = Map({
-          loading: true,
+          isLoading: true,
         })
         const action = {
           type: types.STOP,
         }
         const nextState = Map({
-          loading: false,
+          isLoading: false,
         })
 
         expect(
@@ -77,13 +77,13 @@ describe("loadingReducer", () => {
 
       it("with loading false", () => {
         const previousState = Map({
-          loading: false,
+          isLoading: false,
         })
         const action = {
           type: types.STOP,
         }
         const nextState = Map({
-          loading: false,
+          isLoading: false,
         })
 
         expect(

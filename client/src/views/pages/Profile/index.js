@@ -1,31 +1,34 @@
 import React, { Component } from "react"
+import PropTypes from "prop-types"
 import { connect } from "react-redux"
 
-import { fetchProfile } from "../../../api"
-import actions from "../../../state/ducks/profile/actions"
+import operations from "../../../state/ducks/profile/operations"
 import Show from "./Show"
 import Edit from "./Edit"
 
 export const ProfileComponent = ({ profile }) => {
 
   if (profile.data) {
-    return(<Show {...profile.data} />)
+    return <Show {...profile.data} />
   }
 
-  return(<Edit />)
+  return <Edit />
 }
 
 class ProfileContainer extends Component {
   componentDidMount() {
-    console.log(this.props)
-    const { fetchProfileSuccess } = this.props
-    fetchProfile().then(
-      profile => fetchProfileSuccess(profile))
+    const { fetchProfile } = this.props
+    fetchProfile()
   }
 
   render() {
     return <ProfileComponent {...this.props} />
   }
+}
+
+ProfileContainer.propTypes = {
+  profile: PropTypes.object.isRequired,
+  fetchProfile: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = state => ({
@@ -34,7 +37,7 @@ const mapStateToProps = state => ({
 
 const ProfilePage = connect(
   mapStateToProps,
-  actions,
+  operations,
 )(ProfileContainer)
 
 export default ProfilePage

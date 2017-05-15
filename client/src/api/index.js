@@ -1,21 +1,21 @@
 import axios from "axios"
 
+const fetch = (url, method, data = undefined) =>
+  axios({
+    url: `/v1/${url}`,
+    method,
+    responseType: "json",
+    data,
+  })
+
 const fetchProfile = () =>
   axios({
     url: "/v1/profile",
     method: "get",
     responseType: "json",
   })
-  .then(response => response.data.data.attributes)
-  .catch((error) => {
-    if (error.response) {
-      return error.response
-    } else if (error.request) {
-      return error.request
-    }
-    return (error.message)
-  })
 
-export {
+export default {
+  fetch,
   fetchProfile,
 }

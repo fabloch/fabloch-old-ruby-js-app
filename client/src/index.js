@@ -21,6 +21,7 @@ if (localStorage.token) {
   store.dispatch(sessionActions.setCurrentUser(localStorageAuth))
 }
 
+// store.dispatch(loadingOperations.startLoading())
 // store.dispatch(notificationOperations.addNotification({
 //   title: "First",
 //   level: "success",

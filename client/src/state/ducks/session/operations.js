@@ -21,10 +21,7 @@ const login = data => (dispatch) => {
     url: "/auth/sign_in",
     method: "post",
     responseType: "json",
-    data: {
-      ...data,
-      confirm_success_url: "http://localhost:3000",
-    },
+    data,
   })
   .then((response) => {
     const authHeaders = {
@@ -65,9 +62,8 @@ const signup = data => (dispatch) => {
     url: "/auth",
     method: "post",
     responseType: "json",
-    data: {
-      ...data,
-      confirm_success_url: "http://localhost:3000" } })
+    data,
+  })
   .then(() => {
     dispatch(actions.signupSuccess())
     dispatch(notificationOperations.addNotification({

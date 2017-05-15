@@ -22,7 +22,7 @@ export const userIsAdmin = connectedRouterRedirect({
 })
 
 export const userIsNotAuthenticated = connectedRouterRedirect({
-  redirectPath: (state, ownProps) => locationHelper.getRedirectQuery(ownProps) || "/session/login",
+  redirectPath: (state, ownProps) => locationHelper.getRedirectQuery(ownProps) || "/myfablab",
   allowRedirectBack: false,
   authSelector: state => state.session.toJS(),
   // Want to redirect the user when they are authenticated

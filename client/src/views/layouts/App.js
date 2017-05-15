@@ -4,22 +4,26 @@ import { connect } from "react-redux"
 import { Container } from "semantic-ui-react"
 
 import { logout } from "../../state/ducks/session/actions"
+import Loader from "./Loader"
 import NavbarContainer from "./Navbar"
 import NotificationList from "./Notifications/NotificationList"
 import Routes from "./Routes"
 import Footer from "./Footer"
 
-const App = () => (
-  <Router>
-    <div>
-      <NavbarContainer />
-      <Container>
-        <NotificationList />
-        <Routes />
-      </Container>
-      <Footer />
-    </div>
-  </Router>
-)
+const App = ({ loading }) => {
+  return (
+    <Router>
+      <div>
+        <Loader />
+        <NavbarContainer />
+        <Container>
+            <NotificationList />
+            <Routes />
+          }
+        </Container>
+        <Footer />
+      </div>
+    </Router>
+)}
 
-export default connect(false, { logout })(App)
+export default connect(null, { logout })(App)

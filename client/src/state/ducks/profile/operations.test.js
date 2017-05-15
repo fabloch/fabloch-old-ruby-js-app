@@ -1,7 +1,9 @@
 import configureStore from "redux-mock-store"
 import thunk from "redux-thunk"
 import nock from "nock"
+
 import types from "./types"
+import loadingTypes from "../loading/types"
 import operations from "./operations"
 import mockLocalStorage from "../../../utils/mockLocalStorage"
 
@@ -27,16 +29,22 @@ describe("profileOperations", () => {
         const store = mockStore({})
 
         nock("http://localhost")
-        .get("/profile")
+        .get("/v1/profile")
         .reply(
           200,
-          data,
+          {
+            data: {
+              attributes: data,
+            },
+          },
         )
 
         return store.dispatch(operations.fetchProfile())
         .then(() => { // return of async operations
           const expectedActions = [
+            { type: loadingTypes.START },
             { type: types.FETCH_REQUEST },
+            { type: loadingTypes.STOP },
             {
               type: types.FETCH_SUCCESS,
               data,
@@ -46,6 +54,8 @@ describe("profileOperations", () => {
 
           expect(store.getActions()[0]).toEqual(expectedActions[0])
           expect(store.getActions()[1]).toEqual(expectedActions[1])
+          expect(store.getActions()[2]).toEqual(expectedActions[2])
+          expect(store.getActions()[3]).toEqual(expectedActions[3])
         })
       })
     })
@@ -55,7 +65,7 @@ describe("profileOperations", () => {
         const store = mockStore({})
 
         nock("http://localhost")
-        .get("/profile")
+        .get("/v1/profile")
         .reply(
           404,
         )
@@ -63,7 +73,9 @@ describe("profileOperations", () => {
         return store.dispatch(operations.fetchProfile())
         .then(() => { // return of async operations
           const expectedActions = [
+            { type: loadingTypes.START },
             { type: types.FETCH_REQUEST },
+            { type: loadingTypes.STOP },
             {
               type: types.FETCH_FAILURE,
               error: { status: 404, statusText: "Not Found" },
@@ -72,6 +84,8 @@ describe("profileOperations", () => {
 
           expect(store.getActions()[0]).toEqual(expectedActions[0])
           expect(store.getActions()[1]).toEqual(expectedActions[1])
+          expect(store.getActions()[2]).toEqual(expectedActions[2])
+          expect(store.getActions()[3]).toEqual(expectedActions[3])
         })
       })
     })
@@ -91,18 +105,18 @@ describe("profileOperations", () => {
         .reply(
           201,
           {
-            username: "seb_nicolaidis",
-            firstname: "Sébastien",
-            lastname: "Nicolaïdis",
-            description: "Description",
-            birthdate: "1979-09-13",
+            data: {
+              attributes: data,
+            },
           },
         )
 
         return store.dispatch(operations.submit(data))
         .then(() => { // return of async operations
           const expectedActions = [
+            { type: loadingTypes.START },
             { type: types.POST_REQUEST },
+            { type: loadingTypes.STOP },
             {
               type: types.POST_SUCCESS,
               data,
@@ -112,32 +126,52 @@ describe("profileOperations", () => {
 
           expect(store.getActions()[0]).toEqual(expectedActions[0])
           expect(store.getActions()[1]).toEqual(expectedActions[1])
+          expect(store.getActions()[2]).toEqual(expectedActions[2])
+          expect(store.getActions()[3]).toEqual(expectedActions[3])
         })
       })
     })
 
-    describe("when profile does not exit", () => {
-      it("triggers FETCH_FAILURE", () => {
+    describe("with invalid form", () => {
+      xit("triggers POST_FAILURE", () => {
+        const wrongData = {
+          firstname: "Sébastien",
+          lastname: "Nicolaïdis",
+          description: "Description",
+          birthdate: "1979-09-13",
+        }
+
         const store = mockStore({})
 
         nock("http://localhost")
-        .get("/profile")
+        .post("/v1/profile")
         .reply(
-          404,
+          422,
+          {
+            username: [
+              "can't be blank",
+              "only allows lowercase letters or \"_\"",
+              "is too short (minimum is 3 characters)",
+            ],
+          },
         )
 
-        return store.dispatch(operations.fetchProfile())
+        return store.dispatch(operations.submit(wrongData))
         .then(() => { // return of async operations
           const expectedActions = [
-            { type: types.FETCH_REQUEST },
+            { type: loadingTypes.START },
+            { type: types.POST_REQUEST },
+            { type: loadingTypes.STOP },
             {
-              type: types.FETCH_FAILURE,
+              type: types.POST_FAILURE,
               error: { status: 404, statusText: "Not Found" },
             },
           ]
 
           expect(store.getActions()[0]).toEqual(expectedActions[0])
           expect(store.getActions()[1]).toEqual(expectedActions[1])
+          expect(store.getActions()[2]).toEqual(expectedActions[2])
+          expect(store.getActions()[3]).toEqual(expectedActions[3])
         })
       })
     })
