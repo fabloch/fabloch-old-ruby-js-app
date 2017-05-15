@@ -8,22 +8,23 @@ a thunk that dispatches multiple actions in a certain order
 */
 
 import axios from "axios"
+import { SubmissionError } from "redux-form"
 
 import actions from "./actions"
 
-const getProfile = () => (dispatch) => {
-  dispatch(actions.getProfileRequest())
+const fetchProfile = () => (dispatch) => {
+  dispatch(actions.fetchProfileRequest())
   return axios({
     url: "/profile",
     method: "get",
     responseType: "json",
   })
   .then((response) => {
-    dispatch(actions.getProfileSuccess(response.data))
+    dispatch(actions.fetchProfileSuccess(response.data))
   })
   .catch((err) => {
     if (err.response) {
-      dispatch(actions.getProfileFailure({
+      dispatch(actions.fetchProfileFailure({
         status: err.response.status,
         statusText: err.response.statusText,
       }))
@@ -34,6 +35,31 @@ const getProfile = () => (dispatch) => {
   })
 }
 
+const submit = data => (dispatch) => {
+  dispatch(actions.postProfileRequest())
+  return axios({
+    url: "v1/profile",
+    method: "post",
+    responseType: "json",
+    data,
+  })
+  .then((response) => {
+    console.log(response.data.attributes)
+    dispatch(actions.postProfileSuccess(response.data.attributes))
+  })
+  .catch((err) => {
+    if (err.response) {
+      console.log(err.response.data)
+      dispatch(actions.postProfileFailure(err.response.data.errors))
+      throw new SubmissionError(err.response.data.errors)
+    } else if (err.request) {
+      // do something
+      // TODO: bad request
+    }
+  })
+}
+
 export default {
-  getProfile,
+  fetchProfile,
+  submit,
 }

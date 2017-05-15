@@ -11,34 +11,34 @@ const error = {
 }
 
 describe("profileActions", () => {
-  describe("get", () => {
-    it("getProfileRequest", () => {
+  describe("fetch", () => {
+    it("fetchProfileRequest", () => {
       expect(
-        actions.getProfileRequest(),
+        actions.fetchProfileRequest(),
       ).toEqual(
         {
-          type: types.GET_REQUEST,
+          type: types.FETCH_REQUEST,
         },
       )
     })
 
-    it("getProfileFailure", () => {
+    it("fetchProfileFailure", () => {
       expect(
-        actions.getProfileFailure(error),
+        actions.fetchProfileFailure(error),
       ).toEqual(
         {
-          type: types.GET_FAILURE,
+          type: types.FETCH_FAILURE,
           error,
         },
       )
     })
 
-    it("getProfileSuccess", () => {
+    it("fetchProfileSuccess", () => {
       expect(
-        actions.getProfileSuccess(data),
+        actions.fetchProfileSuccess(data),
       ).toEqual(
         {
-          type: types.GET_SUCCESS,
+          type: types.FETCH_SUCCESS,
           data,
         },
       )
@@ -73,6 +73,7 @@ describe("profileActions", () => {
       ).toEqual(
         {
           type: types.POST_SUCCESS,
+          data,
         },
       )
     })

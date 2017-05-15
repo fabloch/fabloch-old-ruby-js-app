@@ -6,7 +6,6 @@ import Root from "./views/Root"
 import configureStore from "./state/configureStore"
 import setAuthHeaders from "./utils/setAuthHeaders"
 import sessionActions from "./state/ducks/session/actions"
-import { notificationOperations } from "./state/ducks/notification"
 
 const store = configureStore()
 

@@ -16,6 +16,10 @@ RSpec.describe Profile, type: :model do
 
     context "presence" do
       it { should_not allow_value("").for(:username) }
+      it { should allow_value("").for(:firstname) }
+      it { should allow_value("").for(:lastname) }
+      it { should allow_value("").for(:description) }
+      it { should allow_value("").for(:birthday) }
     end
 
     context "format" do

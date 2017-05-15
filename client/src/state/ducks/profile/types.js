@@ -1,6 +1,6 @@
-const GET_REQUEST = "fabloch/profile/GET_REQUEST"
-const GET_FAILURE = "fabloch/profile/GET_FAILURE"
-const GET_SUCCESS = "fabloch/profile/GET_SUCCESS"
+const FETCH_REQUEST = "fabloch/profile/FETCH_REQUEST"
+const FETCH_FAILURE = "fabloch/profile/FETCH_FAILURE"
+const FETCH_SUCCESS = "fabloch/profile/FETCH_SUCCESS"
 const POST_REQUEST = "fabloch/profile/POST_REQUEST"
 const POST_FAILURE = "fabloch/profile/POST_FAILURE"
 const POST_SUCCESS = "fabloch/profile/POST_SUCCESS"
@@ -12,9 +12,9 @@ const DELETE_FAILURE = "fabloch/profile/DELETE_FAILURE"
 const DELETE_SUCCESS = "fabloch/profile/DELETE_SUCCESS"
 
 export default {
-  GET_REQUEST,
-  GET_FAILURE,
-  GET_SUCCESS,
+  FETCH_REQUEST,
+  FETCH_FAILURE,
+  FETCH_SUCCESS,
   POST_REQUEST,
   POST_FAILURE,
   POST_SUCCESS,

@@ -8,7 +8,7 @@ class Profile < ApplicationRecord
     with: /\A[a-z0-9_]+\Z/,
     message: "Only allows lowercase letters or \"_\"" }
   validates :username, length: { in: 3..20 }
-  validates :description, length: { in: 3..140 }
+  validates :description, length: { in: 3..140 }, allow_blank: true
 
   # def username=(string)
   #   return super string unless string

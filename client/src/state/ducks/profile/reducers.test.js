@@ -24,21 +24,21 @@ describe("profilenReducer", () => {
   })
 
   describe("get", () => {
-    it("handles GET_REQUEST", () => {
+    it("handles FETCH_REQUEST", () => {
       expect(
         profileReducer(undefined, {
-          type: types.GET_REQUEST,
+          type: types.FETCH_REQUEST,
         }),
       ).toEqual(Map({
         isLoading: true,
       }))
     })
 
-    it("handles GET_SUCCESS", () => {
+    it("handles FETCH_SUCCESS", () => {
       expect(
         is(
           profileReducer(undefined, {
-            type: types.GET_SUCCESS,
+            type: types.FETCH_SUCCESS,
             data,
           }),
           Map({
@@ -50,10 +50,10 @@ describe("profilenReducer", () => {
       ).toBeTruthy()
     })
 
-    it("handles GET_FAILURE", () => {
+    it("handles FETCH_FAILURE", () => {
       expect(
         profileReducer(undefined, {
-          type: types.GET_FAILURE,
+          type: types.FETCH_FAILURE,
         }),
       ).toEqual(Map({
         isLoading: false,

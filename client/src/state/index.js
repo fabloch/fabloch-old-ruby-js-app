@@ -3,7 +3,8 @@ import { reducer as form } from "redux-form"
 
 import * as reducers from "./ducks"
 
-import * as notificationSelectors from "./ducks/notification/selectors"
+import notificationSelectors from "./ducks/notification/selectors"
+import profileSelectors from "./ducks/profile/selectors"
 
 const rootReducer = combineReducers({
   ...reducers,
@@ -14,3 +15,6 @@ export default rootReducer
 
 export const getHighLightNotifications = state =>
   notificationSelectors.getHighLightNotifications(state.notification)
+
+export const getProfileData = state =>
+  profileSelectors.getProfileData(state.profile)

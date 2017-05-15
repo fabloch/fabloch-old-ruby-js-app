@@ -8,16 +8,16 @@ const initialState = Map({
 const profileReducer = (state = initialState, action) => {
   switch (action.type) {
   /* Signup */
-  case types.GET_REQUEST:
+  case types.FETCH_REQUEST:
     return state.set("isLoading", true)
 
-  case types.GET_SUCCESS:
+  case types.FETCH_SUCCESS:
     return state
       .set("data", action.data)
       .set("isLoading", false)
       .set("notFound", false)
 
-  case types.GET_FAILURE:
+  case types.FETCH_FAILURE:
     return state
       .set("isLoading", false)
       .set("notFound", true)

@@ -2,27 +2,27 @@ import types from "./types"
 
 describe("session types", () => {
 
-  it("GET_REQUEST", () => {
+  it("FETCH_REQUEST", () => {
     expect(
-      types.GET_REQUEST,
+      types.FETCH_REQUEST,
     ).toEqual(
-      "fabloch/profile/GET_REQUEST",
+      "fabloch/profile/FETCH_REQUEST",
     )
   })
 
-  it("GET_FAILURE", () => {
+  it("FETCH_FAILURE", () => {
     expect(
-      types.GET_FAILURE,
+      types.FETCH_FAILURE,
     ).toEqual(
-      "fabloch/profile/GET_FAILURE",
+      "fabloch/profile/FETCH_FAILURE",
     )
   })
 
-  it("GET_SUCCESS", () => {
+  it("FETCH_SUCCESS", () => {
     expect(
-      types.GET_SUCCESS,
+      types.FETCH_SUCCESS,
     ).toEqual(
-      "fabloch/profile/GET_SUCCESS",
+      "fabloch/profile/FETCH_SUCCESS",
     )
   })
 

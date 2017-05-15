@@ -69,10 +69,6 @@ LoginForm.defaultProps = {
   error: null,
 }
 
-LoginForm.contextTypes = {
-  router: PropTypes.object.isRequired,
-}
-
 const mapDispatchToProps = {
   login: sessionOperations.login,
 }
