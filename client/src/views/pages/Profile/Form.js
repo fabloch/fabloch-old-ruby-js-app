@@ -76,12 +76,18 @@ ProfileForm.defaultProps = {
 ProfileForm.contextTypes = {
   router: PropTypes.object.isRequired,
 }
+const mapStateToProps = (state) => ({
+  initialValues: state.profile.data && state.profile.data.toJS(),
+})
 
 const mapDispatchToProps = {
   submit: profileOperations.submit,
 }
 
-const ConnectedProfileForm = connect(null, mapDispatchToProps)(ProfileForm)
+const ConnectedProfileForm = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(ProfileForm)
 
 const FormedProfileForm = reduxForm({
   form: "submit",

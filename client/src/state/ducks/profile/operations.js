@@ -25,7 +25,7 @@ const fetchProfile = () => (dispatch) => {
   .catch((error) => {
     if (error.response) {
       dispatch(loadingOperations.stopLoading())
-      dispatch(actions.fetchProfileFailure({
+      return dispatch(actions.fetchProfileFailure({
         status: error.response.status,
         statusText: error.response.statusText,
       }))

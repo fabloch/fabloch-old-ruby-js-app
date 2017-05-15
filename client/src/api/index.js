@@ -8,14 +8,6 @@ const fetch = (url, method, data = undefined) =>
     data,
   })
 
-const fetchProfile = () =>
-  axios({
-    url: "/v1/profile",
-    method: "get",
-    responseType: "json",
-  })
-
 export default {
   fetch,
-  fetchProfile,
 }

@@ -1,35 +1,64 @@
-import React from "react"
+import React, { Component } from "react"
 import PropTypes from "prop-types"
+import { connect } from "react-redux"
+import { withRouter } from "react-router-dom"
 import { Grid } from "semantic-ui-react"
+
+import operations from "../../../state/ducks/profile/operations"
 
 import PublicCard from "./PublicCard"
 import Private from "./Private"
 
-const Show = props => (
-  <Grid>
-    <Grid.Column mobile={16} tablet={8} computer={4}>
-      <PublicCard {...props} />
-    </Grid.Column>
+class Show extends Component {
+  componentDidMount() {
+    console.log("this props", this.props)
+    const { fetchProfile } = this.props
+    fetchProfile()
+  }
 
-    <Grid.Column mobile={16} tablet={8} computer={12}>
-      <Private {...props} />
-    </Grid.Column>
-  </Grid>
-)
+  componentWillUpdate(nextProps) {
+    console.log("next props", nextProps)
+    const { history } = this.props
+    if (nextProps.profile.errors) {
+      history.push("/profile/edit")
+    }
+  }
 
-Show.propTypes = {
-  username: PropTypes.string.isRequired,
-  firstname: PropTypes.string,
-  lastname: PropTypes.string,
-  description: PropTypes.string,
-  birthday: PropTypes.string,
+  render() {
+    const { profile } = this.props
+    return (
+      <Grid>
+        <Grid.Column mobile={16} tablet={8} computer={4}>
+          <PublicCard {...profile.data} />
+        </Grid.Column>
+
+        <Grid.Column mobile={16} tablet={8} computer={12}>
+          <Private {...profile.data} />
+        </Grid.Column>
+      </Grid>
+    )
+  }
 }
 
-Show.defaultProps = {
-  firstname: "",
-  lastname: "",
-  description: "",
-  birthday: "",
-}
+// Show.propTypes = {
+//   profile: PropTypes.objectOf(PropTypes.string).isRequired,
+//   fetchProfile: PropTypes.func.isRequired,
+// }
+//
+// Show.defaultProps = {
+//   firstname: "",
+//   lastname: "",
+//   description: "",
+//   birthday: "",
+// }
+//
+const mapStateToProps = state => ({
+  profile: state.profile.toJS(),
+})
 
-export default Show
+const connectedShow = connect(
+  mapStateToProps,
+  operations,
+)(Show)
+
+export default withRouter(connectedShow)

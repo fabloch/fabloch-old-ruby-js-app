@@ -42,7 +42,7 @@ module Api::V1
     end
 
     def set_profile
-      @profile = Profile.find_by(user: current_user)
+      @profile = Profile.find_by!(user: current_user)
     end
   end
 end
