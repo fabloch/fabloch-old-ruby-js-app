@@ -1,5 +1,6 @@
 import React from "react"
 import PropTypes from "prop-types"
+import { connect } from "react-redux"
 import { Grid } from "semantic-ui-react"
 
 import Form from "./Form"
@@ -17,19 +18,21 @@ const Edit = ({ profile }) => {
 
   return (
     <Grid centered>
-      { !profile.data && intro }
+      { !profile.data  && intro }
       <Grid.Column mobile={14} tablet={10} computer={6}>
         <Form />
-        Here should be the form
       </Grid.Column>
     </Grid>
   )
 }
 
-Edit.propTypes = {
-  profile: PropTypes.object.isRequired,
-}
-
+// Edit.propTypes = {
+//   username: PropTypes.string.isRequired,
+//   firstname: PropTypes.string,
+//   lastname: PropTypes.string,
+//   description: PropTypes.string,
+//   birthday: PropTypes.string,
+// }
 //
 // Edit.defaultProps = {
 //   firstname: "",
@@ -38,4 +41,8 @@ Edit.propTypes = {
 //   birthday: "",
 // }
 
-export default Edit
+const mapStateToProps = state => ({
+  profile: state.profile.toJS(),
+})
+
+export default connect(mapStateToProps, null)(Edit)

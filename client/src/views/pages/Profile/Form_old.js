@@ -1,21 +1,21 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { connect } from "react-redux"
-import { reduxForm, Field } from "redux-form"
+import { withRouter } from "react-router-dom"
 
-import { Form as UIForm, Grid, Button } from "semantic-ui-react"
+import { Form, Grid, Button } from "semantic-ui-react"
 import NavButton from "../../components/NavButton"
+import { reduxForm, Field } from "redux-form"
 
 import { renderField } from "../../components/renderField"
 import { profileOperations } from "../../../state/ducks/profile"
 
-const Form = (props) => {
-  const { initialValues, submit, errors, handleSubmit, pristine, reset, submitting } = props
-
-  console.log(submit)
+const ProfileForm = (props) => {
+  const { initialValues, ubmit, errors, handleSubmit, pristine, reset, submitting } = props
+  console.log(initialValues)
 
   return (
-    <UIForm onSubmit={handleSubmit(submit)}>
+    <Form onSubmit={handleSubmit(submit)}>
       <Field
         type="text"
         name="username"
@@ -69,11 +69,11 @@ const Form = (props) => {
           />
         </Grid.Column>
       </Grid>
-    </UIForm>
+    </Form>
   )
 }
 
-Form.propTypes = {
+ProfileForm.propTypes = {
   submit: PropTypes.func.isRequired,
   errors: PropTypes.string,
   handleSubmit: PropTypes.func.isRequired,
@@ -84,34 +84,31 @@ Form.propTypes = {
   submitting: PropTypes.bool.isRequired,
 }
 
-Form.defaultProps = {
+ProfileForm.defaultProps = {
   errors: null,
 }
+
+ProfileForm.contextTypes = {
+  router: PropTypes.object.isRequired,
+}
+const mapStateToProps = (state) => ({
+  initialValues: state.profile.data && state.profile.data.toJS(),
+})
 
 const mapDispatchToProps = {
   submit: profileOperations.submit,
 }
 
-const connectForm1 = connect(
-  null,
+const ConnectedProfileForm = connect(
+  mapStateToProps,
   mapDispatchToProps,
-)(Form)
+)(ProfileForm)
 
-
-const connectForm2 = reduxForm({
+const FormedProfileForm = reduxForm({
   form: "submit",
   // validate,
   // warn,
   // asyncValidate,
-})(connectForm1)
+})(ConnectedProfileForm)
 
-const mapStateToProps = state => ({
-  initialValues: state.profile.get("data"),
-})
-
-const connectForm3 = connect(
-  mapStateToProps,
-  null,
-)(connectForm2)
-
-export default connectForm3
+export default withRouter(FormedProfileForm)
