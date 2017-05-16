@@ -1,5 +1,6 @@
 import { combineReducers } from "redux"
 import { reducer as form } from "redux-form"
+import { routerReducer as router } from "react-router-redux"
 
 import * as reducers from "./ducks"
 
@@ -9,6 +10,7 @@ import profileSelectors from "./ducks/profile/selectors"
 const rootReducer = combineReducers({
   ...reducers,
   form,
+  router,
 })
 
 export default rootReducer

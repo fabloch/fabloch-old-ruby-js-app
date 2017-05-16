@@ -2,15 +2,16 @@ import { createStore, applyMiddleware } from "redux"
 import { createLogger } from "redux-logger"
 import thunk from "redux-thunk"
 import { composeWithDevTools } from "redux-devtools-extension"
-import createHistory from "history/createBrowserHistory"
+import { routerMiddleware } from "react-router-redux"
+import history from "./history"
 
 import reducers from "."
-
-export const history = createHistory()
+const router = routerMiddleware(history)
 
 const configureStore = () => {
   const middlewares = [
     thunk,
+    router,
   ]
   if (process.env.NODE_ENV !== "production") {
     middlewares.push(createLogger())

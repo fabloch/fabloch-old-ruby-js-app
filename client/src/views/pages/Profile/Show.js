@@ -7,17 +7,16 @@ import { Grid } from "semantic-ui-react"
 import operations from "../../../state/ducks/profile/operations"
 
 import PublicCard from "./PublicCard"
+import Actions from "./Actions"
 import Private from "./Private"
 
 class Show extends Component {
   componentDidMount() {
-    console.log("this props", this.props)
     const { fetchProfile } = this.props
     fetchProfile()
   }
 
   componentWillUpdate(nextProps) {
-    console.log("next props", nextProps)
     const { history } = this.props
     if (nextProps.profile.errors) {
       history.push("/profile/edit")
@@ -25,7 +24,7 @@ class Show extends Component {
   }
 
   render() {
-    const { profile } = this.props
+    const { profile } = this.props
     return (
       <Grid>
         <Grid.Column mobile={16} tablet={8} computer={4}>
@@ -33,6 +32,7 @@ class Show extends Component {
         </Grid.Column>
 
         <Grid.Column mobile={16} tablet={8} computer={12}>
+          <Actions />
           <Private {...profile.data} />
         </Grid.Column>
       </Grid>
@@ -40,18 +40,14 @@ class Show extends Component {
   }
 }
 
-// Show.propTypes = {
-//   profile: PropTypes.objectOf(PropTypes.string).isRequired,
-//   fetchProfile: PropTypes.func.isRequired,
-// }
-//
-// Show.defaultProps = {
-//   firstname: "",
-//   lastname: "",
-//   description: "",
-//   birthday: "",
-// }
-//
+Show.propTypes = {
+  profile: PropTypes.shape({
+    isLoading: PropTypes.bool.isRequired,
+  }).isRequired,
+  fetchProfile: PropTypes.func.isRequired,
+  history: PropTypes.objectOf(PropTypes.string).isRequired,
+}
+
 const mapStateToProps = state => ({
   profile: state.profile.toJS(),
 })

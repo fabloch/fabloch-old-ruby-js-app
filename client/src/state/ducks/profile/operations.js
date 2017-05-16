@@ -8,6 +8,7 @@ a thunk that dispatches multiple actions in a certain order
 */
 
 import { SubmissionError } from "redux-form"
+import { push } from "react-router-redux"
 import api from "../../../api"
 import actions from "./actions"
 import { loadingOperations } from "../loading"
@@ -45,6 +46,7 @@ const submit = data => (dispatch) => {
     dispatch(
       actions.postProfileSuccess(response.data.data.attributes),
     )
+    dispatch(push("/profile"))
   })
   .catch((error) => {
     if (error.response) {

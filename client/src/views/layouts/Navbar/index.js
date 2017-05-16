@@ -1,27 +1,12 @@
 import React from "react"
 import PropTypes from "prop-types"
-import { Route, Link } from "react-router-dom"
 import { connect } from "react-redux"
 import { Menu } from "semantic-ui-react"
 
+import MenuItem from "../../components/MenuItem"
+
 import { sessionOperations } from "../../../state/ducks/session"
 
-const MenuItem = ({ label, to, activeOnlyWhenExact, onClick }) => (
-  <Route
-    path={to}
-    exact={activeOnlyWhenExact}
-    children={({ match }) => (
-      <Menu.Item
-        as={Link}
-        to={to}
-        active={match && true}
-        onClick={onClick}
-      >
-        {label}
-      </Menu.Item>
-    )}
-  />
-)
 
 export const Navbar = ({ session, logout }) => {
   const LeftMenu = () => (
