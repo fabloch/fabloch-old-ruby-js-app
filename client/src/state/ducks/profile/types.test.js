@@ -26,6 +26,22 @@ describe("session types", () => {
     )
   })
 
+  it("TOGGLE_EDITING", () => {
+    expect(
+      types.TOGGLE_EDITING,
+    ).toEqual(
+      "fabloch/profile/TOGGLE_EDITING",
+    )
+  })
+
+  it("STOP_EDITING", () => {
+    expect(
+      types.STOP_EDITING,
+    ).toEqual(
+      "fabloch/profile/STOP_EDITING",
+    )
+  })
+
   it("POST_REQUEST", () => {
     expect(
       types.POST_REQUEST,

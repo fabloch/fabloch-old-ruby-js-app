@@ -60,7 +60,34 @@ const postProfile = data => (dispatch) => {
   })
 }
 
+const putProfile = data => (dispatch) => {
+  dispatch(loadingOperations.startLoading())
+  dispatch(actions.putProfileRequest())
+  return api.fetch("profile", "put", data)
+  .then((response) => {
+    dispatch(loadingOperations.stopLoading())
+    dispatch(
+      actions.putProfileSuccess(response.data.data.attributes),
+    )
+    dispatch(push("/profile"))
+  })
+  .catch((error) => {
+    if (error.response) {
+      dispatch(loadingOperations.stopLoading())
+      dispatch(actions.putProfileFailure())
+      throw new SubmissionError(error.response.data)
+    } else if (error.request) {
+      // do something
+      // TODO: bad request
+    }
+  })
+}
+
+const toggleEditing = actions.toggleEditing
+
 export default {
   fetchProfile,
+  toggleEditing,
   postProfile,
+  putProfile,
 }

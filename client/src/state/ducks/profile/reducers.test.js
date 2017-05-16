@@ -10,14 +10,6 @@ const data = {
   birthdate: "1979-09-13",
 }
 
-const errors = {
-  username: [
-    "can't be blank",
-    "only allows lowercase letters or \"_\"",
-    "is too short (minimum is 3 characters)",
-  ],
-}
-
 describe("profilenReducer", () => {
   describe("default state", () => {
     it("has default state", () => {
@@ -26,6 +18,7 @@ describe("profilenReducer", () => {
       ).toEqual(
         Map({
           isLoading: false,
+          isEditing: false,
         }),
       )
     })
@@ -39,9 +32,9 @@ describe("profilenReducer", () => {
         }),
       ).toEqual(Map({
         isLoading: true,
+        isEditing: false,
       }))
     })
-
     it("handles FETCH_SUCCESS", () => {
       expect(
         is(
@@ -52,12 +45,12 @@ describe("profilenReducer", () => {
           Map({
             data,
             isLoading: false,
+            isEditing: false,
             errors: false,
           }),
         ),
       ).toBeTruthy()
     })
-
     it("handles FETCH_FAILURE", () => {
       expect(
         profileReducer(undefined, {
@@ -65,7 +58,39 @@ describe("profilenReducer", () => {
         }),
       ).toEqual(Map({
         isLoading: false,
+        isEditing: false,
         errors: true,
+      }))
+    })
+  })
+
+  describe("edit", () => {
+    it("handles TOGGLE_EDITING false to true", () => {
+      const initialState = Map({
+        isLoading: false,
+        isEditing: false,
+      })
+      expect(
+        profileReducer(initialState, {
+          type: types.TOGGLE_EDITING,
+        }),
+      ).toEqual(Map({
+        isLoading: false,
+        isEditing: true,
+      }))
+    })
+    it("handles TOGGLE_EDITING true to false", () => {
+      const initialState = Map({
+        isLoading: false,
+        isEditing: true,
+      })
+      expect(
+        profileReducer(initialState, {
+          type: types.TOGGLE_EDITING,
+        }),
+      ).toEqual(Map({
+        isLoading: false,
+        isEditing: false,
       }))
     })
   })
@@ -78,9 +103,9 @@ describe("profilenReducer", () => {
         }),
       ).toEqual(Map({
         isLoading: true,
+        isEditing: false,
       }))
     })
-
     it("handles POST_SUCCESS", () => {
       expect(
         is(
@@ -91,12 +116,12 @@ describe("profilenReducer", () => {
           Map({
             data,
             isLoading: false,
+            isEditing: false,
             errors: false,
           }),
         ),
       ).toBeTruthy()
     })
-
     it("handles POST_FAILURE", () => {
       expect(
         profileReducer(undefined, {
@@ -104,6 +129,47 @@ describe("profilenReducer", () => {
         }),
       ).toEqual(Map({
         isLoading: false,
+        isEditing: false,
+        errors: true,
+      }))
+    })
+  })
+
+  describe("put", () => {
+    it("handles PUT_REQUEST", () => {
+      expect(
+        profileReducer(undefined, {
+          type: types.PUT_REQUEST,
+        }),
+      ).toEqual(Map({
+        isLoading: true,
+        isEditing: false,
+      }))
+    })
+    it("handles PUT_SUCCESS", () => {
+      expect(
+        is(
+          profileReducer(undefined, {
+            type: types.PUT_SUCCESS,
+            data,
+          }),
+          Map({
+            data,
+            isLoading: false,
+            isEditing: false,
+            errors: false,
+          }),
+        ),
+      ).toBeTruthy()
+    })
+    it("handles PUT_FAILURE", () => {
+      expect(
+        profileReducer(undefined, {
+          type: types.PUT_FAILURE,
+        }),
+      ).toEqual(Map({
+        isLoading: false,
+        isEditing: false,
         errors: true,
       }))
     })

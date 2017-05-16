@@ -45,6 +45,18 @@ describe("profileActions", () => {
     })
   })
 
+  describe("editing", () => {
+    it("toggleEditing", () => {
+      expect(
+        actions.toggleEditing(),
+      ).toEqual(
+        {
+          type: types.TOGGLE_EDITING,
+        },
+      )
+    })
+  })
+
   describe("post", () => {
     it("postProfileRequest", () => {
       expect(
@@ -103,10 +115,11 @@ describe("profileActions", () => {
 
     it("putProfileSuccess", () => {
       expect(
-        actions.putProfileSuccess(),
+        actions.putProfileSuccess(data),
       ).toEqual(
         {
           type: types.PUT_SUCCESS,
+          data,
         },
       )
     })

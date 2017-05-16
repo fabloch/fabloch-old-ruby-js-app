@@ -91,6 +91,19 @@ describe("profileOperations", () => {
     })
   })
 
+  describe("editing", () => {
+    it("toggleEditing", () => {
+      expect(
+        operations.toggleEditing(),
+      ).toEqual(
+        {
+          type: types.TOGGLE_EDITING,
+        },
+      )
+    })
+  })
+
+
   describe("postProfile", () => {
     afterEach(() => {
       nock.cleanAll()
@@ -172,6 +185,92 @@ describe("profileOperations", () => {
           expect(store.getActions()[1]).toEqual(expectedActions[1])
           expect(store.getActions()[2]).toEqual(expectedActions[2])
           expect(store.getActions()[3]).toEqual(expectedActions[3])
+        })
+      })
+    })
+
+    describe("putProfile", () => {
+      afterEach(() => {
+        nock.cleanAll()
+      })
+
+      describe("with valid form", () => {
+        it("triggers POST_SUCCESS with profile infos", () => {
+          const store = mockStore({})
+
+          nock("http://localhost")
+          .put("/v1/profile")
+          .reply(
+            201,
+            {
+              data: {
+                attributes: data,
+              },
+            },
+          )
+
+          return store.dispatch(operations.putProfile(data))
+          .then(() => { // return of async operations
+            const expectedActions = [
+              { type: loadingTypes.START },
+              { type: types.PUT_REQUEST },
+              { type: loadingTypes.STOP },
+              {
+                type: types.PUT_SUCCESS,
+                data,
+              },
+            ]
+
+
+            expect(store.getActions()[0]).toEqual(expectedActions[0])
+            expect(store.getActions()[1]).toEqual(expectedActions[1])
+            expect(store.getActions()[2]).toEqual(expectedActions[2])
+            expect(store.getActions()[3]).toEqual(expectedActions[3])
+          })
+        })
+      })
+
+      describe("with invalid form", () => {
+        xit("triggers PUT_FAILURE", () => {
+          const wrongData = {
+            firstname: "Sébastien",
+            lastname: "Nicolaïdis",
+            description: "Description",
+            birthdate: "1979-09-13",
+          }
+
+          const store = mockStore({})
+
+          nock("http://localhost")
+          .put("/v1/profile")
+          .reply(
+            422,
+            {
+              username: [
+                "can't be blank",
+                "only allows lowercase letters or \"_\"",
+                "is too short (minimum is 3 characters)",
+              ],
+            },
+          )
+
+          return store.dispatch(operations.putProfile(wrongData))
+          .then(() => { // return of async operations
+            const expectedActions = [
+              { type: loadingTypes.START },
+              { type: types.PUT_REQUEST },
+              { type: loadingTypes.STOP },
+              {
+                type: types.PUT_FAILURE,
+                error: { status: 404, statusText: "Not Found" },
+              },
+            ]
+
+            expect(store.getActions()[0]).toEqual(expectedActions[0])
+            expect(store.getActions()[1]).toEqual(expectedActions[1])
+            expect(store.getActions()[2]).toEqual(expectedActions[2])
+            expect(store.getActions()[3]).toEqual(expectedActions[3])
+          })
         })
       })
     })

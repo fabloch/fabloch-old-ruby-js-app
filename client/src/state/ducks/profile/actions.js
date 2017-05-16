@@ -18,6 +18,10 @@ const fetchProfileSuccess = data => ({
   data,
 })
 
+const toggleEditing = () => ({
+  type: types.TOGGLE_EDITING,
+})
+
 const postProfileRequest = () => ({
   type: types.POST_REQUEST,
 })
@@ -37,8 +41,9 @@ const putProfileFailure = errors => ({
   type: types.PUT_FAILURE,
   errors,
 })
-const putProfileSuccess = () => ({
+const putProfileSuccess = data => ({
   type: types.PUT_SUCCESS,
+  data,
 })
 
 const deleteProfileRequest = () => ({
@@ -56,6 +61,8 @@ export default {
   fetchProfileRequest,
   fetchProfileFailure,
   fetchProfileSuccess,
+
+  toggleEditing,
 
   postProfileRequest,
   postProfileFailure,
