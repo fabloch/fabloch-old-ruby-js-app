@@ -91,7 +91,7 @@ describe("profileOperations", () => {
     })
   })
 
-  describe("submit", () => {
+  describe("postProfile", () => {
     afterEach(() => {
       nock.cleanAll()
     })
@@ -111,7 +111,7 @@ describe("profileOperations", () => {
           },
         )
 
-        return store.dispatch(operations.submit(data))
+        return store.dispatch(operations.postProfile(data))
         .then(() => { // return of async operations
           const expectedActions = [
             { type: loadingTypes.START },
@@ -156,7 +156,7 @@ describe("profileOperations", () => {
           },
         )
 
-        return store.dispatch(operations.submit(wrongData))
+        return store.dispatch(operations.postProfile(wrongData))
         .then(() => { // return of async operations
           const expectedActions = [
             { type: loadingTypes.START },

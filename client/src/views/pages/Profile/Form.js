@@ -10,12 +10,10 @@ import { renderField } from "../../components/renderField"
 import { profileOperations } from "../../../state/ducks/profile"
 
 const Form = (props) => {
-  const { initialValues, submit, errors, handleSubmit, pristine, reset, submitting } = props
-
-  console.log(submit)
+  const { initialValues, postProfile, errors, handleSubmit, pristine, reset, submitting } = props
 
   return (
-    <UIForm onSubmit={handleSubmit(submit)}>
+    <UIForm onSubmit={handleSubmit(postProfile)}>
       <Field
         type="text"
         name="username"
@@ -74,7 +72,7 @@ const Form = (props) => {
 }
 
 Form.propTypes = {
-  submit: PropTypes.func.isRequired,
+  postProfile: PropTypes.func.isRequired,
   errors: PropTypes.string,
   handleSubmit: PropTypes.func.isRequired,
   // validate: PropTypes.func.isRequired,
@@ -89,7 +87,7 @@ Form.defaultProps = {
 }
 
 const mapDispatchToProps = {
-  submit: profileOperations.submit,
+  postProfile: profileOperations.postProfile,
 }
 
 const connectForm1 = connect(
@@ -99,7 +97,7 @@ const connectForm1 = connect(
 
 
 const connectForm2 = reduxForm({
-  form: "submit",
+  form: "profile",
   // validate,
   // warn,
   // asyncValidate,

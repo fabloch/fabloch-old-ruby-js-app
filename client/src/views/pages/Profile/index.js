@@ -35,7 +35,7 @@ class ProfilePage extends Component {
   }
 
   render() {
-    const { profile, submit } = this.props
+    const { profile } = this.props
     const { isEditing } = this.state
 
     const Content = () => {
@@ -79,7 +79,6 @@ class ProfilePage extends Component {
 ProfilePage.propTypes = {
   profile: PropTypes.object.isRequired,
   fetchProfile: PropTypes.func.isRequired,
-  submit: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = ({profile}) => ({

@@ -37,7 +37,7 @@ const fetchProfile = () => (dispatch) => {
   })
 }
 
-const submit = data => (dispatch) => {
+const postProfile = data => (dispatch) => {
   dispatch(loadingOperations.startLoading())
   dispatch(actions.postProfileRequest())
   return api.fetch("profile", "post", data)
@@ -62,5 +62,5 @@ const submit = data => (dispatch) => {
 
 export default {
   fetchProfile,
-  submit,
+  postProfile,
 }
