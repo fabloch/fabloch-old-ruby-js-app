@@ -12,7 +12,6 @@ import { profileOperations } from "../../../state/ducks/profile"
 
 const ProfileForm = (props) => {
   const { initialValues, ubmit, errors, handleSubmit, pristine, reset, submitting } = props
-  console.log(initialValues)
 
   return (
     <Form onSubmit={handleSubmit(submit)}>

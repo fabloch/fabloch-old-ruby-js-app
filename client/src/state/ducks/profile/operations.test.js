@@ -3,7 +3,6 @@ import thunk from "redux-thunk"
 import nock from "nock"
 
 import types from "./types"
-import loadingTypes from "../loading/types"
 import operations from "./operations"
 import mockLocalStorage from "../../../utils/mockLocalStorage"
 
@@ -42,20 +41,15 @@ describe("profileOperations", () => {
         return store.dispatch(operations.fetchProfile())
         .then(() => { // return of async operations
           const expectedActions = [
-            { type: loadingTypes.START },
             { type: types.FETCH_REQUEST },
-            { type: loadingTypes.STOP },
             {
               type: types.FETCH_SUCCESS,
               data,
             },
           ]
 
-
           expect(store.getActions()[0]).toEqual(expectedActions[0])
           expect(store.getActions()[1]).toEqual(expectedActions[1])
-          expect(store.getActions()[2]).toEqual(expectedActions[2])
-          expect(store.getActions()[3]).toEqual(expectedActions[3])
         })
       })
     })
@@ -73,9 +67,7 @@ describe("profileOperations", () => {
         return store.dispatch(operations.fetchProfile())
         .then(() => { // return of async operations
           const expectedActions = [
-            { type: loadingTypes.START },
             { type: types.FETCH_REQUEST },
-            { type: loadingTypes.STOP },
             {
               type: types.FETCH_FAILURE,
               error: { status: 404, statusText: "Not Found" },
@@ -84,20 +76,18 @@ describe("profileOperations", () => {
 
           expect(store.getActions()[0]).toEqual(expectedActions[0])
           expect(store.getActions()[1]).toEqual(expectedActions[1])
-          expect(store.getActions()[2]).toEqual(expectedActions[2])
-          expect(store.getActions()[3]).toEqual(expectedActions[3])
         })
       })
     })
   })
 
   describe("editing", () => {
-    it("toggleEditing", () => {
+    it("toggleEdit", () => {
       expect(
-        operations.toggleEditing(),
+        operations.toggleEdit(),
       ).toEqual(
         {
-          type: types.TOGGLE_EDITING,
+          type: types.TOGGLE_EDIT,
         },
       )
     })
@@ -127,9 +117,7 @@ describe("profileOperations", () => {
         return store.dispatch(operations.postProfile(data))
         .then(() => { // return of async operations
           const expectedActions = [
-            { type: loadingTypes.START },
             { type: types.POST_REQUEST },
-            { type: loadingTypes.STOP },
             {
               type: types.POST_SUCCESS,
               data,
@@ -139,8 +127,6 @@ describe("profileOperations", () => {
 
           expect(store.getActions()[0]).toEqual(expectedActions[0])
           expect(store.getActions()[1]).toEqual(expectedActions[1])
-          expect(store.getActions()[2]).toEqual(expectedActions[2])
-          expect(store.getActions()[3]).toEqual(expectedActions[3])
         })
       })
     })
@@ -172,9 +158,7 @@ describe("profileOperations", () => {
         return store.dispatch(operations.postProfile(wrongData))
         .then(() => { // return of async operations
           const expectedActions = [
-            { type: loadingTypes.START },
             { type: types.POST_REQUEST },
-            { type: loadingTypes.STOP },
             {
               type: types.POST_FAILURE,
               error: { status: 404, statusText: "Not Found" },
@@ -183,8 +167,6 @@ describe("profileOperations", () => {
 
           expect(store.getActions()[0]).toEqual(expectedActions[0])
           expect(store.getActions()[1]).toEqual(expectedActions[1])
-          expect(store.getActions()[2]).toEqual(expectedActions[2])
-          expect(store.getActions()[3]).toEqual(expectedActions[3])
         })
       })
     })
@@ -212,9 +194,7 @@ describe("profileOperations", () => {
           return store.dispatch(operations.putProfile(data))
           .then(() => { // return of async operations
             const expectedActions = [
-              { type: loadingTypes.START },
               { type: types.PUT_REQUEST },
-              { type: loadingTypes.STOP },
               {
                 type: types.PUT_SUCCESS,
                 data,
@@ -224,8 +204,6 @@ describe("profileOperations", () => {
 
             expect(store.getActions()[0]).toEqual(expectedActions[0])
             expect(store.getActions()[1]).toEqual(expectedActions[1])
-            expect(store.getActions()[2]).toEqual(expectedActions[2])
-            expect(store.getActions()[3]).toEqual(expectedActions[3])
           })
         })
       })
@@ -257,9 +235,7 @@ describe("profileOperations", () => {
           return store.dispatch(operations.putProfile(wrongData))
           .then(() => { // return of async operations
             const expectedActions = [
-              { type: loadingTypes.START },
               { type: types.PUT_REQUEST },
-              { type: loadingTypes.STOP },
               {
                 type: types.PUT_FAILURE,
                 error: { status: 404, statusText: "Not Found" },
@@ -268,8 +244,6 @@ describe("profileOperations", () => {
 
             expect(store.getActions()[0]).toEqual(expectedActions[0])
             expect(store.getActions()[1]).toEqual(expectedActions[1])
-            expect(store.getActions()[2]).toEqual(expectedActions[2])
-            expect(store.getActions()[3]).toEqual(expectedActions[3])
           })
         })
       })

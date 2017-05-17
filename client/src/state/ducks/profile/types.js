@@ -1,7 +1,7 @@
 const FETCH_REQUEST = "fabloch/profile/FETCH_REQUEST"
 const FETCH_FAILURE = "fabloch/profile/FETCH_FAILURE"
 const FETCH_SUCCESS = "fabloch/profile/FETCH_SUCCESS"
-const TOGGLE_EDITING = "fabloch/profile/TOGGLE_EDITING"
+const TOGGLE_EDIT = "fabloch/profile/TOGGLE_EDIT"
 const STOP_EDITING = "fabloch/profile/STOP_EDITING"
 const POST_REQUEST = "fabloch/profile/POST_REQUEST"
 const POST_FAILURE = "fabloch/profile/POST_FAILURE"
@@ -17,7 +17,7 @@ export default {
   FETCH_REQUEST,
   FETCH_FAILURE,
   FETCH_SUCCESS,
-  TOGGLE_EDITING,
+  TOGGLE_EDIT,
   STOP_EDITING,
   POST_REQUEST,
   POST_FAILURE,

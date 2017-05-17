@@ -18,8 +18,8 @@ const fetchProfileSuccess = data => ({
   data,
 })
 
-const toggleEditing = () => ({
-  type: types.TOGGLE_EDITING,
+const toggleEdit = () => ({
+  type: types.TOGGLE_EDIT,
 })
 
 const postProfileRequest = () => ({
@@ -62,7 +62,7 @@ export default {
   fetchProfileFailure,
   fetchProfileSuccess,
 
-  toggleEditing,
+  toggleEdit,
 
   postProfileRequest,
   postProfileFailure,

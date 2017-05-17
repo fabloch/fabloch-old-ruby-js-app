@@ -28,7 +28,7 @@ const profileReducer = (state = initialState, action) => {
       .set("isLoading", false)
       .set("errors", true)
 
-  case types.TOGGLE_EDITING:
+  case types.TOGGLE_EDIT:
     return state
       .set("isEditing", !state.get("isEditing"))
 

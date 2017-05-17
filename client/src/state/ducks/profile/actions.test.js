@@ -46,12 +46,12 @@ describe("profileActions", () => {
   })
 
   describe("editing", () => {
-    it("toggleEditing", () => {
+    it("toggleEdit", () => {
       expect(
-        actions.toggleEditing(),
+        actions.toggleEdit(),
       ).toEqual(
         {
-          type: types.TOGGLE_EDITING,
+          type: types.TOGGLE_EDIT,
         },
       )
     })

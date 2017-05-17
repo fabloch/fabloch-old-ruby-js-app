@@ -10,12 +10,6 @@ import Show from "./Show"
 import Edit from "./Edit"
 
 class ProfilePage extends Component {
-  constructor(props, context) {
-    super(props, context)
-    this.state = { isEditing: false }
-    this.toggleEdit = this.toggleEdit.bind(this)
-  }
-
   componentDidMount() {
     const { fetchProfile, profile } = this.props
     if (!profile.data) {
@@ -30,16 +24,11 @@ class ProfilePage extends Component {
     )
   }
 
-  toggleEdit() {
-    this.setState({ isEditing: !this.state.isEditing })
-  }
-
   render() {
-    const { profile } = this.props
-    const { isEditing } = this.state
+    const { profile, toggleEdit } = this.props
 
     const Content = () => {
-      if (isEditing || profile.errors) {
+      if (profile.isEditing || profile.errors) {
         return <Edit profile={profile} />
       }
       return <Show profile={profile} />
@@ -56,19 +45,23 @@ class ProfilePage extends Component {
             <Icon name="id card outline" />
             Profil
           </Header>
-          <Button
+          { profile.data && <Button
             floated="right"
             to="/profile/edit"
             content="Edit"
             icon="write"
             labelPosition="left"
-            onClick={this.toggleEdit}
+            onClick={toggleEdit}
 
-          />
+          />}
 
           {/* <Actions isEditing={isEditing} /> */}
         </Segment>
-        <Segment padded attached="bottom">
+        <Segment
+          loading={profile.isLoading}
+          padded
+          attached="bottom"
+        >
           <Content />
         </Segment>
       </div>
@@ -79,6 +72,7 @@ class ProfilePage extends Component {
 ProfilePage.propTypes = {
   profile: PropTypes.object.isRequired,
   fetchProfile: PropTypes.func.isRequired,
+  toggleEdit: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = ({profile}) => ({

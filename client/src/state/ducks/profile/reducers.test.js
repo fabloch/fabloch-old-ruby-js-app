@@ -65,28 +65,28 @@ describe("profilenReducer", () => {
   })
 
   describe("edit", () => {
-    it("handles TOGGLE_EDITING false to true", () => {
+    it("handles TOGGLE_EDIT false to true", () => {
       const initialState = Map({
         isLoading: false,
         isEditing: false,
       })
       expect(
         profileReducer(initialState, {
-          type: types.TOGGLE_EDITING,
+          type: types.TOGGLE_EDIT,
         }),
       ).toEqual(Map({
         isLoading: false,
         isEditing: true,
       }))
     })
-    it("handles TOGGLE_EDITING true to false", () => {
+    it("handles TOGGLE_EDIT true to false", () => {
       const initialState = Map({
         isLoading: false,
         isEditing: true,
       })
       expect(
         profileReducer(initialState, {
-          type: types.TOGGLE_EDITING,
+          type: types.TOGGLE_EDIT,
         }),
       ).toEqual(Map({
         isLoading: false,

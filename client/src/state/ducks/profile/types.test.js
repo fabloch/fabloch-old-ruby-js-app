@@ -26,11 +26,11 @@ describe("session types", () => {
     )
   })
 
-  it("TOGGLE_EDITING", () => {
+  it("TOGGLE_EDIT", () => {
     expect(
-      types.TOGGLE_EDITING,
+      types.TOGGLE_EDIT,
     ).toEqual(
-      "fabloch/profile/TOGGLE_EDITING",
+      "fabloch/profile/TOGGLE_EDIT",
     )
   })
 

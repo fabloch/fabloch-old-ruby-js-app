@@ -15,7 +15,6 @@ const validateInput = (data) => {
   } else {
     delete(errors.password)
   }
-  console.log(isEmpty(errors))
   return {
     errors,
     isValid: isEmpty(errors)

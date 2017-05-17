@@ -8,28 +8,24 @@ a thunk that dispatches multiple actions in a certain order
 */
 
 import { SubmissionError } from "redux-form"
-import { push } from "react-router-redux"
 import api from "../../../api"
 import actions from "./actions"
-import { loadingOperations } from "../loading"
 
 const fetchProfile = () => (dispatch) => {
-  dispatch(loadingOperations.startLoading())
   dispatch(actions.fetchProfileRequest())
   return api.fetch("profile", "get")
   .then((response) => {
-    dispatch(loadingOperations.stopLoading())
     dispatch(
       actions.fetchProfileSuccess(response.data.data.attributes),
     )
   })
   .catch((error) => {
     if (error.response) {
-      dispatch(loadingOperations.stopLoading())
-      return dispatch(actions.fetchProfileFailure({
+      dispatch(actions.fetchProfileFailure({
         status: error.response.status,
         statusText: error.response.statusText,
       }))
+      dispatch(actions.toggleEdit())
     } else if (error.request) {
       return error.request
     }
@@ -38,19 +34,16 @@ const fetchProfile = () => (dispatch) => {
 }
 
 const postProfile = data => (dispatch) => {
-  dispatch(loadingOperations.startLoading())
   dispatch(actions.postProfileRequest())
   return api.fetch("profile", "post", data)
   .then((response) => {
-    dispatch(loadingOperations.stopLoading())
     dispatch(
       actions.postProfileSuccess(response.data.data.attributes),
     )
-    dispatch(push("/profile"))
+    dispatch(actions.toggleEdit())
   })
   .catch((error) => {
     if (error.response) {
-      dispatch(loadingOperations.stopLoading())
       dispatch(actions.postProfileFailure())
       throw new SubmissionError(error.response.data)
     } else if (error.request) {
@@ -61,19 +54,16 @@ const postProfile = data => (dispatch) => {
 }
 
 const putProfile = data => (dispatch) => {
-  dispatch(loadingOperations.startLoading())
   dispatch(actions.putProfileRequest())
   return api.fetch("profile", "put", data)
   .then((response) => {
-    dispatch(loadingOperations.stopLoading())
     dispatch(
       actions.putProfileSuccess(response.data.data.attributes),
     )
-    dispatch(push("/profile"))
+    dispatch(actions.toggleEdit())
   })
   .catch((error) => {
     if (error.response) {
-      dispatch(loadingOperations.stopLoading())
       dispatch(actions.putProfileFailure())
       throw new SubmissionError(error.response.data)
     } else if (error.request) {
@@ -83,11 +73,11 @@ const putProfile = data => (dispatch) => {
   })
 }
 
-const toggleEditing = actions.toggleEditing
+const toggleEdit = actions.toggleEdit
 
 export default {
   fetchProfile,
-  toggleEditing,
+  toggleEdit,
   postProfile,
   putProfile,
 }
