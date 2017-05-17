@@ -20,3 +20,9 @@ node_modules
 
 # Mac osX meta file
 .DS_Store
+
+# Ignore .env 
+.env
+
+# Ignore public/uploads (used only in tests)
+/public/uploads/*

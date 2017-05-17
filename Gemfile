@@ -39,6 +39,12 @@ gem 'devise', '> 4.x'
 gem 'activeadmin', github: 'activeadmin'
 gem 'inherited_resources', git: 'https://github.com/activeadmin/inherited_resources'
 
+# Document upload
+gem "mini_magick"
+gem "fog-aws"
+gem 'carrierwave', '~> 1.0'
+
+
 group :development, :test do
   gem 'rspec-rails'
   gem 'guard-rspec', require: false
@@ -48,6 +54,7 @@ group :development, :test do
   gem 'pry-byebug'
   gem 'pry-stack_explorer'
   gem 'faker'
+  gem 'dotenv-rails', groups: [:development, :test] # Local env variables
 end
 
 group :development do
