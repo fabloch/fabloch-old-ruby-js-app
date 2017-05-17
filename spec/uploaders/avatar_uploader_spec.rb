@@ -4,11 +4,11 @@ describe AvatarUploader do
   include CarrierWave::Test::Matchers
 
   before do
-    profile = build(:profile_with_avatar)
+    profile = build(:profile)
     @uploader = AvatarUploader.new(profile, :avatar)
 
     AvatarUploader.enable_processing = true
-    File.open("spec/fixtures/test.jpg") { |f| @uploader.store!(f) }
+    File.open("spec/fixtures/test1.jpg") { |f| @uploader.store!(f) }
   end
 
   after do

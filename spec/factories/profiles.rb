@@ -6,10 +6,10 @@ FactoryGirl.define do
     lastname {Faker::Name.last_name}
     description {Faker::Lorem.sentence}
 
-    avatar Rack::Test::UploadedFile.new(File.open(File.join(Rails.root, '/spec/fixtures/test.jpg')))
+    avatar Rack::Test::UploadedFile.new(File.open(File.join(Rails.root, '/spec/fixtures/test1.jpg')))
 
-    after :create do |b|
-      b.update_column(:avatar, "public/uploads/profile/avatar/test.jpg")
-    end
+    # after :create do |b|
+    #   b.update_column(:avatar, "public/uploads/profile/avatar/test1.jpg")
+    # end
   end
 end

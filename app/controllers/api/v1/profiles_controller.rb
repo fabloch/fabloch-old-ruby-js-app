@@ -12,12 +12,17 @@ module Api::V1
     # POST /v1/profile
     def create
       @profile = Profile.create!(profile_params_with_user)
+      # @profile = Profile.new(profile_params_with_user)
+      # @avatar = @profile.avatar.new(params[:file])
+      # @profile.save!
+
       json_response(@profile, :created)
     end
 
     # PUT /v1/profile
     def update
       @profile.update(profile_params)
+
       json_response(@profile)
 
     end
@@ -33,8 +38,8 @@ module Api::V1
     def profile_params
       # whitelist params
       params.permit(
-        :username, :firstname, :lastname, :description, :birthday
-      ).merge(user_id: current_user.id)
+        :username, :firstname, :lastname, :description, :birthday, :avatar
+      )
     end
 
     def profile_params_with_user

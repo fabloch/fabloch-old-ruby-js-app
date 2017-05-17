@@ -22,6 +22,9 @@ describe Api::V1::ProfilesController do
           "lastname" => @profile.lastname,
           "description" => @profile.description,
           "birthday" => @profile.birthday,
+          "imglarge" => @profile.avatar_url(:large),
+          "imgmedium" => @profile.avatar_url(:medium),
+          "imgsmall" => @profile.avatar_url(:small),
         }
       )
     end
@@ -44,48 +47,52 @@ describe Api::V1::ProfilesController do
 
       it "returns the serialized user attributes" do
         expect(
-          JSON.parse(response.body)["message"]
-        ).to include("Validation failed")
+          JSON.parse(response.body)['username'][0]
+        ).to eq("can't be blank")
       end
     end
-  end
 
-  context "valid request" do
-    before(:each) do
-      @user = FactoryGirl.create :user
-      auth_headers = @user.create_new_auth_token
-      request.headers.merge!(auth_headers)
-      post(:create, params: {
-        username: "seb_nicolaids",
-        firstname: "Sébastien",
-        lastname: "Nicolaïdis",
-        description: "Some description",
-        birthday: "1979-09-13"
-      })
-    end
+    context "valid request" do
+      before(:each) do
+        @user = FactoryGirl.create :user
+        auth_headers = @user.create_new_auth_token
+        request.headers.merge!(auth_headers)
+        post(:create, params: {
+          username: "seb_nicolaids",
+          firstname: "Sébastien",
+          lastname: "Nicolaïdis",
+          description: "Some description",
+          birthday: "1979-09-13",
+          avatar: fixture_file_upload('spec/fixtures/test1.jpg', 'image/jpg')
+        })
+      end
 
-    it 'responds with 201 status code' do
-      expect(response.code).to eq('201')
-    end
+      it 'responds with 201 status code' do
+        expect(response.code).to eq('201')
+      end
 
-    it "returns the serialized user attributes" do
-      expect(
-        JSON.parse(response.body)['data']['attributes']
-      ).to eq(
-        {
-          "username" => "seb_nicolaids",
-          "firstname" => "Sébastien",
-          "lastname" => "Nicolaïdis",
-          "description" => "Some description",
-          "birthday" => "1979-09-13"
-        }
-      )
-    end
+      it "returns the serialized user attributes" do
+        expect(
+          JSON.parse(response.body)['data']['attributes']
+        ).to eq(
+          {
+            "username" => "seb_nicolaids",
+            "firstname" => "Sébastien",
+            "lastname" => "Nicolaïdis",
+            "description" => "Some description",
+            "birthday" => "1979-09-13",
+            "imglarge" => @user.profile.avatar_url(:large),
+            "imgmedium" => @user.profile.avatar_url(:medium),
+            "imgsmall" => @user.profile.avatar_url(:small),
+          }
+        )
+      end
 
-    it "links profile with current_user" do
-      expect(
-        Profile.last().user
-      ).to eq(@user)
+      it "links profile with current_user" do
+        expect(
+          Profile.last().user
+        ).to eq(@user)
+      end
     end
   end
 
@@ -100,7 +107,8 @@ describe Api::V1::ProfilesController do
         firstname: "Sébastien",
         lastname: "Nicolaïdis",
         description: "Some description",
-        birthday: "1979-09-13"
+        birthday: "1979-09-13",
+        avatar: fixture_file_upload('spec/fixtures/test2.jpg', 'image/jpg')
       }
     end
 
@@ -109,6 +117,7 @@ describe Api::V1::ProfilesController do
     end
 
     it "returns the serialized user attributes" do
+      id = @profile.id
       expect(
         JSON.parse(response.body)['data']['attributes']
       ).to eq(
@@ -117,7 +126,10 @@ describe Api::V1::ProfilesController do
           "firstname" => "Sébastien",
           "lastname" => "Nicolaïdis",
           "description" => "Some description",
-          "birthday" => "1979-09-13"
+          "birthday" => "1979-09-13",
+          "imglarge" => "/Users/sebastiennicolaidis/dev/ruby/fab_loch/spec/support/uploads/profile/avatar/#{id}/large_test2.jpg",
+          "imgmedium" => "/Users/sebastiennicolaidis/dev/ruby/fab_loch/spec/support/uploads/profile/avatar/#{id}/medium_test2.jpg",
+          "imgsmall" => "/Users/sebastiennicolaidis/dev/ruby/fab_loch/spec/support/uploads/profile/avatar/#{id}/small_test2.jpg",
         }
       )
     end
