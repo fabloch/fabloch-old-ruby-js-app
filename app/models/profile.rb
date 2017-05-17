@@ -1,4 +1,5 @@
 class Profile < ApplicationRecord
+  mount_uploader :avatar, AvatarUploader
   belongs_to :user
 
   validates_presence_of [:username]
@@ -10,5 +11,4 @@ class Profile < ApplicationRecord
   validates :username, length: { in: 3..20 }
   validates :description, length: { in: 3..140 }, allow_blank: true
 
-  mount_uploader :avatar, AvatarUploader
 end

@@ -2,9 +2,15 @@ import React from "react"
 import PropTypes from "prop-types"
 import { Card, Image, Icon } from "semantic-ui-react"
 
-const PublicCard = ({username, firstname, lastname, description}) => (
+const PublicCard = ({
+  username,
+  firstname,
+  lastname,
+  description,
+  imgsmall,
+}) => (
   <Card>
-    <Image src="http://placehold.it/800x800" />
+    <Image src={imgsmall} fluid />
     <Card.Content>
       <Card.Header>
         {username}
@@ -32,5 +38,20 @@ const PublicCard = ({username, firstname, lastname, description}) => (
     </Card.Content>
   </Card>
 )
+
+PublicCard.propTypes = {
+  username: PropTypes.string.isRequired,
+  firstname: PropTypes.string,
+  lastname: PropTypes.string,
+  description: PropTypes.string,
+  imgsmall: PropTypes.string,
+}
+
+PublicCard.defaultProps = {
+  firstname: "",
+  lastname: "",
+  description: "",
+  imgsmall: "",
+}
 
 export default PublicCard
