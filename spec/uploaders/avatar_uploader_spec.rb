@@ -3,13 +3,12 @@ require 'carrierwave/test/matchers'
 describe AvatarUploader do
   include CarrierWave::Test::Matchers
 
-
   before do
-    profile = build(:profile)
+    profile = build(:profile_with_avatar)
     @uploader = AvatarUploader.new(profile, :avatar)
 
     AvatarUploader.enable_processing = true
-    File.open("spec/uploaders/upload/test.jpg") { |f| @uploader.store!(f) }
+    File.open("spec/fixtures/test.jpg") { |f| @uploader.store!(f) }
   end
 
   after do
@@ -22,7 +21,6 @@ describe AvatarUploader do
       expect(@uploader).to be_no_larger_than(1920, 1920)
     end
   end
-
 
   context 'the medium version' do
     it "scales down a landscape image to be exactly 1024 by 1024 pixels" do

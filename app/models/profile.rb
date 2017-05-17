@@ -10,5 +10,4 @@ class Profile < ApplicationRecord
     message: "only allows lowercase letters or \"_\"" }
   validates :username, length: { in: 3..20 }
   validates :description, length: { in: 3..140 }, allow_blank: true
-
 end
