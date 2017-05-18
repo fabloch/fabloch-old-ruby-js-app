@@ -7,6 +7,8 @@ import { Form as UIForm, Grid, Button } from "semantic-ui-react"
 import NavButton from "../../components/NavButton"
 
 import { renderField } from "../../components/renderField"
+// import FileInput from "../../components/FileInput"
+import DropzoneInput from "../../components/DropzoneInput"
 import { profileOperations } from "../../../state/ducks/profile"
 
 const Form = (props) => {
@@ -21,6 +23,28 @@ const Form = (props) => {
 
   return (
     <UIForm onSubmit={handleSubmit(sendProfile(initialValues))}>
+      <div>
+        <label htmlFor="avatar">Avatar</label>
+        <Field
+          name="avatar"
+          component={DropzoneInput}
+        />
+      </div>
+
+      {/* <FileInput
+        name="avatar"
+        label="Photo de profil"
+        // classNameLabel="file-input-label"
+        // className="file-input"
+        cbfunction={file => console.log(file)}
+        dropzone_options={{
+          multiple: false,
+          accept: "image/*",
+        }}
+      >
+        <span>Add more</span>
+      </FileInput> */}
+
       <Field
         type="text"
         name="username"

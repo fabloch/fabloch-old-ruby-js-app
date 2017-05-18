@@ -33,9 +33,21 @@ const fetchProfile = () => (dispatch) => {
   })
 }
 
+const dataToForm = (data) => {
+  const formData = new FormData()
+  Object.keys(data).forEach((key) => {
+    if (key === "avatar") {
+      formData.append(key, data[key][0])
+    } else {
+      formData.append(key, data[key])
+    }
+  })
+  return formData
+}
+
 const postProfile = data => (dispatch) => {
   dispatch(actions.postProfileRequest())
-  return api.fetch("profile", "post", data)
+  return api.fetch("profile", "post", dataToForm(data))
   .then((response) => {
     dispatch(
       actions.postProfileSuccess(response.data.data.attributes),
@@ -55,7 +67,7 @@ const postProfile = data => (dispatch) => {
 
 const putProfile = data => (dispatch) => {
   dispatch(actions.putProfileRequest())
-  return api.fetch("profile", "put", data)
+  return api.fetch("profile", "put", dataToForm(data))
   .then((response) => {
     dispatch(
       actions.putProfileSuccess(response.data.data.attributes),

@@ -40,7 +40,7 @@ const PublicCard = ({
 )
 
 PublicCard.propTypes = {
-  username: PropTypes.string.isRequired,
+  username: PropTypes.string,
   firstname: PropTypes.string,
   lastname: PropTypes.string,
   description: PropTypes.string,
@@ -48,6 +48,7 @@ PublicCard.propTypes = {
 }
 
 PublicCard.defaultProps = {
+  username: "",
   firstname: "",
   lastname: "",
   description: "",

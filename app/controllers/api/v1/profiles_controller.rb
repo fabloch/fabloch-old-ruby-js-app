@@ -11,9 +11,14 @@ module Api::V1
 
     # POST /v1/profile
     def create
+      # logger.debug(
+      #   "profile_params_with_user: #{profile_params_with_user[:avatar].inspect}"
+      # )
       @profile = Profile.create!(profile_params_with_user)
+      # avatar_params = profile_params_with_user[:avatar]
+      # logger.debug "profile_params_with_user_without_avatar: #{profile_params_with_user_without_avatar.inspect}"
       # @profile = Profile.new(profile_params_with_user)
-      # @avatar = @profile.avatar.new(params[:file])
+      # logger.debug "profile: #{@profile}"
       # @profile.save!
 
       json_response(@profile, :created)
@@ -38,7 +43,8 @@ module Api::V1
     def profile_params
       # whitelist params
       params.permit(
-        :username, :firstname, :lastname, :description, :birthday, :avatar
+        :username, :firstname, :lastname,
+        :description, :birthday, :avatar
       )
     end
 
