@@ -14,25 +14,27 @@ CarrierWave.configure do |config|
   config.storage = :fog
 end
 
-CarrierWave.configure do |config|
-  config.storage = :file
-  config.enable_processing = false
-end
+if Rails.env.test? or Rails.env.cucumber?
+  CarrierWave.configure do |config|
+    config.storage = :file
+    config.enable_processing = false
+  end
 
-# make sure uploader is auto-loaded
-AvatarUploader
+  # make sure uploader is auto-loaded
+  AvatarUploader
 
-CarrierWave::Uploader::Base.descendants.each do |klass|
-  next if klass.anonymous?
-  klass.class_eval do
-    storage :file
+  CarrierWave::Uploader::Base.descendants.each do |klass|
+    next if klass.anonymous?
+    klass.class_eval do
+      storage :file
 
-    def cache_dir
-      "#{Rails.root}/spec/support/uploads/tmp"
-    end
+      def cache_dir
+        "#{Rails.root}/spec/support/uploads/tmp"
+      end
 
-    def store_dir
-      "#{Rails.root}/spec/support/uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
+      def store_dir
+        "#{Rails.root}/spec/support/uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
+      end
     end
   end
 end
