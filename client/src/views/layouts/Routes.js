@@ -8,6 +8,7 @@ import Admin from "../pages/Admin"
 import MyFablab from "../pages/MyFablab"
 import Session from "../pages/Session"
 import Profile from "../pages/Profile"
+import MembershipPage from "../pages/Membership"
 import NotFoundPage from "../pages/NotFound"
 
 // Need to apply the hocs here to avoid applying them inside the render method
@@ -24,6 +25,7 @@ const Routes = () => (
     <Route path="/myfablab" component={MyFablabPage} />
     <Route path="/admin" component={AdminPage} />
     <Route path="/profile" component={ProfilePage} />
+    <Route path="/membership" component={MembershipPage} />
     <Route component={NotFoundPage} />
   </Switch>
 )
