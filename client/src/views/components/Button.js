@@ -16,6 +16,7 @@ const NavButton = ({
   color,
   icon,
   labelPosition,
+  size,
 }) =>
   <Route
     path={to}
@@ -36,6 +37,7 @@ const NavButton = ({
         color={color}
         icon={icon}
         labelPosition={labelPosition}
+        size={size}
       />
     )}
   </Route>

@@ -10,7 +10,7 @@ const MenuItem = ({
   onClick,
 }) => (
   <Route
-    path={to}
+    path={to.pathname}
     exact={activeOnlyWhenExact}
   >
     {({ match }) => (
@@ -28,7 +28,10 @@ const MenuItem = ({
 
 MenuItem.propTypes = {
   label: PropTypes.string,
-  to: PropTypes.string,
+  to: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object,
+  ]),
   activeOnlyWhenExact: PropTypes.bool,
   onClick: PropTypes.func,
 }

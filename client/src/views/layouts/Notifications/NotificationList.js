@@ -1,6 +1,7 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { connect } from "react-redux"
+import { Grid } from "semantic-ui-react"
 
 import { notificationOperations } from "../../../state/ducks/notification"
 import { getHighLightNotifications } from "../../../state"
@@ -12,11 +13,22 @@ const NotificationList = ({ notifications, hideNotification }) => {
       key={notification.id}
       {...notification}
       hideNotification={hideNotification}
-    />,
+    />
+    ,
   )
-  return (
-    <div>{notificationList}</div>
-  )
+
+  if (notifications.length > 0) {
+    return (
+      <Grid padded>
+        <Grid.Row>
+          <Grid.Column>
+            {notificationList}
+          `</Grid.Column>
+        </Grid.Row>
+      </Grid>
+    )
+  }
+  return null
 }
 
 NotificationList.propTypes = {

@@ -32,10 +32,6 @@ const login = data => (dispatch) => {
     }
     dispatch(actions.loginSuccess(auth))
     localStorage.setItem("auth", JSON.stringify(auth))
-    // localStorage.setItem("client", authHeaders.client)
-    // localStorage.setItem("uid", authHeaders.uid)
-    // localStorage.setItem("token", authHeaders.token)
-    // localStorage.setItem("expiry", authHeaders.expiry)
 
     setAuthHeaders(auth)
 
@@ -50,7 +46,6 @@ const login = data => (dispatch) => {
       dispatch(actions.loginFailure(err.response.data.errors))
       throw new SubmissionError({ _error: err.response.data.errors[0] })
     } else if (err.request) {
-      // do something
       // TODO: bad request
     }
   })
@@ -91,10 +86,6 @@ const removeCurrentUser = actions.removeCurrentUser
 /* Logout */
 const logout = () => (dispatch) => {
   localStorage.clear()
-  // localStorage.removeItem("client")
-  // localStorage.removeItem("uid")
-  // localStorage.removeItem("token")
-  // localStorage.removeItem("expiry")
   setAuthHeaders(false)
   dispatch(actions.logout())
   dispatch(notificationOperations.addNotification({

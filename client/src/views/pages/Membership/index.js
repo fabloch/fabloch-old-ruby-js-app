@@ -5,7 +5,6 @@ import { Segment, Header, Icon } from "semantic-ui-react"
 
 import PresentMembership from "./PresentMembership"
 import RenewMessage from "./RenewMessage"
-import Subscribe from "./Subscribe"
 import History from "./History"
 
 import membershipFakeData from "./fakeData/membership"
@@ -33,10 +32,6 @@ const MembershipPage = ({ membership }) => {
             pastMemberships
             && pastMemberships.show
             && <History pastMemberships={pastMemberships} />
-          }
-          {
-            (shouldResubscribe || pastMemberships || !presentMembership) &&
-            <Subscribe {...membership} />
           }
         </Segment>
       </Segment.Group>

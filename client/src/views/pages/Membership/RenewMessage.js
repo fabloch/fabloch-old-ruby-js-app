@@ -1,6 +1,7 @@
 import React from "react"
 
-import { Icon, Message, Button } from "semantic-ui-react"
+import { Icon, Message } from "semantic-ui-react"
+import Button from "../../components/Button"
 
 const RenewMessage = ({ shouldResubscribe }) =>
   <Message
@@ -14,7 +15,16 @@ const RenewMessage = ({ shouldResubscribe }) =>
       <Message.Header>
         {shouldResubscribe && `Attention, votre abonnement va prendre fin dans ${shouldResubscribe.string}`}
       </Message.Header>
-      Vous pouvez prolonger votre abonnement en bas de cette page.
+      Pour être tranquille, réabonnez-vous dès maintenant. <br />
+      Votre abonnement sera prolongé jusqu'au {shouldResubscribe.newEndDate} <br />
+      <Button
+        icon="chevron right"
+        labelPosition="right"
+        content="Me réabonner maintenant"
+        color="green"
+        size="small"
+        to={{ pathname: "/subscribe"}}
+      />
     </Message.Content>
   </Message>
 

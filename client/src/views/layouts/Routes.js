@@ -8,7 +8,8 @@ import Admin from "../pages/Admin"
 import MyFablab from "../pages/MyFablab"
 import Session from "../pages/Session"
 import Profile from "../pages/Profile"
-import MembershipPage from "../pages/Membership"
+import Membership from "../pages/Membership"
+import Subscribe from "../pages/Subscribe"
 import NotFoundPage from "../pages/NotFound"
 
 // Need to apply the hocs here to avoid applying them inside the render method
@@ -17,6 +18,8 @@ const SessionPage = userIsNotAuthenticated(Session)
 const MyFablabPage = userIsAuthenticated(MyFablab)
 const AdminPage = userIsAuthenticated(userIsAdmin(Admin))
 const ProfilePage = userIsAuthenticated(Profile)
+const MembershipPage = userIsAuthenticated(Membership)
+const SubscribePage = userIsAuthenticated(Subscribe)
 
 const Routes = () => (
   <Switch>
@@ -26,6 +29,7 @@ const Routes = () => (
     <Route path="/admin" component={AdminPage} />
     <Route path="/profile" component={ProfilePage} />
     <Route path="/membership" component={MembershipPage} />
+    <Route path="/subscribe" component={SubscribePage} />
     <Route component={NotFoundPage} />
   </Switch>
 )

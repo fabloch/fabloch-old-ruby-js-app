@@ -5,7 +5,7 @@ import Button from "../../components/Button"
 const Actions = () =>
   <Button
     floated="right"
-    to="/profile/edit"
+    to={{ pathname: "/profile/edit" }}
     content="Edit"
     icon="write"
     labelPosition="left"

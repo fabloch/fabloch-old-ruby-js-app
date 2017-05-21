@@ -1,5 +1,4 @@
-const membership = {
-  isLoading: false,
+export const membership = {
   presentMembership: {
     type: "pro", // "pro", "entreprise"
     startDate: "1er août 2016",
@@ -18,6 +17,9 @@ const membership = {
     show: false,
     memberSince: "31 avril 2016",
   },
+}
+
+export const subscriptionPlans = {
   plans: {
     normal: {
       title: "Particulier",
@@ -49,7 +51,4 @@ const membership = {
         "...",
       ],
     },
-  },
 }
-
-export default membership

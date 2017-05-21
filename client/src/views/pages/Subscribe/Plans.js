@@ -1,4 +1,5 @@
 import React from "react"
+
 import { Grid, Segment, Card, Header, Icon, Button } from "semantic-ui-react"
 
 const Title = ({
@@ -67,7 +68,7 @@ const SubscribeBlock = ({ title, subheader, color, bulletpoints }) =>
   </Segment.Group>
 
 
-const Subscribe = (props) =>
+const Plans = props =>
   <Segment.Group>
     <Segment>
       <Title {...props} />
@@ -87,4 +88,4 @@ const Subscribe = (props) =>
     </Segment>
   </Segment.Group>
 
-export default Subscribe
+export default Plans

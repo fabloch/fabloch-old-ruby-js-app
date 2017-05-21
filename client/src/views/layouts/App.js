@@ -1,11 +1,14 @@
 import React from "react"
 import { ConnectedRouter } from "react-router-redux"
+import { Route } from "react-router-dom"
 import { connect } from "react-redux"
 import { Container } from "semantic-ui-react"
 import history from "../../state/history"
+import Sticky from "react-stickynode"
 
 import { logout } from "../../state/ducks/session/actions"
 import Loader from "./Loader"
+import Splash from "./Splash"
 import NavbarContainer from "./Navbar"
 import NotificationList from "./Notifications/NotificationList"
 import Routes from "./Routes"
@@ -15,7 +18,10 @@ const App = () => (
   <ConnectedRouter history={history}>
     <div>
       <Loader />
-      <NavbarContainer />
+      <Route exact path="/" component={Splash} />
+      <Sticky enabled={true} top={0} innerZ={1}>
+        <NavbarContainer />
+      </Sticky>
       <Container>
         <NotificationList />
         <Routes />

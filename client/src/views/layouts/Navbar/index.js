@@ -1,4 +1,5 @@
 import React from "react"
+import { withRouter } from "react-router-dom"
 import PropTypes from "prop-types"
 import { connect } from "react-redux"
 import { Menu } from "semantic-ui-react"
@@ -8,32 +9,41 @@ import MenuItem from "../../components/MenuItem"
 import { sessionOperations } from "../../../state/ducks/session"
 
 
-export const Navbar = ({ session, logout }) => {
+export const Navbar = (props) => {
+  const { session, logout, location } = props
+
   const LeftMenu = () => (
     <Menu.Menu>
       <MenuItem
-        activeOnlyWhenExact={true}
-        to="/"
+        activeOnlyWhenExact
+        to={{ pathname: "/" }}
         label="La FABrique du Loch"
       />
       <MenuItem
-        to="/myfablab"
+        to={{ pathname: "/myfablab" }}
         label="My Fablab"
       />
     </Menu.Menu>
   )
 
-  const RightMenu = () => {
+  const RightMenu = ({ location }) => {
+    const { search } = location
     if (!session.data) {
       return (
         <Menu.Menu position="right">
           <MenuItem
-            to="/session/login"
+            to={{
+              pathname: "/session/login",
+              search,
+            }}
             label="Me connecter"
           />
 
           <MenuItem
-            to="/session/signup"
+            to={{
+              pathname: "/session/signup",
+              search,
+            }}
             label="M'inscrire"
           />
         </Menu.Menu>
@@ -42,7 +52,8 @@ export const Navbar = ({ session, logout }) => {
     return (
       <Menu.Menu position="right">
         <MenuItem
-          to="/"
+          exact
+          to={{ pathname: "/" }}
           label="Me déconnecter"
           onClick={logout}
         />
@@ -51,9 +62,9 @@ export const Navbar = ({ session, logout }) => {
   }
 
   return (
-    <Menu>
+    <Menu color="orange">
       <LeftMenu />
-      <RightMenu />
+      <RightMenu location={location} />
     </Menu>
   )
 }
@@ -77,4 +88,4 @@ const mapDisptatchToProps = {
 
 const connectedNavbar = connect(mapStateToProps, mapDisptatchToProps)(Navbar)
 
-export default connectedNavbar
+export default withRouter(connectedNavbar)
