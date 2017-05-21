@@ -24,19 +24,20 @@ const login = data => (dispatch) => {
     data,
   })
   .then((response) => {
-    const authHeaders = {
+    const auth = {
       client: response.headers.client,
       uid: response.headers.uid,
       token: response.headers["access-token"],
       expiry: response.headers.expiry,
     }
-    dispatch(actions.loginSuccess(authHeaders))
-    localStorage.setItem("client", authHeaders.client)
-    localStorage.setItem("uid", authHeaders.uid)
-    localStorage.setItem("token", authHeaders.token)
-    localStorage.setItem("expiry", authHeaders.expiry)
+    dispatch(actions.loginSuccess(auth))
+    localStorage.setItem("auth", JSON.stringify(auth))
+    // localStorage.setItem("client", authHeaders.client)
+    // localStorage.setItem("uid", authHeaders.uid)
+    // localStorage.setItem("token", authHeaders.token)
+    // localStorage.setItem("expiry", authHeaders.expiry)
 
-    setAuthHeaders(authHeaders)
+    setAuthHeaders(auth)
 
     dispatch(notificationOperations.addNotification({
       level: "success",
@@ -89,10 +90,11 @@ const removeCurrentUser = actions.removeCurrentUser
 
 /* Logout */
 const logout = () => (dispatch) => {
-  localStorage.removeItem("client")
-  localStorage.removeItem("uid")
-  localStorage.removeItem("token")
-  localStorage.removeItem("expiry")
+  localStorage.clear()
+  // localStorage.removeItem("client")
+  // localStorage.removeItem("uid")
+  // localStorage.removeItem("token")
+  // localStorage.removeItem("expiry")
   setAuthHeaders(false)
   dispatch(actions.logout())
   dispatch(notificationOperations.addNotification({
