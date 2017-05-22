@@ -8,6 +8,7 @@ a thunk that dispatches multiple actions in a certain order
 */
 
 import api from "../../../api"
+import fakeApi from "../../../api/fake"
 import actions from "./actions"
 
 const fetchSubscriptions = () => (dispatch) => {
@@ -31,6 +32,28 @@ const fetchSubscriptions = () => (dispatch) => {
   })
 }
 
+const fetchFakeSubscriptions = () => (dispatch) => {
+  dispatch(actions.fetchSubscriptionsRequest())
+  return fakeApi.fetch("subscriptions", "get")
+  .then((response) => {
+    dispatch(
+      actions.fetchSubscriptionsSuccess(response.data.data.attributes),
+    )
+  })
+  .catch((error) => {
+    if (error.response) {
+      dispatch(actions.fetchSubscriptionsFailure({
+        status: error.response.status,
+        statusText: error.response.statusText,
+      }))
+    } else if (error.request) {
+      return error.request
+    }
+    return (error.message)
+  })
+}
+
 export default {
   fetchSubscriptions,
+  fetchFakeSubscriptions,
 }

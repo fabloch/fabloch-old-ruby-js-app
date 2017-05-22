@@ -1,4 +1,3 @@
-import find from "lodash/find"
 import first from "lodash/first"
 import last from "lodash/last"
 import moment from "moment"
@@ -28,6 +27,19 @@ const memberSinceFromNow = (data, today = moment.utc()) =>
 const memberSinceFromNowInDays = (data, today = moment.utc()) =>
   moment.utc(last(data).startDate).diff(today, "days")
 
+const shouldResubscribe = (data, today = moment.utc()) => {
+  if (memberUntilFromNowInDays(data, today) > 90) {
+    return null
+  } else if (memberUntilFromNowInDays(data, today) > 60
+      && memberUntilFromNowInDays(data, today) <= 90) {
+    return "info"
+  } else if (memberUntilFromNowInDays(data, today) > 30
+      && memberUntilFromNowInDays(data, today) <= 60) {
+    return "warning"
+  }
+  return "error"
+}
+
 export default {
   memberUntil,
   memberUntilFromNow,
@@ -35,4 +47,5 @@ export default {
   memberSince,
   memberSinceFromNow,
   memberSinceFromNowInDays,
+  shouldResubscribe,
 }

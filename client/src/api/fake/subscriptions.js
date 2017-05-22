@@ -1,4 +1,8 @@
-export const subOkHasReubscribed = [
+/*
+  In tests, today is 2010-01-01 UTC
+*/
+
+export const subOkHasResubscribed = [
   {
     type: "regular",
     startDate: "2010-02-01",
@@ -71,38 +75,3 @@ export const subOut = [
     paymentMethod: "cash",
   },
 ]
-
-export const subscriptionPlans = {
-  plans: {
-    normal: {
-      title: "Particulier",
-      subheader: "20€ / an",
-      color: "teal",
-      bulletpoints: [
-        "accès à",
-        "accès à",
-        "...",
-      ],
-    },
-    pro: {
-      title: "Indépendant / Auto-entrepreneur",
-      subheader: "40€ / an",
-      color: "blue",
-      bulletpoints: [
-        "accès à",
-        "accès à",
-        "...",
-      ],
-    },
-    company: {
-      title: "Entreprise",
-      subheader: "100€ / an",
-      color: "violet",
-      bulletpoints: [
-        "accès à",
-        "accès à",
-        "...",
-      ],
-    },
-  },
-}

@@ -1,7 +1,4 @@
-import {
-  subscriptions,
-  subscriptionPlans,
-} from "./data"
+import * as alt from "./subscriptions"
 
 const delay = ms =>
   new Promise(resolve => setTimeout(resolve, ms))
@@ -9,15 +6,17 @@ const delay = ms =>
 const fetch = (url, method) =>
   delay(500).then(() => {
     switch (url) {
-    case "membership":
+    case "subscriptions":
       if (method === "get") {
-        return membership
+        return ({
+          data: {
+            data: {
+              attributes: alt.subOkHasResubscribed,
+            },
+          },
+        })
       }
       return ""
-    case "subscription_plans":
-      if (method === "get") {
-        return subscriptionPlans
-      }
     default:
       throw new Error()
     }

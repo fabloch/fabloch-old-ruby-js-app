@@ -1,7 +1,7 @@
 import types from "./types"
 import actions from "./actions"
 
-import { subOkHasReubscribed as data } from "../../../api/fake/subscriptions"
+import { subOkHasResubscribed as data } from "../../../api/fake/subscriptions"
 
 const error = {
   status: 404,
@@ -15,7 +15,7 @@ describe("subscriptionsActions", () => {
         actions.fetchSubscriptionsRequest(),
       ).toEqual(
         {
-          type: types.FETCH_REQUEST,
+          type: types.FETCH_SUBSCRIPTIONS_REQUEST,
         },
       )
     })
@@ -25,7 +25,7 @@ describe("subscriptionsActions", () => {
         actions.fetchSubscriptionsFailure(error),
       ).toEqual(
         {
-          type: types.FETCH_FAILURE,
+          type: types.FETCH_SUBSCRIPTIONS_FAILURE,
           error,
         },
       )
@@ -36,7 +36,7 @@ describe("subscriptionsActions", () => {
         actions.fetchSubscriptionsSuccess(data),
       ).toEqual(
         {
-          type: types.FETCH_SUCCESS,
+          type: types.FETCH_SUBSCRIPTIONS_SUCCESS,
           data,
         },
       )

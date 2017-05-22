@@ -5,7 +5,7 @@ import nock from "nock"
 import types from "./types"
 import operations from "./operations"
 import mockLocalStorage from "../../../utils/mockLocalStorage"
-import { subOkHasReubscribed as data } from "../../../api/fake/subscriptions"
+import { subOkHasResubscribed as data } from "../../../api/fake/subscriptions"
 
 mockLocalStorage()
 const middlewares = [thunk]
@@ -23,7 +23,7 @@ describe("subscriptionsOperations", () => {
     })
 
     describe("when subscriptions exists", () => {
-      it("triggers FETCH_SUCCESS with subscriptions infos", () => {
+      it("triggers FETCH_SUBSCRIPTIONS_SUCCESS with subscriptions infos", () => {
         const store = mockStore({})
 
         nock("http://localhost")
@@ -40,9 +40,9 @@ describe("subscriptionsOperations", () => {
         return store.dispatch(operations.fetchSubscriptions())
         .then(() => { // return of async operations
           const expectedActions = [
-            { type: types.FETCH_REQUEST },
+            { type: types.FETCH_SUBSCRIPTIONS_REQUEST },
             {
-              type: types.FETCH_SUCCESS,
+              type: types.FETCH_SUBSCRIPTIONS_SUCCESS,
               data,
             },
           ]
@@ -54,7 +54,7 @@ describe("subscriptionsOperations", () => {
     })
 
     describe("when subscriptions does not exit", () => {
-      it("triggers FETCH_FAILURE", () => {
+      it("triggers FETCH_SUBSCRIPTIONS_FAILURE", () => {
         const store = mockStore({})
 
         nock("http://localhost")
@@ -66,9 +66,9 @@ describe("subscriptionsOperations", () => {
         return store.dispatch(operations.fetchSubscriptions())
         .then(() => { // return of async operations
           const expectedActions = [
-            { type: types.FETCH_REQUEST },
+            { type: types.FETCH_SUBSCRIPTIONS_REQUEST },
             {
-              type: types.FETCH_FAILURE,
+              type: types.FETCH_SUBSCRIPTIONS_FAILURE,
               error,
             },
           ]
@@ -76,6 +76,26 @@ describe("subscriptionsOperations", () => {
           expect(store.getActions()[0]).toEqual(expectedActions[0])
           expect(store.getActions()[1]).toEqual(expectedActions[1])
         })
+      })
+    })
+  })
+
+  describe("fetchFakeSubscriptions", () => {
+    it("triggers FETCH_SUBSCRIPTIONS_SUCCESS with subscriptions infos", () => {
+      const store = mockStore({})
+
+      return store.dispatch(operations.fetchFakeSubscriptions())
+      .then(() => { // return of async operations
+        const expectedActions = [
+          { type: types.FETCH_SUBSCRIPTIONS_REQUEST },
+          {
+            type: types.FETCH_SUBSCRIPTIONS_SUCCESS,
+            data,
+          },
+        ]
+
+        expect(store.getActions()[0]).toEqual(expectedActions[0])
+        expect(store.getActions()[1]).toEqual(expectedActions[1])
       })
     })
   })

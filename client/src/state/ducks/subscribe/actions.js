@@ -7,14 +7,14 @@ import types from "./types"
 
 
 const fetchSubscriptionsRequest = () => ({
-  type: types.FETCH_REQUEST,
+  type: types.FETCH_SUBSCRIPTIONS_REQUEST,
 })
 const fetchSubscriptionsFailure = error => ({
-  type: types.FETCH_FAILURE,
+  type: types.FETCH_SUBSCRIPTIONS_FAILURE,
   error,
 })
 const fetchSubscriptionsSuccess = data => ({
-  type: types.FETCH_SUCCESS,
+  type: types.FETCH_SUBSCRIPTIONS_SUCCESS,
   data,
 })
 

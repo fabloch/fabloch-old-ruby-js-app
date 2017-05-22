@@ -5,10 +5,10 @@ import * as alt from "../../../api/fake/subscriptions"
 const today = moment.utc("2010-01-01", "YYYY-MM-DD", true)
 
 describe("subscriptions utils", () => {
-  describe("subOkHasReubscribed", () => {
+  describe("subOkHasResubscribed", () => {
     it("memberUntil", () => {
       expect(
-        utils.memberUntil(alt.subOkHasReubscribed),
+        utils.memberUntil(alt.subOkHasResubscribed),
       ).toEqual(
         "2011-01-31",
       )
@@ -16,7 +16,7 @@ describe("subscriptions utils", () => {
 
     it("memberUntilFromNow", () => {
       expect(
-        utils.memberUntilFromNow(alt.subOkHasReubscribed, today),
+        utils.memberUntilFromNow(alt.subOkHasResubscribed, today),
       ).toEqual(
         "dans un an",
       )
@@ -24,7 +24,7 @@ describe("subscriptions utils", () => {
 
     it("memberUntilFromNowInDays", () => {
       expect(
-        utils.memberUntilFromNowInDays(alt.subOkHasReubscribed, today),
+        utils.memberUntilFromNowInDays(alt.subOkHasResubscribed, today),
       ).toEqual(
         395,
       )
@@ -32,7 +32,7 @@ describe("subscriptions utils", () => {
 
     it("memberSince", () => {
       expect(
-        utils.memberSince(alt.subOkHasReubscribed),
+        utils.memberSince(alt.subOkHasResubscribed),
       ).toEqual(
         "2009-02-01",
       )
@@ -40,7 +40,7 @@ describe("subscriptions utils", () => {
 
     it("memberSinceFromNow", () => {
       expect(
-        utils.memberSinceFromNow(alt.subOkHasReubscribed, today),
+        utils.memberSinceFromNow(alt.subOkHasResubscribed, today),
       ).toEqual(
         "il y a un an",
       )
@@ -48,9 +48,17 @@ describe("subscriptions utils", () => {
 
     it("memberSinceFromNowInDays", () => {
       expect(
-        utils.memberSinceFromNowInDays(alt.subOkHasReubscribed, today),
+        utils.memberSinceFromNowInDays(alt.subOkHasResubscribed, today),
       ).toEqual(
         -334,
+      )
+    })
+
+    it("shouldResubscribe", () => {
+      expect(
+        utils.shouldResubscribe(alt.subOkHasResubscribed, today),
+      ).toEqual(
+        null,
       )
     })
   })
@@ -103,6 +111,14 @@ describe("subscriptions utils", () => {
         -245,
       )
     })
+
+    it("shouldResubscribe", () => {
+      expect(
+        utils.shouldResubscribe(alt.subOkInMoreThan90, today),
+      ).toEqual(
+        null,
+      )
+    })
   })
 
   describe("subShouldRenew90", () => {
@@ -151,6 +167,14 @@ describe("subscriptions utils", () => {
         utils.memberSinceFromNowInDays(alt.subShouldRenew90, today),
       ).toEqual(
         -277,
+      )
+    })
+
+    it("shouldResubscribe", () => {
+      expect(
+        utils.shouldResubscribe(alt.subShouldRenew90, today),
+      ).toEqual(
+        "info",
       )
     })
   })
@@ -203,6 +227,14 @@ describe("subscriptions utils", () => {
         -307,
       )
     })
+
+    it("shouldResubscribe", () => {
+      expect(
+        utils.shouldResubscribe(alt.subShouldRenew60, today),
+      ).toEqual(
+        "warning",
+      )
+    })
   })
 
   describe("subShouldRenew30", () => {
@@ -253,6 +285,14 @@ describe("subscriptions utils", () => {
         -336,
       )
     })
+
+    it("shouldResubscribe", () => {
+      expect(
+        utils.shouldResubscribe(alt.subShouldRenew30, today),
+      ).toEqual(
+        "error",
+      )
+    })
   })
 
   describe("subOut", () => {
@@ -301,6 +341,14 @@ describe("subscriptions utils", () => {
         utils.memberSinceFromNowInDays(alt.subOut, today),
       ).toEqual(
         -1065,
+      )
+    })
+
+    it("shouldResubscribe", () => {
+      expect(
+        utils.shouldResubscribe(alt.subOut, today),
+      ).toEqual(
+        "error",
       )
     })
   })
