@@ -1,56 +1,99 @@
-import React from "react"
+import React, { Component } from "react"
 import PropTypes from "prop-types"
 import { connect } from "react-redux"
-import { Segment, Header, Icon } from "semantic-ui-react"
+import {
+  Container,
+  Segment,
+  Header,
+  Icon,
+  Divider,
+  Button,
+} from "semantic-ui-react"
 
-import PresentMembership from "./PresentMembership"
-import RenewMessage from "./RenewMessage"
+import operations from "../../../state/ducks/subscribe/operations"
+
+import Infos from "./Infos"
+import Resubscribe from "./Resubscribe"
 import History from "./History"
 
-import { subShouldRenew90 } from "../../../api/fake/subscriptions"
+class MembershipPage extends Component {
+  constructor(props) {
+    super(props)
+    this.state = { showHistory: false }
+    this.showHistory = this.showHistory.bind(this);
 
-const MembershipPage = ({ membership }) => {
-  const {
-    isFetching,
-    presentMembership,
-    shouldResubscribe,
-    pastMemberships,
-  } = membership
-  return (
-    <div>
-      <Segment.Group>
-        <Segment padded>
-          <Header as="h1" color="orange">
-            <Icon name="id card outline" />
-            Abonnement
-          </Header>
-        </Segment>
-        <Segment padded loading={isFetching}>
-          {shouldResubscribe && <RenewMessage shouldResubscribe={shouldResubscribe} />}
-          {presentMembership && <PresentMembership presentMembership={presentMembership} />}
-          {
-            pastMemberships
-            && pastMemberships.show
-            && <History pastMemberships={pastMemberships} />
-          }
-        </Segment>
-      </Segment.Group>
+  }
+  componentDidMount() {
+    const { fetchFakeSubscriptions, subscriptions } = this.props
+    if (!subscriptions) {
+      console.log("Aha!")
+      fetchFakeSubscriptions()
+    }
+    console.log("Hello?")
+  }
 
-    </div>
-  )
+  showHistory () {
+    this.setState({
+      showHistory: !this.state.showHistory,
+    })
+  }
+
+  render() {
+    const { isFetching, subscriptions } = this.props
+    const { showHistory } = this.state
+    return (
+      <Container>
+        <Segment.Group>
+          <Segment padded>
+            <Header as="h1" color="orange">
+              <Icon name="id card outline" />
+              Abonnement
+            </Header>
+          </Segment>
+          <Segment padded loading={isFetching}>
+            { subscriptions && subscriptions.shouldResubscribe &&
+              <Resubscribe {...subscriptions} /> }
+            { subscriptions &&
+              <Infos {...subscriptions} showHistory={showHistory} /> }
+            { subscriptions &&
+              <Container textAlign="center">
+                <Divider />
+                <Button
+                  onClick={this.showHistory}
+                  inverted
+                  color="orange"
+                >
+                  {!showHistory ? "Voir" : "Masquer"} l'historique
+                </Button>
+              </Container> }
+            { subscriptions && showHistory
+              && <History {...subscriptions} /> }
+          </Segment>
+        </Segment.Group>
+
+      </Container>
+    )
+  }
 }
 
 MembershipPage.propTypes = {
-  membership: PropTypes.object.isRequired,
+  isFetching: PropTypes.bool.isRequired,
+  fetchFakeSubscriptions: PropTypes.func.isRequired,
+  subscriptions: PropTypes.object,
 }
 
-const mapStateToProps = () => ({
-  membership: subShouldRenew90,
+MembershipPage.defaultProps = {
+  subscriptions: null,
+}
+
+const mapStateToProps = ({ subscribe }) => ({
+  isFetching: subscribe.get("isFetching"),
+  subscriptions: subscribe.get("subscriptions") && subscribe.get("subscriptions").toJS(),
 })
 
 const connectedMembershipPage = connect(
   mapStateToProps,
-  null,
+  operations,
 )(MembershipPage)
 
 export default connectedMembershipPage
