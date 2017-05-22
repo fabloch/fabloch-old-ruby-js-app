@@ -7,11 +7,11 @@ import PresentMembership from "./PresentMembership"
 import RenewMessage from "./RenewMessage"
 import History from "./History"
 
-import membershipFakeData from "./fakeData/membership"
+import { subShouldRenew90 } from "../../../api/fake/subscriptions"
 
 const MembershipPage = ({ membership }) => {
   const {
-    isLoading,
+    isFetching,
     presentMembership,
     shouldResubscribe,
     pastMemberships,
@@ -25,7 +25,7 @@ const MembershipPage = ({ membership }) => {
             Abonnement
           </Header>
         </Segment>
-        <Segment padded loading={isLoading}>
+        <Segment padded loading={isFetching}>
           {shouldResubscribe && <RenewMessage shouldResubscribe={shouldResubscribe} />}
           {presentMembership && <PresentMembership presentMembership={presentMembership} />}
           {
@@ -45,7 +45,7 @@ MembershipPage.propTypes = {
 }
 
 const mapStateToProps = () => ({
-  membership: membershipFakeData,
+  membership: subShouldRenew90,
 })
 
 const connectedMembershipPage = connect(

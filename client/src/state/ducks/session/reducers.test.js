@@ -11,7 +11,7 @@ describe("sessionReducer", () => {
       ).toEqual(
         Map({
           data: null,
-          isLoading: false,
+          isFetching: false,
         }),
       )
     })
@@ -25,7 +25,7 @@ describe("sessionReducer", () => {
         }),
       ).toEqual(Map({
         data: null,
-        isLoading: true,
+        isFetching: true,
       }))
     })
 
@@ -36,7 +36,7 @@ describe("sessionReducer", () => {
         }),
       ).toEqual(Map({
         data: null,
-        isLoading: false,
+        isFetching: false,
       }))
     })
 
@@ -53,7 +53,7 @@ describe("sessionReducer", () => {
       ).toEqual(
         Map({
           data: null,
-          isLoading: false,
+          isFetching: false,
           errors: Map({
             email: "has already been taken",
             full_message: "Email has already been taken",
@@ -71,7 +71,7 @@ describe("sessionReducer", () => {
         }),
       ).toEqual(Map({
         data: null,
-        isLoading: true,
+        isFetching: true,
       }))
     })
 
@@ -94,7 +94,7 @@ describe("sessionReducer", () => {
             token: "mnopqr",
             expiry: "123456",
           }),
-          isLoading: false,
+          isFetching: false,
         }),
       )
     })
@@ -107,7 +107,7 @@ describe("sessionReducer", () => {
       ).toEqual(
         Map({
           data: null,
-          isLoading: false,
+          isFetching: false,
         }),
       )
     })
@@ -133,7 +133,7 @@ describe("sessionReducer", () => {
             token: "mnopqr",
             expiry: "123456",
           }),
-          isLoading: false,
+          isFetching: false,
         }),
       )
     })
@@ -146,12 +146,12 @@ describe("sessionReducer", () => {
           token: "mnopqr",
           expiry: "123456",
         }),
-        isLoading: false,
+        isFetching: false,
       })
       const action = actions.removeCurrentUser()
       const nextState = Map({
         data: null,
-        isLoading: false,
+        isFetching: false,
       })
       expect(sessionReducer(initialState, action)).toEqual(nextState)
     })
@@ -166,12 +166,12 @@ describe("sessionReducer", () => {
           token: "mnopqr",
           expiry: "123456",
         }),
-        isLoading: false,
+        isFetching: false,
       })
       const action = actions.logout()
       const nextState = Map({
         data: null,
-        isLoading: false,
+        isFetching: false,
       })
       expect(sessionReducer(initialState, action)).toEqual(nextState)
     })

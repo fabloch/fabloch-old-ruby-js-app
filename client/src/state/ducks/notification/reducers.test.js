@@ -1,4 +1,5 @@
-import { Map, fromJS, is } from "immutable"
+import { Map } from "immutable"
+import * as matchers from "jest-immutable-matchers"
 import notificationReducer from "./reducers"
 import types from "./types"
 
@@ -20,16 +21,19 @@ const notificationOut = Map({
 })
 
 describe("notifications notificationReducer", () => {
+  beforeEach(() =>
+    jest.addMatchers(matchers),
+  )
+
   it("should return the initial state", () => {
     expect(
-      is(
-        notificationReducer(undefined, {}),
-        Map({
-          highlight: Map(),
-          history: Map(),
-        }),
-      ),
-    ).toEqual(true)
+      notificationReducer(undefined, {}),
+    ).toEqualImmutable(
+      Map({
+        highlight: Map(),
+        history: Map(),
+      }),
+    )
   })
 
   describe("should handle SHOW", () => {
@@ -49,12 +53,9 @@ describe("notifications notificationReducer", () => {
         history: Map({}),
       })
       expect(
-        is(
-          notificationReducer(initialState, action),
-          nextState,
-        ),
-      ).toEqual(
-        true,
+        notificationReducer(initialState, action),
+      ).toEqualImmutable(
+        nextState,
       )
     })
 
@@ -86,11 +87,10 @@ describe("notifications notificationReducer", () => {
       })
 
       expect(
-        is(
-          notificationReducer(previousState, action),
-          nextState,
-        ),
-      ).toEqual(true)
+        notificationReducer(previousState, action),
+      ).toEqualImmutable(
+        nextState,
+      )
     })
   })
 
@@ -134,7 +134,7 @@ describe("notifications notificationReducer", () => {
 
       expect(
         notificationReducer(initialState, action),
-      ).toEqual(
+      ).toEqualImmutable(
         nextState,
       )
     })

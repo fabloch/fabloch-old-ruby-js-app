@@ -33,7 +33,7 @@ exports[`Navbar presentational when logged in homepage 1`] = `
             "token": "mnopqr",
             "uid": "ghijkl",
           },
-          "isLoading": false,
+          "isFetching": false,
         }
       }>
       <Menu>
@@ -167,7 +167,7 @@ exports[`Navbar presentational when not logged in homepage 1`] = `
       session={
         Object {
           "data": null,
-          "isLoading": false,
+          "isFetching": false,
         }
       }>
       <Menu>
@@ -323,7 +323,7 @@ exports[`Navbar presentational when not logged in login page 1`] = `
       session={
         Object {
           "data": null,
-          "isLoading": false,
+          "isFetching": false,
         }
       }>
       <Menu>
@@ -479,7 +479,7 @@ exports[`Navbar presentational when not logged in signup page 1`] = `
       session={
         Object {
           "data": null,
-          "isLoading": false,
+          "isFetching": false,
         }
       }>
       <Menu>

@@ -1,4 +1,5 @@
-import { Map, is } from "immutable"
+import { Map } from "immutable"
+import * as matchers from "jest-immutable-matchers"
 import profileReducer from "./reducers"
 import types from "./types"
 
@@ -11,13 +12,17 @@ const data = {
 }
 
 describe("profilenReducer", () => {
+  beforeEach(() =>
+    jest.addMatchers(matchers),
+  )
+
   describe("default state", () => {
     it("has default state", () => {
       expect(
         profileReducer(undefined, { type: "ANOTHER_ACTION" }),
-      ).toEqual(
+      ).toEqualImmutable(
         Map({
-          isLoading: false,
+          isFetching: false,
           isEditing: false,
         }),
       )
@@ -30,36 +35,35 @@ describe("profilenReducer", () => {
         profileReducer(undefined, {
           type: types.FETCH_REQUEST,
         }),
-      ).toEqual(Map({
-        isLoading: true,
+      ).toEqualImmutable(Map({
+        isFetching: true,
         isEditing: false,
       }))
     })
     it("handles FETCH_SUCCESS", () => {
       expect(
-        is(
-          profileReducer(undefined, {
-            type: types.FETCH_SUCCESS,
-            data,
-          }),
-          Map({
-            data,
-            isLoading: false,
-            isEditing: false,
-            errors: false,
-          }),
-        ),
-      ).toBeTruthy()
+        profileReducer(undefined, {
+          type: types.FETCH_SUCCESS,
+          data,
+        }),
+      ).toEqualImmutable(
+        Map({
+          data,
+          isFetching: false,
+          isEditing: false,
+          fetchingError: false,
+        }),
+      )
     })
     it("handles FETCH_FAILURE", () => {
       expect(
         profileReducer(undefined, {
           type: types.FETCH_FAILURE,
         }),
-      ).toEqual(Map({
-        isLoading: false,
+      ).toEqualImmutable(Map({
+        isFetching: false,
         isEditing: false,
-        errors: true,
+        fetchingError: true,
       }))
     })
   })
@@ -67,29 +71,29 @@ describe("profilenReducer", () => {
   describe("edit", () => {
     it("handles TOGGLE_EDIT false to true", () => {
       const initialState = Map({
-        isLoading: false,
+        isFetching: false,
         isEditing: false,
       })
       expect(
         profileReducer(initialState, {
           type: types.TOGGLE_EDIT,
         }),
-      ).toEqual(Map({
-        isLoading: false,
+      ).toEqualImmutable(Map({
+        isFetching: false,
         isEditing: true,
       }))
     })
     it("handles TOGGLE_EDIT true to false", () => {
       const initialState = Map({
-        isLoading: false,
+        isFetching: false,
         isEditing: true,
       })
       expect(
         profileReducer(initialState, {
           type: types.TOGGLE_EDIT,
         }),
-      ).toEqual(Map({
-        isLoading: false,
+      ).toEqualImmutable(Map({
+        isFetching: false,
         isEditing: false,
       }))
     })
@@ -101,26 +105,25 @@ describe("profilenReducer", () => {
         profileReducer(undefined, {
           type: types.POST_REQUEST,
         }),
-      ).toEqual(Map({
-        isLoading: true,
+      ).toEqualImmutable(Map({
+        isFetching: true,
         isEditing: false,
       }))
     })
     it("handles POST_SUCCESS", () => {
       expect(
-        is(
-          profileReducer(undefined, {
-            type: types.POST_SUCCESS,
-            data,
-          }),
-          Map({
-            data,
-            isLoading: false,
-            isEditing: false,
-            errors: false,
-          }),
-        ),
-      ).toBeTruthy()
+        profileReducer(undefined, {
+          type: types.POST_SUCCESS,
+          data,
+        }),
+      ).toEqualImmutable(
+        Map({
+          data,
+          isFetching: false,
+          isEditing: false,
+          fetchingError: false,
+        }),
+      )
     })
     it("handles POST_FAILURE", () => {
       expect(
@@ -128,9 +131,9 @@ describe("profilenReducer", () => {
           type: types.POST_FAILURE,
         }),
       ).toEqual(Map({
-        isLoading: false,
+        isFetching: false,
         isEditing: false,
-        errors: true,
+        fetchingError: true,
       }))
     })
   })
@@ -141,37 +144,38 @@ describe("profilenReducer", () => {
         profileReducer(undefined, {
           type: types.PUT_REQUEST,
         }),
-      ).toEqual(Map({
-        isLoading: true,
+      ).toEqualImmutable(Map({
+        isFetching: true,
         isEditing: false,
       }))
     })
     it("handles PUT_SUCCESS", () => {
       expect(
-        is(
-          profileReducer(undefined, {
-            type: types.PUT_SUCCESS,
-            data,
-          }),
-          Map({
-            data,
-            isLoading: false,
-            isEditing: false,
-            errors: false,
-          }),
-        ),
-      ).toBeTruthy()
+        profileReducer(undefined, {
+          type: types.PUT_SUCCESS,
+          data,
+        }),
+      ).toEqualImmutable(
+        Map({
+          data,
+          isFetching: false,
+          isEditing: false,
+          fetchingError: false,
+        }),
+      )
     })
     it("handles PUT_FAILURE", () => {
       expect(
         profileReducer(undefined, {
           type: types.PUT_FAILURE,
         }),
-      ).toEqual(Map({
-        isLoading: false,
-        isEditing: false,
-        errors: true,
-      }))
+      ).toEqualImmutable(
+        Map({
+          isFetching: false,
+          isEditing: false,
+          fetchingError: true,
+        }),
+      )
     })
   })
 })

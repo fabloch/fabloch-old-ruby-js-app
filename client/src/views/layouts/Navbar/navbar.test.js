@@ -7,7 +7,7 @@ import { Navbar } from "./"
 
 const notLoggedIn = {
   data: null,
-  isLoading: false,
+  isFetching: false,
 }
 
 const loggedIn = {
@@ -17,7 +17,7 @@ const loggedIn = {
     token: "mnopqr",
     expiry: "123456",
   },
-  isLoading: false,
+  isFetching: false,
 }
 
 const logout = jest.fn()

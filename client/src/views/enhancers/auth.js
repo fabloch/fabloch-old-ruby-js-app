@@ -8,7 +8,7 @@ const locationHelper = locationHelperBuilder({})
 export const userIsAuthenticated = connectedRouterRedirect({
   redirectPath: "/session/login",
   authSelector: state => state.session.get("data"),
-  authenticatingSelector: state => state.session.get("isLoading"),
+  authenticatingSelector: state => state.session.get("isFetching"),
   AuthenticatingComponent: Loading,
   wrapperDisplayName: "UserIsAuthenticated",
 })

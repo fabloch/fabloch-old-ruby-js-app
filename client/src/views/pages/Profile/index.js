@@ -58,7 +58,7 @@ class ProfilePage extends Component {
           {/* <Actions isEditing={isEditing} /> */}
         </Segment>
         <Segment
-          loading={profile.isLoading}
+          loading={profile.isFetching}
           padded
           attached="bottom"
         >

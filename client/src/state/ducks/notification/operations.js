@@ -6,7 +6,7 @@ const hideNotification = actions.hideNotification
 const addNotification = notification => (dispatch) => {
   const id = shortid.generate()
   const date = new Date()
-  const timeStamp = date.getTime();
+  const timeStamp = date.getTime()
   const notificationWithId = {
     ...notification,
     id,

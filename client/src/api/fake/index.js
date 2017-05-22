@@ -1,5 +1,5 @@
 import {
-  membership,
+  subscriptions,
   subscriptionPlans,
 } from "./data"
 

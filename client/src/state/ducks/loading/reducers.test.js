@@ -1,17 +1,21 @@
-import { Map, is } from "immutable"
+import { Map } from "immutable"
+import * as matchers from "jest-immutable-matchers"
 import loadingReducer from "./reducers"
 import types from "./types"
 
 describe("loadingReducer", () => {
+  beforeEach(() =>
+    jest.addMatchers(matchers),
+  )
+
   it("should return the initial state", () => {
     expect(
-      is(
-        loadingReducer(undefined, {}),
-        Map({
-          isLoading: false,
-        }),
-      ),
-    ).toEqual(true)
+      loadingReducer(undefined, {}),
+    ).toEqualImmutable(
+      Map({
+        isLoading: false,
+      }),
+    )
   })
 
   describe("handles START", () => {
@@ -26,12 +30,9 @@ describe("loadingReducer", () => {
         isLoading: true,
       })
       expect(
-        is(
-          loadingReducer(initialState, action),
-          nextState,
-        ),
-      ).toEqual(
-        true,
+        loadingReducer(initialState, action),
+      ).toEqualImmutable(
+        nextState,
       )
     })
 
@@ -46,12 +47,9 @@ describe("loadingReducer", () => {
         isLoading: true,
       })
       expect(
-        is(
-          loadingReducer(initialState, action),
-          nextState,
-        ),
-      ).toEqual(
-        true,
+        loadingReducer(initialState, action),
+      ).toEqualImmutable(
+        nextState,
       )
     })
 
@@ -68,11 +66,10 @@ describe("loadingReducer", () => {
         })
 
         expect(
-          is(
-            loadingReducer(previousState, action),
-            nextState,
-          ),
-        ).toEqual(true)
+          loadingReducer(previousState, action),
+        ).toEqualImmutable(
+          nextState,
+        )
       })
 
       it("with loading false", () => {
@@ -87,11 +84,10 @@ describe("loadingReducer", () => {
         })
 
         expect(
-          is(
-            loadingReducer(previousState, action),
-            nextState,
-          ),
-        ).toEqual(true)
+          loadingReducer(previousState, action),
+        ).toEqual(
+          nextState,
+        )
       })
     })
   })

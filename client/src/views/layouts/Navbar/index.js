@@ -72,7 +72,7 @@ export const Navbar = (props) => {
 Navbar.propTypes = {
   session: PropTypes.shape({
     data: PropTypes.objectOf(PropTypes.string),
-    isLoading: PropTypes.bool.isRequired,
+    isFetching: PropTypes.bool.isRequired,
   }).isRequired,
   logout: PropTypes.func.isRequired,
 }
