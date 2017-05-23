@@ -4,6 +4,7 @@ const FETCH_SUBSCRIPTIONS_SUCCESS = "fabloch/subscribe/FETCH_SUBSCRIPTIONS_SUCCE
 
 const SELECT_PLAN = "fabloch/subscribe/SELECT_PLAN"
 const SELECT_PAYMENT_METHOD = "fabloch/subscribe/SELECT_PAYMENT_METHOD"
+const FOCUS_STEP = "fabloch/subscribe/FOCUS_STEP"
 
 export default {
   FETCH_SUBSCRIPTIONS_REQUEST,
@@ -11,4 +12,5 @@ export default {
   FETCH_SUBSCRIPTIONS_SUCCESS,
   SELECT_PLAN,
   SELECT_PAYMENT_METHOD,
+  FOCUS_STEP,
 }

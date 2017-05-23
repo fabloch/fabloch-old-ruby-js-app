@@ -55,10 +55,12 @@ const fetchFakeSubscriptions = () => (dispatch) => {
 
 const selectPlan = actions.selectPlan
 const selectPaymentMethod = actions.selectPaymentMethod
+const focusStep = actions.focusStep
 
 export default {
   fetchSubscriptions,
   fetchFakeSubscriptions,
   selectPlan,
   selectPaymentMethod,
+  focusStep,
 }

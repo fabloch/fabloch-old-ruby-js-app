@@ -213,5 +213,18 @@ describe("subscriptionsReducer", () => {
         )
       })
     })
+
+    it("focusStep", () => {
+      expect(
+        subscriptionsReducer(undefined, {
+          type: types.FOCUS_STEP,
+          step: 1,
+        }),
+      ).toEqualImmutable(
+        initialState
+        .setIn(["steps", 1, "completed"], false)
+        ,
+      )
+    })
   })
 })

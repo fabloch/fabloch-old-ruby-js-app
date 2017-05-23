@@ -40,4 +40,12 @@ describe("subscriptions types", () => {
       "fabloch/subscribe/SELECT_PAYMENT_METHOD",
     )
   })
+
+  it("FOCUS_STEP", () => {
+    expect(
+      types.FOCUS_STEP,
+    ).toEqual(
+      "fabloch/subscribe/FOCUS_STEP",
+    )
+  })
 })

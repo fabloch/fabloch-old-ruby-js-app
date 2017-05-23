@@ -122,5 +122,16 @@ describe("subscriptionsOperations", () => {
         },
       )
     })
+
+    it("focusStep", () => {
+      expect(
+        operations.focusStep(1),
+      ).toEqual(
+        {
+          type: types.FOCUS_STEP,
+          step: 1,
+        },
+      )
+    })
   })
 })

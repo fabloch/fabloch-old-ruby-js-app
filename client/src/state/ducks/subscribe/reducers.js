@@ -66,10 +66,12 @@ const subscriptionsReducer = (state = initialState, action) => {
       .setIn(["steps", 1, "paymentMethod"], action.paymentMethod)
       .setIn(["steps", 1, "paymentMethodLocalized"], paymentMethodLocalized(action.paymentMethod))
       .setIn(["steps", 1, "completed"], true)
+  case types.FOCUS_STEP:
+    return state
+      .setIn(["steps", action.step, "completed"], false)
   default:
     return state
   }
 }
-
 
 export default subscriptionsReducer

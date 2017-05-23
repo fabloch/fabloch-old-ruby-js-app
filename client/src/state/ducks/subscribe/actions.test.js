@@ -63,5 +63,16 @@ describe("subscriptionsActions", () => {
         },
       )
     })
+
+    it("focusStep", () => {
+      expect(
+        actions.focusStep(1),
+      ).toEqual(
+        {
+          type: types.FOCUS_STEP,
+          step: 1,
+        },
+      )
+    })
   })
 })

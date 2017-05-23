@@ -25,6 +25,10 @@ const selectPaymentMethod = paymentMethod => ({
   type: types.SELECT_PAYMENT_METHOD,
   paymentMethod,
 })
+const focusStep = step => ({
+  type: types.FOCUS_STEP,
+  step,
+})
 
 export default {
   fetchSubscriptionsRequest,
@@ -32,4 +36,5 @@ export default {
   fetchSubscriptionsSuccess,
   selectPlan,
   selectPaymentMethod,
+  focusStep,
 }
