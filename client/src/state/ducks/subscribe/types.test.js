@@ -1,7 +1,6 @@
 import types from "./types"
 
 describe("subscriptions types", () => {
-
   it("FETCH_SUBSCRIPTIONS_REQUEST", () => {
     expect(
       types.FETCH_SUBSCRIPTIONS_REQUEST,
@@ -23,6 +22,22 @@ describe("subscriptions types", () => {
       types.FETCH_SUBSCRIPTIONS_SUCCESS,
     ).toEqual(
       "fabloch/subscribe/FETCH_SUBSCRIPTIONS_SUCCESS",
+    )
+  })
+
+  it("SELECT_PLAN", () => {
+    expect(
+      types.SELECT_PLAN,
+    ).toEqual(
+      "fabloch/subscribe/SELECT_PLAN",
+    )
+  })
+
+  it("SELECT_PAYMENT_METHOD", () => {
+    expect(
+      types.SELECT_PAYMENT_METHOD,
+    ).toEqual(
+      "fabloch/subscribe/SELECT_PAYMENT_METHOD",
     )
   })
 })

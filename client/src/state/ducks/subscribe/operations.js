@@ -53,7 +53,12 @@ const fetchFakeSubscriptions = () => (dispatch) => {
   })
 }
 
+const selectPlan = actions.selectPlan
+const selectPaymentMethod = actions.selectPaymentMethod
+
 export default {
   fetchSubscriptions,
   fetchFakeSubscriptions,
+  selectPlan,
+  selectPaymentMethod,
 }

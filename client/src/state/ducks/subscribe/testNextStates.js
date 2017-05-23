@@ -100,7 +100,7 @@ export const stateShouldRenew30 = Map({
   subscriptions: fromJS({
     type: "regular",
     memberUntil: alt.plus10end,
-    memberUntilFromNow: "dans 10 jours",
+    memberUntilFromNow: "dans 9 jours",
     memberUntilFromNowInDays: 9,
     memberSince: alt.plus10start,
     memberSinceFromNow: "il y a un an",
@@ -122,7 +122,7 @@ export const stateOut = Map({
   subscriptions: fromJS({
     type: "regular",
     memberUntil: alt.minus10end,
-    memberUntilFromNow: "il y a 10 jours",
+    memberUntilFromNow: "il y a 11 jours",
     memberUntilFromNowInDays: -10,
     memberSince: alt.minus10start2,
     memberSinceFromNow: "il y a 2 ans",

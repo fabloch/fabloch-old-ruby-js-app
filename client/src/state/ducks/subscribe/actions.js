@@ -17,9 +17,19 @@ const fetchSubscriptionsSuccess = data => ({
   type: types.FETCH_SUBSCRIPTIONS_SUCCESS,
   data,
 })
+const selectPlan = plan => ({
+  type: types.SELECT_PLAN,
+  plan,
+})
+const selectPaymentMethod = paymentMethod => ({
+  type: types.SELECT_PAYMENT_METHOD,
+  paymentMethod,
+})
 
 export default {
   fetchSubscriptionsRequest,
   fetchSubscriptionsFailure,
   fetchSubscriptionsSuccess,
+  selectPlan,
+  selectPaymentMethod,
 }

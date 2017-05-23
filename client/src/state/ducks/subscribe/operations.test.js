@@ -99,4 +99,28 @@ describe("subscriptionsOperations", () => {
       })
     })
   })
+
+  describe("plan Operations", () => {
+    it("selectPlan", () => {
+      expect(
+        operations.selectPlan("regular"),
+      ).toEqual(
+        {
+          type: types.SELECT_PLAN,
+          plan: "regular",
+        },
+      )
+    })
+
+    it("selectPaymentMethod", () => {
+      expect(
+        operations.selectPaymentMethod("card"),
+      ).toEqual(
+        {
+          type: types.SELECT_PAYMENT_METHOD,
+          paymentMethod: "card",
+        },
+      )
+    })
+  })
 })

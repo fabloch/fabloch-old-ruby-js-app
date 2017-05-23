@@ -1,4 +1,4 @@
-import { Map } from "immutable"
+// import { Map, List } from "immutable"
 import * as matchers from "jest-immutable-matchers"
 import subscriptionsReducer from "./reducers"
 import types from "./types"
@@ -120,8 +120,82 @@ describe("subscriptionsReducer", () => {
       ).toEqualImmutable(
         initialState
         .set("isFetching", false)
-        .set("fetchErrors", true)
+        .set("fetchErrors", true),
       )
+    })
+  })
+
+  describe("steps", () => {
+    describe("handles selectPlan", () => {
+      it("with regular", () => {
+        expect(
+          subscriptionsReducer(undefined, {
+            type: types.SELECT_PLAN,
+            plan: "regular",
+          }),
+        ).toEqualImmutable(
+          initialState
+          .setIn(["steps", 0, "plan"], "regular")
+          .setIn(["steps", 0, "planLocalized"], "particuliers")
+          .setIn(["steps", 0, "done"], true),
+        )
+      })
+
+      it("with pro", () => {
+        expect(
+          subscriptionsReducer(undefined, {
+            type: types.SELECT_PLAN,
+            plan: "pro",
+          }),
+        ).toEqualImmutable(
+          initialState
+          .setIn(["steps", 0, "plan"], "pro")
+          .setIn(["steps", 0, "planLocalized"], "auto-entrepreneurs et indépendants")
+          .setIn(["steps", 0, "done"], true),
+        )
+      })
+
+      it("with company", () => {
+        expect(
+          subscriptionsReducer(undefined, {
+            type: types.SELECT_PLAN,
+            plan: "company",
+          }),
+        ).toEqualImmutable(
+          initialState
+          .setIn(["steps", 0, "plan"], "company")
+          .setIn(["steps", 0, "planLocalized"], "entreprises")
+          .setIn(["steps", 0, "done"], true),
+        )
+      })
+    })
+    describe("handles selectMethod", () => {
+      it("cash", () => {
+        expect(
+          subscriptionsReducer(undefined, {
+            type: types.SELECT_PAYMENT_METHOD,
+            paymentMethod: "cash",
+          }),
+        ).toEqualImmutable(
+          initialState
+          .setIn(["steps", 1, "paymentMethod"], "cash")
+          .setIn(["steps", 1, "paymentMethodLocalized"], "espèces")
+          .setIn(["steps", 1, "done"], true),
+        )
+      })
+      it("check", () => {
+        expect(
+          subscriptionsReducer(undefined, {
+            type: types.SELECT_PAYMENT_METHOD,
+            paymentMethod: "check",
+          }),
+        ).toEqualImmutable(
+          initialState
+          .setIn(["steps", 1, "paymentMethod"], "check")
+          .setIn(["steps", 1, "paymentMethodLocalized"], "chèque")
+          .setIn(["steps", 1, "done"], true),
+        )
+      })
     })
   })
 })

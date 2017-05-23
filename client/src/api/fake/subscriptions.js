@@ -106,4 +106,4 @@ export const subOut = [
   },
 ]
 
-export const chosenAlt = subShouldRenew30
+export const chosenAlt = subOkHasResubscribed
