@@ -9,6 +9,8 @@ moment.locale("fr")
 // });
 
 
+const type = data => first(data).type
+
 const memberUntil = data =>
   moment.utc(first(data).endDate).format("YYYY-MM-DD")
 
@@ -41,6 +43,7 @@ const shouldResubscribe = (data, today = moment.utc()) => {
 }
 
 export default {
+  type,
   memberUntil,
   memberUntilFromNow,
   memberUntilFromNowInDays,

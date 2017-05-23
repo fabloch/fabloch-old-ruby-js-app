@@ -11,7 +11,7 @@ const fetch = (url, method) =>
         return ({
           data: {
             data: {
-              attributes: alt.subOkHasResubscribed,
+              attributes: alt.chosenAlt,
             },
           },
         })

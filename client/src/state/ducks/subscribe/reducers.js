@@ -9,8 +9,9 @@ const subscriptionsReducer = (state = initialState, action) => {
     return state.set("isFetching", true)
   case types.FETCH_SUBSCRIPTIONS_SUCCESS:
     return state
-      .setIn(["subscriptions", "isFetching"], false)
-      .setIn(["subscriptions", "fetchErrors"], false)
+      .set("isFetching", false)
+      .set("fetchErrors", false)
+      .setIn(["subscriptions", "type"], utils.type(action.data))
       .setIn(["subscriptions", "memberUntil"], utils.memberUntil(action.data))
       .setIn(["subscriptions", "memberUntilFromNow"], utils.memberUntilFromNow(action.data))
       .setIn(["subscriptions", "memberUntilFromNowInDays"], utils.memberUntilFromNowInDays(action.data))

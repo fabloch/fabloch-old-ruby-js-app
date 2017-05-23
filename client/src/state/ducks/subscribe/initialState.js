@@ -2,7 +2,6 @@ import { Map, fromJS } from "immutable"
 
 const initialState = Map({
   isFetching: false,
-  subscriptions: Map({}),
   plans: fromJS(
     {
       normal: {

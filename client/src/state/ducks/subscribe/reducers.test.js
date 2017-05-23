@@ -1,14 +1,10 @@
 import { Map } from "immutable"
 import * as matchers from "jest-immutable-matchers"
-import MockDate from "mockdate"
-import moment from "moment"
 import subscriptionsReducer from "./reducers"
 import types from "./types"
 import * as alt from "../../../api/fake/subscriptions"
 import * as nextStates from "./testNextStates"
 import initialState from "./initialState"
-
-MockDate.set(moment.utc("2010-01-01", "YYYY-MM-DD", true))
 
 describe("subscriptionsReducer", () => {
   beforeEach(() =>
@@ -43,7 +39,10 @@ describe("subscriptionsReducer", () => {
             data: alt.subOkInMoreThan90,
           }),
         ).toEqualImmutable(
-          initialState.merge(
+          initialState
+          .set("isFetching", false)
+          .set("fetchErrors", false)
+          .merge(
             nextStates.stateOkInMoreThan90,
           ),
         )
@@ -56,7 +55,10 @@ describe("subscriptionsReducer", () => {
             data: alt.subShouldRenew90,
           }),
         ).toEqualImmutable(
-          initialState.merge(
+          initialState
+          .set("isFetching", false)
+          .set("fetchErrors", false)
+          .merge(
             nextStates.stateShouldRenew90,
           ),
         )
@@ -69,7 +71,10 @@ describe("subscriptionsReducer", () => {
             data: alt.subShouldRenew60,
           }),
         ).toEqualImmutable(
-          initialState.merge(
+          initialState
+          .set("isFetching", false)
+          .set("fetchErrors", false)
+          .merge(
             nextStates.stateShouldRenew60,
           ),
         )
@@ -82,7 +87,10 @@ describe("subscriptionsReducer", () => {
             data: alt.subShouldRenew30,
           }),
         ).toEqualImmutable(
-          initialState.merge(
+          initialState
+          .set("isFetching", false)
+          .set("fetchErrors", false)
+          .merge(
             nextStates.stateShouldRenew30,
           ),
         )
@@ -95,7 +103,10 @@ describe("subscriptionsReducer", () => {
             data: alt.subOut,
           }),
         ).toEqualImmutable(
-          initialState.merge(
+          initialState
+          .set("isFetching", false)
+          .set("fetchErrors", false)
+          .merge(
             nextStates.stateOut,
           ),
         )
@@ -107,10 +118,9 @@ describe("subscriptionsReducer", () => {
           type: types.FETCH_SUBSCRIPTIONS_FAILURE,
         }),
       ).toEqualImmutable(
-        initialState.merge(Map({
-          isFetching: false,
-          fetchErrors: true,
-        })),
+        initialState
+        .set("isFetching", false)
+        .set("fetchErrors", true)
       )
     })
   })

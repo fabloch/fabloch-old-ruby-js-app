@@ -1,28 +1,28 @@
 import { Map, fromJS } from "immutable"
+import * as alt from "../../../api/fake/subscriptions"
 
 export const stateOkHasReubscribed = Map({
   subscriptions: fromJS({
-    isFetching: false,
-    fetchErrors: false,
-    memberUntil: "2011-01-31",
-    memberUntilFromNow: "dans 4 mois",
-    memberUntilFromNowInDays: 119,
-    memberSince: "2010-01-31",
-    memberSinceFromNow: "il y a 8 mois",
-    memberSinceFromNowInDays: -245,
+    type: "regular",
+    memberUntil: alt.plus100end,
+    memberUntilFromNow: "dans 3 mois",
+    memberUntilFromNowInDays: 99,
+    memberSince: alt.plus100start2,
+    memberSinceFromNow: "il y a 2 ans",
+    memberSinceFromNowInDays: -630,
     shouldResubscribe: null,
     allMemberships: [
       {
         type: "regular",
-        startDate: "2010-02-01",
-        endDate: "2011-01-31",
+        startDate: alt.plus100start,
+        endDate: alt.plus100end,
         price: "20",
         paymentMethod: "cash",
       },
       {
         type: "regular",
-        startDate: "2009-02-01",
-        endDate: "2010-01-31",
+        startDate: alt.plus100start2,
+        endDate: alt.plus100end2,
         price: "20",
         paymentMethod: "cash",
       },
@@ -32,20 +32,19 @@ export const stateOkHasReubscribed = Map({
 
 export const stateOkInMoreThan90 = Map({
   subscriptions: fromJS({
-    isFetching: false,
-    fetchErrors: false,
-    memberUntil: "2010-04-30",
-    memberUntilFromNow: "dans 4 mois",
-    memberUntilFromNowInDays: 119,
-    memberSince: "2009-05-01",
-    memberSinceFromNow: "il y a 8 mois",
-    memberSinceFromNowInDays: -245,
+    type: "regular",
+    memberUntil: alt.plus100end,
+    memberUntilFromNow: "dans 3 mois",
+    memberUntilFromNowInDays: 99,
+    memberSince: alt.plus100start,
+    memberSinceFromNow: "il y a 9 mois",
+    memberSinceFromNowInDays: -264,
     shouldResubscribe: null,
     allMemberships: [
       {
         type: "regular",
-        startDate: "2009-05-01",
-        endDate: "2010-04-30",
+        startDate: alt.plus100start,
+        endDate: alt.plus100end,
         price: "20",
         paymentMethod: "cash",
       },
@@ -55,20 +54,19 @@ export const stateOkInMoreThan90 = Map({
 
 export const stateShouldRenew90 = Map({
   subscriptions: fromJS({
-    isFetching: false,
-    fetchErrors: false,
-    memberUntil: "2010-03-29",
-    memberUntilFromNow: "dans 3 mois",
-    memberUntilFromNowInDays: 87,
-    memberSince: "2009-03-30",
-    memberSinceFromNow: "il y a 9 mois",
-    memberSinceFromNowInDays: -277,
+    type: "regular",
+    memberUntil: alt.plus70end,
+    memberUntilFromNow: "dans 2 mois",
+    memberUntilFromNowInDays: 69,
+    memberSince: alt.plus70start,
+    memberSinceFromNow: "il y a 10 mois",
+    memberSinceFromNowInDays: -294,
     shouldResubscribe: "info",
     allMemberships: [
       {
         type: "regular",
-        startDate: "2009-03-30",
-        endDate: "2010-03-29",
+        startDate: alt.plus70start,
+        endDate: alt.plus70end,
         price: "20",
         paymentMethod: "cash",
       },
@@ -78,20 +76,19 @@ export const stateShouldRenew90 = Map({
 
 export const stateShouldRenew60 = Map({
   subscriptions: fromJS({
-    isFetching: false,
-    fetchErrors: false,
-    memberUntil: "2010-02-27",
+    type: "regular",
+    memberUntil: alt.plus50end,
     memberUntilFromNow: "dans 2 mois",
-    memberUntilFromNowInDays: 57,
-    memberSince: "2009-02-28",
+    memberUntilFromNowInDays: 49,
+    memberSince: alt.plus50start,
     memberSinceFromNow: "il y a 10 mois",
-    memberSinceFromNowInDays: -307,
+    memberSinceFromNowInDays: -314,
     shouldResubscribe: "warning",
     allMemberships: [
       {
         type: "regular",
-        startDate: "2009-02-28",
-        endDate: "2010-02-27",
+        startDate: alt.plus50start,
+        endDate: alt.plus50end,
         price: "20",
         paymentMethod: "cash",
       },
@@ -101,20 +98,19 @@ export const stateShouldRenew60 = Map({
 
 export const stateShouldRenew30 = Map({
   subscriptions: fromJS({
-    isFetching: false,
-    fetchErrors: false,
-    memberUntil: "2010-01-29",
-    memberUntilFromNow: "dans un mois",
-    memberUntilFromNowInDays: 28,
-    memberSince: "2009-01-30",
+    type: "regular",
+    memberUntil: alt.plus10end,
+    memberUntilFromNow: "dans 10 jours",
+    memberUntilFromNowInDays: 9,
+    memberSince: alt.plus10start,
     memberSinceFromNow: "il y a un an",
-    memberSinceFromNowInDays: -336,
+    memberSinceFromNowInDays: -354,
     shouldResubscribe: "error",
     allMemberships: [
       {
         type: "regular",
-        startDate: "2009-01-30",
-        endDate: "2010-01-29",
+        startDate: alt.plus10start,
+        endDate: alt.plus10end,
         price: "20",
         paymentMethod: "cash",
       },
@@ -124,27 +120,26 @@ export const stateShouldRenew30 = Map({
 
 export const stateOut = Map({
   subscriptions: fromJS({
-    isFetching: false,
-    fetchErrors: false,
-    memberUntil: "2009-01-31",
-    memberUntilFromNow: "il y a un an",
-    memberUntilFromNowInDays: -335,
-    memberSince: "2007-02-01",
-    memberSinceFromNow: "il y a 3 ans",
-    memberSinceFromNowInDays: -1065,
+    type: "regular",
+    memberUntil: alt.minus10end,
+    memberUntilFromNow: "il y a 10 jours",
+    memberUntilFromNowInDays: -10,
+    memberSince: alt.minus10start2,
+    memberSinceFromNow: "il y a 2 ans",
+    memberSinceFromNowInDays: -740,
     shouldResubscribe: "error",
     allMemberships: [
       {
         type: "regular",
-        startDate: "2008-02-01",
-        endDate: "2009-01-31",
+        startDate: alt.minus10start,
+        endDate: alt.minus10end,
         price: "20",
         paymentMethod: "cash",
       },
       {
         type: "regular",
-        startDate: "2007-02-01",
-        endDate: "2008-01-31",
+        startDate: alt.minus10start2,
+        endDate: alt.minus10end2,
         price: "20",
         paymentMethod: "cash",
       },

@@ -2,31 +2,37 @@ import moment from "moment"
 import utils from "./utils"
 import * as alt from "../../../api/fake/subscriptions"
 
-const today = moment.utc("2010-01-01", "YYYY-MM-DD", true)
-
 describe("subscriptions utils", () => {
   describe("subOkHasResubscribed", () => {
+    it("type", () => {
+      expect(
+        utils.type(alt.subOkHasResubscribed),
+      ).toEqual(
+        "regular",
+      )
+    })
+
     it("memberUntil", () => {
       expect(
         utils.memberUntil(alt.subOkHasResubscribed),
       ).toEqual(
-        "2011-01-31",
+        alt.plus100end,
       )
     })
 
     it("memberUntilFromNow", () => {
       expect(
-        utils.memberUntilFromNow(alt.subOkHasResubscribed, today),
+        utils.memberUntilFromNow(alt.subOkHasResubscribed),
       ).toEqual(
-        "dans un an",
+        "dans 3 mois",
       )
     })
 
     it("memberUntilFromNowInDays", () => {
       expect(
-        utils.memberUntilFromNowInDays(alt.subOkHasResubscribed, today),
+        utils.memberUntilFromNowInDays(alt.subOkHasResubscribed),
       ).toEqual(
-        395,
+        99,
       )
     })
 
@@ -34,29 +40,29 @@ describe("subscriptions utils", () => {
       expect(
         utils.memberSince(alt.subOkHasResubscribed),
       ).toEqual(
-        "2009-02-01",
+        alt.plus100start2,
       )
     })
 
     it("memberSinceFromNow", () => {
       expect(
-        utils.memberSinceFromNow(alt.subOkHasResubscribed, today),
+        utils.memberSinceFromNow(alt.subOkHasResubscribed),
       ).toEqual(
-        "il y a un an",
+        "il y a 2 ans",
       )
     })
 
     it("memberSinceFromNowInDays", () => {
       expect(
-        utils.memberSinceFromNowInDays(alt.subOkHasResubscribed, today),
+        utils.memberSinceFromNowInDays(alt.subOkHasResubscribed),
       ).toEqual(
-        -334,
+        -630,
       )
     })
 
     it("shouldResubscribe", () => {
       expect(
-        utils.shouldResubscribe(alt.subOkHasResubscribed, today),
+        utils.shouldResubscribe(alt.subOkHasResubscribed),
       ).toEqual(
         null,
       )
@@ -68,23 +74,23 @@ describe("subscriptions utils", () => {
       expect(
         utils.memberUntil(alt.subOkInMoreThan90),
       ).toEqual(
-        "2010-04-30",
+        alt.plus100end,
       )
     })
 
     it("memberUntilFromNow", () => {
       expect(
-        utils.memberUntilFromNow(alt.subOkInMoreThan90, today),
+        utils.memberUntilFromNow(alt.subOkInMoreThan90),
       ).toEqual(
-        "dans 4 mois",
+        "dans 3 mois",
       )
     })
 
     it("memberUntilFromNowInDays", () => {
       expect(
-        utils.memberUntilFromNowInDays(alt.subOkInMoreThan90, today),
+        utils.memberUntilFromNowInDays(alt.subOkInMoreThan90),
       ).toEqual(
-        119,
+        99,
       )
     })
 
@@ -92,29 +98,29 @@ describe("subscriptions utils", () => {
       expect(
         utils.memberSince(alt.subOkInMoreThan90),
       ).toEqual(
-        "2009-05-01",
+        alt.plus100start,
       )
     })
 
     it("memberSinceFromNow", () => {
       expect(
-        utils.memberSinceFromNow(alt.subOkInMoreThan90, today),
+        utils.memberSinceFromNow(alt.subOkInMoreThan90),
       ).toEqual(
-        "il y a 8 mois",
+        "il y a 9 mois",
       )
     })
 
     it("memberSinceFromNowInDays", () => {
       expect(
-        utils.memberSinceFromNowInDays(alt.subOkInMoreThan90, today),
+        utils.memberSinceFromNowInDays(alt.subOkInMoreThan90),
       ).toEqual(
-        -245,
+        -264,
       )
     })
 
     it("shouldResubscribe", () => {
       expect(
-        utils.shouldResubscribe(alt.subOkInMoreThan90, today),
+        utils.shouldResubscribe(alt.subOkInMoreThan90),
       ).toEqual(
         null,
       )
@@ -126,23 +132,23 @@ describe("subscriptions utils", () => {
       expect(
         utils.memberUntil(alt.subShouldRenew90),
       ).toEqual(
-        "2010-03-29",
+        alt.plus70end,
       )
     })
 
     it("memberUntilFromNow", () => {
       expect(
-        utils.memberUntilFromNow(alt.subShouldRenew90, today),
+        utils.memberUntilFromNow(alt.subShouldRenew90),
       ).toEqual(
-        "dans 3 mois",
+        "dans 2 mois",
       )
     })
 
     it("memberUntilFromNowInDays", () => {
       expect(
-        utils.memberUntilFromNowInDays(alt.subShouldRenew90, today),
+        utils.memberUntilFromNowInDays(alt.subShouldRenew90),
       ).toEqual(
-        87,
+        69,
       )
     })
 
@@ -150,29 +156,29 @@ describe("subscriptions utils", () => {
       expect(
         utils.memberSince(alt.subShouldRenew90),
       ).toEqual(
-        "2009-03-30",
+        alt.plus70start,
       )
     })
 
     it("memberSinceFromNow", () => {
       expect(
-        utils.memberSinceFromNow(alt.subShouldRenew90, today),
+        utils.memberSinceFromNow(alt.subShouldRenew90),
       ).toEqual(
-        "il y a 9 mois",
+        "il y a 10 mois",
       )
     })
 
     it("memberSinceFromNowInDays", () => {
       expect(
-        utils.memberSinceFromNowInDays(alt.subShouldRenew90, today),
+        utils.memberSinceFromNowInDays(alt.subShouldRenew90),
       ).toEqual(
-        -277,
+        -294,
       )
     })
 
     it("shouldResubscribe", () => {
       expect(
-        utils.shouldResubscribe(alt.subShouldRenew90, today),
+        utils.shouldResubscribe(alt.subShouldRenew90),
       ).toEqual(
         "info",
       )
@@ -184,13 +190,13 @@ describe("subscriptions utils", () => {
       expect(
         utils.memberUntil(alt.subShouldRenew60),
       ).toEqual(
-        "2010-02-27",
+        alt.plus50end,
       )
     })
 
     it("memberUntilFromNow", () => {
       expect(
-        utils.memberUntilFromNow(alt.subShouldRenew60, today),
+        utils.memberUntilFromNow(alt.subShouldRenew60),
       ).toEqual(
         "dans 2 mois",
       )
@@ -198,9 +204,9 @@ describe("subscriptions utils", () => {
 
     it("memberUntilFromNowInDays", () => {
       expect(
-        utils.memberUntilFromNowInDays(alt.subShouldRenew60, today),
+        utils.memberUntilFromNowInDays(alt.subShouldRenew60),
       ).toEqual(
-        57,
+        49,
       )
     })
 
@@ -208,13 +214,13 @@ describe("subscriptions utils", () => {
       expect(
         utils.memberSince(alt.subShouldRenew60),
       ).toEqual(
-        "2009-02-28",
+        alt.plus50start,
       )
     })
 
     it("memberSinceFromNow", () => {
       expect(
-        utils.memberSinceFromNow(alt.subShouldRenew60, today),
+        utils.memberSinceFromNow(alt.subShouldRenew60),
       ).toEqual(
         "il y a 10 mois",
       )
@@ -222,15 +228,15 @@ describe("subscriptions utils", () => {
 
     it("memberSinceFromNowInDays", () => {
       expect(
-        utils.memberSinceFromNowInDays(alt.subShouldRenew60, today),
+        utils.memberSinceFromNowInDays(alt.subShouldRenew60),
       ).toEqual(
-        -307,
+        -314,
       )
     })
 
     it("shouldResubscribe", () => {
       expect(
-        utils.shouldResubscribe(alt.subShouldRenew60, today),
+        utils.shouldResubscribe(alt.subShouldRenew60),
       ).toEqual(
         "warning",
       )
@@ -242,23 +248,23 @@ describe("subscriptions utils", () => {
       expect(
         utils.memberUntil(alt.subShouldRenew30),
       ).toEqual(
-        "2010-01-29",
+        alt.plus10end,
       )
     })
 
     it("memberUntilFromNow", () => {
       expect(
-        utils.memberUntilFromNow(alt.subShouldRenew30, today),
+        utils.memberUntilFromNow(alt.subShouldRenew30),
       ).toEqual(
-        "dans un mois",
+        "dans 10 jours",
       )
     })
 
     it("memberUntilFromNowInDays", () => {
       expect(
-        utils.memberUntilFromNowInDays(alt.subShouldRenew30, today),
+        utils.memberUntilFromNowInDays(alt.subShouldRenew30),
       ).toEqual(
-        28,
+        9,
       )
     })
 
@@ -266,13 +272,13 @@ describe("subscriptions utils", () => {
       expect(
         utils.memberSince(alt.subShouldRenew30),
       ).toEqual(
-        "2009-01-30",
+        alt.plus10start,
       )
     })
 
     it("memberSinceFromNow", () => {
       expect(
-        utils.memberSinceFromNow(alt.subShouldRenew30, today),
+        utils.memberSinceFromNow(alt.subShouldRenew30),
       ).toEqual(
         "il y a un an",
       )
@@ -280,15 +286,15 @@ describe("subscriptions utils", () => {
 
     it("memberSinceFromNowInDays", () => {
       expect(
-        utils.memberSinceFromNowInDays(alt.subShouldRenew30, today),
+        utils.memberSinceFromNowInDays(alt.subShouldRenew30),
       ).toEqual(
-        -336,
+        -354,
       )
     })
 
     it("shouldResubscribe", () => {
       expect(
-        utils.shouldResubscribe(alt.subShouldRenew30, today),
+        utils.shouldResubscribe(alt.subShouldRenew30),
       ).toEqual(
         "error",
       )
@@ -300,23 +306,23 @@ describe("subscriptions utils", () => {
       expect(
         utils.memberUntil(alt.subOut),
       ).toEqual(
-        "2009-01-31",
+        alt.minus10end,
       )
     })
 
     it("memberUntilFromNow", () => {
       expect(
-        utils.memberUntilFromNow(alt.subOut, today),
+        utils.memberUntilFromNow(alt.subOut),
       ).toEqual(
-        "il y a un an",
+        "il y a 10 jours",
       )
     })
 
     it("memberUntilFromNowInDays", () => {
       expect(
-        utils.memberUntilFromNowInDays(alt.subOut, today),
+        utils.memberUntilFromNowInDays(alt.subOut),
       ).toEqual(
-        -335,
+        -10,
       )
     })
 
@@ -324,29 +330,29 @@ describe("subscriptions utils", () => {
       expect(
         utils.memberSince(alt.subOut),
       ).toEqual(
-        "2007-02-01",
+        alt.minus10start2,
       )
     })
 
     it("memberSinceFromNow", () => {
       expect(
-        utils.memberSinceFromNow(alt.subOut, today),
+        utils.memberSinceFromNow(alt.subOut),
       ).toEqual(
-        "il y a 3 ans",
+        "il y a 2 ans",
       )
     })
 
     it("memberSinceFromNowInDays", () => {
       expect(
-        utils.memberSinceFromNowInDays(alt.subOut, today),
+        utils.memberSinceFromNowInDays(alt.subOut),
       ).toEqual(
-        -1065,
+        -740,
       )
     })
 
     it("shouldResubscribe", () => {
       expect(
-        utils.shouldResubscribe(alt.subOut, today),
+        utils.shouldResubscribe(alt.subOut),
       ).toEqual(
         "error",
       )

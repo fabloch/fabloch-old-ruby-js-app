@@ -5,7 +5,7 @@ import nock from "nock"
 import types from "./types"
 import operations from "./operations"
 import mockLocalStorage from "../../../utils/mockLocalStorage"
-import { subOkHasResubscribed as data } from "../../../api/fake/subscriptions"
+import { chosenAlt as data } from "../../../api/fake/subscriptions"
 
 mockLocalStorage()
 const middlewares = [thunk]
