@@ -57,12 +57,15 @@ const subscriptionsReducer = (state = initialState, action) => {
     return state
       .setIn(["steps", 0, "plan"], action.plan)
       .setIn(["steps", 0, "planLocalized"], planLocalized(action.plan))
-      .setIn(["steps", 0, "done"], true)
+      .setIn(["steps", 0, "completed"], true)
+      .setIn(["steps", 0, "active"], false)
+      .setIn(["steps", 1, "disabled"], false)
+      .setIn(["steps", 1, "active"], true)
   case types.SELECT_PAYMENT_METHOD:
     return state
       .setIn(["steps", 1, "paymentMethod"], action.paymentMethod)
       .setIn(["steps", 1, "paymentMethodLocalized"], paymentMethodLocalized(action.paymentMethod))
-      .setIn(["steps", 1, "done"], true)
+      .setIn(["steps", 1, "completed"], true)
   default:
     return state
   }

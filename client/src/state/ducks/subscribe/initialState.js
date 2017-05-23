@@ -4,7 +4,8 @@ const initialState = Map({
   isFetching: false,
   plans: fromJS(
     {
-      normal: {
+      regular: {
+        planName: "regular",
         title: "Particulier",
         subheader: "20€ / an",
         color: "teal",
@@ -15,6 +16,7 @@ const initialState = Map({
         ],
       },
       pro: {
+        planName: "pro",
         title: "Indépendant / Auto-entrepreneur",
         subheader: "40€ / an",
         color: "blue",
@@ -25,6 +27,7 @@ const initialState = Map({
         ],
       },
       company: {
+        planName: "company",
         title: "Entreprise",
         subheader: "100€ / an",
         color: "violet",

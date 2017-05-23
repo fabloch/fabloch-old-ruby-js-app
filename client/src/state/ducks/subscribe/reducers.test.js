@@ -120,7 +120,8 @@ describe("subscriptionsReducer", () => {
       ).toEqualImmutable(
         initialState
         .set("isFetching", false)
-        .set("fetchErrors", true),
+        .set("fetchErrors", true)
+        ,
       )
     })
   })
@@ -137,7 +138,11 @@ describe("subscriptionsReducer", () => {
           initialState
           .setIn(["steps", 0, "plan"], "regular")
           .setIn(["steps", 0, "planLocalized"], "particuliers")
-          .setIn(["steps", 0, "done"], true),
+          .setIn(["steps", 0, "completed"], true)
+          .setIn(["steps", 0, "active"], false)
+          .setIn(["steps", 1, "disabled"], false)
+          .setIn(["steps", 1, "active"], true)
+          ,
         )
       })
 
@@ -151,7 +156,11 @@ describe("subscriptionsReducer", () => {
           initialState
           .setIn(["steps", 0, "plan"], "pro")
           .setIn(["steps", 0, "planLocalized"], "auto-entrepreneurs et indépendants")
-          .setIn(["steps", 0, "done"], true),
+          .setIn(["steps", 0, "completed"], true)
+          .setIn(["steps", 0, "active"], false)
+          .setIn(["steps", 1, "disabled"], false)
+          .setIn(["steps", 1, "active"], true)
+          ,
         )
       })
 
@@ -165,10 +174,15 @@ describe("subscriptionsReducer", () => {
           initialState
           .setIn(["steps", 0, "plan"], "company")
           .setIn(["steps", 0, "planLocalized"], "entreprises")
-          .setIn(["steps", 0, "done"], true),
+          .setIn(["steps", 0, "completed"], true)
+          .setIn(["steps", 0, "active"], false)
+          .setIn(["steps", 1, "disabled"], false)
+          .setIn(["steps", 1, "active"], true)
+          ,
         )
       })
     })
+
     describe("handles selectMethod", () => {
       it("cash", () => {
         expect(
@@ -180,7 +194,8 @@ describe("subscriptionsReducer", () => {
           initialState
           .setIn(["steps", 1, "paymentMethod"], "cash")
           .setIn(["steps", 1, "paymentMethodLocalized"], "espèces")
-          .setIn(["steps", 1, "done"], true),
+          .setIn(["steps", 1, "completed"], true)
+          ,
         )
       })
       it("check", () => {
@@ -193,7 +208,8 @@ describe("subscriptionsReducer", () => {
           initialState
           .setIn(["steps", 1, "paymentMethod"], "check")
           .setIn(["steps", 1, "paymentMethodLocalized"], "chèque")
-          .setIn(["steps", 1, "done"], true),
+          .setIn(["steps", 1, "completed"], true)
+          ,
         )
       })
     })

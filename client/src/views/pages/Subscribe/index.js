@@ -17,7 +17,31 @@ class SubscribePage extends Component {
   }
 
   render() {
-    const { subscriptions, steps, plans } = this.props
+    const {
+      subscriptions,
+      steps,
+      plans,
+      selectPlan,
+    } = this.props
+
+    const displaySteps = (steps) => {
+      if (!steps[0].completed) {
+        return (
+          <div>
+            <PlanIntro {...subscriptions} />
+            <Plans
+              plans={plans}
+              selectPlan={selectPlan}
+            />
+          </div>
+        )
+      } else if (!steps[1].completed) {
+        return <div>PaymentMethod</div>
+      } else if (!steps[2].done) {
+        return <div>Confirm</div>
+      }
+      return ""
+    }
 
     return (
       <Grid padded>
@@ -29,8 +53,7 @@ class SubscribePage extends Component {
         <Grid.Row>
           <Grid.Column>
             <Segment.Group>
-              <PlanIntro {...subscriptions} />
-              <Plans plans={plans} />
+              { displaySteps(steps)}
             </Segment.Group>
           </Grid.Column>
         </Grid.Row>
@@ -44,6 +67,8 @@ SubscribePage.propTypes = {
   plans: PropTypes.object.isRequired,
   steps: PropTypes.array.isRequired,
   fetchFakeSubscriptions: PropTypes.func.isRequired,
+  selectPlan: PropTypes.func.isRequired,
+  selectPaymentMethod: PropTypes.func.isRequired,
 }
 
 SubscribePage.defaultProps = {
