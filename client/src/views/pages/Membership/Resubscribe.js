@@ -1,11 +1,12 @@
 import React from "react"
 import PropTypes from "prop-types"
+import moment from "moment"
 
-import { Icon, Message } from "semantic-ui-react"
+import { Icon, Message, Divider } from "semantic-ui-react"
 import Button from "../../components/Button"
 
 const Resubscribe = ({
-  // memberUntil,
+  memberUntil,
   // memberUntilFromNow,
   memberUntilFromNowInDays,
   // memberSince,
@@ -30,10 +31,11 @@ const Resubscribe = ({
           {
             (warning || error)
             && `Attention, votre abonnement va prendre
-              fin dans ${memberUntilFromNowInDays}`}
+              fin le ${moment(memberUntil).format("d MMM YYYY")} (dans ${memberUntilFromNowInDays} jours)`}
         </Message.Header>
         Pour être tranquille, réabonnez-vous dès maintenant. <br />
-        Votre abonnement sera prolongé jusqu'au {shouldResubscribe.newEndDate} <br />
+        Votre abonnement sera prolongé jusqu'au {moment(memberUntil).add(1, "y").subtract(1, "d").format("d MMM YYYY")}.
+        <Divider />
         <Button
           icon="chevron right"
           labelPosition="right"
@@ -48,7 +50,7 @@ const Resubscribe = ({
 }
 
 Resubscribe.propTypes = {
-  // memberUntil: PropTypes.string.isRequired,
+  memberUntil: PropTypes.string.isRequired,
   // memberUntilFromNow: PropTypes.string.isRequired,
   memberUntilFromNowInDays: PropTypes.number.isRequired,
   // memberSince: PropTypes.string.isRequired,

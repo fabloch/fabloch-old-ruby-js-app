@@ -1,49 +1,5 @@
 import React from "react"
-
-import { Grid, Segment, Card, Header, Icon, Button } from "semantic-ui-react"
-
-const Title = ({
-  shouldResubscribe,
-  pastMemberships,
-}) => {
-  const title = () => {
-    if (shouldResubscribe) {
-      return "Prolongez votre abonnement dès maintenant"
-    } else if (pastMemberships) {
-      return "Vous nous manquez à la FABrique du Loch :'/"
-    } else {
-      return "Abonnez-vous à la FABrique du Loch"
-    }
-  }
-  const subHeader = () => {
-    console.log("test", shouldResubscribe)
-    if (shouldResubscribe) {
-      return <span>
-        Votre abonnement se termine dans {shouldResubscribe.string}.
-        Pour être tranquille, réabonnez-vous dès maintenant. <br />
-        Votre abonnement sera prolongé jusqu'au {shouldResubscribe.newEndDate}
-      </span>
-    } else if (pastMemberships) {
-      return <span>
-        Réabonnez-vous maintenant, vous récupérerez fièrement votre
-        { " "}
-        <strong>Membre depuis le {pastMemberships.memberSince}"</strong> ;-)
-      </span>
-    } else {
-      return <span>
-        Rejoignez blabla
-      </span>
-    }
-  }
-
-  return (
-    <Header as="h1" textAlign="center" color="orange" icon>
-      <Icon name='sun' />
-      {title()}
-       <Header.Subheader>{subHeader()}</Header.Subheader>
-    </Header>
-  )
-}
+import { Grid, Segment, Header, Button } from "semantic-ui-react"
 
 const SubscribeBlock = ({ title, subheader, color, bulletpoints }) =>
   <Segment.Group>
@@ -52,7 +8,7 @@ const SubscribeBlock = ({ title, subheader, color, bulletpoints }) =>
     </Segment>
     <Segment>
       <ul>
-        {bulletpoints.map(point => <li>{point}</li>)}
+        {bulletpoints.map((point, i) => <li key={i}>{point}</li>)}
       </ul>
     </Segment>
     <Segment>
@@ -68,24 +24,19 @@ const SubscribeBlock = ({ title, subheader, color, bulletpoints }) =>
   </Segment.Group>
 
 
-const Plans = props =>
-  <Segment.Group>
-    <Segment>
-      <Title {...props} />
-    </Segment>
-    <Segment>
-      <Grid stackable columns={3} divided padded>
-        <Grid.Column>
-          <SubscribeBlock {...props.plans.normal} />
-        </Grid.Column>
-        <Grid.Column>
-          <SubscribeBlock {...props.plans.pro} />
-        </Grid.Column>
-        <Grid.Column>
-          <SubscribeBlock {...props.plans.company} />
-        </Grid.Column>
-      </Grid>
-    </Segment>
-  </Segment.Group>
+const Plans = ({ plans }) =>
+  <Segment>
+    <Grid stackable columns={3} divided padded>
+      <Grid.Column>
+        <SubscribeBlock {...plans.normal} />
+      </Grid.Column>
+      <Grid.Column>
+        <SubscribeBlock {...plans.pro} />
+      </Grid.Column>
+      <Grid.Column>
+        <SubscribeBlock {...plans.company} />
+      </Grid.Column>
+    </Grid>
+  </Segment>
 
 export default Plans

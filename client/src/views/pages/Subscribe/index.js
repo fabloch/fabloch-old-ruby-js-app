@@ -1,58 +1,37 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
 import { connect } from "react-redux"
-import { Grid, Step } from "semantic-ui-react"
+import { Grid, Segment, Step } from "semantic-ui-react"
 
+import operations from "../../../state/ducks/subscribe/operations"
+
+import PlanIntro from "./PlanIntro"
 import Plans from "./Plans"
 
-import operations from "../../../state/ducks/subscriptions/operations"
-
-class SubscribePage extends Component{
+class SubscribePage extends Component {
   componentDidMount() {
-    const { fetchSubscriptions, subscriptions } = this.props
-    if (!subscriptions.data) {
-      fetchSubscriptions()
+    const { fetchFakeSubscriptions, subscriptions } = this.props
+    if (!subscriptions) {
+      fetchFakeSubscriptions()
     }
   }
 
-  steps() {
-    return (
-      [
-        {
-          active: true,
-          icon: "map signs",
-          title: "Formule",
-          description: "Choisissez votre formule",
-        },
-        {
-          disabled: true,
-          icon: "credit card",
-          title: "Paiement",
-          description: "Choisissez le mode de paiement",
-        },
-        {
-          disabled: true,
-          icon: "unordered list",
-          title: "Validation",
-          description: "Confirmez les information et validez",
-        },
-      ]
-    )
-  }
-
   render() {
-    const { subscriptions } = this.props
+    const { subscriptions, steps, plans } = this.props
 
     return (
       <Grid padded>
         <Grid.Row>
           <Grid.Column textAlign="center">
-            <Step.Group items={this.steps()} />
+            <Step.Group items={steps} />
           </Grid.Column>
         </Grid.Row>
         <Grid.Row>
           <Grid.Column>
-            <Plans {...subscriptions} />
+            <Segment.Group>
+              <PlanIntro {...subscriptions} />
+              <Plans plans={plans} />
+            </Segment.Group>
           </Grid.Column>
         </Grid.Row>
       </Grid>
@@ -61,12 +40,20 @@ class SubscribePage extends Component{
 }
 
 SubscribePage.propTypes = {
-  subscriptions: PropTypes.object.isRequired,
-  fetchSubscriptions: PropTypes.func.isRequired,
+  subscriptions: PropTypes.object,
+  plans: PropTypes.object.isRequired,
+  steps: PropTypes.array.isRequired,
+  fetchFakeSubscriptions: PropTypes.func.isRequired,
 }
 
-const mapStateToProps = ({ subscriptions }) => ({
-  subscriptions: subscriptions.toJS(),
+SubscribePage.defaultProps = {
+  subscriptions: null,
+}
+
+const mapStateToProps = ({ subscribe }) => ({
+  subscriptions: subscribe.get("subscriptions") && subscribe.get("subscriptions").toJS(),
+  plans: subscribe.get("plans") && subscribe.get("plans").toJS(),
+  steps: subscribe.get("steps") && subscribe.get("steps").toJS(),
 })
 
 const connectedSubscribePage = connect(
