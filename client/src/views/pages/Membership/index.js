@@ -20,19 +20,17 @@ class MembershipPage extends Component {
   constructor(props) {
     super(props)
     this.state = { showHistory: false }
-    this.showHistory = this.showHistory.bind(this);
-
+    this.showHistory = this.showHistory.bind(this)
   }
+
   componentDidMount() {
     const { fetchFakeSubscriptions, subscriptions } = this.props
     if (!subscriptions) {
-      console.log("Aha!")
       fetchFakeSubscriptions()
     }
-    console.log("Hello?")
   }
 
-  showHistory () {
+  showHistory() {
     this.setState({
       showHistory: !this.state.showHistory,
     })

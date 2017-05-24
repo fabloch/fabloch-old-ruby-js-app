@@ -42,41 +42,22 @@ const initialState = Map({
   steps: fromJS(
     [
       {
-        // active: false,
-        // icon: "map signs",
-        // title: "Formule",
-        // description: "Entreprises (100€)",
-        // plan: "company",
-        // planLocalized: "entreprises",
-        // completed: true,
-        /* Regular initial state */
         active: true,
         icon: "map signs",
         title: "Formule",
         description: "Choisissez votre formule",
       },
       {
-        // icon: "credit card",
-        // title: "Paiement",
-        // description: "Carte bancaire",
-        // paymentMethod: "card",
-        // paymentMethodLocalized: "Carte bancaire",
-        // completed: true,
-        /* Regular initial state */
         disabled: true,
         icon: "credit card",
         title: "Paiement",
         description: "Choisissez le mode de paiement",
       },
       {
-        // icon: "unordered list",
-        // title: "Confirmation",
-        // description: "Confirmez les information et validez",
-        /* Regular initial state */
         disabled: true,
         icon: "unordered list",
         title: "Confirmation",
-        description: "Confirmez les information et validez",
+        description: "Vérifiez et validez votre adhésion",
       },
     ],
   ),

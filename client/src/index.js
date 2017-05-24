@@ -1,4 +1,3 @@
-import { config } from "dotenv"
 import React from "react"
 import { render } from "react-dom"
 import "semantic-ui-css/semantic.min.css"
@@ -10,10 +9,6 @@ import sessionActions from "./state/ducks/session/actions"
 // import notificationOperations from "./state/ducks/notification/operations"
 
 
-if (process.env.NODE_ENV === "development" || "test") {
-  config()
-}
-
 const store = configureStore()
 
 if (localStorage.auth) {
@@ -22,8 +17,7 @@ if (localStorage.auth) {
   setAuthHeaders(authData)
   store.dispatch(sessionActions.setCurrentUser(authData))
 }
-console.log("NODE_ENV", process.env.NODE_ENV)
-console.log("STRIPE_PUBLIC", process.env.STRIPE_PUBLIC)
+const stripeKey = process.env.REACT_APP_STRIPE_PUBLIC
 // store.dispatch(notificationOperations.addNotification({
 //   level: "success",
 //   title: "Login successful",
@@ -37,5 +31,5 @@ console.log("STRIPE_PUBLIC", process.env.STRIPE_PUBLIC)
 // }))
 
 render(
-  <Root store={store} />,
+  <Root store={store} stripeKey={stripeKey} />,
   document.getElementById("root"))
