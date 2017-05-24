@@ -19,7 +19,7 @@ const App = () => (
     <div>
       <Loader />
       <Route exact path="/" component={Splash} />
-      <Sticky enabled={true} top={0} innerZ={1}>
+      <Sticky enabled={true} top={0} innerZ={3}>
         <NavbarContainer />
       </Sticky>
       <Container>

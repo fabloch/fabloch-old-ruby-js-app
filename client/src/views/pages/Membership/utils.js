@@ -13,7 +13,7 @@ export const planType = (type) => {
 
 export const paidWith = (paymentMethod) => {
   switch (paymentMethod) {
-  case ("cash"):
+  case ("checkOrCash"):
     return "en espèces"
   case ("card"):
     return "par carte de crédit"

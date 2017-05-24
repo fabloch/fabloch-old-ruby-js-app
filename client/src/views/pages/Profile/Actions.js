@@ -1,9 +1,9 @@
 import React from "react"
 
-import Button from "../../components/Button"
+import RouterButton from "../../components/RouterButton"
 
 const Actions = () =>
-  <Button
+  <RouterButton
     floated="right"
     to={{ pathname: "/profile/edit" }}
     content="Edit"

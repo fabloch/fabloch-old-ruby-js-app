@@ -1,4 +1,3 @@
-import moment from "moment"
 import utils from "./utils"
 import * as alt from "../../../api/fake/subscriptions"
 
@@ -67,6 +66,22 @@ describe("subscriptions utils", () => {
         null,
       )
     })
+
+    it("newSubscriptionStart", () => {
+      expect(
+        utils.newSubscriptionStart(alt.subOkHasResubscribed),
+      ).toEqual(
+        alt.plus100newStart,
+      )
+    })
+
+    it("newSubscriptionEnd", () => {
+      expect(
+        utils.newSubscriptionEnd(alt.subOkHasResubscribed),
+      ).toEqual(
+        alt.plus100newEnd,
+      )
+    })
   })
 
   describe("subOkInMoreThan90", () => {
@@ -123,6 +138,22 @@ describe("subscriptions utils", () => {
         utils.shouldResubscribe(alt.subOkInMoreThan90),
       ).toEqual(
         null,
+      )
+    })
+
+    it("newSubscriptionStart", () => {
+      expect(
+        utils.newSubscriptionStart(alt.subOkInMoreThan90),
+      ).toEqual(
+        alt.plus100newStart,
+      )
+    })
+
+    it("newSubscriptionEnd", () => {
+      expect(
+        utils.newSubscriptionEnd(alt.subOkInMoreThan90),
+      ).toEqual(
+        alt.plus100newEnd,
       )
     })
   })
@@ -183,6 +214,22 @@ describe("subscriptions utils", () => {
         "info",
       )
     })
+
+    it("newSubscriptionStart", () => {
+      expect(
+        utils.newSubscriptionStart(alt.subShouldRenew90),
+      ).toEqual(
+        alt.plus70newStart,
+      )
+    })
+
+    it("newSubscriptionEnd", () => {
+      expect(
+        utils.newSubscriptionEnd(alt.subShouldRenew90),
+      ).toEqual(
+        alt.plus70newEnd,
+      )
+    })
   })
 
   describe("subShouldRenew60", () => {
@@ -239,6 +286,22 @@ describe("subscriptions utils", () => {
         utils.shouldResubscribe(alt.subShouldRenew60),
       ).toEqual(
         "warning",
+      )
+    })
+
+    it("newSubscriptionStart", () => {
+      expect(
+        utils.newSubscriptionStart(alt.subShouldRenew60),
+      ).toEqual(
+        alt.plus50newStart,
+      )
+    })
+
+    it("newSubscriptionEnd", () => {
+      expect(
+        utils.newSubscriptionEnd(alt.subShouldRenew60),
+      ).toEqual(
+        alt.plus50newEnd,
       )
     })
   })
@@ -299,6 +362,22 @@ describe("subscriptions utils", () => {
         "error",
       )
     })
+
+    it("newSubscriptionStart", () => {
+      expect(
+        utils.newSubscriptionStart(alt.subShouldRenew30),
+      ).toEqual(
+        alt.plus10newStart,
+      )
+    })
+
+    it("newSubscriptionEnd", () => {
+      expect(
+        utils.newSubscriptionEnd(alt.subShouldRenew30),
+      ).toEqual(
+        alt.plus10newEnd,
+      )
+    })
   })
 
   describe("subOut", () => {
@@ -355,6 +434,22 @@ describe("subscriptions utils", () => {
         utils.shouldResubscribe(alt.subOut),
       ).toEqual(
         "error",
+      )
+    })
+
+    it("newSubscriptionStart", () => {
+      expect(
+        utils.newSubscriptionStart(alt.subOut),
+      ).toEqual(
+        alt.minus10newStart,
+      )
+    })
+
+    it("newSubscriptionEnd", () => {
+      expect(
+        utils.newSubscriptionEnd(alt.subOut),
+      ).toEqual(
+        alt.minus10newEnd,
       )
     })
   })

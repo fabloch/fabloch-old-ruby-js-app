@@ -17,14 +17,25 @@ const planLocalized = (plan) => {
   }
 }
 
+const planLocalizedWithMoney = (plan) => {
+  switch (plan) {
+  case ("regular"):
+    return "Particuliers (20€)"
+  case ("pro"):
+    return "Indépendants (40€)"
+  case ("company"):
+    return "Entreprises (100€)"
+  default:
+    return ""
+  }
+}
+
 const paymentMethodLocalized = (paymentMethod) => {
   switch (paymentMethod) {
   case ("card"):
-    return "carte bancaire"
-  case ("cash"):
-    return "espèces"
-  case ("check"):
-    return "chèque"
+    return "Carte bancaire"
+  case ("checkOrCash"):
+    return "Chèque ou espèces"
   default:
     return ""
 
@@ -47,6 +58,8 @@ const subscriptionsReducer = (state = initialState, action) => {
       .setIn(["subscriptions", "memberSinceFromNow"], utils.memberSinceFromNow(action.data))
       .setIn(["subscriptions", "memberSinceFromNowInDays"], utils.memberSinceFromNowInDays(action.data))
       .setIn(["subscriptions", "shouldResubscribe"], utils.shouldResubscribe(action.data))
+      .setIn(["subscriptions", "newSubscriptionEnd"], utils.newSubscriptionEnd(action.data))
+      .setIn(["subscriptions", "newSubscriptionStart"], utils.newSubscriptionStart(action.data))
       .setIn(["subscriptions", "allMemberships"], fromJS(action.data))
   case types.FETCH_SUBSCRIPTIONS_FAILURE:
     return state
@@ -57,6 +70,7 @@ const subscriptionsReducer = (state = initialState, action) => {
     return state
       .setIn(["steps", 0, "plan"], action.plan)
       .setIn(["steps", 0, "planLocalized"], planLocalized(action.plan))
+      .setIn(["steps", 0, "description"], planLocalizedWithMoney(action.plan))
       .setIn(["steps", 0, "completed"], true)
       .setIn(["steps", 0, "active"], false)
       .setIn(["steps", 1, "disabled"], false)
@@ -65,9 +79,14 @@ const subscriptionsReducer = (state = initialState, action) => {
     return state
       .setIn(["steps", 1, "paymentMethod"], action.paymentMethod)
       .setIn(["steps", 1, "paymentMethodLocalized"], paymentMethodLocalized(action.paymentMethod))
+      .setIn(["steps", 1, "description"], paymentMethodLocalized(action.paymentMethod))
       .setIn(["steps", 1, "completed"], true)
   case types.FOCUS_STEP:
     return state
+      .setIn(["steps", 0, "active"], false)
+      .setIn(["steps", 1, "active"], false)
+      .setIn(["steps", 2, "active"], false)
+      .setIn(["steps", action.step, "active"], true)
       .setIn(["steps", action.step, "completed"], false)
   default:
     return state

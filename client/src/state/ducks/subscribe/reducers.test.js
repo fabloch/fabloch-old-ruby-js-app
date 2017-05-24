@@ -139,6 +139,7 @@ describe("subscriptionsReducer", () => {
           .setIn(["steps", 0, "plan"], "regular")
           .setIn(["steps", 0, "planLocalized"], "particuliers")
           .setIn(["steps", 0, "completed"], true)
+          .setIn(["steps", 0, "description"], "Particuliers (20€)")
           .setIn(["steps", 0, "active"], false)
           .setIn(["steps", 1, "disabled"], false)
           .setIn(["steps", 1, "active"], true)
@@ -156,6 +157,7 @@ describe("subscriptionsReducer", () => {
           initialState
           .setIn(["steps", 0, "plan"], "pro")
           .setIn(["steps", 0, "planLocalized"], "auto-entrepreneurs et indépendants")
+          .setIn(["steps", 0, "description"], "Indépendants (40€)")
           .setIn(["steps", 0, "completed"], true)
           .setIn(["steps", 0, "active"], false)
           .setIn(["steps", 1, "disabled"], false)
@@ -174,6 +176,7 @@ describe("subscriptionsReducer", () => {
           initialState
           .setIn(["steps", 0, "plan"], "company")
           .setIn(["steps", 0, "planLocalized"], "entreprises")
+          .setIn(["steps", 0, "description"], "Entreprises (100€)")
           .setIn(["steps", 0, "completed"], true)
           .setIn(["steps", 0, "active"], false)
           .setIn(["steps", 1, "disabled"], false)
@@ -184,30 +187,32 @@ describe("subscriptionsReducer", () => {
     })
 
     describe("handles selectMethod", () => {
-      it("cash", () => {
+      it("checkOrCash", () => {
         expect(
           subscriptionsReducer(undefined, {
             type: types.SELECT_PAYMENT_METHOD,
-            paymentMethod: "cash",
+            paymentMethod: "checkOrCash",
           }),
         ).toEqualImmutable(
           initialState
-          .setIn(["steps", 1, "paymentMethod"], "cash")
-          .setIn(["steps", 1, "paymentMethodLocalized"], "espèces")
+          .setIn(["steps", 1, "paymentMethod"], "checkOrCash")
+          .setIn(["steps", 1, "paymentMethodLocalized"], "Chèque ou espèces")
+          .setIn(["steps", 1, "description"], "Chèque ou espèces")
           .setIn(["steps", 1, "completed"], true)
           ,
         )
       })
-      it("check", () => {
+      it("card", () => {
         expect(
           subscriptionsReducer(undefined, {
             type: types.SELECT_PAYMENT_METHOD,
-            paymentMethod: "check",
+            paymentMethod: "card",
           }),
         ).toEqualImmutable(
           initialState
-          .setIn(["steps", 1, "paymentMethod"], "check")
-          .setIn(["steps", 1, "paymentMethodLocalized"], "chèque")
+          .setIn(["steps", 1, "paymentMethod"], "card")
+          .setIn(["steps", 1, "paymentMethodLocalized"], "Carte bancaire")
+          .setIn(["steps", 1, "description"], "Carte bancaire")
           .setIn(["steps", 1, "completed"], true)
           ,
         )
@@ -223,6 +228,9 @@ describe("subscriptionsReducer", () => {
       ).toEqualImmutable(
         initialState
         .setIn(["steps", 1, "completed"], false)
+        .setIn(["steps", 1, "active"], true)
+        .setIn(["steps", 0, "active"], false)
+        .setIn(["steps", 2, "active"], false)
         ,
       )
     })

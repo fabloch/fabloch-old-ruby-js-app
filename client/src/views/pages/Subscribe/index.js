@@ -1,12 +1,15 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
 import { connect } from "react-redux"
-import { Grid, Segment, Step } from "semantic-ui-react"
+import { Grid, Segment } from "semantic-ui-react"
 
 import operations from "../../../state/ducks/subscribe/operations"
 
+import StepBar from "./StepBar"
 import PlanIntro from "./PlanIntro"
 import Plans from "./Plans"
+import Payment from "./Payment"
+import Confirm from "./Confirm"
 
 class SubscribePage extends Component {
   componentDidMount() {
@@ -22,6 +25,8 @@ class SubscribePage extends Component {
       steps,
       plans,
       selectPlan,
+      selectPaymentMethod,
+      focusStep,
     } = this.props
 
     const displaySteps = (steps) => {
@@ -36,9 +41,9 @@ class SubscribePage extends Component {
           </div>
         )
       } else if (!steps[1].completed) {
-        return <div>PaymentMethod</div>
+        return <Payment selectPaymentMethod={selectPaymentMethod} />
       } else if (!steps[2].done) {
-        return <div>Confirm</div>
+        return <Confirm steps={steps} subscriptions={subscriptions} />
       }
       return ""
     }
@@ -47,7 +52,7 @@ class SubscribePage extends Component {
       <Grid padded>
         <Grid.Row>
           <Grid.Column textAlign="center">
-            <Step.Group items={steps} />
+            <StepBar steps={steps} focusStep={focusStep} />
           </Grid.Column>
         </Grid.Row>
         <Grid.Row>
@@ -69,6 +74,7 @@ SubscribePage.propTypes = {
   fetchFakeSubscriptions: PropTypes.func.isRequired,
   selectPlan: PropTypes.func.isRequired,
   selectPaymentMethod: PropTypes.func.isRequired,
+  focusStep: PropTypes.func.isRequired,
 }
 
 SubscribePage.defaultProps = {

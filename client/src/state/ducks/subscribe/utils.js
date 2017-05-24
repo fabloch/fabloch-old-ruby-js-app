@@ -42,6 +42,13 @@ const shouldResubscribe = (data, today = moment.utc()) => {
   return "error"
 }
 
+const newSubscriptionStart = (data) =>
+  moment.utc(first(data).startDate).add(1, "y")
+
+const newSubscriptionEnd = (data) =>
+  moment.utc(first(data).endDate).add(1, "y")
+
+
 export default {
   type,
   memberUntil,
@@ -51,4 +58,6 @@ export default {
   memberSinceFromNow,
   memberSinceFromNowInDays,
   shouldResubscribe,
+  newSubscriptionStart,
+  newSubscriptionEnd,
 }

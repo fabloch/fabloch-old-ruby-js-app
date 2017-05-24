@@ -1,6 +1,6 @@
 import React from "react"
 import PropTypes from "prop-types"
-
+import shortid from "shortid"
 import Dropzone from "react-dropzone"
 
 const DropzoneInput = (field) => {
@@ -23,7 +23,7 @@ const DropzoneInput = (field) => {
         <span className="error">{field.meta.error}</span>}
       {files && Array.isArray(files) && (
         <ul>
-          { files.map((file, i) => <li key={i}>{file.name}</li>) }
+          { files.map((file, i) => <li key={shortid.generate()}>{file.name}</li>) }
         </ul>
       )}
     </div>

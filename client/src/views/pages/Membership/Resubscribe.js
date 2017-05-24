@@ -3,7 +3,7 @@ import PropTypes from "prop-types"
 import moment from "moment"
 
 import { Icon, Message, Divider } from "semantic-ui-react"
-import Button from "../../components/Button"
+import RouterButton from "../../components/RouterButton"
 
 const Resubscribe = ({
   memberUntil,
@@ -36,7 +36,7 @@ const Resubscribe = ({
         Pour être tranquille, réabonnez-vous dès maintenant. <br />
         Votre abonnement sera prolongé jusqu'au {moment(memberUntil).add(1, "y").subtract(1, "d").format("d MMM YYYY")}.
         <Divider />
-        <Button
+        <RouterButton
           icon="chevron right"
           labelPosition="right"
           content="Me réabonner maintenant"

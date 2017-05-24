@@ -1,5 +1,6 @@
 import React from "react"
 import { Grid, Segment, Header, Button } from "semantic-ui-react"
+import shortid from "shortid"
 
 const SubscribeBlock = ({
   planName,
@@ -15,7 +16,7 @@ const SubscribeBlock = ({
     </Segment>
     <Segment>
       <ul>
-        {bulletpoints.map((point, i) => <li key={i}>{point}</li>)}
+        {bulletpoints.map((point, i) => <li key={shortid.generate()}>{point}</li>)}
       </ul>
     </Segment>
     <Segment>
