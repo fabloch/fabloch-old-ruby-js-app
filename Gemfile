@@ -48,6 +48,7 @@ gem 'carrierwave', '~> 1.0'
 gem 'money-rails', '~>1'
 
 group :development, :test do
+  gem "awesome_print"
   gem 'rspec-rails'
   gem 'guard-rspec', require: false
   gem 'factory_girl_rails'

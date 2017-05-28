@@ -18,10 +18,10 @@ describe Api::V1::MembershipsController do
         JSON.parse(response.body)['data'][0]['attributes']
       ).to eq(
         {
-          "payment_method" => "checkOrCash",
-          "price_cents" => 200,
-          "start_date" => "2017-05-24",
-          "end_date" => "2018-05-23",
+          "paymentMethod" => "checkOrCash",
+          "priceCents" => 200,
+          "startDate" => "2017-05-24",
+          "endDate" => "2018-05-23",
           "status" => "pending",
           "version" => "regular",
         }
@@ -30,10 +30,10 @@ describe Api::V1::MembershipsController do
         JSON.parse(response.body)['data'][1]['attributes']
       ).to eq(
         {
-          "payment_method" => "checkOrCash",
-          "price_cents" => 200,
-          "start_date" => "2017-05-24",
-          "end_date" => "2018-05-23",
+          "paymentMethod" => "checkOrCash",
+          "priceCents" => 200,
+          "startDate" => "2017-05-24",
+          "endDate" => "2018-05-23",
           "status" => "pending",
           "version" => "regular",
         }
@@ -59,10 +59,10 @@ describe Api::V1::MembershipsController do
         JSON.parse(response.body)['data']['attributes']
       ).to eq(
         {
-          "payment_method" => "checkOrCash",
-          "price_cents" => 200,
-          "start_date" => "2017-05-24",
-          "end_date" => "2018-05-23",
+          "paymentMethod" => "checkOrCash",
+          "priceCents" => 200,
+          "startDate" => "2017-05-24",
+          "endDate" => "2018-05-23",
           "status" => "pending",
           "version" => "regular",
         }
@@ -95,11 +95,13 @@ describe Api::V1::MembershipsController do
         @user = FactoryGirl.create :user
         auth_headers = @user.create_new_auth_token
         request.headers.merge!(auth_headers)
+        headers = { "X-Key-Inflection" => "camel" }
+        request.headers.merge!(headers)
         post(:create, params: {
-          payment_method: "checkOrCash",
-          price_cents: 200,
-          start_date: "2017-05-24",
-          end_date: "2018-05-23",
+          paymentMethod: "checkOrCash",
+          priceCents: 200,
+          startDate: "2017-05-24",
+          endDate: "2018-05-23",
           status: "pending",
           version: "regular",
         })
@@ -110,14 +112,15 @@ describe Api::V1::MembershipsController do
       end
 
       it "returns the serialized user attributes" do
+        # print(JSON.parse(response.body))
         expect(
           JSON.parse(response.body)['data']['attributes']
         ).to eq(
           {
-            "payment_method" => "checkOrCash",
-            "price_cents" => 200,
-            "start_date" => "2017-05-24",
-            "end_date" => "2018-05-23",
+            "paymentMethod" => "checkOrCash",
+            "priceCents" => 200,
+            "startDate" => "2017-05-24",
+            "endDate" => "2018-05-23",
             "status" => "pending",
             "version" => "regular",
           }

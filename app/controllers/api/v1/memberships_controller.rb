@@ -16,9 +16,6 @@ module Api::V1
 
     # POST /v1/membership
     def create
-      # logger.debug(
-      #   "membership_params_with_user: #{membership_params_with_user[:avatar].inspect}"
-      # )
       @membership = Membership.create!(membership_params_with_user)
 
       json_response(@membership, :created)
@@ -45,10 +42,10 @@ module Api::V1
       params.permit(
         :version,
         :status,
-        :end_date,
-        :start_date,
-        :payment_method,
-        :price_cents
+        :endDate,
+        :startDate,
+        :paymentMethod,
+        :priceCents
       )
     end
 

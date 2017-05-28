@@ -1,2 +1,2 @@
 ActiveModelSerializers.config.adapter = :json_api
-ActiveModelSerializers.config.key_transform = :unaltered
+ActiveModelSerializers.config.key_transform = :camel_lower

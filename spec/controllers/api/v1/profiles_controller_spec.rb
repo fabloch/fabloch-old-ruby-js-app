@@ -22,9 +22,9 @@ describe Api::V1::ProfilesController do
           "lastname" => @profile.lastname,
           "description" => @profile.description,
           "birthday" => @profile.birthday,
-          "img_large" => @profile.avatar_url(:large),
-          "img_medium" => @profile.avatar_url(:medium),
-          "img_small" => @profile.avatar_url(:small),
+          "imgLarge" => @profile.avatar_url(:large),
+          "imgMedium" => @profile.avatar_url(:medium),
+          "imgSmall" => @profile.avatar_url(:small),
         }
       )
     end
@@ -81,9 +81,9 @@ describe Api::V1::ProfilesController do
             "lastname" => "Nicolaïdis",
             "description" => "Some description",
             "birthday" => "1979-09-13",
-            "img_large" => @user.profile.avatar_url(:large),
-            "img_medium" => @user.profile.avatar_url(:medium),
-            "img_small" => @user.profile.avatar_url(:small),
+            "imgLarge" => @user.profile.avatar_url(:large),
+            "imgMedium" => @user.profile.avatar_url(:medium),
+            "imgSmall" => @user.profile.avatar_url(:small),
           }
         )
       end
@@ -127,9 +127,9 @@ describe Api::V1::ProfilesController do
           "lastname" => "Nicolaïdis",
           "description" => "Some description",
           "birthday" => "1979-09-13",
-          "img_large" => "/Users/sebastiennicolaidis/dev/ruby/fab_loch/spec/support/uploads/profile/avatar/#{id}/large_test2.jpg",
-          "img_medium" => "/Users/sebastiennicolaidis/dev/ruby/fab_loch/spec/support/uploads/profile/avatar/#{id}/medium_test2.jpg",
-          "img_small" => "/Users/sebastiennicolaidis/dev/ruby/fab_loch/spec/support/uploads/profile/avatar/#{id}/small_test2.jpg",
+          "imgLarge" => "/Users/sebastiennicolaidis/dev/ruby/fab_loch/spec/support/uploads/profile/avatar/#{id}/large_test2.jpg",
+          "imgMedium" => "/Users/sebastiennicolaidis/dev/ruby/fab_loch/spec/support/uploads/profile/avatar/#{id}/medium_test2.jpg",
+          "imgSmall" => "/Users/sebastiennicolaidis/dev/ruby/fab_loch/spec/support/uploads/profile/avatar/#{id}/small_test2.jpg",
         }
       )
     end
