@@ -23,7 +23,7 @@ describe Api::V1::SubscriptionsController do
           "startDate" => "2017-05-24",
           "endDate" => "2018-05-23",
           "status" => "pending",
-          "version" => "regular",
+          "plan" => "regular",
         }
       )
       expect(
@@ -35,7 +35,7 @@ describe Api::V1::SubscriptionsController do
           "startDate" => "2017-05-24",
           "endDate" => "2018-05-23",
           "status" => "pending",
-          "version" => "regular",
+          "plan" => "regular",
         }
       )
     end
@@ -64,7 +64,7 @@ describe Api::V1::SubscriptionsController do
           "startDate" => "2017-05-24",
           "endDate" => "2018-05-23",
           "status" => "pending",
-          "version" => "regular",
+          "plan" => "regular",
         }
       )
     end
@@ -85,7 +85,7 @@ describe Api::V1::SubscriptionsController do
 
       it "returns the serialized user attributes" do
         expect(
-          JSON.parse(response.body)['version'][0]
+          JSON.parse(response.body)['plan'][0]
         ).to eq("can't be blank")
       end
     end
@@ -103,7 +103,7 @@ describe Api::V1::SubscriptionsController do
           startDate: "2017-05-24",
           endDate: "2018-05-23",
           status: "pending",
-          version: "regular",
+          plan: "regular",
         })
       end
 
@@ -122,7 +122,7 @@ describe Api::V1::SubscriptionsController do
             "startDate" => "2017-05-24",
             "endDate" => "2018-05-23",
             "status" => "pending",
-            "version" => "regular",
+            "plan" => "regular",
           }
         )
       end

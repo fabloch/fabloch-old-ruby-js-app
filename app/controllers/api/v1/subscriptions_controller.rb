@@ -40,7 +40,7 @@ module Api::V1
     def subscription_params
       # whitelist params
       params.permit(
-        :version,
+        :plan,
         :status,
         :endDate,
         :startDate,

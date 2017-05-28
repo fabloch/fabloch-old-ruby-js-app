@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :subscription do
     user
-    version "regular"
+    plan "regular"
     start_date "2017-05-24"
     end_date "2018-05-23"
     price_cents 200

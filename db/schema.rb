@@ -71,7 +71,7 @@ ActiveRecord::Schema.define(version: 20170524143349) do
 
   create_table "subscriptions", force: :cascade do |t|
     t.integer  "user_id"
-    t.string   "version"
+    t.string   "plan"
     t.date     "start_date"
     t.date     "end_date"
     t.integer  "price_cents"
