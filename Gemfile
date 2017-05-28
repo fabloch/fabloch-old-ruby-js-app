@@ -44,6 +44,8 @@ gem "mini_magick"
 gem "fog-aws"
 gem 'carrierwave', '~> 1.0'
 
+# Money
+gem 'money-rails', '~>1'
 
 group :development, :test do
   gem 'rspec-rails'

@@ -4,19 +4,19 @@ class ProfileSerializer < ActiveModel::Serializer
               :lastname,
               :description,
               :birthday,
-              :imglarge,
-              :imgmedium,
-              :imgsmall
+              :img_large,
+              :img_medium,
+              :img_small
 
-  def imglarge
+  def img_large
     object.avatar.url(:large)
   end
 
-  def imgmedium
+  def img_medium
     object.avatar.url(:medium)
   end
 
-  def imgsmall
+  def img_small
     object.avatar.url(:small)
   end
 end

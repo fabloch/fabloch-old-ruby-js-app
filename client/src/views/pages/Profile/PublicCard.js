@@ -7,10 +7,10 @@ const PublicCard = ({
   firstname,
   lastname,
   description,
-  imgsmall,
+  img_small,
 }) => (
   <Card>
-    <Image src={imgsmall} fluid />
+    <Image src={img_small} fluid />
     <Card.Content>
       <Card.Header>
         {username}
@@ -44,7 +44,7 @@ PublicCard.propTypes = {
   firstname: PropTypes.string,
   lastname: PropTypes.string,
   description: PropTypes.string,
-  imgsmall: PropTypes.string,
+  img_small: PropTypes.string,
 }
 
 PublicCard.defaultProps = {
@@ -52,7 +52,7 @@ PublicCard.defaultProps = {
   firstname: "",
   lastname: "",
   description: "",
-  imgsmall: "",
+  img_small: "",
 }
 
 export default PublicCard
