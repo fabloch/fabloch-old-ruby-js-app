@@ -1,6 +1,6 @@
-class CreateMemberships < ActiveRecord::Migration[5.0]
+class CreateSubscriptions < ActiveRecord::Migration[5.0]
   def change
-    create_table :memberships do |t|
+    create_table :subscriptions do |t|
       t.references :user, foreign_key: true
       t.string :version
       t.date :start_date

@@ -1,9 +1,9 @@
-describe Api::V1::MembershipsController do
+describe Api::V1::SubscriptionsController do
   describe "GET #index" do
     before(:each) do
       @user = FactoryGirl.create :user
-      @membership1 = FactoryGirl.create :membership, user: @user
-      @membership2 = FactoryGirl.create :membership, user: @user
+      @subscription1 = FactoryGirl.create :subscription, user: @user
+      @subscription2 = FactoryGirl.create :subscription, user: @user
       auth_headers = @user.create_new_auth_token
       request.headers.merge!(auth_headers)
       get :index
@@ -13,7 +13,7 @@ describe Api::V1::MembershipsController do
       expect(response.code).to eq('200')
     end
 
-    it "returns the serialized memberships" do
+    it "returns the serialized subscriptions" do
       expect(
         JSON.parse(response.body)['data'][0]['attributes']
       ).to eq(
@@ -44,10 +44,10 @@ describe Api::V1::MembershipsController do
   describe "GET #show" do
     before(:each) do
       @user = FactoryGirl.create :user
-      @membership = FactoryGirl.create :membership, user: @user
+      @subscription = FactoryGirl.create :subscription, user: @user
       auth_headers = @user.create_new_auth_token
       request.headers.merge!(auth_headers)
-      get :show, params: { id: @membership.id }
+      get :show, params: { id: @subscription.id }
     end
 
     it 'responds with 200 status code' do
@@ -127,9 +127,9 @@ describe Api::V1::MembershipsController do
         )
       end
 
-      it "links membership with current_user" do
+      it "links subscription with current_user" do
         expect(
-          Membership.last().user
+          Subscription.last().user
         ).to eq(@user)
       end
     end

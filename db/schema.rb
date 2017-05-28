@@ -55,19 +55,6 @@ ActiveRecord::Schema.define(version: 20170524143349) do
     t.index ["chargeable_type", "chargeable_id"], name: "index_charges_on_chargeable_type_and_chargeable_id", using: :btree
   end
 
-  create_table "memberships", force: :cascade do |t|
-    t.integer  "user_id"
-    t.string   "version"
-    t.date     "start_date"
-    t.date     "end_date"
-    t.integer  "price_cents"
-    t.string   "payment_method"
-    t.string   "status"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
-    t.index ["user_id"], name: "index_memberships_on_user_id", using: :btree
-  end
-
   create_table "profiles", force: :cascade do |t|
     t.integer  "user_id"
     t.string   "username"
@@ -80,6 +67,19 @@ ActiveRecord::Schema.define(version: 20170524143349) do
     t.string   "avatar"
     t.index ["user_id"], name: "index_profiles_on_user_id", using: :btree
     t.index ["username"], name: "index_profiles_on_username", unique: true, using: :btree
+  end
+
+  create_table "subscriptions", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "version"
+    t.date     "start_date"
+    t.date     "end_date"
+    t.integer  "price_cents"
+    t.string   "payment_method"
+    t.string   "status"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.index ["user_id"], name: "index_subscriptions_on_user_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
@@ -111,6 +111,6 @@ ActiveRecord::Schema.define(version: 20170524143349) do
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true, using: :btree
   end
 
-  add_foreign_key "memberships", "users"
   add_foreign_key "profiles", "users"
+  add_foreign_key "subscriptions", "users"
 end

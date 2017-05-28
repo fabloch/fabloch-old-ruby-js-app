@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :membership do
+  factory :subscription do
     user
     version "regular"
     start_date "2017-05-24"

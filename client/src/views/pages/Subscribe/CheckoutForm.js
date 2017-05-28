@@ -9,12 +9,12 @@ import {
 
 import { Form, Grid, Segment, Header, List, Button } from "semantic-ui-react"
 
-import "./CheckoutForm.css"
+// import "./CheckoutForm.css"
 
 const style = {
   base: {
     color: "#303238",
-    fontSize: "16px",
+    fontSize: "18px",
     lineHeight: "48px",
     fontSmoothing: "antialiased",
     "::placeholder": {
@@ -47,12 +47,12 @@ class CheckoutForm extends Component {
 
     // Within the context of `Elements`, this call to createToken knows which Element to
     // tokenize, since there's only one in this group.
-    this.props.stripe.createToken({name: 'Jenny Rosen'}).then(({token}) => {
-      console.log('Received Stripe token:', token);
-    });
+    this.props.stripe.createToken({ name: "Jenny Rosen" }).then(({ token }) => {
+      console.log("Received Stripe token:", token)
+    })
 
     // However, this line of code will do the same thing:
-    // this.props.stripe.createToken({type: 'card', name: 'Jenny Rosen'});
+    // this.props.stripe.createToken({type: "card", name: 'Jenny Rosen'});
   }
 
   render() {
@@ -64,12 +64,12 @@ class CheckoutForm extends Component {
         </Form.Field>
 
         <Form.Field>
-          <label>Numéro de carte</label>
+          <label>Date d'expiration</label>
           <CardExpiryElement style={style} />
         </Form.Field>
 
         <Form.Field>
-          <label>Numéro de carte</label>
+          <label>CVC</label>
           <CardCVCElement style={style} />
         </Form.Field>
 

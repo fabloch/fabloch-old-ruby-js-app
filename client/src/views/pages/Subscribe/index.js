@@ -13,9 +13,9 @@ import Confirm from "./Confirm"
 
 class SubscribePage extends Component {
   componentDidMount() {
-    const { fetchFakeSubscriptions, subscriptions } = this.props
+    const { fetchSubscriptions, subscriptions } = this.props
     if (!subscriptions) {
-      fetchFakeSubscriptions()
+      fetchSubscriptions()
     }
   }
 
@@ -71,7 +71,7 @@ SubscribePage.propTypes = {
   subscriptions: PropTypes.object,
   plans: PropTypes.object.isRequired,
   steps: PropTypes.array.isRequired,
-  fetchFakeSubscriptions: PropTypes.func.isRequired,
+  fetchSubscriptions: PropTypes.func.isRequired,
   selectPlan: PropTypes.func.isRequired,
   selectPaymentMethod: PropTypes.func.isRequired,
   focusStep: PropTypes.func.isRequired,

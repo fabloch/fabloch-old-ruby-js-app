@@ -1,4 +1,4 @@
-class MembershipSerializer < ActiveModel::Serializer
+class SubscriptionSerializer < ActiveModel::Serializer
   # attributes  :paymentMethod,
   #             :priceCents,
   #             :startDate,

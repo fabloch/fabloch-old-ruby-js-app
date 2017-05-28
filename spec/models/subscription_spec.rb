@@ -1,9 +1,9 @@
 require 'rails_helper'
 
-RSpec.describe Membership, type: :model do
+RSpec.describe Subscription, type: :model do
   context "valid Factory" do
     it "has a valid factory" do
-      expect(build(:membership)).to be_valid
+      expect(build(:subscription)).to be_valid
     end
   end
 
