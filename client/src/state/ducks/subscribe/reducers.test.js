@@ -199,6 +199,9 @@ describe("subscriptionsReducer", () => {
           .setIn(["steps", 1, "paymentMethodLocalized"], "Chèque ou espèces")
           .setIn(["steps", 1, "description"], "Chèque ou espèces")
           .setIn(["steps", 1, "completed"], true)
+          .setIn(["steps", 1, "active"], false)
+          .setIn(["steps", 2, "disabled"], false)
+          .setIn(["steps", 2, "active"], true)
           ,
         )
       })
@@ -214,6 +217,9 @@ describe("subscriptionsReducer", () => {
           .setIn(["steps", 1, "paymentMethodLocalized"], "Carte bancaire")
           .setIn(["steps", 1, "description"], "Carte bancaire")
           .setIn(["steps", 1, "completed"], true)
+          .setIn(["steps", 1, "active"], false)
+          .setIn(["steps", 2, "disabled"], false)
+          .setIn(["steps", 2, "active"], true)
           ,
         )
       })

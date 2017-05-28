@@ -48,14 +48,14 @@ export const minus10start2 = moment.utc(minus10end2).subtract(1, "y").add(1, "d"
 
 export const subOkHasResubscribed = [
   {
-    type: "regular",
+    plan: "regular",
     startDate: plus100start,
     endDate: plus100end,
     price: "20",
     paymentMethod: "checkOrCash",
   },
   {
-    type: "regular",
+    plan: "regular",
     startDate: plus100start2,
     endDate: plus100end2,
     price: "20",
@@ -65,7 +65,7 @@ export const subOkHasResubscribed = [
 
 export const subOkInMoreThan90 = [
   {
-    type: "regular",
+    plan: "regular",
     startDate: plus100start,
     endDate: plus100end,
     price: "20",
@@ -75,7 +75,7 @@ export const subOkInMoreThan90 = [
 
 export const subShouldRenew90 = [
   {
-    type: "regular",
+    plan: "regular",
     startDate: plus70start,
     endDate: plus70end,
     price: "20",
@@ -85,7 +85,7 @@ export const subShouldRenew90 = [
 
 export const subShouldRenew60 = [
   {
-    type: "regular",
+    plan: "regular",
     startDate: plus50start,
     endDate: plus50end,
     price: "20",
@@ -95,7 +95,7 @@ export const subShouldRenew60 = [
 
 export const subShouldRenew30 = [
   {
-    type: "regular",
+    plan: "regular",
     startDate: plus10start,
     endDate: plus10end,
     price: "20",
@@ -105,14 +105,14 @@ export const subShouldRenew30 = [
 
 export const subOut = [
   {
-    type: "regular",
+    plan: "regular",
     startDate: minus10start,
     endDate: minus10end,
     price: "20",
     paymentMethod: "checkOrCash",
   },
   {
-    type: "regular",
+    plan: "regular",
     startDate: minus10start2,
     endDate: minus10end2,
     price: "20",

@@ -9,7 +9,7 @@ moment.locale("fr")
 // });
 
 
-const type = data => first(data).type
+const plan = data => first(data).plan
 
 const memberUntil = data =>
   moment.utc(first(data).endDate).format("YYYY-MM-DD")
@@ -50,7 +50,7 @@ const newSubscriptionEnd = (data) =>
 
 
 export default {
-  type,
+  plan,
   memberUntil,
   memberUntilFromNow,
   memberUntilFromNowInDays,

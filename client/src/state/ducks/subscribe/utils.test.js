@@ -3,9 +3,9 @@ import * as alt from "../../../api/fake/subscriptions"
 
 describe("subscriptions utils", () => {
   describe("subOkHasResubscribed", () => {
-    it("type", () => {
+    it("plan", () => {
       expect(
-        utils.type(alt.subOkHasResubscribed),
+        utils.plan(alt.subOkHasResubscribed),
       ).toEqual(
         "regular",
       )
@@ -319,7 +319,7 @@ describe("subscriptions utils", () => {
       expect(
         utils.memberUntilFromNow(alt.subShouldRenew30),
       ).toEqual(
-        "dans 10 jours",
+        "dans 9 jours",
       )
     })
 
@@ -393,7 +393,7 @@ describe("subscriptions utils", () => {
       expect(
         utils.memberUntilFromNow(alt.subOut),
       ).toEqual(
-        "il y a 10 jours",
+        "il y a 11 jours",
       )
     })
 
