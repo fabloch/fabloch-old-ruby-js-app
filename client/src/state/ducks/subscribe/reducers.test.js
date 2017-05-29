@@ -1,10 +1,11 @@
-// import { Map, List } from "immutable"
+import { fromJS } from "immutable"
 import * as matchers from "jest-immutable-matchers"
 import subscriptionsReducer from "./reducers"
 import types from "./types"
 import * as alt from "../../../api/fake/subscriptions"
 import * as nextStates from "./testNextStates"
 import initialState from "./initialState"
+import { localizedFromNow, daysFromNow } from "../../../utils/dateAndTime"
 
 describe("subscriptionsReducer", () => {
   beforeEach(() =>
@@ -28,7 +29,7 @@ describe("subscriptionsReducer", () => {
           type: types.FETCH_SUBSCRIPTIONS_REQUEST,
         }),
       ).toEqualImmutable(
-        initialState.set("isFetching", true),
+        initialState.set("isLoading", true),
       )
     })
     describe("handles FETCH_SUBSCRIPTIONS_SUCCESS", () => {
@@ -40,8 +41,8 @@ describe("subscriptionsReducer", () => {
           }),
         ).toEqualImmutable(
           initialState
-          .set("isFetching", false)
-          .set("fetchErrors", false)
+          .set("isLoading", false)
+          .set("loadErrors", false)
           .merge(
             nextStates.stateOkInMoreThan90,
           ),
@@ -56,8 +57,8 @@ describe("subscriptionsReducer", () => {
           }),
         ).toEqualImmutable(
           initialState
-          .set("isFetching", false)
-          .set("fetchErrors", false)
+          .set("isLoading", false)
+          .set("loadErrors", false)
           .merge(
             nextStates.stateShouldRenew90,
           ),
@@ -72,8 +73,8 @@ describe("subscriptionsReducer", () => {
           }),
         ).toEqualImmutable(
           initialState
-          .set("isFetching", false)
-          .set("fetchErrors", false)
+          .set("isLoading", false)
+          .set("loadErrors", false)
           .merge(
             nextStates.stateShouldRenew60,
           ),
@@ -88,8 +89,8 @@ describe("subscriptionsReducer", () => {
           }),
         ).toEqualImmutable(
           initialState
-          .set("isFetching", false)
-          .set("fetchErrors", false)
+          .set("isLoading", false)
+          .set("loadErrors", false)
           .merge(
             nextStates.stateShouldRenew30,
           ),
@@ -104,8 +105,8 @@ describe("subscriptionsReducer", () => {
           }),
         ).toEqualImmutable(
           initialState
-          .set("isFetching", false)
-          .set("fetchErrors", false)
+          .set("isLoading", false)
+          .set("loadErrors", false)
           .merge(
             nextStates.stateOut,
           ),
@@ -119,8 +120,8 @@ describe("subscriptionsReducer", () => {
         }),
       ).toEqualImmutable(
         initialState
-        .set("isFetching", false)
-        .set("fetchErrors", true)
+        .set("isLoading", false)
+        .set("loadErrors", true)
         ,
       )
     })
@@ -143,6 +144,8 @@ describe("subscriptionsReducer", () => {
           .setIn(["steps", 0, "active"], false)
           .setIn(["steps", 1, "disabled"], false)
           .setIn(["steps", 1, "active"], true)
+          .setIn(["new", "plan"], "regular")
+          .setIn(["new", "priceCents"], 2000)
           ,
         )
       })
@@ -162,6 +165,8 @@ describe("subscriptionsReducer", () => {
           .setIn(["steps", 0, "active"], false)
           .setIn(["steps", 1, "disabled"], false)
           .setIn(["steps", 1, "active"], true)
+          .setIn(["new", "plan"], "pro")
+          .setIn(["new", "priceCents"], 4000)
           ,
         )
       })
@@ -181,6 +186,8 @@ describe("subscriptionsReducer", () => {
           .setIn(["steps", 0, "active"], false)
           .setIn(["steps", 1, "disabled"], false)
           .setIn(["steps", 1, "active"], true)
+          .setIn(["new", "plan"], "company")
+          .setIn(["new", "priceCents"], 10000)
           ,
         )
       })
@@ -202,6 +209,8 @@ describe("subscriptionsReducer", () => {
           .setIn(["steps", 1, "active"], false)
           .setIn(["steps", 2, "disabled"], false)
           .setIn(["steps", 2, "active"], true)
+          .setIn(["new", "paymentMethod"], "checkOrCash")
+          .setIn(["new", "pending"], true)
           ,
         )
       })
@@ -220,6 +229,8 @@ describe("subscriptionsReducer", () => {
           .setIn(["steps", 1, "active"], false)
           .setIn(["steps", 2, "disabled"], false)
           .setIn(["steps", 2, "active"], true)
+          .setIn(["new", "paymentMethod"], "card")
+          .setIn(["new", "pending"], false)
           ,
         )
       })
@@ -237,6 +248,55 @@ describe("subscriptionsReducer", () => {
         .setIn(["steps", 1, "active"], true)
         .setIn(["steps", 0, "active"], false)
         .setIn(["steps", 2, "active"], false)
+        ,
+      )
+    })
+  })
+
+  describe("post", () => {
+    it("handles POST_SUBSCRIPTION_REQUEST", () => {
+      expect(
+        subscriptionsReducer(undefined, {
+          type: types.POST_SUBSCRIPTION_REQUEST,
+        }),
+      ).toEqualImmutable(
+        initialState
+        .set("isLoading", true)
+        ,
+      )
+    })
+    it("handles POST_SUBSCRIPTION_SUCCESS", () => {
+      expect(
+        subscriptionsReducer(undefined, {
+          type: types.POST_SUBSCRIPTION_SUCCESS,
+          data: alt.postData1,
+        }),
+      ).toEqualImmutable(
+        initialState
+        .set("isLoading", false)
+        .set("loadErrors", false)
+        .delete("new")
+        .update("all", list => list.push(fromJS(alt.postData1)))
+        .setIn(["present", "plan"], alt.postData1.plan)
+        .setIn(["present", "memberUntil"], alt.postData1.end)
+        .setIn(["present", "memberUntilFromNow"], localizedFromNow(alt.postData1.end))
+        .setIn(["present", "memberUntilFromNowInDays"], daysFromNow(alt.postData1.end))
+        .deleteIn(["present", "memberSince"])
+        .deleteIn(["present", "memberSinceFromNow"])
+        .deleteIn(["present", "memberSinceFromNowInDays"])
+        .deleteIn(["present", "shouldResubscribe"])
+        ,
+      )
+    })
+    it("handles POST_SUBSCRIPTION_FAILURE", () => {
+      expect(
+        subscriptionsReducer(undefined, {
+          type: types.POST_SUBSCRIPTION_FAILURE,
+        }),
+      ).toEqual(
+        initialState
+        .set("isLoading", false)
+        .set("postErrors", true)
         ,
       )
     })

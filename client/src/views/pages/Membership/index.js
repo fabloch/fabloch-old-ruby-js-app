@@ -13,7 +13,7 @@ import {
 import operations from "../../../state/ducks/subscribe/operations"
 
 import Infos from "./Infos"
-import Resubscribe from "./Resubscribe"
+import SubscribeMessage from "./SubscribeMessage"
 import History from "./History"
 
 class MembershipPage extends Component {
@@ -24,9 +24,9 @@ class MembershipPage extends Component {
   }
 
   componentDidMount() {
-    const { fetchFakeSubscriptions, subscriptions } = this.props
+    const { fetchSubscriptions, subscriptions } = this.props
     if (!subscriptions) {
-      fetchFakeSubscriptions()
+      fetchSubscriptions()
     }
   }
 
@@ -37,7 +37,7 @@ class MembershipPage extends Component {
   }
 
   render() {
-    const { isFetching, subscriptions } = this.props
+    const { isFetching, subscriptions, fetchErrors } = this.props
     const { showHistory } = this.state
     return (
       <Container>
@@ -49,8 +49,11 @@ class MembershipPage extends Component {
             </Header>
           </Segment>
           <Segment padded loading={isFetching}>
-            { subscriptions && subscriptions.shouldResubscribe &&
-              <Resubscribe {...subscriptions} /> }
+            <SubscribeMessage
+              isFetching={isFetching}
+              subscriptions={subscriptions}
+              fetchErrors={fetchErrors}
+            />
             { subscriptions &&
               <Infos {...subscriptions} showHistory={showHistory} /> }
             { subscriptions &&
@@ -76,7 +79,8 @@ class MembershipPage extends Component {
 
 MembershipPage.propTypes = {
   isFetching: PropTypes.bool.isRequired,
-  fetchFakeSubscriptions: PropTypes.func.isRequired,
+  fetchErrors: PropTypes.bool.isRequired,
+  fetchSubscriptions: PropTypes.func.isRequired,
   subscriptions: PropTypes.object,
 }
 
@@ -86,6 +90,7 @@ MembershipPage.defaultProps = {
 
 const mapStateToProps = ({ subscribe }) => ({
   isFetching: subscribe.get("isFetching"),
+  fetchErrors: subscribe.get("fetchErrors"),
   subscriptions: subscribe.get("subscriptions") && subscribe.get("subscriptions").toJS(),
 })
 

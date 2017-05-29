@@ -6,6 +6,7 @@ module Api::V1
     # GET /v1/subscriptions
     def index
       @subscriptions = Subscription.all().where(user: current_user)
+      raise ActiveRecord::RecordNotFound if @subscriptions.empty?
       render json: @subscriptions
     end
 
@@ -42,8 +43,8 @@ module Api::V1
       params.permit(
         :plan,
         :status,
-        :endDate,
-        :startDate,
+        :end,
+        :start,
         :paymentMethod,
         :priceCents
       )

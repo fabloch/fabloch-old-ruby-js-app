@@ -1,51 +1,25 @@
 import React from "react"
-import { Grid, Segment, Header, Button } from "semantic-ui-react"
-import shortid from "shortid"
+import PropTypes from "prop-types"
+import { Grid } from "semantic-ui-react"
 
-const SubscribeBlock = ({
-  planName,
-  title,
-  subheader,
-  color,
-  bulletpoints,
-  selectPlan,
-}) =>
-  <Segment.Group>
-    <Segment inverted color={color} textAlign="center">
-      <Header inverted as="h2" content={title} subheader={subheader} />
-    </Segment>
-    <Segment>
-      <ul>
-        {bulletpoints.map((point, i) => <li key={shortid.generate()}>{point}</li>)}
-      </ul>
-    </Segment>
-    <Segment>
-      <Button
-        onClick={() => selectPlan(planName)}
-        color={color}
-        content="Continuer"
-        icon="chevron right"
-        labelPosition="right"
-        size="large"
-        fluid
-      />
-    </Segment>
-  </Segment.Group>
-
+import PlanBlock from "./PlanBlock"
 
 const Plans = ({ plans, selectPlan }) =>
-  <Segment>
-    <Grid stackable columns={3} divided padded>
-      <Grid.Column>
-        <SubscribeBlock {...plans.regular} selectPlan={selectPlan} />
-      </Grid.Column>
-      <Grid.Column>
-        <SubscribeBlock {...plans.pro} selectPlan={selectPlan} />
-      </Grid.Column>
-      <Grid.Column>
-        <SubscribeBlock {...plans.company} selectPlan={selectPlan} />
-      </Grid.Column>
-    </Grid>
-  </Segment>
+  <Grid stackable columns={3} divided padded>
+    <Grid.Column>
+      <PlanBlock {...plans.regular} selectPlan={selectPlan} />
+    </Grid.Column>
+    <Grid.Column>
+      <PlanBlock {...plans.pro} selectPlan={selectPlan} />
+    </Grid.Column>
+    <Grid.Column>
+      <PlanBlock {...plans.company} selectPlan={selectPlan} />
+    </Grid.Column>
+  </Grid>
+
+Plans.propTypes = {
+  plans: PropTypes.object.isRequired,
+  selectPlan: PropTypes.func.isRequired,
+}
 
 export default Plans

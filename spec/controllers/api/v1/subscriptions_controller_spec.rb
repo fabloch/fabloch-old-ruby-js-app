@@ -20,8 +20,8 @@ describe Api::V1::SubscriptionsController do
         {
           "paymentMethod" => "checkOrCash",
           "priceCents" => 200,
-          "startDate" => "2017-05-24",
-          "endDate" => "2018-05-23",
+          "start" => "2017-05-24",
+          "end" => "2018-05-23",
           "status" => "pending",
           "plan" => "regular",
         }
@@ -32,8 +32,8 @@ describe Api::V1::SubscriptionsController do
         {
           "paymentMethod" => "checkOrCash",
           "priceCents" => 200,
-          "startDate" => "2017-05-24",
-          "endDate" => "2018-05-23",
+          "start" => "2017-05-24",
+          "end" => "2018-05-23",
           "status" => "pending",
           "plan" => "regular",
         }
@@ -61,8 +61,8 @@ describe Api::V1::SubscriptionsController do
         {
           "paymentMethod" => "checkOrCash",
           "priceCents" => 200,
-          "startDate" => "2017-05-24",
-          "endDate" => "2018-05-23",
+          "start" => "2017-05-24",
+          "end" => "2018-05-23",
           "status" => "pending",
           "plan" => "regular",
         }
@@ -100,8 +100,8 @@ describe Api::V1::SubscriptionsController do
         post(:create, params: {
           paymentMethod: "checkOrCash",
           priceCents: 200,
-          startDate: "2017-05-24",
-          endDate: "2018-05-23",
+          start: "2017-05-24",
+          end: "2018-05-23",
           status: "pending",
           plan: "regular",
         })
@@ -119,8 +119,8 @@ describe Api::V1::SubscriptionsController do
           {
             "paymentMethod" => "checkOrCash",
             "priceCents" => 200,
-            "startDate" => "2017-05-24",
-            "endDate" => "2018-05-23",
+            "start" => "2017-05-24",
+            "end" => "2018-05-23",
             "status" => "pending",
             "plan" => "regular",
           }

@@ -1,7 +1,8 @@
-import { Map, fromJS } from "immutable"
+import { Map, List, fromJS } from "immutable"
+import { todayString, todayPlusAYearString } from "../../../utils/dateAndTime"
 
 const initialState = Map({
-  isFetching: false,
+  isLoading: false,
   plans: fromJS(
     {
       regular: {
@@ -61,6 +62,12 @@ const initialState = Map({
       },
     ],
   ),
+  present: Map({}),
+  all: List(),
+  new: fromJS({
+    start: todayString,
+    end: todayPlusAYearString,
+  }),
 })
 
 export default initialState

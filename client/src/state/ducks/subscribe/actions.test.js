@@ -41,7 +41,9 @@ describe("subscriptionsActions", () => {
         },
       )
     })
+  })
 
+  describe("selectPlan, selectPaymentMethod", () => {
     it("selectPlan", () => {
       expect(
         actions.selectPlan("regular"),
@@ -71,6 +73,40 @@ describe("subscriptionsActions", () => {
         {
           type: types.FOCUS_STEP,
           step: 1,
+        },
+      )
+    })
+  })
+
+  describe("post", () => {
+    it("postSubscriptionRequest", () => {
+      expect(
+        actions.postSubscriptionRequest(),
+      ).toEqual(
+        {
+          type: types.POST_SUBSCRIPTION_REQUEST,
+        },
+      )
+    })
+
+    it("postSubscriptionFailure", () => {
+      expect(
+        actions.postSubscriptionFailure(error),
+      ).toEqual(
+        {
+          type: types.POST_SUBSCRIPTION_FAILURE,
+          error,
+        },
+      )
+    })
+
+    it("postSubscriptionSuccess", () => {
+      expect(
+        actions.postSubscriptionSuccess(data),
+      ).toEqual(
+        {
+          type: types.POST_SUBSCRIPTION_SUCCESS,
+          data,
         },
       )
     })

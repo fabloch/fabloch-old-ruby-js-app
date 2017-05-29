@@ -1,10 +1,11 @@
 import React from "react"
 import PropTypes from "prop-types"
-import { Grid, Card, Image, Icon } from "semantic-ui-react"
+// import { Grid, Card, Image, Icon } from "semantic-ui-react"
 
-const Private = ({username, firstname, lastname, description}) => (
+const Private = ({ username, firstname, lastname, description }) => (
   <div>
     Infos personnelles.
+    {username}, {firstname}, {lastname}, {description}.
     Lorem ipsum dolor sit amet, consectetur adipisicing elit,
     sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
     Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
@@ -14,5 +15,18 @@ const Private = ({username, firstname, lastname, description}) => (
     mollit anim id est laborum.
   </div>
 )
+
+Private.propTypes = {
+  username: PropTypes.string.isRequired,
+  firstname: PropTypes.string,
+  lastname: PropTypes.string,
+  description: PropTypes.string,
+}
+
+Private.defaultProps = {
+  firstname: "",
+  lastname: "",
+  description: "",
+}
 
 export default Private

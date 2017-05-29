@@ -7,6 +7,7 @@ Complex operations involve returning
 a thunk that dispatches multiple actions in a certain order
 */
 
+import { SubmissionError } from "redux-form"
 import api from "../../../api"
 import fakeApi from "../../../api/fake"
 import actions from "./actions"
@@ -53,6 +54,25 @@ const fetchFakeSubscriptions = () => (dispatch) => {
   })
 }
 
+const postSubscription = data => (dispatch) => {
+  dispatch(actions.postSubscriptionRequest())
+  return api.fetch("subscriptions", "post", data)
+  .then((response) => {
+    dispatch(
+      actions.postSubscriptionSuccess(response.data.data.attributes),
+    )
+  })
+  .catch((error) => {
+    if (error.response) {
+      dispatch(actions.postSubscriptionFailure())
+      throw new SubmissionError(error.response.data)
+    } else if (error.request) {
+      // do something
+      // TODO: bad request
+    }
+  })
+}
+
 const selectPlan = actions.selectPlan
 const selectPaymentMethod = actions.selectPaymentMethod
 const focusStep = actions.focusStep
@@ -63,4 +83,5 @@ export default {
   selectPlan,
   selectPaymentMethod,
   focusStep,
+  postSubscription
 }

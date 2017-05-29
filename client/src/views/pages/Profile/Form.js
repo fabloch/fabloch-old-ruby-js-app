@@ -12,7 +12,7 @@ import DropzoneInput from "../../components/DropzoneInput"
 import { profileOperations } from "../../../state/ducks/profile"
 
 const Form = (props) => {
-  const { initialValues, postProfile, putProfile, errors, handleSubmit, pristine, reset, submitting } = props
+  const { initialValues, postProfile, putProfile, handleSubmit, pristine, reset, submitting } = props
 
   const sendProfile = (initialValues) => {
     if (initialValues) {
@@ -103,9 +103,9 @@ const Form = (props) => {
 }
 
 Form.propTypes = {
+  initialValues: PropTypes.object.isRequired,
   postProfile: PropTypes.func.isRequired,
   putProfile: PropTypes.func.isRequired,
-  errors: PropTypes.string,
   handleSubmit: PropTypes.func.isRequired,
   // validate: PropTypes.func.isRequired,
   // warn: PropTypes.func.isRequired,
@@ -115,7 +115,7 @@ Form.propTypes = {
 }
 
 Form.defaultProps = {
-  errors: null,
+  initialValues: null,
 }
 
 const mapDispatchToProps = {

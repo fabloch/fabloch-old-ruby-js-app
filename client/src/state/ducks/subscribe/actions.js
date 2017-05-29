@@ -17,6 +17,7 @@ const fetchSubscriptionsSuccess = data => ({
   type: types.FETCH_SUBSCRIPTIONS_SUCCESS,
   data,
 })
+
 const selectPlan = plan => ({
   type: types.SELECT_PLAN,
   plan,
@@ -30,6 +31,18 @@ const focusStep = step => ({
   step,
 })
 
+const postSubscriptionRequest = () => ({
+  type: types.POST_SUBSCRIPTION_REQUEST,
+})
+const postSubscriptionFailure = error => ({
+  type: types.POST_SUBSCRIPTION_FAILURE,
+  error,
+})
+const postSubscriptionSuccess = data => ({
+  type: types.POST_SUBSCRIPTION_SUCCESS,
+  data,
+})
+
 export default {
   fetchSubscriptionsRequest,
   fetchSubscriptionsFailure,
@@ -37,4 +50,7 @@ export default {
   selectPlan,
   selectPaymentMethod,
   focusStep,
+  postSubscriptionRequest,
+  postSubscriptionFailure,
+  postSubscriptionSuccess,
 }

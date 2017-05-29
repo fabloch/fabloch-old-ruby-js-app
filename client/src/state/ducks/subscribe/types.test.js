@@ -48,4 +48,28 @@ describe("subscriptions types", () => {
       "fabloch/subscribe/FOCUS_STEP",
     )
   })
+
+  it("POST_SUBSCRIPTION_REQUEST", () => {
+    expect(
+      types.POST_SUBSCRIPTION_REQUEST,
+    ).toEqual(
+      "fabloch/subscribe/POST_SUBSCRIPTION_REQUEST",
+    )
+  })
+
+  it("POST_SUBSCRIPTION_FAILURE", () => {
+    expect(
+      types.POST_SUBSCRIPTION_FAILURE,
+    ).toEqual(
+      "fabloch/subscribe/POST_SUBSCRIPTION_FAILURE",
+    )
+  })
+
+  it("POST_SUBSCRIPTION_SUCCESS", () => {
+    expect(
+      types.POST_SUBSCRIPTION_SUCCESS,
+    ).toEqual(
+      "fabloch/subscribe/POST_SUBSCRIPTION_SUCCESS",
+    )
+  })
 })

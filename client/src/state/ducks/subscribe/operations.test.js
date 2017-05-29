@@ -134,4 +134,81 @@ describe("subscriptionsOperations", () => {
       )
     })
   })
+
+  describe("postSubscription", () => {
+    afterEach(() => {
+      nock.cleanAll()
+    })
+
+    describe("with valid form", () => {
+      it("triggers POST_SUBSCRIPTION_SUCCESS with subscription infos", () => {
+        const store = mockStore({})
+
+        nock("http://localhost")
+        .post("/v1/subscriptions")
+        .reply(
+          201,
+          {
+            data: {
+              attributes: data,
+            },
+          },
+        )
+
+        return store.dispatch(operations.postSubscription(data))
+        .then(() => { // return of async operations
+          const expectedActions = [
+            { type: types.POST_SUBSCRIPTION_REQUEST },
+            {
+              type: types.POST_SUBSCRIPTION_SUCCESS,
+              data,
+            },
+          ]
+
+          expect(store.getActions()[0]).toEqual(expectedActions[0])
+          expect(store.getActions()[1]).toEqual(expectedActions[1])
+        })
+      })
+    })
+
+    describe("with invalid form", () => {
+      xit("triggers POST_SUBSCRIPTION_FAILURE", () => {
+        const wrongData = {
+          firstname: "Sébastien",
+          lastname: "Nicolaïdis",
+          description: "Description",
+          birthdate: "1979-09-13",
+        }
+
+        const store = mockStore({})
+
+        nock("http://localhost")
+        .post("/v1/profile")
+        .reply(
+          422,
+          {
+            username: [
+              "can't be blank",
+              "only allows lowercase letters or \"_\"",
+              "is too short (minimum is 3 characters)",
+            ],
+          },
+        )
+
+        return store.dispatch(operations.postSubscription(wrongData))
+        .then(() => { // return of async operations
+          const expectedActions = [
+            { type: types.POST_SUBSCRIPTION_REQUEST },
+            {
+              type: types.POST_SUBSCRIPTION_FAILURE,
+              error: { status: 404, statusText: "Not Found" },
+            },
+          ]
+
+          expect(store.getActions()[0]).toEqual(expectedActions[0])
+          expect(store.getActions()[1]).toEqual(expectedActions[1])
+        })
+      })
+    })
+  })
 })

@@ -31,7 +31,7 @@ describe("subscriptions utils", () => {
       expect(
         utils.memberUntilFromNowInDays(alt.subOkHasResubscribed),
       ).toEqual(
-        99,
+        100,
       )
     })
 
@@ -105,7 +105,7 @@ describe("subscriptions utils", () => {
       expect(
         utils.memberUntilFromNowInDays(alt.subOkInMoreThan90),
       ).toEqual(
-        99,
+        100,
       )
     })
 
@@ -179,7 +179,7 @@ describe("subscriptions utils", () => {
       expect(
         utils.memberUntilFromNowInDays(alt.subShouldRenew90),
       ).toEqual(
-        69,
+        70,
       )
     })
 
@@ -253,7 +253,7 @@ describe("subscriptions utils", () => {
       expect(
         utils.memberUntilFromNowInDays(alt.subShouldRenew60),
       ).toEqual(
-        49,
+        50,
       )
     })
 
@@ -351,7 +351,7 @@ describe("subscriptions utils", () => {
       expect(
         utils.memberSinceFromNowInDays(alt.subShouldRenew30),
       ).toEqual(
-        -354,
+        -355,
       )
     })
 
@@ -393,7 +393,7 @@ describe("subscriptions utils", () => {
       expect(
         utils.memberUntilFromNow(alt.subOut),
       ).toEqual(
-        "il y a 11 jours",
+        "il y a 10 jours",
       )
     })
 

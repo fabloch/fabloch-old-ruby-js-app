@@ -12,8 +12,8 @@ const Subscription = ({membership}) =>
       <List.Item>
         <List.Icon name="calendar" />
         <List.Content>
-          Du {moment(membership.startDate).format("d MMM YYYY")}
-          au {moment(membership.endDate).format("d MMM YYYY")}
+          Du {moment(membership.start).format("d MMM YYYY")}
+          au {moment(membership.end).format("d MMM YYYY")}
         </List.Content>
       </List.Item>
       <List.Item>

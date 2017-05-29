@@ -7,7 +7,7 @@ import {
   CardCVCElement,
 } from "react-stripe-elements"
 
-import { Form, Grid, Segment, Header, List, Button } from "semantic-ui-react"
+import { Form, Button } from "semantic-ui-react"
 
 // import "./CheckoutForm.css"
 

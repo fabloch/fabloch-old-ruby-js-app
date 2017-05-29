@@ -1,160 +1,190 @@
-import { Map, fromJS } from "immutable"
+import { Map, List, fromJS } from "immutable"
 import * as alt from "../../../api/fake/subscriptions"
+import { todayString, todayPlusAYearString } from "../../../utils/dateAndTime"
 
 export const stateOkHasReubscribed = Map({
-  subscriptions: fromJS({
+  present: fromJS({
     plan: "regular",
     memberUntil: alt.plus100end,
     memberUntilFromNow: "dans 3 mois",
-    memberUntilFromNowInDays: 99,
+    memberUntilFromNowInDays: 100,
     memberSince: alt.plus100start2,
     memberSinceFromNow: "il y a 2 ans",
     memberSinceFromNowInDays: -630,
     shouldResubscribe: null,
-    newSubscriptionEnd: alt.plus100newEnd,
-    newSubscriptionStart: alt.plus100newStart,
-    allMemberships: [
-      {
-        plan: "regular",
-        startDate: alt.plus100start,
-        endDate: alt.plus100end,
-        price: "20",
-        paymentMethod: "checkOrCash",
-      },
-      {
-        plan: "regular",
-        startDate: alt.plus100start2,
-        endDate: alt.plus100end2,
-        price: "20",
-        paymentMethod: "checkOrCash",
-      },
-    ],
+  }),
+  all: fromJS([
+    {
+      plan: "regular",
+      start: alt.plus100start,
+      end: alt.plus100end,
+      priceCents: 2000,
+      paymentMethod: "checkOrCash",
+      pending: false,
+    },
+    {
+      plan: "regular",
+      start: alt.plus100start2,
+      end: alt.plus100end2,
+      priceCents: 2000,
+      paymentMethod: "checkOrCash",
+      pending: false,
+    },
+  ]),
+  new: fromJS({
+    start: alt.plus100newStart,
+    end: alt.plus100newEnd,
   }),
 })
 
 export const stateOkInMoreThan90 = Map({
-  subscriptions: fromJS({
+  present: fromJS({
     plan: "regular",
     memberUntil: alt.plus100end,
     memberUntilFromNow: "dans 3 mois",
-    memberUntilFromNowInDays: 99,
+    memberUntilFromNowInDays: 100,
     memberSince: alt.plus100start,
     memberSinceFromNow: "il y a 9 mois",
     memberSinceFromNowInDays: -264,
     shouldResubscribe: null,
-    newSubscriptionEnd: alt.plus100newEnd,
-    newSubscriptionStart: alt.plus100newStart,
-    allMemberships: [
-      {
-        plan: "regular",
-        startDate: alt.plus100start,
-        endDate: alt.plus100end,
-        price: "20",
-        paymentMethod: "checkOrCash",
-      },
-    ],
+  }),
+  all: fromJS([
+    {
+      plan: "regular",
+      start: alt.plus100start,
+      end: alt.plus100end,
+      priceCents: 2000,
+      paymentMethod: "checkOrCash",
+      pending: false,
+    },
+  ]),
+  new: fromJS({
+    start: alt.plus100newStart,
+    end: alt.plus100newEnd,
   }),
 })
 
 export const stateShouldRenew90 = Map({
-  subscriptions: fromJS({
+  present: fromJS({
     plan: "regular",
     memberUntil: alt.plus70end,
     memberUntilFromNow: "dans 2 mois",
-    memberUntilFromNowInDays: 69,
+    memberUntilFromNowInDays: 70,
     memberSince: alt.plus70start,
     memberSinceFromNow: "il y a 10 mois",
     memberSinceFromNowInDays: -294,
     shouldResubscribe: "info",
-    newSubscriptionEnd: alt.plus70newEnd,
-    newSubscriptionStart: alt.plus70newStart,
-    allMemberships: [
-      {
-        plan: "regular",
-        startDate: alt.plus70start,
-        endDate: alt.plus70end,
-        price: "20",
-        paymentMethod: "checkOrCash",
-      },
-    ],
+  }),
+  all: fromJS([
+    {
+      plan: "regular",
+      start: alt.plus70start,
+      end: alt.plus70end,
+      priceCents: 2000,
+      paymentMethod: "checkOrCash",
+      pending: false,
+    },
+  ]),
+  new: fromJS({
+    start: alt.plus70newStart,
+    end: alt.plus70newEnd,
   }),
 })
 
 export const stateShouldRenew60 = Map({
-  subscriptions: fromJS({
+  present: fromJS({
     plan: "regular",
     memberUntil: alt.plus50end,
     memberUntilFromNow: "dans 2 mois",
-    memberUntilFromNowInDays: 49,
+    memberUntilFromNowInDays: 50,
     memberSince: alt.plus50start,
     memberSinceFromNow: "il y a 10 mois",
     memberSinceFromNowInDays: -314,
     shouldResubscribe: "warning",
-    newSubscriptionEnd: alt.plus50newEnd,
-    newSubscriptionStart: alt.plus50newStart,
-    allMemberships: [
-      {
-        plan: "regular",
-        startDate: alt.plus50start,
-        endDate: alt.plus50end,
-        price: "20",
-        paymentMethod: "checkOrCash",
-      },
-    ],
+  }),
+  all: fromJS([
+    {
+      plan: "regular",
+      start: alt.plus50start,
+      end: alt.plus50end,
+      priceCents: 2000,
+      paymentMethod: "checkOrCash",
+      pending: false,
+    },
+  ]),
+  new: fromJS({
+    start: alt.plus50newStart,
+    end: alt.plus50newEnd,
   }),
 })
 
 export const stateShouldRenew30 = Map({
-  subscriptions: fromJS({
+  present: fromJS({
     plan: "regular",
     memberUntil: alt.plus10end,
     memberUntilFromNow: "dans 9 jours",
     memberUntilFromNowInDays: 9,
     memberSince: alt.plus10start,
     memberSinceFromNow: "il y a un an",
-    memberSinceFromNowInDays: -354,
+    memberSinceFromNowInDays: -355,
     shouldResubscribe: "error",
-    newSubscriptionEnd: alt.plus10newEnd,
-    newSubscriptionStart: alt.plus10newStart,
-    allMemberships: [
-      {
-        plan: "regular",
-        startDate: alt.plus10start,
-        endDate: alt.plus10end,
-        price: "20",
-        paymentMethod: "checkOrCash",
-      },
-    ],
+  }),
+  all: fromJS([
+    {
+      plan: "regular",
+      start: alt.plus10start,
+      end: alt.plus10end,
+      priceCents: 2000,
+      paymentMethod: "checkOrCash",
+      pending: false,
+    },
+  ]),
+  new: fromJS({
+    start: alt.plus10newStart,
+    end: alt.plus10newEnd,
   }),
 })
 
 export const stateOut = Map({
-  subscriptions: fromJS({
+  present: fromJS({
     plan: "regular",
     memberUntil: alt.minus10end,
-    memberUntilFromNow: "il y a 11 jours",
+    memberUntilFromNow: "il y a 10 jours",
     memberUntilFromNowInDays: -10,
     memberSince: alt.minus10start2,
     memberSinceFromNow: "il y a 2 ans",
     memberSinceFromNowInDays: -740,
     shouldResubscribe: "error",
-    newSubscriptionEnd: alt.minus10newEnd,
-    newSubscriptionStart: alt.minus10newStart,
-    allMemberships: [
-      {
-        plan: "regular",
-        startDate: alt.minus10start,
-        endDate: alt.minus10end,
-        price: "20",
-        paymentMethod: "checkOrCash",
-      },
-      {
-        plan: "regular",
-        startDate: alt.minus10start2,
-        endDate: alt.minus10end2,
-        price: "20",
-        paymentMethod: "checkOrCash",
-      },
-    ],
+  }),
+  all: fromJS([
+    {
+      plan: "regular",
+      start: alt.minus10start,
+      end: alt.minus10end,
+      priceCents: 2000,
+      paymentMethod: "checkOrCash",
+      pending: false,
+    },
+    {
+      plan: "regular",
+      start: alt.minus10start2,
+      end: alt.minus10end2,
+      priceCents: 2000,
+      paymentMethod: "checkOrCash",
+      pending: false,
+    },
+  ]),
+  new: fromJS({
+    start: alt.minus10newStart,
+    end: alt.minus10newEnd,
+  }),
+})
+
+export const virgin = Map({
+  present: Map({}),
+  all: List(),
+  new: fromJS({
+    start: todayString,
+    end: todayPlusAYearString,
   }),
 })

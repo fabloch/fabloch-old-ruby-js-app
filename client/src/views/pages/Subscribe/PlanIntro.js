@@ -1,7 +1,7 @@
 import React from "react"
 import moment from "moment"
 
-import { Grid, Segment, Card, Header, Icon, Button } from "semantic-ui-react"
+import { Header, Icon } from "semantic-ui-react"
 
 const PlanIntro = ({
   memberUntil,
@@ -44,13 +44,11 @@ const PlanIntro = ({
   }
 
   return (
-    <Segment>
-      <Header as="h1" textAlign="center" color="orange" icon>
-        <Icon name='sun' />
-        {title()}
-         <Header.Subheader>{subHeader()}</Header.Subheader>
-      </Header>
-    </Segment>
+    <Header as="h1" textAlign="center" color="orange" icon>
+      <Icon name='sun' />
+      {title()}
+       <Header.Subheader>{subHeader()}</Header.Subheader>
+    </Header>
   )
 }
 
