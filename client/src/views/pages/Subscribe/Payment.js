@@ -1,5 +1,5 @@
 import React from "react"
-import { Grid, Segment, Header, Button, Icon } from "semantic-ui-react"
+import { Grid, Header, Button, Icon } from "semantic-ui-react"
 
 const Payment = ({ selectPaymentMethod }) =>
   <Grid

@@ -3,6 +3,7 @@ import { todayString, todayPlusAYearString } from "../../../utils/dateAndTime"
 
 const initialState = Map({
   isLoading: false,
+  loadErrors: false,
   plans: fromJS(
     {
       regular: {
@@ -64,7 +65,7 @@ const initialState = Map({
   ),
   present: Map({}),
   all: List(),
-  new: fromJS({
+  create: fromJS({
     startDate: todayString,
     endDate: todayPlusAYearString,
   }),

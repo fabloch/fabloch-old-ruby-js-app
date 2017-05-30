@@ -85,8 +85,8 @@ const subscriptionsReducer = (state = initialState, action) => {
       .setIn(["present", "memberSinceFromNowInDays"], utils.memberSinceFromNowInDays(action.data))
       .setIn(["present", "shouldResubscribe"], utils.shouldResubscribe(action.data))
       .set("all", fromJS(action.data))
-      .setIn(["new", "startDate"], utils.newSubscriptionStart(action.data))
-      .setIn(["new", "endDate"], utils.newSubscriptionEnd(action.data))
+      .setIn(["create", "startDate"], utils.newSubscriptionStart(action.data))
+      .setIn(["create", "endDate"], utils.newSubscriptionEnd(action.data))
   case types.FETCH_SUBSCRIPTIONS_FAILURE:
     return state
       .set("isLoading", false)
@@ -101,8 +101,8 @@ const subscriptionsReducer = (state = initialState, action) => {
       .setIn(["steps", 0, "active"], false)
       .setIn(["steps", 1, "disabled"], false)
       .setIn(["steps", 1, "active"], true)
-      .setIn(["new", "plan"], action.plan)
-      .setIn(["new", "priceCents"], planPriceCents(action.plan))
+      .setIn(["create", "plan"], action.plan)
+      .setIn(["create", "priceCents"], planPriceCents(action.plan))
   case types.SELECT_PAYMENT_METHOD:
     return state
       .setIn(["steps", 1, "paymentMethod"], action.paymentMethod)
@@ -112,8 +112,8 @@ const subscriptionsReducer = (state = initialState, action) => {
       .setIn(["steps", 1, "active"], false)
       .setIn(["steps", 2, "disabled"], false)
       .setIn(["steps", 2, "active"], true)
-      .setIn(["new", "paymentMethod"], action.paymentMethod)
-      .setIn(["new", "pending"], paymentMethodPending(action.paymentMethod))
+      .setIn(["create", "paymentMethod"], action.paymentMethod)
+      .setIn(["create", "pending"], paymentMethodPending(action.paymentMethod))
   case types.FOCUS_STEP:
     return state
       .setIn(["steps", 0, "active"], false)
@@ -132,7 +132,7 @@ const subscriptionsReducer = (state = initialState, action) => {
     return state
       .set("isLoading", false)
       .set("loadErrors", false)
-      .delete("new")
+      .delete("create")
       .update("all", list => list.push(fromJS(action.data)))
       .setIn(["present", "plan"], action.data.plan)
       .setIn(["present", "memberUntil"], action.data.end)

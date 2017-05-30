@@ -21,7 +21,7 @@ class SubscribePage extends Component {
 
   render() {
     const {
-      isFetching,
+      isLoading,
       subscriptions,
       steps,
       plans,
@@ -58,7 +58,7 @@ class SubscribePage extends Component {
         </Grid.Row>
         <Grid.Row>
           <Grid.Column>
-            <Segment padded loading={isFetching}>
+            <Segment padded loading={isLoading}>
               { displaySteps(steps)}
             </Segment>
           </Grid.Column>
@@ -69,7 +69,7 @@ class SubscribePage extends Component {
 }
 
 SubscribePage.propTypes = {
-  isFetching: PropTypes.bool.isRequired,
+  isLoading: PropTypes.bool.isRequired,
   subscriptions: PropTypes.object,
   plans: PropTypes.object.isRequired,
   steps: PropTypes.array.isRequired,
@@ -84,7 +84,7 @@ SubscribePage.defaultProps = {
 }
 
 const mapStateToProps = ({ subscribe }) => ({
-  isFetching: subscribe.get("isFetching"),
+  isLoading: subscribe.get("isLoading"),
   subscriptions: subscribe.get("subscriptions") && subscribe.get("subscriptions").toJS(),
   plans: subscribe.get("plans") && subscribe.get("plans").toJS(),
   steps: subscribe.get("steps") && subscribe.get("steps").toJS(),

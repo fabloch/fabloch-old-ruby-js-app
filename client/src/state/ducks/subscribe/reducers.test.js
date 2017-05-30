@@ -144,8 +144,8 @@ describe("subscriptionsReducer", () => {
           .setIn(["steps", 0, "active"], false)
           .setIn(["steps", 1, "disabled"], false)
           .setIn(["steps", 1, "active"], true)
-          .setIn(["new", "plan"], "regular")
-          .setIn(["new", "priceCents"], 2000)
+          .setIn(["create", "plan"], "regular")
+          .setIn(["create", "priceCents"], 2000)
           ,
         )
       })
@@ -165,8 +165,8 @@ describe("subscriptionsReducer", () => {
           .setIn(["steps", 0, "active"], false)
           .setIn(["steps", 1, "disabled"], false)
           .setIn(["steps", 1, "active"], true)
-          .setIn(["new", "plan"], "pro")
-          .setIn(["new", "priceCents"], 4000)
+          .setIn(["create", "plan"], "pro")
+          .setIn(["create", "priceCents"], 4000)
           ,
         )
       })
@@ -186,8 +186,8 @@ describe("subscriptionsReducer", () => {
           .setIn(["steps", 0, "active"], false)
           .setIn(["steps", 1, "disabled"], false)
           .setIn(["steps", 1, "active"], true)
-          .setIn(["new", "plan"], "company")
-          .setIn(["new", "priceCents"], 10000)
+          .setIn(["create", "plan"], "company")
+          .setIn(["create", "priceCents"], 10000)
           ,
         )
       })
@@ -209,8 +209,8 @@ describe("subscriptionsReducer", () => {
           .setIn(["steps", 1, "active"], false)
           .setIn(["steps", 2, "disabled"], false)
           .setIn(["steps", 2, "active"], true)
-          .setIn(["new", "paymentMethod"], "checkOrCash")
-          .setIn(["new", "pending"], true)
+          .setIn(["create", "paymentMethod"], "checkOrCash")
+          .setIn(["create", "pending"], true)
           ,
         )
       })
@@ -229,8 +229,8 @@ describe("subscriptionsReducer", () => {
           .setIn(["steps", 1, "active"], false)
           .setIn(["steps", 2, "disabled"], false)
           .setIn(["steps", 2, "active"], true)
-          .setIn(["new", "paymentMethod"], "card")
-          .setIn(["new", "pending"], false)
+          .setIn(["create", "paymentMethod"], "card")
+          .setIn(["create", "pending"], false)
           ,
         )
       })
@@ -275,7 +275,7 @@ describe("subscriptionsReducer", () => {
         initialState
         .set("isLoading", false)
         .set("loadErrors", false)
-        .delete("new")
+        .delete("create")
         .update("all", list => list.push(fromJS(alt.postData1)))
         .setIn(["present", "plan"], alt.postData1.plan)
         .setIn(["present", "memberUntil"], alt.postData1.end)

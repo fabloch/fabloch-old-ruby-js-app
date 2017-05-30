@@ -44,7 +44,7 @@ const NavButton = ({
 
 NavButton.propTypes = {
   type: PropTypes.string,
-  to: PropTypes.string,
+  to: PropTypes.object,
   onClick: PropTypes.func,
   content: PropTypes.string,
   primary: PropTypes.bool,
@@ -59,7 +59,7 @@ NavButton.propTypes = {
 
 NavButton.defaultProps = {
   type: "",
-  to: "",
+  to: {},
   onClick: undefined,
   content: undefined,
   primary: false,

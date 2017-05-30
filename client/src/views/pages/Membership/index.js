@@ -1,6 +1,8 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
 import { connect } from "react-redux"
+import isEmpty from "lodash/isEmpty"
+
 import {
   Container,
   Segment,
@@ -19,26 +21,26 @@ import History from "./History"
 class MembershipPage extends Component {
   constructor(props) {
     super(props)
-    this.state = { showHistory: false }
-    this.showHistory = this.showHistory.bind(this)
+    this.state = { showAll: false }
+    this.handleShowAll = this.handleShowAll.bind(this)
   }
 
   componentDidMount() {
-    const { fetchSubscriptions, subscriptions } = this.props
-    if (!subscriptions) {
-      fetchSubscriptions()
+    const { fetchFakeSubscriptions, present } = this.props
+    if (isEmpty(present)) {
+      fetchFakeSubscriptions()
     }
   }
 
-  showHistory() {
+  handleShowAll() {
     this.setState({
-      showHistory: !this.state.showHistory,
+      showAll: !this.state.showAll,
     })
   }
 
   render() {
-    const { isFetching, subscriptions, fetchErrors } = this.props
-    const { showHistory } = this.state
+    const { isLoading, present, all, loadErrors } = this.props
+    const { showAll } = this.state
     return (
       <Container>
         <Segment.Group>
@@ -48,27 +50,27 @@ class MembershipPage extends Component {
               Abonnement
             </Header>
           </Segment>
-          <Segment padded loading={isFetching}>
+          <Segment padded loading={isLoading}>
             <SubscribeMessage
-              isFetching={isFetching}
-              subscriptions={subscriptions}
-              fetchErrors={fetchErrors}
+              isLoading={isLoading}
+              present={present}
+              loadErrors={loadErrors}
             />
-            { subscriptions &&
-              <Infos {...subscriptions} showHistory={showHistory} /> }
-            { subscriptions &&
+            { !isEmpty(present) &&
+              <Infos {...present} /> }
+            { !isEmpty(present) &&
               <Container textAlign="center">
                 <Divider />
                 <Button
-                  onClick={this.showHistory}
+                  onClick={this.handleShowAll}
                   inverted
                   color="orange"
                 >
-                  {!showHistory ? "Voir" : "Masquer"} l'historique
+                  {!showAll ? "Voir" : "Masquer"} l'historique
                 </Button>
               </Container> }
-            { subscriptions && showHistory
-              && <History {...subscriptions} /> }
+            { !isEmpty(all) && showAll &&
+              <History all={all} /> }
           </Segment>
         </Segment.Group>
 
@@ -78,20 +80,18 @@ class MembershipPage extends Component {
 }
 
 MembershipPage.propTypes = {
-  isFetching: PropTypes.bool.isRequired,
-  fetchErrors: PropTypes.bool.isRequired,
-  fetchSubscriptions: PropTypes.func.isRequired,
-  subscriptions: PropTypes.object,
-}
-
-MembershipPage.defaultProps = {
-  subscriptions: null,
+  isLoading: PropTypes.bool.isRequired,
+  loadErrors: PropTypes.bool.isRequired,
+  fetchFakeSubscriptions: PropTypes.func.isRequired,
+  present: PropTypes.object.isRequired,
+  all: PropTypes.array.isRequired,
 }
 
 const mapStateToProps = ({ subscribe }) => ({
-  isFetching: subscribe.get("isFetching"),
-  fetchErrors: subscribe.get("fetchErrors"),
-  subscriptions: subscribe.get("subscriptions") && subscribe.get("subscriptions").toJS(),
+  isLoading: subscribe.get("isLoading"),
+  loadErrors: subscribe.get("loadErrors"),
+  present: subscribe.get("present").toJS(),
+  all: subscribe.get("all").toJS(),
 })
 
 const connectedMembershipPage = connect(

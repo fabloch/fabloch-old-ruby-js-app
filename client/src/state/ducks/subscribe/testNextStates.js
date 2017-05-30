@@ -31,7 +31,7 @@ export const stateOkHasReubscribed = Map({
       pending: false,
     },
   ]),
-  new: fromJS({
+  create: fromJS({
     startDate: alt.plus100newStart,
     endDate: alt.plus100newEnd,
   }),
@@ -58,7 +58,7 @@ export const stateOkInMoreThan90 = Map({
       pending: false,
     },
   ]),
-  new: fromJS({
+  create: fromJS({
     startDate: alt.plus100newStart,
     endDate: alt.plus100newEnd,
   }),
@@ -85,7 +85,7 @@ export const stateShouldRenew90 = Map({
       pending: false,
     },
   ]),
-  new: fromJS({
+  create: fromJS({
     startDate: alt.plus70newStart,
     endDate: alt.plus70newEnd,
   }),
@@ -112,7 +112,7 @@ export const stateShouldRenew60 = Map({
       pending: false,
     },
   ]),
-  new: fromJS({
+  create: fromJS({
     startDate: alt.plus50newStart,
     endDate: alt.plus50newEnd,
   }),
@@ -139,7 +139,7 @@ export const stateShouldRenew30 = Map({
       pending: false,
     },
   ]),
-  new: fromJS({
+  create: fromJS({
     startDate: alt.plus10newStart,
     endDate: alt.plus10newEnd,
   }),
@@ -174,7 +174,7 @@ export const stateOut = Map({
       pending: false,
     },
   ]),
-  new: fromJS({
+  create: fromJS({
     startDate: alt.minus10newStart,
     endDate: alt.minus10newEnd,
   }),
@@ -183,7 +183,7 @@ export const stateOut = Map({
 export const virgin = Map({
   present: Map({}),
   all: List(),
-  new: fromJS({
+  create: fromJS({
     startDate: todayString,
     endDate: todayPlusAYearString,
   }),

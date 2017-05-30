@@ -11,7 +11,7 @@ import {
 import { planType } from "./utils"
 
 const Infos = ({
-  type,
+  plan,
   memberUntil,
   memberUntilFromNow,
   memberUntilFromNowInDays,
@@ -33,10 +33,10 @@ const Infos = ({
         <Statistic.Group widths="3">
           <Statistic color="orange">
             <Statistic.Label>
-              Abonnement de type
+              Type d'abonnement
             </Statistic.Label>
             <Statistic.Value text>
-              { planType(type) }
+              { planType(plan) }
             </Statistic.Value>
           </Statistic>
           <Statistic color="orange">
@@ -44,15 +44,15 @@ const Infos = ({
               {memberUntilFromNowInDays > 0 ? "Abonné.e jusqu'au" : "Plus abonné.e depuis" }
             </Statistic.Label>
             <Statistic.Value text>
-              {moment(memberUntil).format("d MMM YYYY")}
+              {moment(memberUntil).format("LL")}
             </Statistic.Value>
           </Statistic>
           <Statistic color="orange">
             <Statistic.Label>
-              Abonné.e depuis le
+              Première arrivée le
             </Statistic.Label>
             <Statistic.Value text>
-              {moment(memberSince).format("d MMM YYYY")}
+              {moment(memberSince).format("LL")}
             </Statistic.Value>
           </Statistic>
         </Statistic.Group>

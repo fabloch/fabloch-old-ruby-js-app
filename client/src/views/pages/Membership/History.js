@@ -5,40 +5,40 @@ import moment from "moment"
 
 import { planType, paidWith } from "./utils"
 
-const Subscription = ({membership}) =>
+const Subscription = ({subscription}) =>
   <Segment>
-    <Header>Formule {planType(membership.type)}</Header>
+    <Header>Formule {planType(subscription.plan)}</Header>
     <List horizontal>
       <List.Item>
         <List.Icon name="calendar" />
         <List.Content>
-          Du {moment(membership.start).format("d MMM YYYY")}
-          au {moment(membership.end).format("d MMM YYYY")}
+          Du {moment(subscription.startDate).format("LL")}
+          au {moment(subscription.endDate).format("LL")}
         </List.Content>
       </List.Item>
       <List.Item>
         <List.Icon name="credit card" />
         <List.Content>
-          {membership.price}€
+          {subscription.priceCents / 100}€
           {" "}
-          {paidWith(membership.paymentMethod)}
+          {paidWith(subscription.paymentMethod)}
         </List.Content>
       </List.Item>
     </List>
   </Segment>
 
-const History = ({ allMemberships }) =>
+const History = ({ all }) =>
   <Grid padded>
     <Grid.Column>
       <Segment.Group>
-        {allMemberships.map(membership =>
-          <Subscription membership={membership} />
+        {all.map(subscription =>
+          <Subscription subscription={subscription} />
         )}
       </Segment.Group>
     </Grid.Column>
   </Grid>
 
 History.propTypes = {
-  allMemberships: PropTypes.array.isRequired,
+  all: PropTypes.array.isRequired,
 }
 export default History
