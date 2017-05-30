@@ -85,8 +85,8 @@ const subscriptionsReducer = (state = initialState, action) => {
       .setIn(["present", "memberSinceFromNowInDays"], utils.memberSinceFromNowInDays(action.data))
       .setIn(["present", "shouldResubscribe"], utils.shouldResubscribe(action.data))
       .set("all", fromJS(action.data))
-      .setIn(["new", "start"], utils.newSubscriptionStart(action.data))
-      .setIn(["new", "end"], utils.newSubscriptionEnd(action.data))
+      .setIn(["new", "startDate"], utils.newSubscriptionStart(action.data))
+      .setIn(["new", "endDate"], utils.newSubscriptionEnd(action.data))
   case types.FETCH_SUBSCRIPTIONS_FAILURE:
     return state
       .set("isLoading", false)

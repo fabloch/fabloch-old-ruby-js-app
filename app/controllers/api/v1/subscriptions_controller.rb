@@ -43,8 +43,8 @@ module Api::V1
       params.permit(
         :plan,
         :status,
-        :end,
-        :start,
+        :endDate,
+        :startDate,
         :paymentMethod,
         :priceCents
       )

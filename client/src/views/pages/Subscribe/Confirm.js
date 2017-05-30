@@ -8,8 +8,8 @@ import { Elements } from "react-stripe-elements"
 import CheckoutForm from "./CheckoutForm"
 
 const Summary = ({ steps, subscriptions }) => {
-  const start = subscriptions ? moment(subscriptions.newSubscriptionStart) : moment()
-  const end = subscriptions ? moment(subscriptions.newSubscriptionEnd) : moment(start).add(1, "y").subtract(1, "d")
+  const startDate = subscriptions ? moment(subscriptions.newSubscriptionStart) : moment()
+  const endDate = subscriptions ? moment(subscriptions.newSubscriptionEnd) : moment(startDate).add(1, "y").subtract(1, "d")
 
   return (
     <Grid.Column>
@@ -31,7 +31,7 @@ const Summary = ({ steps, subscriptions }) => {
               <List.Content>
                 <List.Header as="h3">Période d'abonnement</List.Header>
                 <List.Description>
-                  Du {start.format("L")} au {end.format("L")}
+                  Du {startDate.format("L")} au {endDate.format("L")}
                 </List.Description>
               </List.Content>
             </List.Item>

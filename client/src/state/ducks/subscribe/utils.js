@@ -12,22 +12,22 @@ import {
 const plan = data => first(data).plan
 
 const memberUntil = data =>
-  fromApiToString(first(data).end)
+  fromApiToString(first(data).endDate)
 
-const memberUntilFromNow = (data, today) =>
-  localizedFromNow(first(data).end, today)
+const memberUntilFromNow = data =>
+  localizedFromNow(first(data).endDate)
 
-const memberUntilFromNowInDays = (data, today) =>
-  daysFromNow(first(data).end, today)
+const memberUntilFromNowInDays = data =>
+  daysFromNow(first(data).endDate)
 
 const memberSince = data =>
-  fromApiToString(last(data).start)
+  fromApiToString(last(data).startDate)
 
 const memberSinceFromNow = data =>
-  localizedFromNow(last(data).start)
+  localizedFromNow(last(data).startDate)
 
 const memberSinceFromNowInDays = data =>
-  daysFromNow(last(data).start)
+  daysFromNow(last(data).startDate)
 
 const shouldResubscribe = (data) => {
   if (memberUntilFromNowInDays(data) > 90) {
@@ -43,7 +43,7 @@ const shouldResubscribe = (data) => {
 }
 
 const newSubscriptionStart = data =>
-  addOneYearAndBeInFuture(moment.utc(first(data).start))
+  addOneYearAndBeInFuture(moment.utc(first(data).startDate))
 
 const newSubscriptionEnd = data =>
   addOneYear(newSubscriptionStart(data))

@@ -9,6 +9,6 @@ class Subscription < ApplicationRecord
 
   alias_attribute :paymentMethod, :payment_method
   alias_attribute :priceCents, :price_cents
-  alias_attribute :start, :start_date
-  alias_attribute :end, :end_date
+  alias_attribute :startDate, :start_date
+  alias_attribute :endDate, :end_date
 end

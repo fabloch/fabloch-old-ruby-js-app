@@ -48,7 +48,7 @@ describe Api::V1::ProfilesController do
       it "returns the serialized user attributes" do
         expect(
           JSON.parse(response.body)['username'][0]
-        ).to eq("can't be blank")
+        ).to eq("doit être rempli(e)")
       end
     end
 

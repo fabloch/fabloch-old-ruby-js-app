@@ -20,8 +20,8 @@ describe Api::V1::SubscriptionsController do
         {
           "paymentMethod" => "checkOrCash",
           "priceCents" => 200,
-          "start" => "2017-05-24",
-          "end" => "2018-05-23",
+          "startDate" => "2017-05-24",
+          "endDate" => "2018-05-23",
           "status" => "pending",
           "plan" => "regular",
         }
@@ -32,8 +32,8 @@ describe Api::V1::SubscriptionsController do
         {
           "paymentMethod" => "checkOrCash",
           "priceCents" => 200,
-          "start" => "2017-05-24",
-          "end" => "2018-05-23",
+          "startDate" => "2017-05-24",
+          "endDate" => "2018-05-23",
           "status" => "pending",
           "plan" => "regular",
         }
@@ -61,8 +61,8 @@ describe Api::V1::SubscriptionsController do
         {
           "paymentMethod" => "checkOrCash",
           "priceCents" => 200,
-          "start" => "2017-05-24",
-          "end" => "2018-05-23",
+          "startDate" => "2017-05-24",
+          "endDate" => "2018-05-23",
           "status" => "pending",
           "plan" => "regular",
         }
@@ -86,7 +86,7 @@ describe Api::V1::SubscriptionsController do
       it "returns the serialized user attributes" do
         expect(
           JSON.parse(response.body)['plan'][0]
-        ).to eq("can't be blank")
+        ).to eq("doit être rempli(e)")
       end
     end
 
@@ -99,9 +99,9 @@ describe Api::V1::SubscriptionsController do
         request.headers.merge!(headers)
         post(:create, params: {
           paymentMethod: "checkOrCash",
-          priceCents: 200,
-          start: "2017-05-24",
-          end: "2018-05-23",
+          priceCents: 2000,
+          startDate: "2017-05-24",
+          endDate: "2018-05-23",
           status: "pending",
           plan: "regular",
         })
@@ -118,9 +118,9 @@ describe Api::V1::SubscriptionsController do
         ).to eq(
           {
             "paymentMethod" => "checkOrCash",
-            "priceCents" => 200,
-            "start" => "2017-05-24",
-            "end" => "2018-05-23",
+            "priceCents" => 2000,
+            "startDate" => "2017-05-24",
+            "endDate" => "2018-05-23",
             "status" => "pending",
             "plan" => "regular",
           }

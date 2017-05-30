@@ -16,24 +16,24 @@ export const stateOkHasReubscribed = Map({
   all: fromJS([
     {
       plan: "regular",
-      start: alt.plus100start,
-      end: alt.plus100end,
+      startDate: alt.plus100start,
+      endDate: alt.plus100end,
       priceCents: 2000,
       paymentMethod: "checkOrCash",
       pending: false,
     },
     {
       plan: "regular",
-      start: alt.plus100start2,
-      end: alt.plus100end2,
+      startDate: alt.plus100start2,
+      endDate: alt.plus100end2,
       priceCents: 2000,
       paymentMethod: "checkOrCash",
       pending: false,
     },
   ]),
   new: fromJS({
-    start: alt.plus100newStart,
-    end: alt.plus100newEnd,
+    startDate: alt.plus100newStart,
+    endDate: alt.plus100newEnd,
   }),
 })
 
@@ -51,16 +51,16 @@ export const stateOkInMoreThan90 = Map({
   all: fromJS([
     {
       plan: "regular",
-      start: alt.plus100start,
-      end: alt.plus100end,
+      startDate: alt.plus100start,
+      endDate: alt.plus100end,
       priceCents: 2000,
       paymentMethod: "checkOrCash",
       pending: false,
     },
   ]),
   new: fromJS({
-    start: alt.plus100newStart,
-    end: alt.plus100newEnd,
+    startDate: alt.plus100newStart,
+    endDate: alt.plus100newEnd,
   }),
 })
 
@@ -78,16 +78,16 @@ export const stateShouldRenew90 = Map({
   all: fromJS([
     {
       plan: "regular",
-      start: alt.plus70start,
-      end: alt.plus70end,
+      startDate: alt.plus70start,
+      endDate: alt.plus70end,
       priceCents: 2000,
       paymentMethod: "checkOrCash",
       pending: false,
     },
   ]),
   new: fromJS({
-    start: alt.plus70newStart,
-    end: alt.plus70newEnd,
+    startDate: alt.plus70newStart,
+    endDate: alt.plus70newEnd,
   }),
 })
 
@@ -105,16 +105,16 @@ export const stateShouldRenew60 = Map({
   all: fromJS([
     {
       plan: "regular",
-      start: alt.plus50start,
-      end: alt.plus50end,
+      startDate: alt.plus50start,
+      endDate: alt.plus50end,
       priceCents: 2000,
       paymentMethod: "checkOrCash",
       pending: false,
     },
   ]),
   new: fromJS({
-    start: alt.plus50newStart,
-    end: alt.plus50newEnd,
+    startDate: alt.plus50newStart,
+    endDate: alt.plus50newEnd,
   }),
 })
 
@@ -132,16 +132,16 @@ export const stateShouldRenew30 = Map({
   all: fromJS([
     {
       plan: "regular",
-      start: alt.plus10start,
-      end: alt.plus10end,
+      startDate: alt.plus10start,
+      endDate: alt.plus10end,
       priceCents: 2000,
       paymentMethod: "checkOrCash",
       pending: false,
     },
   ]),
   new: fromJS({
-    start: alt.plus10newStart,
-    end: alt.plus10newEnd,
+    startDate: alt.plus10newStart,
+    endDate: alt.plus10newEnd,
   }),
 })
 
@@ -159,24 +159,24 @@ export const stateOut = Map({
   all: fromJS([
     {
       plan: "regular",
-      start: alt.minus10start,
-      end: alt.minus10end,
+      startDate: alt.minus10start,
+      endDate: alt.minus10end,
       priceCents: 2000,
       paymentMethod: "checkOrCash",
       pending: false,
     },
     {
       plan: "regular",
-      start: alt.minus10start2,
-      end: alt.minus10end2,
+      startDate: alt.minus10start2,
+      endDate: alt.minus10end2,
       priceCents: 2000,
       paymentMethod: "checkOrCash",
       pending: false,
     },
   ]),
   new: fromJS({
-    start: alt.minus10newStart,
-    end: alt.minus10newEnd,
+    startDate: alt.minus10newStart,
+    endDate: alt.minus10newEnd,
   }),
 })
 
@@ -184,7 +184,7 @@ export const virgin = Map({
   present: Map({}),
   all: List(),
   new: fromJS({
-    start: todayString,
-    end: todayPlusAYearString,
+    startDate: todayString,
+    endDate: todayPlusAYearString,
   }),
 })

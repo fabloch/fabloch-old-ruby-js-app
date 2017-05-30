@@ -65,8 +65,8 @@ const initialState = Map({
   present: Map({}),
   all: List(),
   new: fromJS({
-    start: todayString,
-    end: todayPlusAYearString,
+    startDate: todayString,
+    endDate: todayPlusAYearString,
   }),
 })
 
