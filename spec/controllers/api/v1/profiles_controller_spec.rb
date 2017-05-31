@@ -14,7 +14,7 @@ describe Api::V1::ProfilesController do
 
     it "returns the serialized user attributes" do
       expect(
-        JSON.parse(response.body)['data']['attributes']
+        JSON.parse(response.body)
       ).to eq(
         {
           "username" => @profile.username,
@@ -73,7 +73,7 @@ describe Api::V1::ProfilesController do
 
       it "returns the serialized user attributes" do
         expect(
-          JSON.parse(response.body)['data']['attributes']
+          JSON.parse(response.body)
         ).to eq(
           {
             "username" => "seb_nicolaids",
@@ -119,7 +119,7 @@ describe Api::V1::ProfilesController do
     it "returns the serialized user attributes" do
       id = @profile.id
       expect(
-        JSON.parse(response.body)['data']['attributes']
+        JSON.parse(response.body)
       ).to eq(
         {
           "username" => "seb_nicolaids",

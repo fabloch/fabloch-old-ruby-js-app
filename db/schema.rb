@@ -50,6 +50,7 @@ ActiveRecord::Schema.define(version: 20170524143349) do
     t.string   "chargeable_type"
     t.integer  "chargeable_id"
     t.integer  "amount_cents"
+    t.string   "token"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
     t.index ["chargeable_type", "chargeable_id"], name: "index_charges_on_chargeable_type_and_chargeable_id", using: :btree

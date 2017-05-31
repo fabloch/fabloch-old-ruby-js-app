@@ -13,7 +13,7 @@ describe Api::V1::UsersController do
 
     it "returns the serialized user attributes" do
       expect(
-        JSON.parse(response.body)['data']['attributes']
+        JSON.parse(response.body)
       ).to eq(
         { "name" => nil, "email" => @user.email }
       )
@@ -33,9 +33,9 @@ describe Api::V1::UsersController do
     end
 
     it 'returns the serialized user attributes' do
-      expect(JSON.parse(response.body)['data'].length).to eq(1)
+      expect(JSON.parse(response.body).length()).to eq(1)
       expect(
-        JSON.parse(response.body)['data'].first['attributes']
+        JSON.parse(response.body).first()
       ).to eq(
         { "name" => nil, "email" => @user.email }
       )

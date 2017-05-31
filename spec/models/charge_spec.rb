@@ -14,6 +14,7 @@ RSpec.describe Charge, type: :model do
   context "presence" do
     it { should validate_presence_of(:chargeable) }
     it { should validate_presence_of(:amount_cents) }
+    it { should validate_presence_of(:token) }
   end
 
   context "format" do

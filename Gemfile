@@ -47,6 +47,9 @@ gem 'carrierwave', '~> 1.0'
 # Money
 gem 'money-rails', '~>1'
 
+# Stripe
+gem 'stripe'
+
 group :development, :test do
   gem "awesome_print"
   gem 'rspec-rails'

@@ -17,7 +17,18 @@ module Api::V1
 
     # POST /v1/subscription
     def create
-      @subscription = Subscription.create!(subscription_params_with_user)
+      @subscription = Subscription.new(subscription_params_with_user)
+      if subscription_params_with_user['paymentMethod'] == "card"
+        charge = Charge.new(
+          chargeable: @subscription,
+          amount_cents: subscription_params_with_user['priceCents'],
+          token: subscription_params_with_user['token'],
+        )
+        charge.process_payment(current_user)
+        charge.save!
+        @subscription.confirmed = true
+      end
+      @subscription.save!
 
       json_response(@subscription, :created)
     end
@@ -46,7 +57,8 @@ module Api::V1
         :endDate,
         :startDate,
         :paymentMethod,
-        :priceCents
+        :priceCents,
+        :token,
       )
     end
 

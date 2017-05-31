@@ -1,11 +1,17 @@
+require "stripe"
+Stripe.api_key = ENV['STRIPE_PUBLIC_TEST']
+
 describe Api::V1::SubscriptionsController do
+  before(:each) do
+    @user = FactoryGirl.create :user
+    auth_headers = @user.create_new_auth_token
+    request.headers.merge!(auth_headers)
+  end
+
   describe "GET #index" do
     before(:each) do
-      @user = FactoryGirl.create :user
       @subscription1 = FactoryGirl.create :subscription, user: @user
       @subscription2 = FactoryGirl.create :subscription, user: @user
-      auth_headers = @user.create_new_auth_token
-      request.headers.merge!(auth_headers)
       get :index
     end
 
@@ -15,38 +21,33 @@ describe Api::V1::SubscriptionsController do
 
     it "returns the serialized subscriptions" do
       expect(
-        JSON.parse(response.body)['data'][0]['attributes']
+        JSON.parse(response.body)
       ).to eq(
-        {
-          "plan" => "regular",
-          "paymentMethod" => "checkOrCash",
-          "priceCents" => 2000,
-          "startDate" => "2017-05-24",
-          "endDate" => "2018-05-23",
-          "confirmed" => false,
-        }
-      )
-      expect(
-        JSON.parse(response.body)['data'][1]['attributes']
-      ).to eq(
-        {
-          "plan" => "regular",
-          "paymentMethod" => "checkOrCash",
-          "priceCents" => 2000,
-          "startDate" => "2017-05-24",
-          "endDate" => "2018-05-23",
-          "confirmed" => false,
-        }
+        [
+          {
+            "plan" => "regular",
+            "paymentMethod" => "checkOrCash",
+            "priceCents" => 2000,
+            "startDate" => "2017-05-24",
+            "endDate" => "2018-05-23",
+            "confirmed" => false,
+          },
+          {
+            "plan" => "regular",
+            "paymentMethod" => "checkOrCash",
+            "priceCents" => 2000,
+            "startDate" => "2017-05-24",
+            "endDate" => "2018-05-23",
+            "confirmed" => false,
+          }
+        ]
       )
     end
   end
 
   describe "GET #show" do
     before(:each) do
-      @user = FactoryGirl.create :user
       @subscription = FactoryGirl.create :subscription, user: @user
-      auth_headers = @user.create_new_auth_token
-      request.headers.merge!(auth_headers)
       get :show, params: { id: @subscription.id }
     end
 
@@ -56,7 +57,7 @@ describe Api::V1::SubscriptionsController do
 
     it "returns the serialized user attributes" do
       expect(
-        JSON.parse(response.body)['data']['attributes']
+        JSON.parse(response.body)
       ).to eq(
         {
           "plan" => "regular",
@@ -71,11 +72,8 @@ describe Api::V1::SubscriptionsController do
   end
 
   describe "POST #create" do
-    context "invalid request" do
+    context "super invalid request" do
       before(:each) do
-        @user = FactoryGirl.create :user
-        auth_headers = @user.create_new_auth_token
-        request.headers.merge!(auth_headers)
         post :create, params: { foo: "bar" }
       end
 
@@ -86,106 +84,216 @@ describe Api::V1::SubscriptionsController do
       it "returns the serialized user attributes" do
         expect(
           JSON.parse(response.body)['plan'][0]
-        ).to eq("doit être rempli(e)")
-      end
-    end
-
-    context "valid request - checkOrCash" do
-      before(:each) do
-        @user = FactoryGirl.create :user
-        auth_headers = @user.create_new_auth_token
-        request.headers.merge!(auth_headers)
-        headers = { "X-Key-Inflection" => "camel" }
-        request.headers.merge!(headers)
-        post(:create, params: {
-          plan: "regular",
-          paymentMethod: "checkOrCash",
-          priceCents: 2000,
-          startDate: "2017-05-24",
-          endDate: "2018-05-23",
-        })
-      end
-
-      it 'responds with 201 status code' do
-        expect(response.code).to eq('201')
-      end
-
-      it "returns the serialized user attributes" do
-        # print(JSON.parse(response.body))
-        expect(
-          JSON.parse(response.body)['data']['attributes']
         ).to eq(
-          {
-            "plan" => "regular",
-            "paymentMethod" => "checkOrCash",
-            "priceCents" => 2000,
-            "startDate" => "2017-05-24",
-            "endDate" => "2018-05-23",
-            "confirmed" => false,
-          }
+          "doit être rempli(e)"
         )
       end
+    end
 
-      it "links subscription with current_user" do
-        expect(
-          Subscription.last().user
-        ).to eq(@user)
+    context "checkOrCash" do
+      context "valid request" do
+        before(:each) do
+          post(:create, params: {
+            plan: "regular",
+            paymentMethod: "checkOrCash",
+            priceCents: 2000,
+            startDate: "2017-05-24",
+            endDate: "2018-05-23",
+          })
+        end
+
+        it 'responds with 201 status code' do
+          expect(response.code).to eq('201')
+        end
+
+        it "returns the serialized user attributes" do
+          # print(JSON.parse(response.body))
+          expect(
+            JSON.parse(response.body)
+          ).to eq(
+            {
+              "plan" => "regular",
+              "paymentMethod" => "checkOrCash",
+              "priceCents" => 2000,
+              "startDate" => "2017-05-24",
+              "endDate" => "2018-05-23",
+              "confirmed" => false,
+            }
+          )
+        end
+
+        it "links subscription with current_user" do
+          expect(
+            Subscription.last().user
+          ).to eq(@user)
+        end
       end
     end
-  end
 
-  # describe "PUT #update" do
-  #   before(:each) do
-  #     @profile = FactoryGirl.create :profile
-  #     @user = @profile.user
-  #     auth_headers = @user.create_new_auth_token
-  #     request.headers.merge!(auth_headers)
-  #     put :update, params: {
-  #       username: "seb_nicolaids",
-  #       firstname: "Sébastien",
-  #       lastname: "Nicolaïdis",
-  #       description: "Some description",
-  #       birthday: "1979-09-13",
-  #       avatar: fixture_file_upload('spec/fixtures/test2.jpg', 'image/jpg')
-  #     }
-  #   end
-  #
-  #   it 'responds with 200 status code' do
-  #     expect(response.code).to eq('200')
-  #   end
-  #
-  #   it "returns the serialized user attributes" do
-  #     id = @profile.id
-  #     expect(
-  #       JSON.parse(response.body)['data']['attributes']
-  #     ).to eq(
-  #       {
-  #         "username" => "seb_nicolaids",
-  #         "firstname" => "Sébastien",
-  #         "lastname" => "Nicolaïdis",
-  #         "description" => "Some description",
-  #         "birthday" => "1979-09-13",
-  #         "img_large" => "/Users/sebastiennicolaidis/dev/ruby/fab_loch/spec/support/uploads/profile/avatar/#{id}/large_test2.jpg",
-  #         "img_medium" => "/Users/sebastiennicolaidis/dev/ruby/fab_loch/spec/support/uploads/profile/avatar/#{id}/medium_test2.jpg",
-  #         "img_small" => "/Users/sebastiennicolaidis/dev/ruby/fab_loch/spec/support/uploads/profile/avatar/#{id}/small_test2.jpg",
-  #       }
-  #     )
-  #   end
-  # end
-  #
-  # describe "DELETE #destroy" do
-  #   before(:each) do
-  #     @profile = FactoryGirl.create :profile
-  #     @user = @profile.user
-  #     auth_headers = @user.create_new_auth_token
-  #     request.headers.merge!(auth_headers)
-  #     delete :destroy
-  #   end
-  #
-  #   it 'returns status code 204' do
-  #     expect(response).to have_http_status(204)
-  #     expect(Profile.all()).to be_empty
-  #   end
-  # end
-  #
+    ap "Tests involving Stripe are commented"
+    # context "card" do
+    #   context "valid request" do
+    #     before(:each) do
+    #       @token = Stripe::Token.create(
+    #         :card => {
+    #           :number => "4242424242424242",
+    #           :exp_month => 5,
+    #           :exp_year => (Time.now + 1.year).strftime("%Y"),
+    #           :cvc => "314"
+    #         },
+    #       )
+    #       post(:create, params: {
+    #         plan: "regular",
+    #         paymentMethod: "card",
+    #         priceCents: 2000,
+    #         startDate: "2017-05-24",
+    #         endDate: "2018-05-23",
+    #         token: @token.id
+    #       })
+    #     end
+    #
+    #     it 'responds with 201 status code' do
+    #       expect(response.code).to eq('201')
+    #     end
+    #
+    #     it "returns the serialized user attributes" do
+    #       # print(JSON.parse(response.body))
+    #       expect(
+    #         JSON.parse(response.body)
+    #       ).to eq(
+    #         {
+    #           "plan" => "regular",
+    #           "paymentMethod" => "card",
+    #           "priceCents" => 2000,
+    #           "startDate" => "2017-05-24",
+    #           "endDate" => "2018-05-23",
+    #           "confirmed" => true,
+    #         }
+    #       )
+    #     end
+    #
+    #     it "links subscription with current_user" do
+    #       expect(
+    #         Subscription.last().user
+    #       ).to eq(@user)
+    #     end
+    #
+    #     it "links subscription with charge" do
+    #       expect(
+    #         Subscription.last().charge
+    #       ).to_not be_nil
+    #     end
+    #   end
+    #
+    #   context "invalid request" do
+    #     context "incorrect_cvc" do
+    #       before(:each) do
+    #         @token = Stripe::Token.create(
+    #           :card => {
+    #             :number => "4000000000000101",
+    #             :exp_month => 5,
+    #             :exp_year => (Time.now + 1.year).strftime("%Y"),
+    #             :cvc => "314"
+    #           },
+    #         )
+    #         post(:create, params: {
+    #           plan: "regular",
+    #           paymentMethod: "card",
+    #           priceCents: 2000,
+    #           startDate: "2017-05-24",
+    #           endDate: "2018-05-23",
+    #           token: @token.id
+    #         })
+    #       end
+    #
+    #       it 'responds with 402 status code' do
+    #         expect(response.code).to eq('402')
+    #       end
+    #
+    #       it "returns error, incorrect_cvc" do
+    #         # print(JSON.parse(response.body))
+    #         expect(
+    #           JSON.parse(response.body)
+    #         ).to eq(
+    #           {
+    #             "error" => "incorrect_cvc",
+    #           }
+    #         )
+    #       end
+    #     end
+    #
+    #     context "card_declined" do
+    #       before(:each) do
+    #         @token = Stripe::Token.create(
+    #           :card => {
+    #             :number => "4000000000000002",
+    #             :exp_month => 5,
+    #             :exp_year => (Time.now + 1.year).strftime("%Y"),
+    #             :cvc => "314"
+    #           },
+    #         )
+    #         post(:create, params: {
+    #           plan: "regular",
+    #           paymentMethod: "card",
+    #           priceCents: 2000,
+    #           startDate: "2017-05-24",
+    #           endDate: "2018-05-23",
+    #           token: @token.id
+    #         })
+    #       end
+    #
+    #       it 'responds with 402 status code' do
+    #         expect(response.code).to eq('402')
+    #       end
+    #
+    #       it "returns error, card_declined" do
+    #         # print(JSON.parse(response.body))
+    #         expect(
+    #           JSON.parse(response.body)
+    #         ).to eq(
+    #           {
+    #             "error" => "card_declined",
+    #           }
+    #         )
+    #       end
+    #     end
+    #
+    #     context "incorrect_number" do
+    #       before(:each) do
+    #         @token = Stripe::Token.create(
+    #           :card => {
+    #             :number => "4242424242424241",
+    #             :exp_month => 5,
+    #             :exp_year => (Time.now + 1.year).strftime("%Y"),
+    #             :cvc => "314"
+    #           },
+    #         )
+    #         post(:create, params: {
+    #           plan: "regular",
+    #           paymentMethod: "card",
+    #           priceCents: 2000,
+    #           startDate: "2017-05-24",
+    #           endDate: "2018-05-23",
+    #           token: @token.id
+    #         })
+    #       end
+    #
+    #       it 'responds with 402 status code' do
+    #         expect(response.code).to eq('402')
+    #       end
+    #
+    #       it "returns error, incorrect_number" do
+    #         # print(JSON.parse(response.body))
+    #         expect(
+    #           JSON.parse(response.body)
+    #         ).to eq(
+    #           {
+    #             "error" => "incorrect_number",
+    #           }
+    #         )
+    #       end
+    #     end
+    #   end
+    # end
+  end
 end

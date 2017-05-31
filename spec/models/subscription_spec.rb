@@ -12,11 +12,12 @@ RSpec.describe Subscription, type: :model do
     it { should have_one(:charge) }
   end
 
-  context "relations" do
+  context "values" do
     it "confirmed defaults to false" do
-      profile = create(:subscription)
-      expect(profile.confirmed).to be(false)
+      subscription = create(:subscription)
+      expect(subscription.confirmed).to be(false)
     end
+    it { should validate_inclusion_of(:payment_method).in_array(["card", "checkOrCash"]) }
   end
 
   context "validations" do
