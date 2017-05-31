@@ -6,7 +6,7 @@ class Charge < ApplicationRecord
   def process_payment(user)
     Stripe.api_key = ENV["STRIPE_SECRET"]
     Stripe::Charge.create amount: self.amount_cents,
-                          description: "Subscription for #{user.email} (#{self.chargeable.start_date}/#{self.chargeable.end_date})",
+                          description: "Abo pour #{user.email} (#{self.chargeable.start_date}/#{self.chargeable.end_date})",
                           currency: 'eur',
                           source: self.chargeable.token
   end

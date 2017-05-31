@@ -7,7 +7,7 @@ class Profile < ApplicationRecord
 
   validates :username, format: {
     with: /\A[a-z0-9_]+\Z/,
-    message: "only allows lowercase letters or \"_\"" }
+    message: "Sont acceptés chiffres, minuscules et le tiret du bas \"_\""}
   validates :username, length: { in: 3..20 }
   validates :description, length: { in: 3..140 }, allow_blank: true
 end

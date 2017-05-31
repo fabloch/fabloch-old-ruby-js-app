@@ -24,7 +24,12 @@ RSpec.describe Profile, type: :model do
 
       it { should allow_value("seb_nicolaidis").for(:username) }
       it { should allow_value("seb_nicolaidis2").for(:username) }
-      it { should_not allow_value("Seb_Nicolaidis").for(:username) }
+      it { should_not allow_value("Seb_Nicolaidis")
+            .for(:username)
+            .with_message(
+              /Sont acceptés chiffres, minuscules et le tiret du bas \"_\"/
+            )
+          }
       it { should_not allow_value("seb-nicolaidis").for(:username) }
       it { should_not allow_value("$eb_nicolaidis").for(:username) }
     end
