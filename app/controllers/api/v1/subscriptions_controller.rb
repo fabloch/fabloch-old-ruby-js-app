@@ -42,7 +42,7 @@ module Api::V1
       # whitelist params
       params.permit(
         :plan,
-        :status,
+        :confirmed,
         :endDate,
         :startDate,
         :paymentMethod,

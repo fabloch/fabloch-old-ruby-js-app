@@ -18,24 +18,24 @@ describe Api::V1::SubscriptionsController do
         JSON.parse(response.body)['data'][0]['attributes']
       ).to eq(
         {
+          "plan" => "regular",
           "paymentMethod" => "checkOrCash",
-          "priceCents" => 200,
+          "priceCents" => 2000,
           "startDate" => "2017-05-24",
           "endDate" => "2018-05-23",
-          "status" => "pending",
-          "plan" => "regular",
+          "confirmed" => false,
         }
       )
       expect(
         JSON.parse(response.body)['data'][1]['attributes']
       ).to eq(
         {
+          "plan" => "regular",
           "paymentMethod" => "checkOrCash",
-          "priceCents" => 200,
+          "priceCents" => 2000,
           "startDate" => "2017-05-24",
           "endDate" => "2018-05-23",
-          "status" => "pending",
-          "plan" => "regular",
+          "confirmed" => false,
         }
       )
     end
@@ -59,12 +59,12 @@ describe Api::V1::SubscriptionsController do
         JSON.parse(response.body)['data']['attributes']
       ).to eq(
         {
+          "plan" => "regular",
           "paymentMethod" => "checkOrCash",
-          "priceCents" => 200,
+          "priceCents" => 2000,
           "startDate" => "2017-05-24",
           "endDate" => "2018-05-23",
-          "status" => "pending",
-          "plan" => "regular",
+          "confirmed" => false,
         }
       )
     end
@@ -98,12 +98,11 @@ describe Api::V1::SubscriptionsController do
         headers = { "X-Key-Inflection" => "camel" }
         request.headers.merge!(headers)
         post(:create, params: {
+          plan: "regular",
           paymentMethod: "checkOrCash",
           priceCents: 2000,
           startDate: "2017-05-24",
           endDate: "2018-05-23",
-          status: "pending",
-          plan: "regular",
         })
       end
 
@@ -117,12 +116,12 @@ describe Api::V1::SubscriptionsController do
           JSON.parse(response.body)['data']['attributes']
         ).to eq(
           {
+            "plan" => "regular",
             "paymentMethod" => "checkOrCash",
             "priceCents" => 2000,
             "startDate" => "2017-05-24",
             "endDate" => "2018-05-23",
-            "status" => "pending",
-            "plan" => "regular",
+            "confirmed" => false,
           }
         )
       end

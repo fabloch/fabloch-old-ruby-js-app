@@ -17,7 +17,7 @@ const fetchSubscriptions = () => (dispatch) => {
   return api.fetch("subscriptions", "get")
   .then((response) => {
     dispatch(
-      actions.fetchSubscriptionsSuccess(response.data.data.attributes),
+      actions.fetchSubscriptionsSuccess(response.data),
     )
   })
   .catch((error) => {
@@ -38,7 +38,7 @@ const fetchFakeSubscriptions = () => (dispatch) => {
   return fakeApi.fetch("subscriptions", "get")
   .then((response) => {
     dispatch(
-      actions.fetchSubscriptionsSuccess(response.data.data.attributes),
+      actions.fetchSubscriptionsSuccess(response.data),
     )
   })
   .catch((error) => {
@@ -59,7 +59,7 @@ const postSubscription = data => (dispatch) => {
   return api.fetch("subscriptions", "post", data)
   .then((response) => {
     dispatch(
-      actions.postSubscriptionSuccess(response.data.data.attributes),
+      actions.postSubscriptionSuccess(response.data),
     )
   })
   .catch((error) => {
@@ -83,5 +83,5 @@ export default {
   selectPlan,
   selectPaymentMethod,
   focusStep,
-  postSubscription
+  postSubscription,
 }

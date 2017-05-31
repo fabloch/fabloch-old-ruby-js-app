@@ -7,9 +7,9 @@ import { Elements } from "react-stripe-elements"
 
 import CheckoutForm from "./CheckoutForm"
 
-const Summary = ({ steps, subscriptions }) => {
-  const startDate = subscriptions ? moment(subscriptions.newSubscriptionStart) : moment()
-  const endDate = subscriptions ? moment(subscriptions.newSubscriptionEnd) : moment(startDate).add(1, "y").subtract(1, "d")
+const Summary = ({ steps, create }) => {
+  const startDate = moment(create.startDate).format("LL")
+  const endDate = moment(create.endDate).format("LL")
 
   return (
     <Grid.Column>
@@ -31,7 +31,7 @@ const Summary = ({ steps, subscriptions }) => {
               <List.Content>
                 <List.Header as="h3">Période d'abonnement</List.Header>
                 <List.Description>
-                  Du {startDate.format("L")} au {endDate.format("L")}
+                  Du {startDate} au {endDate}
                 </List.Description>
               </List.Content>
             </List.Item>
@@ -49,13 +49,18 @@ const Summary = ({ steps, subscriptions }) => {
   )
 }
 
-const Confirm = ({ steps, subscriptions }) =>
+Summary.propTypes = {
+  steps: PropTypes.array.isRequired,
+  create: PropTypes.object.isRequired,
+}
+
+const Confirm = ({ steps, create, postSubscription }) =>
   <Segment padded="very">
     <Header as="h1" textAlign="center">Confirmation</Header>
     { steps[1].paymentMethod === "card" ?
       <Grid stackable columns={2}>
         <Grid.Column>
-          <Summary steps={steps} subscriptions={subscriptions} />
+          <Summary steps={steps} create={create} />
         </Grid.Column>
         <Grid.Column>
           <Elements>
@@ -73,11 +78,11 @@ const Confirm = ({ steps, subscriptions }) =>
     :
       <Grid>
         <Grid.Column>
-          <Summary steps={steps} subscriptions={subscriptions} />
+          <Summary steps={steps} create={create} />
           <Grid padded>
             <Grid.Column>
               <Button
-                onClick={() => {}}
+                onClick={() => {postSubscription(create)}}
                 color="green"
                 content="Confirmer"
                 icon="chevron right"
@@ -94,11 +99,8 @@ const Confirm = ({ steps, subscriptions }) =>
 
 Confirm.propTypes = {
   steps: PropTypes.array.isRequired,
-  subscriptions: PropTypes.object,
-}
-
-Confirm.defaultProps = {
-  subscriptions: null,
+  create: PropTypes.object,
+  postSubscription: PropTypes.func.isRequired,
 }
 
 export default Confirm

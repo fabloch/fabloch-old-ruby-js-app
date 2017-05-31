@@ -7,7 +7,7 @@ class CreateSubscriptions < ActiveRecord::Migration[5.0]
       t.date :end_date
       t.integer :price_cents
       t.string :payment_method
-      t.string :status
+      t.boolean :confirmed, default: false
 
       t.timestamps
     end

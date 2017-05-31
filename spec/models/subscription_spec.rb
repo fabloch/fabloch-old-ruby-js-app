@@ -12,9 +12,14 @@ RSpec.describe Subscription, type: :model do
     it { should have_one(:charge) }
   end
 
-  context "validations" do
-    before { create(:profile) }
+  context "relations" do
+    it "confirmed defaults to false" do
+      profile = create(:subscription)
+      expect(profile.confirmed).to be(false)
+    end
+  end
 
+  context "validations" do
     context "presence" do
       it { should validate_presence_of(:user) }
       it { should validate_presence_of (:plan) }
@@ -22,7 +27,7 @@ RSpec.describe Subscription, type: :model do
       it { should validate_presence_of (:end_date) }
       it { should validate_presence_of (:price_cents) }
       it { should validate_presence_of (:payment_method) }
-      it { should validate_presence_of (:status) }
+      it { should_not validate_presence_of (:confirmed) }
 
       # it { should allow_value("").for(:firstname) }
       # it { should allow_value("").for(:lastname) }
@@ -31,7 +36,6 @@ RSpec.describe Subscription, type: :model do
     end
 
     context "format" do
-
       # it { should allow_value("seb_nicolaidis").for(:username) }
       # it { should allow_value("seb_nicolaidis2").for(:username) }
       # it { should_not allow_value("Seb_Nicolaidis").for(:username) }

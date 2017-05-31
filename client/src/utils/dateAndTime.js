@@ -9,9 +9,6 @@ export const today = moment.utc()
   .hour(0)
 
 export const todayString = moment(today)
-                            .add(1, "y")
-                            .subtract(1, "d")
-                            .format("YYYY-MM-DD")
 
 export const todayPlusAYearString = moment(today)
                                       .add(1, "y")

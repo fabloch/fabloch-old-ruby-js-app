@@ -31,11 +31,7 @@ describe("profileOperations", () => {
         .get("/v1/profile")
         .reply(
           200,
-          {
-            data: {
-              attributes: data,
-            },
-          },
+          data,
         )
 
         return store.dispatch(operations.fetchProfile())
@@ -107,11 +103,7 @@ describe("profileOperations", () => {
         .post("/v1/profile")
         .reply(
           201,
-          {
-            data: {
-              attributes: data,
-            },
-          },
+          data,
         )
 
         return store.dispatch(operations.postProfile(data))
@@ -184,11 +176,7 @@ describe("profileOperations", () => {
           .put("/v1/profile")
           .reply(
             201,
-            {
-              data: {
-                attributes: data,
-              },
-            },
+            data,
           )
 
           return store.dispatch(operations.putProfile(data))

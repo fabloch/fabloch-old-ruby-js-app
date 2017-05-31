@@ -16,7 +16,7 @@ const fetchProfile = () => (dispatch) => {
   return api.fetch("profile", "get")
   .then((response) => {
     dispatch(
-      actions.fetchProfileSuccess(response.data.data.attributes),
+      actions.fetchProfileSuccess(response.data),
     )
   })
   .catch((error) => {
@@ -50,7 +50,7 @@ const postProfile = data => (dispatch) => {
   return api.fetch("profile", "post", dataToForm(data))
   .then((response) => {
     dispatch(
-      actions.postProfileSuccess(response.data.data.attributes),
+      actions.postProfileSuccess(response.data),
     )
     dispatch(actions.toggleEdit())
   })
@@ -70,7 +70,7 @@ const putProfile = data => (dispatch) => {
   return api.fetch("profile", "put", dataToForm(data))
   .then((response) => {
     dispatch(
-      actions.putProfileSuccess(response.data.data.attributes),
+      actions.putProfileSuccess(response.data),
     )
     dispatch(actions.toggleEdit())
   })

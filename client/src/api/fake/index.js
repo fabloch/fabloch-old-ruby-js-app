@@ -9,11 +9,7 @@ const fetch = (url, method) =>
     case "subscriptions":
       if (method === "get") {
         return ({
-          data: {
-            data: {
-              attributes: alt.chosenAlt,
-            },
-          },
+          data: alt.chosenAlt,
         })
       }
       return ""

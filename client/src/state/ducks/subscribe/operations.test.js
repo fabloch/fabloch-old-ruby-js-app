@@ -30,11 +30,7 @@ describe("subscriptionsOperations", () => {
         .get("/v1/subscriptions")
         .reply(
           200,
-          {
-            data: {
-              attributes: data,
-            },
-          },
+          data,
         )
 
         return store.dispatch(operations.fetchSubscriptions())
@@ -148,11 +144,7 @@ describe("subscriptionsOperations", () => {
         .post("/v1/subscriptions")
         .reply(
           201,
-          {
-            data: {
-              attributes: data,
-            },
-          },
+          data,
         )
 
         return store.dispatch(operations.postSubscription(data))

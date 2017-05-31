@@ -3,7 +3,7 @@ class Subscription < ApplicationRecord
   has_one :charge, as: :chargeable
 
   validates_presence_of [:user, :plan, :start_date, :end_date,
-                         :price_cents, :payment_method, :status]
+                         :price_cents, :payment_method]
 
   monetize :price_cents
 

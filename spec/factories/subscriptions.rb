@@ -4,8 +4,8 @@ FactoryGirl.define do
     plan "regular"
     start_date "2017-05-24"
     end_date "2018-05-23"
-    price_cents 200
+    price_cents 2000
     payment_method "checkOrCash"
-    status "pending"
+    confirmed false
   end
 end

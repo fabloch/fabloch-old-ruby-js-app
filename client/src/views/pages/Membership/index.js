@@ -26,9 +26,9 @@ class MembershipPage extends Component {
   }
 
   componentDidMount() {
-    const { fetchFakeSubscriptions, present } = this.props
+    const { fetchSubscriptions, present } = this.props
     if (isEmpty(present)) {
-      fetchFakeSubscriptions()
+      fetchSubscriptions()
     }
   }
 
@@ -82,7 +82,7 @@ class MembershipPage extends Component {
 MembershipPage.propTypes = {
   isLoading: PropTypes.bool.isRequired,
   loadErrors: PropTypes.bool.isRequired,
-  fetchFakeSubscriptions: PropTypes.func.isRequired,
+  fetchSubscriptions: PropTypes.func.isRequired,
   present: PropTypes.object.isRequired,
   all: PropTypes.array.isRequired,
 }

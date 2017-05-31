@@ -76,9 +76,9 @@ ActiveRecord::Schema.define(version: 20170524143349) do
     t.date     "end_date"
     t.integer  "price_cents"
     t.string   "payment_method"
-    t.string   "status"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.boolean  "confirmed",      default: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
     t.index ["user_id"], name: "index_subscriptions_on_user_id", using: :btree
   end
 

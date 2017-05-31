@@ -2,6 +2,7 @@ import React, { Component } from "react"
 import PropTypes from "prop-types"
 import { connect } from "react-redux"
 import { Grid, Segment } from "semantic-ui-react"
+import isEmpty from "lodash/isEmpty"
 
 import operations from "../../../state/ducks/subscribe/operations"
 
@@ -13,16 +14,18 @@ import Confirm from "./Confirm"
 
 class SubscribePage extends Component {
   componentDidMount() {
-    const { fetchSubscriptions, subscriptions } = this.props
-    if (!subscriptions) {
+    const { fetchSubscriptions, present } = this.props
+    if (isEmpty(present)) {
       fetchSubscriptions()
     }
   }
 
   render() {
     const {
+      postSubscription,
       isLoading,
-      subscriptions,
+      present,
+      create,
       steps,
       plans,
       selectPlan,
@@ -34,7 +37,7 @@ class SubscribePage extends Component {
       if (!steps[0].completed) {
         return (
           <div>
-            <PlanIntro {...subscriptions} />
+            <PlanIntro {...present} />
             <Plans
               plans={plans}
               selectPlan={selectPlan}
@@ -44,7 +47,13 @@ class SubscribePage extends Component {
       } else if (!steps[1].completed) {
         return <Payment selectPaymentMethod={selectPaymentMethod} />
       } else if (!steps[2].done) {
-        return <Confirm steps={steps} subscriptions={subscriptions} />
+        return (
+          <Confirm
+            steps={steps}
+            postSubscription={postSubscription}
+            create={create}
+          />
+        )
       }
       return ""
     }
@@ -69,8 +78,10 @@ class SubscribePage extends Component {
 }
 
 SubscribePage.propTypes = {
+  postSubscription: PropTypes.func.isRequired,
   isLoading: PropTypes.bool.isRequired,
-  subscriptions: PropTypes.object,
+  present: PropTypes.object.isRequired,
+  create: PropTypes.object.isRequired,
   plans: PropTypes.object.isRequired,
   steps: PropTypes.array.isRequired,
   fetchSubscriptions: PropTypes.func.isRequired,
@@ -79,13 +90,10 @@ SubscribePage.propTypes = {
   focusStep: PropTypes.func.isRequired,
 }
 
-SubscribePage.defaultProps = {
-  subscriptions: null,
-}
-
 const mapStateToProps = ({ subscribe }) => ({
   isLoading: subscribe.get("isLoading"),
-  subscriptions: subscribe.get("subscriptions") && subscribe.get("subscriptions").toJS(),
+  present: subscribe.get("present").toJS(),
+  create: subscribe.get("create").toJS(),
   plans: subscribe.get("plans") && subscribe.get("plans").toJS(),
   steps: subscribe.get("steps") && subscribe.get("steps").toJS(),
 })

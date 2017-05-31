@@ -12,8 +12,6 @@ RSpec.describe Profile, type: :model do
   end
 
   context "validations" do
-    before { create(:profile) }
-
     context "presence" do
       it { should_not allow_value("").for(:username) }
       it { should allow_value("").for(:firstname) }
