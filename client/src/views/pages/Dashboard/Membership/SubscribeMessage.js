@@ -4,7 +4,7 @@ import moment from "moment"
 import isEmpty from "lodash/isEmpty"
 
 import { Icon, Message, Divider } from "semantic-ui-react"
-import RouterButton from "../../components/RouterButton"
+import RouterButton from "../../../components/RouterButton"
 
 const Resubscribe = ({
   present,

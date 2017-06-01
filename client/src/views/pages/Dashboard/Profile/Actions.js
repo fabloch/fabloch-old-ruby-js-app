@@ -1,6 +1,6 @@
 import React from "react"
 
-import RouterButton from "../../components/RouterButton"
+import RouterButton from "../../../components/RouterButton"
 
 const Actions = () =>
   <RouterButton

@@ -1,9 +1,10 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { Route, Link } from "react-router-dom"
-import { Menu } from "semantic-ui-react"
+import { Menu, Icon } from "semantic-ui-react"
 
 const MenuItem = ({
+  icon,
   label,
   to,
   activeOnlyWhenExact,
@@ -20,6 +21,7 @@ const MenuItem = ({
         active={match && true}
         onClick={onClick}
       >
+        {icon && <Icon name={icon} />}
         {label}
       </Menu.Item>
     )}

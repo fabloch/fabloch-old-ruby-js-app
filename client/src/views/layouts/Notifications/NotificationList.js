@@ -23,7 +23,7 @@ const NotificationList = ({ notifications, hideNotification }) => {
         <Grid.Row>
           <Grid.Column>
             {notificationList}
-          `</Grid.Column>
+          </Grid.Column>
         </Grid.Row>
       </Grid>
     )

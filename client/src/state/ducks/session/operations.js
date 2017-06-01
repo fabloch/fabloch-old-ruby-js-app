@@ -37,8 +37,8 @@ const login = data => (dispatch) => {
 
     dispatch(notificationOperations.addNotification({
       level: "success",
-      title: "Log in successful",
-      body: "Enjoy your ride.",
+      title: "Vous êtes connecté.e",
+      body: "Bon surf sur le site de la FABrique.",
     }))
   })
   .catch((err) => {
@@ -64,8 +64,8 @@ const signup = data => (dispatch) => {
     dispatch(actions.signupSuccess())
     dispatch(notificationOperations.addNotification({
       level: "success",
-      title: "Account created",
-      body: "Account created successfully.",
+      title: "Votre compte a été créé avec succès.",
+      body: "Vous allez être connecté.e bientôt...",
     }))
     dispatch(login(data))
   })

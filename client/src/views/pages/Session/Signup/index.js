@@ -1,11 +1,13 @@
 import React from "react"
+import PropTypes from "prop-types"
+
 import { Grid } from "semantic-ui-react"
 import { Link } from "react-router-dom"
 
 import SignupForm from "./SignupForm"
 
-const SignupPage = (props) => {
-  const search = props.location.search
+const Signup = ({ location }) => {
+  const search = location.search
   return (
     <Grid.Column width={5} textAlign="center">
       <h1>Inscription</h1>
@@ -28,4 +30,8 @@ const SignupPage = (props) => {
   )
 }
 
-export default SignupPage
+Signup.propTypes = {
+  location: PropTypes.object.isRequired,
+}
+
+export default Signup

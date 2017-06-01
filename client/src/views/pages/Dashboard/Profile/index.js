@@ -4,7 +4,7 @@ import { connect } from "react-redux"
 
 import { Segment, Header, Icon, Button } from "semantic-ui-react"
 
-import operations from "../../../state/ducks/profile/operations"
+import operations from "../../../../state/ducks/profile/operations"
 
 import Show from "./Show"
 import Edit from "./Edit"

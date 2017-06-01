@@ -2,61 +2,113 @@ import React from "react"
 import { withRouter } from "react-router-dom"
 import PropTypes from "prop-types"
 import { connect } from "react-redux"
-import { Menu } from "semantic-ui-react"
+import { Menu, Dropdown } from "semantic-ui-react"
 
 import MenuItem from "../../components/MenuItem"
 
 import { sessionOperations } from "../../../state/ducks/session"
 
+import * as routes from "../Routes"
 
 export const Navbar = (props) => {
   const { session, logout, location } = props
 
-  const LeftMenu = () => (
-    <Menu.Menu>
-      <MenuItem
-        activeOnlyWhenExact
-        to={{ pathname: "/" }}
-        label="La FABrique du Loch"
-      />
-      <MenuItem
-        to={{ pathname: "/myfablab" }}
-        label="My Fablab"
-      />
-    </Menu.Menu>
-  )
+  const HomeNav = () =>
+    <MenuItem
+      activeOnlyWhenExact
+      to={{ pathname: "/" }}
+      label="La FABrique du Loch"
+    />
+
+  const LeftMenu = () => {
+    if (!session.data) {
+      return (
+        <Menu.Menu>
+          <HomeNav />
+          <MenuItem
+            icon="home"
+            to={{ pathname: routes.THE_PLACE }}
+            label="Le lieu"
+          />
+          <MenuItem
+            icon="cubes"
+            to={{ pathname: routes.PROJECTS }}
+            label="Les projets"
+          />
+          <MenuItem
+            icon="users"
+            to={{ pathname: routes.MEMBERS }}
+            label="Les membres"
+          />
+          <MenuItem
+            icon="file"
+            to={{ pathname: routes.DOCUMENTATION }}
+            label="La Doc"
+          />
+        </Menu.Menu>
+      )
+    }
+    return (
+      <Menu.Menu>
+        <HomeNav />
+        <MenuItem
+          to={{ pathname: routes.MY_FABLAB }}
+          label="My Fablab"
+        />
+      </Menu.Menu>
+    )
+  }
 
   const RightMenu = ({ location }) => {
     const { search } = location
     if (!session.data) {
       return (
         <Menu.Menu position="right">
-          <MenuItem
-            to={{
-              pathname: "/session/login",
-              search,
-            }}
-            label="Me connecter"
-          />
+          <Dropdown item icon="user">
+            <Dropdown.Menu>
+              <MenuItem
+                icon="sign in"
+                to={{
+                  pathname: routes.LOGIN,
+                  search,
+                }}
+                label="Me connecter"
+              />
 
-          <MenuItem
-            to={{
-              pathname: "/session/signup",
-              search,
-            }}
-            label="M'inscrire"
-          />
+              <MenuItem
+                icon="signup"
+                to={{
+                  pathname: routes.SIGNUP,
+                  search,
+                }}
+                label="M'inscrire"
+              />
+            </Dropdown.Menu>
+          </Dropdown>
+
         </Menu.Menu>
       )
     }
     return (
+
       <Menu.Menu position="right">
-        <MenuItem
-          exact
-          to={{ pathname: "/" }}
-          label="Me déconnecter"
-          onClick={logout}
-        />
+        <Dropdown item icon="user">
+          <Dropdown.Menu>
+            <MenuItem
+              icon="dashboard"
+              exact
+              to={{ pathname: routes.DASHBOARD }}
+              label="Dashboard"
+            />
+            <MenuItem
+              icon="sign out"
+              exact
+              to={{ pathname: routes.LOGOUT }}
+              label="Me déconnecter"
+              onClick={logout}
+            />
+          </Dropdown.Menu>
+        </Dropdown>
       </Menu.Menu>
     )
   }

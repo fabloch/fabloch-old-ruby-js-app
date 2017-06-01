@@ -4,12 +4,12 @@ import { connect } from "react-redux"
 import { reduxForm, Field } from "redux-form"
 
 import { Form as UIForm, Grid, Button } from "semantic-ui-react"
-import NavButton from "../../components/NavButton"
+import NavButton from "../../../components/NavButton"
 
-import { renderField } from "../../components/renderField"
-// import FileInput from "../../components/FileInput"
-import DropzoneInput from "../../components/DropzoneInput"
-import { profileOperations } from "../../../state/ducks/profile"
+import { renderField } from "../../../components/renderField"
+// import FileInput from "../../../components/FileInput"
+import DropzoneInput from "../../../components/DropzoneInput"
+import { profileOperations } from "../../../../state/ducks/profile"
 
 const Form = (props) => {
   const { initialValues, postProfile, putProfile, handleSubmit, pristine, reset, submitting } = props

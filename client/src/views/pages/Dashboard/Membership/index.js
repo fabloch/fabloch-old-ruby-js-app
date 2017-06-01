@@ -12,7 +12,7 @@ import {
   Button,
 } from "semantic-ui-react"
 
-import operations from "../../../state/ducks/subscribe/operations"
+import operations from "../../../../state/ducks/subscribe/operations"
 
 import Infos from "./Infos"
 import SubscribeMessage from "./SubscribeMessage"

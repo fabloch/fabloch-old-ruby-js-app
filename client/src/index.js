@@ -8,6 +8,7 @@ import setAuthHeaders from "./utils/setAuthHeaders"
 import sessionActions from "./state/ducks/session/actions"
 // import notificationOperations from "./state/ducks/notification/operations"
 
+import "./index.css"
 
 const store = configureStore()
 
@@ -31,5 +32,5 @@ const stripeKey = process.env.REACT_APP_STRIPE_PUBLIC
 // }))
 
 render(
-  <Root store={store} stripeKey={stripeKey} />,
+  <Root store={store} stripeKey={stripeKey} style={{ height: "100%" }} />,
   document.getElementById("root"))
