@@ -1,9 +1,14 @@
 import { Map } from "immutable"
+import * as matchers from "jest-immutable-matchers"
 import sessionReducer from "./reducers"
 import types from "./types"
 import actions from "./actions"
 
 describe("sessionReducer", () => {
+  beforeEach(() =>
+    jest.addMatchers(matchers),
+  )
+
   describe(" default state", () => {
     it("has a default state", () => {
       expect(
@@ -26,6 +31,7 @@ describe("sessionReducer", () => {
       ).toEqual(Map({
         data: null,
         isFetching: true,
+        fetchError: false,
       }))
     })
 
@@ -37,6 +43,7 @@ describe("sessionReducer", () => {
       ).toEqual(Map({
         data: null,
         isFetching: false,
+        fetchError: false,
       }))
     })
 
@@ -54,10 +61,7 @@ describe("sessionReducer", () => {
         Map({
           data: null,
           isFetching: false,
-          errors: Map({
-            email: "has already been taken",
-            full_message: "Email has already been taken",
-          }),
+          fetchError: true,
         }),
       )
     })
@@ -72,6 +76,7 @@ describe("sessionReducer", () => {
       ).toEqual(Map({
         data: null,
         isFetching: true,
+        fetchError: false,
       }))
     })
 
@@ -95,6 +100,7 @@ describe("sessionReducer", () => {
             expiry: "123456",
           }),
           isFetching: false,
+          fetchError: false,
         }),
       )
     })
@@ -108,6 +114,158 @@ describe("sessionReducer", () => {
         Map({
           data: null,
           isFetching: false,
+          fetchError: true,
+        }),
+      )
+    })
+  })
+
+  describe("updateAccount", () => {
+    it("handles TOGGLE_EDIT false to true", () => {
+      const initialState = Map({
+        isEditing: false,
+      })
+      expect(
+        sessionReducer(initialState, {
+          type: types.TOGGLE_EDIT_ACCOUNT,
+        }),
+      ).toEqualImmutable(Map({
+        isEditing: true,
+      }))
+    })
+    it("handles TOGGLE_EDIT true to false", () => {
+      const initialState = Map({
+        isEditing: true,
+      })
+      expect(
+        sessionReducer(initialState, {
+          type: types.TOGGLE_EDIT_ACCOUNT,
+        }),
+      ).toEqualImmutable(Map({
+        isEditing: false,
+      }))
+    })
+
+    it("handles UPDATE_ACCOUNT_REQUEST", () => {
+      expect(
+        sessionReducer(undefined, {
+          type: types.UPDATE_ACCOUNT_REQUEST,
+        }),
+      ).toEqual(Map({
+        data: null,
+        isFetching: true,
+        fetchError: false,
+      }))
+    })
+
+    it("handles UPDATE_ACCOUNT_SUCCESS", () => {
+      expect(
+        sessionReducer(undefined, {
+          type: types.UPDATE_ACCOUNT_SUCCESS,
+        }),
+      ).toEqual(
+        Map({
+          data: null,
+          isFetching: false,
+          fetchError: false,
+        }),
+      )
+    })
+
+    it("handles UPDATE_ACCOUNT_FAILURE", () => {
+      expect(
+        sessionReducer(undefined, {
+          type: types.UPDATE_ACCOUNT_FAILURE,
+        }),
+      ).toEqual(
+        Map({
+          data: null,
+          isFetching: false,
+          fetchError: true,
+        }),
+      )
+    })
+  })
+
+  describe("passwordReset", () => {
+    it("handles PASSWORD_RESET_REQUEST", () => {
+      expect(
+        sessionReducer(undefined, {
+          type: types.PASSWORD_RESET_REQUEST,
+        }),
+      ).toEqual(Map({
+        data: null,
+        isFetching: true,
+        fetchError: false,
+      }))
+    })
+
+    it("handles PASSWORD_RESET_SUCCESS", () => {
+      expect(
+        sessionReducer(undefined, {
+          type: types.PASSWORD_RESET_SUCCESS,
+        }),
+      ).toEqual(
+        Map({
+          data: null,
+          isFetching: false,
+          fetchError: false,
+        }),
+      )
+    })
+
+    it("handles PASSWORD_RESET_FAILURE", () => {
+      expect(
+        sessionReducer(undefined, {
+          type: types.PASSWORD_RESET_FAILURE,
+        }),
+      ).toEqual(
+        Map({
+          data: null,
+          isFetching: false,
+          fetchError: true,
+        }),
+      )
+    })
+  })
+
+  describe("updatePassword", () => {
+    it("handles UPDATE_PASSWORD_REQUEST", () => {
+      expect(
+        sessionReducer(undefined, {
+          type: types.UPDATE_PASSWORD_REQUEST,
+        }),
+      ).toEqual(Map({
+        data: null,
+        isFetching: true,
+        fetchError: false,
+      }))
+    })
+
+    it("handles UPDATE_PASSWORD_SUCCESS", () => {
+      expect(
+        sessionReducer(undefined, {
+          type: types.UPDATE_PASSWORD_SUCCESS,
+        }),
+      ).toEqual(
+        Map({
+          data: null,
+          isFetching: false,
+          fetchError: false,
+        }),
+      )
+    })
+
+    it("handles UPDATE_PASSWORD_FAILURE", () => {
+      expect(
+        sessionReducer(undefined, {
+          type: types.UPDATE_PASSWORD_FAILURE,
+        }),
+      ).toEqual(
+        Map({
+          data: null,
+          isFetching: false,
+          fetchError: true,
         }),
       )
     })
@@ -134,6 +292,7 @@ describe("sessionReducer", () => {
             expiry: "123456",
           }),
           isFetching: false,
+          fetchError: false,
         }),
       )
     })

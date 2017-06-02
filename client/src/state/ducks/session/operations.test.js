@@ -59,8 +59,8 @@ describe("sessionpOperations", () => {
               id,
               timeStamp,
               level: "success",
-              title: "Log in successful",
-              body: "Enjoy your ride.",
+              title: "Vous êtes connecté.e",
+              body: "Bon surf sur le site de la FABrique.",
             },
           },
         ]
@@ -98,9 +98,9 @@ describe("sessionpOperations", () => {
             notification: {
               id,
               timeStamp,
-              body: "Account created successfully.",
+              body: "Vous allez être connecté.e bientôt...",
               level: "success",
-              title: "Account created",
+              title: "Votre compte a été créé avec succès.",
             },
           },
         ]
@@ -129,25 +129,181 @@ describe("sessionpOperations", () => {
     })
   })
 
-  describe("current user", () => {
-    it("setCurrentUser", () => {
-      expect(
-        operations.setCurrentUser(data),
-      ).toEqual(
-        {
-          type: types.SET_CURRENT_USER,
-          data,
-        },
-      )
+  describe("updateAccount", () => {
+    afterEach(() => {
+      nock.cleanAll()
     })
 
-    it("removeCurrentUser", () => {
-      expect(
-        operations.removeCurrentUser(),
-      ).toEqual(
-        {
-          type: types.REMOVE_CURRENT_USER,
-        },
+    it("sends SUCCESS with valid data", () => {
+      const store = mockStore({})
+
+      nock("http://localhost")
+        .put("/auth")
+        .reply(200, { textStatus: "ok" })
+
+      return store.dispatch(operations.updateAccount(data))
+      .then(() => {
+        const id = store.getActions()[2].notification.id
+        const timeStamp = store.getActions()[2].notification.timeStamp
+        const expectedActions = [
+          { type: types.UPDATE_ACCOUNT_REQUEST },
+          {
+            type: types.UPDATE_ACCOUNT_SUCCESS,
+          },
+          {
+            type: notificationTypes.SHOW,
+            notification: {
+              id,
+              timeStamp,
+              icon: "setting",
+              loading: true,
+              level: "success",
+              title: "Vos identifiants de connexion ont bien été mis à jour.",
+            },
+          },
+        ]
+
+
+        expect(store.getActions()[0]).toEqual(expectedActions[0])
+        expect(store.getActions()[1]).toEqual(expectedActions[1])
+        expect(store.getActions()[2]).toEqual(expectedActions[2])
+      })
+    })
+
+    xit("creates a SubmissionError when user already exists", () => {
+      const store = mockStore({})
+
+      nock("http://localhost")
+        .post("/auth")
+        .reply(422, { errors: { textStatus: "ok" } })
+
+
+      expect.assertions(1)
+      return store.dispatch(operations.signup(data)).catch(e =>
+        expect(e).toEqual({
+          error: "User with 2 not found.",
+        }),
+      )
+    })
+  })
+
+  describe("passwordReset", () => {
+    afterEach(() => {
+      nock.cleanAll()
+    })
+
+    it("sends SUCCESS with valid data", () => {
+      const email = { email: "user@example.com" }
+      const store = mockStore({})
+
+      nock("http://localhost")
+        .post("/auth/password")
+        .reply(201, { textStatus: "ok" })
+
+      return store.dispatch(operations.passwordReset(email))
+      .then(() => {
+        const id = store.getActions()[2].notification.id
+        const timeStamp = store.getActions()[2].notification.timeStamp
+        const expectedActions = [
+          { type: types.PASSWORD_RESET_REQUEST },
+          {
+            type: types.PASSWORD_RESET_SUCCESS,
+          },
+          {
+            type: notificationTypes.SHOW,
+            notification: {
+              id,
+              timeStamp,
+              icon: "setting",
+              loading: true,
+              level: "info",
+              title: "Un email vous a été envoyé pour réinitialiser votre mot de passe.",
+            },
+          },
+        ]
+
+
+        expect(store.getActions()[0]).toEqual(expectedActions[0])
+        expect(store.getActions()[1]).toEqual(expectedActions[1])
+        expect(store.getActions()[2]).toEqual(expectedActions[2])
+      })
+    })
+
+    xit("creates a SubmissionError when user already exists", () => {
+      const store = mockStore({})
+
+      nock("http://localhost")
+        .post("/auth")
+        .reply(422, { errors: { textStatus: "ok" } })
+
+
+      expect.assertions(1)
+      return store.dispatch(operations.signup(data)).catch(e =>
+        expect(e).toEqual({
+          error: "User with 2 not found.",
+        }),
+      )
+    })
+  })
+
+  describe("updatePassword", () => {
+    afterEach(() => {
+      nock.cleanAll()
+    })
+
+    it("sends SUCCESS with valid data", () => {
+      const passwords = {
+        password: "motdepasse",
+        password_confirmation: "motdepasse",
+      }
+      const store = mockStore({})
+
+      nock("http://localhost")
+        .put("/auth/password")
+        .reply(200, { textStatus: "ok" })
+
+      return store.dispatch(operations.updatePassword(passwords))
+      .then(() => {
+        const id = store.getActions()[2].notification.id
+        const timeStamp = store.getActions()[2].notification.timeStamp
+        const expectedActions = [
+          { type: types.UPDATE_PASSWORD_REQUEST },
+          {
+            type: types.UPDATE_PASSWORD_SUCCESS,
+          },
+          {
+            type: notificationTypes.SHOW,
+            notification: {
+              id,
+              timeStamp,
+              icon: "setting",
+              loading: true,
+              level: "success",
+              title: "Votre mot de passe a bien été mis à jour.",
+            },
+          },
+        ]
+
+
+        expect(store.getActions()[0]).toEqual(expectedActions[0])
+        expect(store.getActions()[1]).toEqual(expectedActions[1])
+        expect(store.getActions()[2]).toEqual(expectedActions[2])
+      })
+    })
+
+    xit("creates a SubmissionError when user already exists", () => {
+      const store = mockStore({})
+
+      nock("http://localhost")
+        .post("/auth")
+        .reply(422, { errors: { textStatus: "ok" } })
+
+
+      expect.assertions(1)
+      return store.dispatch(operations.signup(data)).catch(e =>
+        expect(e).toEqual({
+          error: "User with 2 not found.",
+        }),
       )
     })
   })

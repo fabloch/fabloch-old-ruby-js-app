@@ -19,7 +19,6 @@ describe("sessionActions", () => {
         },
       )
     })
-
     it("signupSuccess", () => {
       expect(
         actions.signupSuccess(),
@@ -29,7 +28,6 @@ describe("sessionActions", () => {
         },
       )
     })
-
     it("signupFailure", () => {
       expect(
         actions.signupFailure({ response: "error" }),
@@ -52,7 +50,6 @@ describe("sessionActions", () => {
         },
       )
     })
-
     it("loginSuccess", () => {
       expect(
         actions.loginSuccess(data),
@@ -63,7 +60,6 @@ describe("sessionActions", () => {
         },
       )
     })
-
     it("loginFailure", () => {
       expect(
         actions.loginFailure({ response: "error" }),
@@ -74,7 +70,113 @@ describe("sessionActions", () => {
         },
       )
     })
+  })
 
+  describe("updateAccount actions", () => {
+    it("toggleEditAccount", () => {
+      expect(
+        actions.toggleEditAccount(),
+      ).toEqual(
+        {
+          type: types.TOGGLE_EDIT_ACCOUNT,
+        },
+      )
+    })
+    it("updateAccountRequest", () => {
+      expect(
+        actions.updateAccountRequest(),
+      ).toEqual(
+        {
+          type: types.UPDATE_ACCOUNT_REQUEST,
+        },
+      )
+    })
+    it("updateAccountSuccess", () => {
+      expect(
+        actions.updateAccountSuccess(),
+      ).toEqual(
+        {
+          type: types.UPDATE_ACCOUNT_SUCCESS,
+        },
+      )
+    })
+    it("updateAccountFailure", () => {
+      expect(
+        actions.updateAccountFailure({ response: "error" }),
+      ).toEqual(
+        {
+          type: types.UPDATE_ACCOUNT_FAILURE,
+          errors: { response: "error" },
+        },
+      )
+    })
+  })
+
+  describe("passwordReset actions", () => {
+    it("passwordResetRequest", () => {
+      expect(
+        actions.passwordResetRequest(),
+      ).toEqual(
+        {
+          type: types.PASSWORD_RESET_REQUEST,
+        },
+      )
+    })
+    it("passwordResetSuccess", () => {
+      expect(
+        actions.passwordResetSuccess(data),
+      ).toEqual(
+        {
+          type: types.PASSWORD_RESET_SUCCESS,
+          data,
+        },
+      )
+    })
+    it("passwordResetFailure", () => {
+      expect(
+        actions.passwordResetFailure({ response: "error" }),
+      ).toEqual(
+        {
+          type: types.PASSWORD_RESET_FAILURE,
+          errors: { response: "error" },
+        },
+      )
+    })
+  })
+
+  describe("updatePassword actions", () => {
+    it("updatePasswordRequest", () => {
+      expect(
+        actions.updatePasswordRequest(),
+      ).toEqual(
+        {
+          type: types.UPDATE_PASSWORD_REQUEST,
+        },
+      )
+    })
+    it("updatePasswordSuccess", () => {
+      expect(
+        actions.updatePasswordSuccess(data),
+      ).toEqual(
+        {
+          type: types.UPDATE_PASSWORD_SUCCESS,
+          data,
+        },
+      )
+    })
+    it("updatePasswordFailure", () => {
+      expect(
+        actions.updatePasswordFailure({ response: "error" }),
+      ).toEqual(
+        {
+          type: types.UPDATE_PASSWORD_FAILURE,
+          errors: { response: "error" },
+        },
+      )
+    })
+  })
+
+  describe("current user actions", () => {
     it("setCurrentUser", () => {
       expect(
         actions.setCurrentUser(data),
@@ -85,7 +187,6 @@ describe("sessionActions", () => {
         },
       )
     })
-
     it("removeCurrentUser", () => {
       expect(
         actions.removeCurrentUser(),

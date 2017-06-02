@@ -80,6 +80,94 @@ const signup = data => (dispatch) => {
   })
 }
 
+/* updateAccount */
+const updateAccount = data => (dispatch) => {
+  dispatch(actions.updateAccountRequest())
+  return axios({
+    url: "/auth",
+    method: "put",
+    responseType: "json",
+    data,
+  })
+  .then(() => {
+    dispatch(actions.updateAccountSuccess())
+    dispatch(notificationOperations.addNotification({
+      icon: "setting",
+      loading: true,
+      level: "success",
+      title: "Vos identifiants de connexion ont bien été mis à jour.",
+    }))
+    dispatch(actions.toggleEditAccount())
+  })
+  .catch((err) => {
+    if (err.response) {
+      dispatch(actions.updateAccountFailure(err.response.data.errors))
+      throw new SubmissionError(err.response.data.errors)
+    } else if (err.request) {
+      // do something
+      // TODO: bad request
+    }
+  })
+}
+
+/* passwordReset */
+const passwordReset = data => (dispatch) => {
+  dispatch(actions.passwordResetRequest())
+  return axios({
+    url: "/auth/password",
+    method: "post",
+    responseType: "json",
+    data,
+  })
+  .then(() => {
+    dispatch(actions.passwordResetSuccess())
+    dispatch(notificationOperations.addNotification({
+      icon: "setting",
+      loading: true,
+      level: "info",
+      title: "Un email vous a été envoyé pour réinitialiser votre mot de passe.",
+    }))
+  })
+  .catch((err) => {
+    if (err.response) {
+      dispatch(actions.passwordResetFailure(err.response.data.errors))
+      throw new SubmissionError(err.response.data.errors)
+    } else if (err.request) {
+      // do something
+      // TODO: bad request
+    }
+  })
+}
+
+/* updatePassword */
+const updatePassword = data => (dispatch) => {
+  dispatch(actions.updatePasswordRequest())
+  return axios({
+    url: "/auth/password",
+    method: "put",
+    responseType: "json",
+    data,
+  })
+  .then(() => {
+    dispatch(actions.updatePasswordSuccess())
+    dispatch(notificationOperations.addNotification({
+      icon: "setting",
+      loading: true,
+      level: "success",
+      title: "Votre mot de passe a bien été mis à jour.",
+    }))
+  })
+  .catch((err) => {
+    if (err.response) {
+      dispatch(actions.updatePasswordFailure(err.response.data.errors))
+      throw new SubmissionError(err.response.data.errors)
+    } else if (err.request) {
+      // do something
+      // TODO: bad request
+    }
+  })
+}
+
 const setCurrentUser = actions.setCurrentUser
 const removeCurrentUser = actions.removeCurrentUser
 
@@ -96,11 +184,12 @@ const logout = () => (dispatch) => {
 }
 
 export default {
-  signup,
-
   login,
+  signup,
+  updateAccount,
+  passwordReset,
+  updatePassword,
   setCurrentUser,
   removeCurrentUser,
-
   logout,
 }
