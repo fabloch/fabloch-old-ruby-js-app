@@ -16,6 +16,8 @@ const NavButton = ({
   color,
   icon,
   labelPosition,
+  size,
+  compact,
 }) =>
   <Route
     path={to.pathname}
@@ -36,6 +38,8 @@ const NavButton = ({
         color={color}
         icon={icon}
         labelPosition={labelPosition}
+        size={size}
+        compact={compact}
       />
     )}
   </Route>
@@ -53,6 +57,8 @@ NavButton.propTypes = {
   color: PropTypes.string,
   icon: PropTypes.string,
   labelPosition: PropTypes.string,
+  size: PropTypes.string,
+  compact: PropTypes.string,
 }
 
 NavButton.defaultProps = {
@@ -68,6 +74,8 @@ NavButton.defaultProps = {
   color: undefined,
   icon: undefined,
   labelPosition: undefined,
+  size: undefined,
+  compact: undefined,
 }
 
 export default NavButton

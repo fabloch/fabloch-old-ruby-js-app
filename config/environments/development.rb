@@ -26,13 +26,21 @@ Rails.application.configure do
     config.cache_store = :null_store
   end
 
-  # Don't care if the mailer can't send.
-  config.action_mailer.raise_delivery_errors = false
-  config.action_mailer.perform_caching = false
-  config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = { address: 'localhost', port: 1025 }
-  config.action_mailer.default_url_options = { :host => 'localhost', port: '3000' }
+  host = 'localhost:3000'
+  config.action_mailer.default_url_options = { host: host }
+  config.action_mailer.default :charset => "utf-8"
 
+  ### NORMAL CONFIG
+  # config.action_mailer.delivery_method = :test
+  # config.action_mailer.raise_delivery_errors = false
+  # config.action_mailer.perform_deliveries = false
+
+  ### MAILCATCHER CONFIG
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.smtp_settings = { address: "localhost", port: 1025 }
+  
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
 

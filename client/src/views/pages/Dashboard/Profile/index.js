@@ -54,8 +54,6 @@ class ProfilePage extends Component {
             onClick={toggleEdit}
 
           />}
-
-          {/* <Actions isEditing={isEditing} /> */}
         </Segment>
         <Segment
           loading={profile.isFetching}

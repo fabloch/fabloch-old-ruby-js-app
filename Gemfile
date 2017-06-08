@@ -50,6 +50,9 @@ gem 'money-rails', '~>1'
 # Stripe
 gem 'stripe'
 
+# Mailchimp
+gem "gibbon"
+
 group :development, :test do
   gem "awesome_print"
   gem 'rspec-rails'
@@ -61,6 +64,7 @@ group :development, :test do
   gem 'pry-stack_explorer'
   gem 'faker'
   gem 'dotenv-rails', groups: [:development, :test] # Local env variables
+  gem 'webmock'
 end
 
 group :development do

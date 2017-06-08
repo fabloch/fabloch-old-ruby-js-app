@@ -6,9 +6,9 @@ import { Form, Button } from "semantic-ui-react"
 import { reduxForm, Field } from "redux-form"
 
 import { validate } from "./validate"
-import { asyncValidate } from "./asyncValidate"
+// import { asyncValidate } from "./asyncValidate"
 import { warn } from "./warn"
-import { renderField } from "../../../components/renderField"
+import InputField from "../../../components/InputField"
 import { sessionOperations } from "../../../../state/ducks/session"
 
 const SignupForm = (props) => {
@@ -19,14 +19,14 @@ const SignupForm = (props) => {
       <Field
         type="email"
         name="email"
-        component={renderField}
+        component={InputField}
         placeholder="Email"
         label="Email"
       />
 
       <Field
         name="password"
-        component={renderField}
+        component={InputField}
         type="password"
         placeholder="Password"
         label="Password"
@@ -77,7 +77,7 @@ const FormedSignupForm = reduxForm({
   form: "signup",
   validate,
   warn,
-  asyncValidate,
+  // asyncValidate,
 })(ConnectedSignupForm)
 
 export default FormedSignupForm

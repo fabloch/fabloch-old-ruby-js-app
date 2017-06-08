@@ -33,12 +33,18 @@ const Notification = (
 
 Notification.propTypes = {
   icon: PropTypes.string.isRequired,
-  loading: PropTypes.bool.isRequired,
+  loading: PropTypes.bool,
   level: PropTypes.string.isRequired,
   size: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   body: PropTypes.string.isRequired,
   hideNotification: PropTypes.func.isRequired,
+}
+
+Notification.defaultProps = {
+  icon: undefined,
+  loading: undefined,
+  size: undefined,
 }
 
 export default Notification

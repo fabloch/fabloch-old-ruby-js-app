@@ -3,8 +3,15 @@ import PropTypes from "prop-types"
 import { Route } from "react-router-dom"
 import { Grid, Message, Icon } from "semantic-ui-react"
 
+import * as routes from "../../layouts/Routes"
+
 import Signup from "./Signup"
 import Login from "./Login"
+import ForgotPassword from "./ForgotPassword"
+import Links from "./Links"
+
+const Home = () =>
+  <div>Session Home</div>
 
 const Session = ({ location }) => {
   const RedirectMessage = () => {
@@ -37,9 +44,12 @@ const Session = ({ location }) => {
     <div>
       <RedirectMessage />
       <Grid centered>
-        <Route path="/session/login" component={Login} />
-        <Route path="/session/signup" component={Signup} />
+        <Route exact path={routes.SESSION} component={Home} />
+        <Route path={routes.LOGIN} component={Login} />
+        <Route path={routes.SIGNUP} component={Signup} />
+        <Route path={routes.FORGOT_PASSWORD} component={ForgotPassword} />
       </Grid>
+      <Links />
     </div>
   )
 }

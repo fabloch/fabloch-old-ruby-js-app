@@ -2,20 +2,22 @@ import React from "react"
 import PropTypes from "prop-types"
 import { connect } from "react-redux"
 
-import { Form, Button } from "semantic-ui-react"
+import { Grid, Form, Button } from "semantic-ui-react"
 import { reduxForm, Field } from "redux-form"
 
-// import { validate } from "./validate"
-// import { asyncValidate } from "./asyncValidate"
-// import { warn } from "./warn"
 import InputField from "../../../components/InputField"
 import { sessionOperations } from "../../../../state/ducks/session"
 
-const LoginForm = (props) => {
-  const { login, error, handleSubmit, pristine, reset, submitting } = props
-
-  return (
-    <Form onSubmit={handleSubmit(login)}>
+const ForgotPassword = ({
+  passwordReset,
+  error,
+  handleSubmit,
+  pristine,
+  submitting,
+}) => (
+  <Grid.Column width={5} textAlign="center">
+    <h1>Mot de passe oublié</h1>
+    <Form onSubmit={handleSubmit(passwordReset)}>
       {error && <strong>{error}</strong>}
       <Field
         type="email"
@@ -23,14 +25,6 @@ const LoginForm = (props) => {
         component={InputField}
         placeholder="Email"
         label="Email"
-      />
-
-      <Field
-        name="password"
-        component={InputField}
-        type="password"
-        placeholder="Password"
-        label="Password"
       />
 
       <Button
@@ -41,21 +35,12 @@ const LoginForm = (props) => {
       >
         Sign Up
       </Button>
-      <p>
-        <Button
-          type="button"
-          disabled={pristine || submitting}
-          onClick={reset}
-        >
-          Clear Values
-        </Button>
-      </p>
     </Form>
-  )
-}
+  </Grid.Column>
+)
 
-LoginForm.propTypes = {
-  login: PropTypes.func.isRequired,
+ForgotPassword.propTypes = {
+  passwordReset: PropTypes.func.isRequired,
   error: PropTypes.string,
   handleSubmit: PropTypes.func.isRequired,
   // validate: PropTypes.func.isRequired,
@@ -65,21 +50,21 @@ LoginForm.propTypes = {
   submitting: PropTypes.bool.isRequired,
 }
 
-LoginForm.defaultProps = {
+ForgotPassword.defaultProps = {
   error: null,
 }
 
 const mapDispatchToProps = {
-  login: sessionOperations.login,
+  passwordReset: sessionOperations.passwordReset,
 }
 
-const ConnectedLoginForm = connect(null, mapDispatchToProps)(LoginForm)
+const ConnectedForgotPassword = connect(null, mapDispatchToProps)(ForgotPassword)
 
-const FormedLoginForm = reduxForm({
-  form: "login",
+const FormedForgotPassword = reduxForm({
+  form: "passwordReset",
   // validate,
   // warn,
   // asyncValidate,
-})(ConnectedLoginForm)
+})(ConnectedForgotPassword)
 
-export default FormedLoginForm
+export default FormedForgotPassword

@@ -1,6 +1,5 @@
 import React from "react"
 import { Container, Grid, List, Header, Image } from "semantic-ui-react"
-import times from "lodash/times"
 
 const ListItem = ({icon, url, header}) =>
   <List.Item
@@ -15,12 +14,6 @@ const ListItem = ({icon, url, header}) =>
       </List.Header>
     </List.Content>
   </List.Item>
-
-const columns = times(6, (i) => (
-  <Grid.Column key={i}>
-    <Image src='http://placehold.it/64/64' />
-  </Grid.Column>
-))
 
 const Footer = () => (
   <Container fluid style={{ backgroundColor: "#A5673F", marginTop: "30px" }}>
@@ -53,7 +46,7 @@ const Footer = () => (
           <Header as="h3" inverted>
             Un énorme merci à nos partenaires et soutiens
           </Header>
-          <List horizontal size="huge" inverted stackable>
+          <List horizontal size="huge" inverted>
             <List.Item>
               <Image avatar src="http://via.placeholder.com/64/19abbf/ffffff?text=logo" />
               <List.Content>
@@ -104,7 +97,7 @@ const Footer = () => (
     </Grid>
     <Grid columns="1" textAlign="center">
       <Grid.Column>
-        <p textAlign="center" style={{ color: "rgba(255,255,255,.9)" }} >
+        <p style={{ color: "rgba(255,255,255,.9)" }} >
           mentions légales - charte - blabla
         </p>
       </Grid.Column>

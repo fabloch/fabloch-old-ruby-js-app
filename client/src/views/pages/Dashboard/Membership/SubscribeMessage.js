@@ -4,7 +4,7 @@ import moment from "moment"
 import isEmpty from "lodash/isEmpty"
 
 import { Icon, Message, Divider } from "semantic-ui-react"
-import RouterButton from "../../../components/RouterButton"
+import NavButton from "../../../components/NavButton"
 
 const Resubscribe = ({
   present,
@@ -61,7 +61,7 @@ const Resubscribe = ({
           <Message.Header>{title}</Message.Header>
           {body}
           <Divider />
-          <RouterButton
+          <NavButton
             icon="chevron right"
             labelPosition="right"
             content={action}

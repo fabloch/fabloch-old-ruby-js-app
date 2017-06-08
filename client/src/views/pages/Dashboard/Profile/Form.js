@@ -6,7 +6,7 @@ import { reduxForm, Field } from "redux-form"
 import { Form as UIForm, Grid, Button } from "semantic-ui-react"
 import NavButton from "../../../components/NavButton"
 
-import { renderField } from "../../../components/renderField"
+import InputField from "../../../components/InputField"
 // import FileInput from "../../../components/FileInput"
 import DropzoneInput from "../../../components/DropzoneInput"
 import { profileOperations } from "../../../../state/ducks/profile"
@@ -48,7 +48,7 @@ const Form = (props) => {
       <Field
         type="text"
         name="username"
-        component={renderField}
+        component={InputField}
         placeholder="Username"
         label="Username"
       />
@@ -56,7 +56,7 @@ const Form = (props) => {
       <Field
         type="text"
         name="firstname"
-        component={renderField}
+        component={InputField}
         placeholder="Firstname"
         label="Firstname"
       />
@@ -64,7 +64,7 @@ const Form = (props) => {
       <Field
         type="text"
         name="lastname"
-        component={renderField}
+        component={InputField}
         placeholder="Lastname"
         label="Lastname"
       />

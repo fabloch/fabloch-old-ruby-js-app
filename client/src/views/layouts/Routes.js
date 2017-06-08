@@ -29,6 +29,7 @@ export const SUBSCRIBE = "/subscribe"
 export const SESSION = "/session"
 export const LOGIN = "/session/login"
 export const SIGNUP = "/session/signup"
+export const FORGOT_PASSWORD = "/session/mot-de-passe-oublie"
 export const LOGOUT = "/session/logout"
 export const ADMIN = "/admin"
 

@@ -130,12 +130,15 @@ const passwordReset = data => (dispatch) => {
   })
   .catch((err) => {
     if (err.response) {
+      console.log(err.response)
       dispatch(actions.passwordResetFailure(err.response.data.errors))
       throw new SubmissionError(err.response.data.errors)
     } else if (err.request) {
+      console.log(err.request)
       // do something
       // TODO: bad request
     }
+    console.log(err)
   })
 }
 
