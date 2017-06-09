@@ -9,7 +9,7 @@ import InputField from "../../../components/InputField"
 import { sessionOperations } from "../../../../state/ducks/session"
 
 const ForgotPassword = ({
-  passwordReset,
+  sendPasswordResetEmail,
   error,
   handleSubmit,
   pristine,
@@ -17,7 +17,7 @@ const ForgotPassword = ({
 }) => (
   <Grid.Column width={5} textAlign="center">
     <h1>Mot de passe oublié</h1>
-    <Form onSubmit={handleSubmit(passwordReset)}>
+    <Form onSubmit={handleSubmit(sendPasswordResetEmail)}>
       {error && <strong>{error}</strong>}
       <Field
         type="email"
@@ -33,14 +33,14 @@ const ForgotPassword = ({
         fluid
         primary
       >
-        Sign Up
+        Réinitialiser mon mot de passe
       </Button>
     </Form>
   </Grid.Column>
 )
 
 ForgotPassword.propTypes = {
-  passwordReset: PropTypes.func.isRequired,
+  sendPasswordResetEmail: PropTypes.func.isRequired,
   error: PropTypes.string,
   handleSubmit: PropTypes.func.isRequired,
   // validate: PropTypes.func.isRequired,
@@ -55,13 +55,13 @@ ForgotPassword.defaultProps = {
 }
 
 const mapDispatchToProps = {
-  passwordReset: sessionOperations.passwordReset,
+  sendPasswordResetEmail: sessionOperations.sendPasswordResetEmail,
 }
 
 const ConnectedForgotPassword = connect(null, mapDispatchToProps)(ForgotPassword)
 
 const FormedForgotPassword = reduxForm({
-  form: "passwordReset",
+  form: "sendPasswordResetEmail",
   // validate,
   // warn,
   // asyncValidate,

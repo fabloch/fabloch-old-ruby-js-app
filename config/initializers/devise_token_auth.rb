@@ -45,6 +45,7 @@ DeviseTokenAuth.setup do |config|
   # If, however, you wish to integrate with legacy Devise authentication, you can
   # do so by enabling this flag. NOTE: This feature is highly experimental!
   # config.enable_standard_devise_support = false
-  config.default_confirm_success_url = "http://localhost:3000"
+  config.default_confirm_success_url = "http://localhost:3001"
+  config.default_password_reset_url = "http://localhost:3000/session/reinitialiser-mon-mot-de-passe"
   # TODO: check this on production
 end

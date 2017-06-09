@@ -47,20 +47,23 @@ const updateAccountFailure = errors => ({
   errors,
 })
 
-/* passwordReset */
-const passwordResetRequest = () => ({
+/* sendPasswordResetEmail */
+const sendPasswordResetEmailRequest = () => ({
   type: types.PASSWORD_RESET_REQUEST,
 })
-const passwordResetSuccess = data => ({
+const sendPasswordResetEmailSuccess = data => ({
   type: types.PASSWORD_RESET_SUCCESS,
   data,
 })
-const passwordResetFailure = errors => ({
+const sendPasswordResetEmailFailure = errors => ({
   type: types.PASSWORD_RESET_FAILURE,
   errors,
 })
 
 /* updatePassword */
+const setHeadersForPasswordReset = () => ({
+  type: types.SET_HEADERS_FOR_PASSWORD_RESET,
+})
 const updatePasswordRequest = () => ({
   type: types.UPDATE_PASSWORD_REQUEST,
 })
@@ -102,10 +105,11 @@ export default {
   updateAccountFailure,
   updateAccountSuccess,
 
-  passwordResetRequest,
-  passwordResetFailure,
-  passwordResetSuccess,
+  sendPasswordResetEmailRequest,
+  sendPasswordResetEmailFailure,
+  sendPasswordResetEmailSuccess,
 
+  setHeadersForPasswordReset,
   updatePasswordRequest,
   updatePasswordFailure,
   updatePasswordSuccess,

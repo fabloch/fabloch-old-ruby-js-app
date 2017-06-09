@@ -12,6 +12,7 @@ import { SubmissionError } from "redux-form"
 
 import actions from "./actions"
 import setAuthHeaders from "../../../utils/setAuthHeaders"
+import setResetAuthHeaders from "../../../utils/setResetAuthHeaders"
 import notificationOperations from "../notification/operations"
 
 /* Login */
@@ -110,9 +111,9 @@ const updateAccount = data => (dispatch) => {
   })
 }
 
-/* passwordReset */
-const passwordReset = data => (dispatch) => {
-  dispatch(actions.passwordResetRequest())
+/* sendPasswordResetEmail */
+const sendPasswordResetEmail = data => (dispatch) => {
+  dispatch(actions.sendPasswordResetEmailRequest())
   return axios({
     url: "/auth/password",
     method: "post",
@@ -120,7 +121,7 @@ const passwordReset = data => (dispatch) => {
     data,
   })
   .then(() => {
-    dispatch(actions.passwordResetSuccess())
+    dispatch(actions.sendPasswordResetEmailSuccess())
     dispatch(notificationOperations.addNotification({
       icon: "setting",
       loading: true,
@@ -131,7 +132,7 @@ const passwordReset = data => (dispatch) => {
   .catch((err) => {
     if (err.response) {
       console.log(err.response)
-      dispatch(actions.passwordResetFailure(err.response.data.errors))
+      dispatch(actions.sendPasswordResetEmailFailure(err.response.data.errors))
       throw new SubmissionError(err.response.data.errors)
     } else if (err.request) {
       console.log(err.request)
@@ -143,6 +144,11 @@ const passwordReset = data => (dispatch) => {
 }
 
 /* updatePassword */
+const setHeadersForPasswordReset = data => (dispatch) => {
+  setResetAuthHeaders(data)
+  dispatch(actions.setHeadersForPasswordReset(data))
+}
+
 const updatePassword = data => (dispatch) => {
   dispatch(actions.updatePasswordRequest())
   return axios({
@@ -162,6 +168,7 @@ const updatePassword = data => (dispatch) => {
   })
   .catch((err) => {
     if (err.response) {
+      console.log(err.response.data)
       dispatch(actions.updatePasswordFailure(err.response.data.errors))
       throw new SubmissionError(err.response.data.errors)
     } else if (err.request) {
@@ -190,7 +197,8 @@ export default {
   login,
   signup,
   updateAccount,
-  passwordReset,
+  sendPasswordResetEmail,
+  setHeadersForPasswordReset,
   updatePassword,
   setCurrentUser,
   removeCurrentUser,

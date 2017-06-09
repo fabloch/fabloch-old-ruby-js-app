@@ -187,7 +187,7 @@ describe("sessionpOperations", () => {
     })
   })
 
-  describe("passwordReset", () => {
+  describe("sendPasswordResetEmail", () => {
     afterEach(() => {
       nock.cleanAll()
     })
@@ -200,7 +200,7 @@ describe("sessionpOperations", () => {
         .post("/auth/password")
         .reply(201, { textStatus: "ok" })
 
-      return store.dispatch(operations.passwordReset(email))
+      return store.dispatch(operations.sendPasswordResetEmail(email))
       .then(() => {
         const id = store.getActions()[2].notification.id
         const timeStamp = store.getActions()[2].notification.timeStamp
@@ -249,6 +249,17 @@ describe("sessionpOperations", () => {
   describe("updatePassword", () => {
     afterEach(() => {
       nock.cleanAll()
+    })
+
+    it("setHeadersForPasswordReset", () => {
+      expect(
+        operations.setHeadersForPasswordReset({ key: "value" }),
+      ).toEqual(
+        {
+          type: types.SET_HEADERS_FOR_PASSWORD_RESET,
+          data: { key: "value" },
+        },
+      )
     })
 
     it("sends SUCCESS with valid data", () => {

@@ -105,6 +105,13 @@ describe("session types", () => {
   })
 
   describe("send password reset", () => {
+    it("SET_HEADERS_FOR_PASSWORD_RESET", () => {
+      expect(
+        types.SET_HEADERS_FOR_PASSWORD_RESET,
+      ).toEqual(
+        "fab_loch/session/SET_HEADERS_FOR_PASSWORD_RESET",
+      )
+    })
     it("UPDATE_PASSWORD_REQUEST", () => {
       expect(
         types.UPDATE_PASSWORD_REQUEST,

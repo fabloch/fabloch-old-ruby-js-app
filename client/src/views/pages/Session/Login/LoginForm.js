@@ -2,7 +2,7 @@ import React from "react"
 import PropTypes from "prop-types"
 import { connect } from "react-redux"
 
-import { Form, Button } from "semantic-ui-react"
+import { Form, Button, Message } from "semantic-ui-react"
 import { reduxForm, Field } from "redux-form"
 
 // import { validate } from "./validate"
@@ -16,7 +16,14 @@ const LoginForm = (props) => {
 
   return (
     <Form onSubmit={handleSubmit(login)}>
-      {error && <strong>{error}</strong>}
+      {
+        error &&
+        <Message
+          icon="bug"
+          header={error}
+          negative
+        />
+      }
       <Field
         type="email"
         name="email"
@@ -29,8 +36,8 @@ const LoginForm = (props) => {
         name="password"
         component={InputField}
         type="password"
-        placeholder="Password"
-        label="Password"
+        placeholder="Mot de passe"
+        label="Mot de passe"
       />
 
       <Button
@@ -39,7 +46,7 @@ const LoginForm = (props) => {
         fluid
         primary
       >
-        Sign Up
+        Se connecter
       </Button>
       <p>
         <Button
@@ -47,7 +54,7 @@ const LoginForm = (props) => {
           disabled={pristine || submitting}
           onClick={reset}
         >
-          Clear Values
+          Effacer
         </Button>
       </p>
     </Form>

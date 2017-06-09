@@ -55,6 +55,10 @@ export const Navbar = (props) => {
           to={{ pathname: routes.MY_FABLAB }}
           label="My Fablab"
         />
+        <MenuItem
+          to={{ pathname: routes.CALENDAR }}
+          label="Calendrier"
+        />
       </Menu.Menu>
     )
   }

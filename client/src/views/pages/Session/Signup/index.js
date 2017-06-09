@@ -5,6 +5,7 @@ import { Grid } from "semantic-ui-react"
 import { Link } from "react-router-dom"
 
 import SignupForm from "./SignupForm"
+import * as routes from "../../../layouts/Routes"
 
 const Signup = ({ location }) => {
   const search = location.search
@@ -18,7 +19,7 @@ const Signup = ({ location }) => {
           { " " }
           <Link
             to={{
-              pathname: "/session/login",
+              pathname: routes.LOGIN,
               search,
             }}
           >

@@ -112,19 +112,19 @@ describe("sessionActions", () => {
     })
   })
 
-  describe("passwordReset actions", () => {
-    it("passwordResetRequest", () => {
+  describe("sendPasswordResetEmail actions", () => {
+    it("sendPasswordResetEmailRequest", () => {
       expect(
-        actions.passwordResetRequest(),
+        actions.sendPasswordResetEmailRequest(),
       ).toEqual(
         {
           type: types.PASSWORD_RESET_REQUEST,
         },
       )
     })
-    it("passwordResetSuccess", () => {
+    it("sendPasswordResetEmailSuccess", () => {
       expect(
-        actions.passwordResetSuccess(data),
+        actions.sendPasswordResetEmailSuccess(data),
       ).toEqual(
         {
           type: types.PASSWORD_RESET_SUCCESS,
@@ -132,9 +132,9 @@ describe("sessionActions", () => {
         },
       )
     })
-    it("passwordResetFailure", () => {
+    it("sendPasswordResetEmailFailure", () => {
       expect(
-        actions.passwordResetFailure({ response: "error" }),
+        actions.sendPasswordResetEmailFailure({ response: "error" }),
       ).toEqual(
         {
           type: types.PASSWORD_RESET_FAILURE,
@@ -145,6 +145,16 @@ describe("sessionActions", () => {
   })
 
   describe("updatePassword actions", () => {
+    it("setHeadersForPasswordReset", () => {
+      expect(
+        actions.setHeadersForPasswordReset(),
+      ).toEqual(
+        {
+          type: types.SET_HEADERS_FOR_PASSWORD_RESET,
+        },
+      )
+    })
+
     it("updatePasswordRequest", () => {
       expect(
         actions.updatePasswordRequest(),

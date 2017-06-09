@@ -53,6 +53,10 @@ const sessionReducer = (state = initialState, action) => {
     return state
       .set("data", null)
 
+  case types.SET_HEADERS_FOR_PASSWORD_RESET:
+    return state
+      .set("passwordResetData", action.data)
+
   default:
     return state
   }

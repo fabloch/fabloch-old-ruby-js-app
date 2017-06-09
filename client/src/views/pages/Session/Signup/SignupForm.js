@@ -28,17 +28,17 @@ const SignupForm = (props) => {
         name="password"
         component={InputField}
         type="password"
-        placeholder="Password"
-        label="Password"
+        placeholder="Mot de passe"
+        label="Mot de passe"
       />
 
       <Button
         type="submit"
+        color="green"
         disabled={pristine || submitting}
         fluid
-        primary
       >
-        Sign Up
+        Je m'inscris
       </Button>
       <p>
         <Button
@@ -46,7 +46,7 @@ const SignupForm = (props) => {
           disabled={pristine || submitting}
           onClick={reset}
         >
-          Clear Values
+          Effacer
         </Button>
       </p>
     </Form>

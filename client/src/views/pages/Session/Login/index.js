@@ -18,7 +18,7 @@ const Login = ({ location }) => {
           { " " }
           <Link
             to={{
-              pathname: routes.SIGN_UP,
+              pathname: routes.SIGNUP,
               search,
             }}
           >

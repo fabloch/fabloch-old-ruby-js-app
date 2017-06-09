@@ -10,5 +10,6 @@
     "test:back": "bundle exec guard",
     "test:front": "cd client && yarn test && cd ..",
     "test:front:coverage": "cd client && yarn test:coverage && cd .."
-  }
+  },
+  "dependencies": {}
 }

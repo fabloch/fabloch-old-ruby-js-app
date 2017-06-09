@@ -187,7 +187,20 @@ describe("sessionReducer", () => {
     })
   })
 
-  describe("passwordReset", () => {
+  describe("sendPasswordResetEmail", () => {
+    it("handles SET_HEADERS_FOR_PASSWORD_RESET", () => {
+      expect(
+        sessionReducer(undefined, {
+          type: types.SET_HEADERS_FOR_PASSWORD_RESET,
+          data: { key: "value" },
+        }),
+      ).toEqual(Map({
+        data: null,
+        isFetching: false,
+        passwordResetData: { key: "value" },
+      }))
+    })
+
     it("handles PASSWORD_RESET_REQUEST", () => {
       expect(
         sessionReducer(undefined, {
