@@ -19,11 +19,11 @@ const App = () => (
     <div style={{ height: "100%" }}>
       <Loader />
       <Route exact path="/" component={Splash} />
-      <Sticky enabled={true} top={0} innerZ={3}>
+      <Sticky enabled top={0} innerZ={3}>
         <NavbarContainer />
+        <NotificationList />
       </Sticky>
       <Container style={{ minHeight: "100%", marginTop: "50px" }}>
-        <NotificationList />
         <Routes />
       </Container>
       <Footer />

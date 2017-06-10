@@ -82,6 +82,8 @@ const signup = data => (dispatch) => {
 }
 
 /* updateAccount */
+const toggleEditAccount = actions.toggleEditAccount
+
 const updateAccount = data => (dispatch) => {
   dispatch(actions.updateAccountRequest())
   return axios({
@@ -196,6 +198,7 @@ const logout = () => (dispatch) => {
 export default {
   login,
   signup,
+  toggleEditAccount,
   updateAccount,
   sendPasswordResetEmail,
   setHeadersForPasswordReset,

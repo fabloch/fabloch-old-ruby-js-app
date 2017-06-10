@@ -46,7 +46,7 @@ class MembershipPage extends Component {
         <Segment.Group>
           <Segment padded>
             <Header as="h1" color="orange">
-              <Icon name="id card outline" />
+              <Icon name="certificate" />
               Abonnement
             </Header>
           </Segment>

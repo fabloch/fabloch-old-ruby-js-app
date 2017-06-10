@@ -32,15 +32,7 @@ const NotificationList = ({ notifications, hideNotification }) => {
 }
 
 NotificationList.propTypes = {
-  notifications: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      timeStamp: PropTypes.number.isRequired,
-      title: PropTypes.string.isRequired,
-      level: PropTypes.string.isRequired,
-      body: PropTypes.string.isRequired,
-    }),
-  ),
+  notifications: PropTypes.array,
   hideNotification: PropTypes.func.isRequired,
 }
 

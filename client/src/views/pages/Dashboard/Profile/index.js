@@ -42,17 +42,17 @@ class ProfilePage extends Component {
             as="h1"
             color="orange"
           >
-            <Icon name="id card outline" />
+            <Icon name="address card" />
             Profil
           </Header>
           { profile.data && <Button
             floated="right"
             to={{ pathname: "/profile/edit" }}
-            content="Edit"
-            icon="write"
+            content={profile.isEditing ? "Annuler" : "Modifier"}
+            icon={profile.isEditing ? "remove" : "write"}
             labelPosition="left"
+            color={profile.isEditing ? "red" : "blue"}
             onClick={toggleEdit}
-
           />}
         </Segment>
         <Segment
@@ -73,7 +73,7 @@ ProfilePage.propTypes = {
   toggleEdit: PropTypes.func.isRequired,
 }
 
-const mapStateToProps = ({profile}) => ({
+const mapStateToProps = ({ profile }) => ({
   profile: profile.toJS(),
 })
 
