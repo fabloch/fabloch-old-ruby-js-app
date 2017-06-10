@@ -8,8 +8,11 @@ a thunk that dispatches multiple actions in a certain order
 */
 
 import { SubmissionError } from "redux-form"
+import { toastr } from "react-redux-toastr"
+
 import api from "../../../api"
 import actions from "./actions"
+import toastrOptions from "../../../utils/toastrOptions"
 
 const fetchProfile = () => (dispatch) => {
   dispatch(actions.fetchProfileRequest())
@@ -49,6 +52,13 @@ const postProfile = data => (dispatch) => {
   dispatch(actions.postProfileRequest())
   return api.fetch("profile", "post", dataToForm(data))
   .then((response) => {
+    toastr.success(
+      "Profil créé.",
+      "Un profil tout neuf !",
+      toastrOptions({
+        icon: "address card",
+      }),
+    )
     dispatch(
       actions.postProfileSuccess(response.data),
     )
@@ -69,6 +79,13 @@ const putProfile = data => (dispatch) => {
   dispatch(actions.putProfileRequest())
   return api.fetch("profile", "put", dataToForm(data))
   .then((response) => {
+    toastr.info(
+      "Profil mis à jour.",
+      "Votre profil a bien été mis à jour.",
+      toastrOptions({
+        icon: "address card",
+      }),
+    )
     dispatch(
       actions.putProfileSuccess(response.data),
     )

@@ -9,11 +9,12 @@ a thunk that dispatches multiple actions in a certain order
 
 import axios from "axios"
 import { SubmissionError } from "redux-form"
+import { toastr } from "react-redux-toastr"
 
 import actions from "./actions"
 import setAuthHeaders from "../../../utils/setAuthHeaders"
 import setResetAuthHeaders from "../../../utils/setResetAuthHeaders"
-import notificationOperations from "../notification/operations"
+import toastrOptions from "../../../utils/toastrOptions"
 
 /* Login */
 const login = data => (dispatch) => {
@@ -35,12 +36,13 @@ const login = data => (dispatch) => {
     localStorage.setItem("auth", JSON.stringify(auth))
 
     setAuthHeaders(auth)
-
-    dispatch(notificationOperations.addNotification({
-      level: "success",
-      title: "Vous êtes connecté.e",
-      body: "Bon surf sur le site de la FABrique.",
-    }))
+    toastr.info(
+      "Vous êtes connecté.e",
+      "Bon surf sur le site de la FABrique.",
+      toastrOptions({
+        icon: "sign in",
+      }),
+    )
   })
   .catch((err) => {
     if (err.response) {
@@ -63,11 +65,12 @@ const signup = data => (dispatch) => {
   })
   .then(() => {
     dispatch(actions.signupSuccess())
-    dispatch(notificationOperations.addNotification({
-      level: "success",
-      title: "Votre compte a été créé avec succès.",
-      body: "Vous allez être connecté.e bientôt...",
-    }))
+    toastr.success(
+      "Votre compte a été créé avec succès.",
+      "Vous allez être connecté.e...",
+      toastrOptions({}),
+    )
+
     dispatch(login(data))
   })
   .catch((err) => {
@@ -94,12 +97,13 @@ const updateAccount = data => (dispatch) => {
   })
   .then(() => {
     dispatch(actions.updateAccountSuccess())
-    dispatch(notificationOperations.addNotification({
-      icon: "setting",
-      loading: true,
-      level: "success",
-      title: "Vos identifiants de connexion ont bien été mis à jour.",
-    }))
+    toastr.info(
+      "Identifiants mis à jour.",
+      "Vos email / mot de passe ont bien été mis à jour.",
+      toastrOptions({
+        icon: "lock",
+      }),
+    )
     dispatch(actions.toggleEditAccount())
   })
   .catch((err) => {
@@ -124,12 +128,13 @@ const sendPasswordResetEmail = data => (dispatch) => {
   })
   .then(() => {
     dispatch(actions.sendPasswordResetEmailSuccess())
-    dispatch(notificationOperations.addNotification({
-      icon: "setting",
-      loading: true,
-      level: "info",
-      title: "Un email vous a été envoyé pour réinitialiser votre mot de passe.",
-    }))
+    toastr.info(
+      "Un email vous a été envoyé.",
+      "Suivez les instructions dans l'email pour réinitialiser votre mot de passe.",
+      toastrOptions({
+        icon: "lock",
+      }),
+    )
   })
   .catch((err) => {
     if (err.response) {
@@ -161,12 +166,12 @@ const updatePassword = data => (dispatch) => {
   })
   .then(() => {
     dispatch(actions.updatePasswordSuccess())
-    dispatch(notificationOperations.addNotification({
-      icon: "setting",
-      loading: true,
-      level: "success",
-      title: "Votre mot de passe a bien été mis à jour.",
-    }))
+    toastr.info(
+      "Votre mot de passe a bien été mis à jour.",
+      toastrOptions({
+        icon: "lock",
+      }),
+    )
   })
   .catch((err) => {
     if (err.response) {
@@ -188,11 +193,13 @@ const logout = () => (dispatch) => {
   localStorage.clear()
   setAuthHeaders(false)
   dispatch(actions.logout())
-  dispatch(notificationOperations.addNotification({
-    level: "success",
-    title: "Successfully disconnected",
-    body: "You have been disconnected successfully.",
-  }))
+  toastr.info(
+    "Deconnexion réussie.",
+    "On espère vous revoir très bientôt !",
+    toastrOptions({
+      icon: "sign out",
+    }),
+  )
 }
 
 export default {

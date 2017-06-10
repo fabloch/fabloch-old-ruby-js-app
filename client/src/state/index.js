@@ -1,6 +1,7 @@
 import { combineReducers } from "redux"
 import { reducer as form } from "redux-form"
 import { routerReducer as router } from "react-router-redux"
+import {reducer as toastr} from "react-redux-toastr"
 
 import * as reducers from "./ducks"
 
@@ -11,6 +12,7 @@ const rootReducer = combineReducers({
   ...reducers,
   form,
   router,
+  toastr,
 })
 
 export default rootReducer

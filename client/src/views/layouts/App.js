@@ -3,9 +3,10 @@ import { ConnectedRouter } from "react-router-redux"
 import { Route } from "react-router-dom"
 import { connect } from "react-redux"
 import { Container } from "semantic-ui-react"
-import history from "../../state/history"
 import Sticky from "react-stickynode"
+import ReduxToastr from "react-redux-toastr"
 
+import history from "../../state/history"
 import { logout } from "../../state/ducks/session/actions"
 import Loader from "./Loader"
 import Splash from "./Splash"
@@ -27,6 +28,7 @@ const App = () => (
         <Routes />
       </Container>
       <Footer />
+      <ReduxToastr />
     </div>
   </ConnectedRouter>
 )

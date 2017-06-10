@@ -8,9 +8,12 @@ a thunk that dispatches multiple actions in a certain order
 */
 
 import { SubmissionError } from "redux-form"
+import { toastr } from "react-redux-toastr"
+
 import api from "../../../api"
 import fakeApi from "../../../api/fake"
 import actions from "./actions"
+import toastrOptions from "../../../utils/toastrOptions"
 
 const fetchSubscriptions = () => (dispatch) => {
   dispatch(actions.fetchSubscriptionsRequest())
@@ -60,6 +63,13 @@ const postSubscription = data => (dispatch) => {
   .then((response) => {
     dispatch(
       actions.postSubscriptionSuccess(response.data),
+    )
+    toastr.success(
+      "Votre abonnement est confirmé.",
+      "Un email récapitulatif vous a été envoyé.",
+      toastrOptions({
+        icon: "certificate",
+      }),
     )
   })
   .catch((error) => {
